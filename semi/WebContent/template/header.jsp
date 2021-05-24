@@ -57,7 +57,7 @@
 						<li><a href="<%=root%>/product/productSearch.jsp">상품 검색(2)</a></li>
 					</ul></li>
 					<%} %>
-				<li><a href="#">부 메뉴 02</a>
+				<li><a href="#">부 메뉴 03</a>
 					<ul>
 						<li><a href="<%=root%>/board/boardWrite.jsp">게시글 작성</a></li>
 						<li><a href="<%=root%>/board/boardList.jsp">게시글 목록</a></li>
