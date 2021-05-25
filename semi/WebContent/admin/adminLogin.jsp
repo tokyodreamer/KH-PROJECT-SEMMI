@@ -3,10 +3,11 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <div class="container-600">
+
 	<div class="row">
 		<h1>관리자 로그인</h1>
 	</div>
-
+	
 	<form action="adminLogin.kh" method="post">
 		<div class="row">
 			<label> 아이디 </label> <input type="text" name="adminId" required
@@ -20,5 +21,10 @@
 			<input type="submit" value="로그인" class="btn-input">
 		</div>
 	</form>
+	<% if (request.getParameter("error")!=null) {%>
+	<div class="error">
+		<h5> 정보가 일치하지 않습니다.</h5>
+	</div>
+	<% } %>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
