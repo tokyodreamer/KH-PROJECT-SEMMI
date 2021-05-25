@@ -15,7 +15,7 @@ public class MemberDao {
 	public void regist(MemberDto memberDto) throws Exception{
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql="insert into member values(member_seq.nextval,?,?,?,20000,?)";
+		String sql="insert into member values(member_seq.nextval,?,?,?,200000,?)";
 		
 		PreparedStatement ps= con.prepareStatement(sql);
 		ps.setString(1, memberDto.getMemberId());
