@@ -11,7 +11,7 @@
 	
 		<div class="row">
 		<a href="memberLogin.jsp" class="link-btn">로그인하기</a>
-		<a href="/semi/index.jsp" class="link-btn">메인으로</a>
+		<a href="<%=request.getContextPath() %>/index.jsp" class="link-btn">메인으로</a>
 		</div>
 	
 	
