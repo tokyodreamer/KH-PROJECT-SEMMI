@@ -1,4 +1,4 @@
-package semi.admin.beans;
+package semi.member.beans;
 
 public class MemberDto {
 	private int memberNo;
@@ -7,7 +7,6 @@ public class MemberDto {
 	private String memberNick;
 	private int memberPoint;
 	private String memberEmail;
-	private String memberGrade;
 	public MemberDto() {
 		super();
 	}
@@ -46,12 +45,6 @@ public class MemberDto {
 	}
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
-	}
-	public String getMemberGrade() {
-		return memberGrade;
-	}
-	public void setMemberGrade(String memberGrade) {
-		this.memberGrade = memberGrade;
 	}
 
 }
