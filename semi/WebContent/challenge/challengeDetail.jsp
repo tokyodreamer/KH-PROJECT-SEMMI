@@ -5,7 +5,6 @@
 	int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
 
 	ChallengeDao challengeDao = new ChallengeDao();
-	challengeDao.getChallenge(challengeNo);
 	
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
