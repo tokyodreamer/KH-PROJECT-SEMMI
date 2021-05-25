@@ -3,6 +3,7 @@ package semi.challenge.beans;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,22 @@ import semi.beans.JDBCUtils;
 
 public class ChallengeDao {
 	
-	//게시글 등록
+	// 도전글 번호 불러오기
+	public int getSequence() throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select challenge_seq nextval from dual";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		int challengeNo = rs.getInt(1);
+		
+		con.close();
+		return challengeNo;
+	}
+	
+	// 도전글 가입
 	public void challengeJoin(ChallengeDto challengeDto) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
@@ -26,12 +42,44 @@ public class ChallengeDao {
 		ps.setString(6, challengeDto.getChallengeEndDate()); // 종료일
 		ps.setInt(7, (int) (challengeDto.getChallengePushPoint()*0.01)); // 상금 로직 : 참가비 * 0.01
 		ps.setString(8, challengeDto.getChallengeContent()); // 도전글 내용 
-		
 		ps.execute();
 		
 		con.close();
 	}
 	
+	// 도전글 상세보기
+	public ChallengeDto getChallenge(int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select * from challenge where challenge_no = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ResultSet rs = ps.executeQuery();
+		
+		ChallengeDto challengeDto;
+		if(rs.next()) {
+			challengeDto = new ChallengeDto();
+			
+			challengeDto.setChallengeNo(rs.getInt("challenge_no"));
+			challengeDto.setChallengeWriter(rs.getInt("challenge_writer"));
+			challengeDto.setCategoryNo(rs.getInt("category_no"));
+			challengeDto.setChallengeTitle(rs.getString("challenge_title"));
+			challengeDto.setChallengePushPoint(rs.getInt("challenge_pushPoint"));
+			challengeDto.setChallengeStartDate(rs.getString("challenge_startDate"));
+			challengeDto.setChallengeEndDate(rs.getString("challenge_endDate"));
+			challengeDto.setChallengePercent(rs.getInt("challenge_percent"));
+			challengeDto.setChallengeReward(rs.getInt("challenge_reward"));
+			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
+			challengeDto.setChallengeContent(rs.getString("challenge_content"));
+		} else {
+			challengeDto = null;
+		}
+		
+		con.close();
+		
+		return challengeDto;
+	}
 	
 	//게시글 목록 기능
 	public List<ChallengeDto> list(int startRow, int endRow) throws Exception {
@@ -145,4 +193,5 @@ public class ChallengeDao {
 		return count;
 		
 	}
+	
 }
