@@ -34,11 +34,18 @@ public class ChallengeDao {
 	
 	
 	//게시글 목록 기능
-	public List<ChallengeDto> list() throws Exception {
+	public List<ChallengeDto> list(int startRow, int endRow) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "select * from challenge order by challenge_no desc";
+		String sql = "select * from ("
+					 	+ "select rownum rn, TMP.* from ("
+					 		+ "select * from challenge order by challenge_no desc"
+					 	+ ")TMP"
+			          +") where rn between ? and ?"; 
+							
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, startRow);
+		ps.setInt(2, endRow);
 		ResultSet rs = ps.executeQuery();
 		
 		List<ChallengeDto> challengeList = new ArrayList<>();
@@ -65,14 +72,22 @@ public class ChallengeDao {
 	}
 	
 	//검색 기능
-	public List<ChallengeDto> search(String type, String keyword) throws Exception {
+	public List<ChallengeDto> search(String type, String keyword, int startRow, int endRow) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "select * from challenge where instr(#1, ?) > 0 order by challenge_no desc";
 		
+		String sql = "select * from ("
+			 			+ "select rownum rn, TMP.* from ("
+			 				+ "select * from challenge "
+			 				+ "where instr(#1, ?) > 0 order by challenge_no desc"
+			 			+ ")TMP"
+			 		+") where rn between ? and ?"; 
+				
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
+		ps.setInt(2, startRow);
+		ps.setInt(3, endRow);
 		ResultSet rs = ps.executeQuery();
 		
 		List<ChallengeDto> challengeList = new ArrayList<>();
@@ -95,5 +110,39 @@ public class ChallengeDao {
 		
 		con.close();
 		return challengeList;
+	}
+	
+	//페이지블럭 계산을 위한 카운트 기능(목록/검색)
+	public int getCount() throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select count(*) from challenge";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
+	
+	public int getCount(String type, String keyword) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select count(*) from challenge where instr(#1, ?) > 0";
+		sql = sql.replace("#1", type);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+		
 	}
 }
