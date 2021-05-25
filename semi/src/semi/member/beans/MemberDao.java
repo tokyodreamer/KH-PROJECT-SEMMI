@@ -9,7 +9,6 @@ public class MemberDao {
 	
 	
 	//회원 가입 메소드
-	
 	public void regist(MemberDto memberDto) throws Exception{
 		Connection con = JDBCUtils.getConnection();
 		
