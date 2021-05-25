@@ -7,8 +7,6 @@ import semi.beans.JDBCUtils;
 
 public class MemberDao {
 	
-	public static final String USERNAME = "semi";
-	public static final String PASSWORD = "semi";
 	
 	//회원 가입 메소드
 	
