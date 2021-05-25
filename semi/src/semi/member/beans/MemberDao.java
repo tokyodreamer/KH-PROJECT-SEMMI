@@ -1,4 +1,4 @@
-package semi.admin.beans;
+package semi.member.beans;
 
 public class MemberDao {
 
