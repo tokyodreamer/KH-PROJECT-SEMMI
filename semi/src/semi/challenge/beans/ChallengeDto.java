@@ -8,8 +8,8 @@ public class ChallengeDto {
 	private int categoryNo; // FK : categoryNo -> categoryType
 	private String challengeTitle;
 	private int challengePushPoint;
-	private Date challengeStartDate;
-	private Date challengeEndDate;
+	private String challengeStartDate;
+	private String challengeEndDate;
 	private int challengePercent;
 	private int challengeReward;
 	private int challengeDonate;
@@ -59,19 +59,19 @@ public class ChallengeDto {
 		this.challengePushPoint = challengePushPoint;
 	}
 
-	public Date getChallengeStartDate() {
+	public String getChallengeStartDate() {
 		return challengeStartDate;
 	}
 
-	public void setChallengeStartDate(Date challengeStartDate) {
+	public void setChallengeStartDate(String challengeStartDate) {
 		this.challengeStartDate = challengeStartDate;
 	}
 
-	public Date getChallengeEndDate() {
+	public String getChallengeEndDate() {
 		return challengeEndDate;
 	}
 
-	public void setChallengeEndDate(Date challengeEndDate) {
+	public void setChallengeEndDate(String challengeEndDate) {
 		this.challengeEndDate = challengeEndDate;
 	}
 
