@@ -39,8 +39,8 @@
 							<li><a href="<%=root%>/member/exit.kh">회원 탈퇴</a></li>
 							<li><a href="#">회원 조회/검색</a></li>
 						<%} else { %>
-							<li><a href="<%=root%>/member/join.jsp">회원 가입</a></li>
-							<li><a href="<%=root%>/member/login.jsp">로그인</a></li>
+							<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
+							<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
 						<%} %>
 					</ul></li>
 				<li><a href="#">주 메뉴 02</a>
