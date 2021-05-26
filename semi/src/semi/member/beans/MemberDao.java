@@ -10,10 +10,7 @@ public class MemberDao {
 	
 	public boolean changePassword(int memberNo,String nowPw, String newPw) throws Exception {
 				
-
 			Connection con = JDBCUtils.getConnection();
-
-
 			String sql="update meber set member_pw=? where member_no=? and member_pw=?";
 
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -43,17 +40,6 @@ public class MemberDao {
 		
 		con.close();
 		
-		return count > 0;
-	}
-	
-	public boolean checkMember(int no,String nowPw) throws Exception { //멤버 확인
-		Connection con = JDBCUtils.getConnection();
-		
-		String sql = "";
-		
-		PreparedStatement ps = con.prepareStatement(sql);
-		
-		int count = ps.executeUpdate();
 		return count > 0;
 	}
 	

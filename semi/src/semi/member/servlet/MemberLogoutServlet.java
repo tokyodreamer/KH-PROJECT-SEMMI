@@ -1,4 +1,4 @@
-package semi.member.beans;
+package semi.member.servlet;
 
 import java.io.IOException;
 
