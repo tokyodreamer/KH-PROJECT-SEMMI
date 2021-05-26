@@ -14,6 +14,9 @@
 	<div class="row">
 		<h2>도전글 상세보기</h2>
 	</div>
+	<div class="row">
+		<h2><%=challengeDto.getChallengeNo() %></h2>
+	</div>
 	<div class="row text-left">
 		<label>도전글 제목</label>
 		<h2><%=challengeDto.getChallengeTitle() %></h2>

@@ -21,7 +21,7 @@ public class ChallengeJoinServlet extends HttpServlet {
 			
 			ChallengeDao challengeDao = new ChallengeDao();
 			
-			// 도전글 상세보기 번호
+			// 도전글 상세보기 번호 불러오기
 			int challengeNo = challengeDao.getSequence();
 			
 			ChallengeDto challengeDto = new ChallengeDto();
