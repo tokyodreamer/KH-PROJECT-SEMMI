@@ -7,6 +7,8 @@
 	<h2>인증글 작성</h2>
 </div>
 
+	
+
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
