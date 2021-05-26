@@ -1,3 +1,4 @@
+<%@page import="semi.challenge.beans.ChallengeListDao"%>
 <%@page import="semi.challenge.beans.ChallengeDto"%>
 <%@page import="semi.challenge.beans.ChallengeDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,8 +7,9 @@
 	int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
 
 	ChallengeDao challengeDao = new ChallengeDao();
-	ChallengeDto challengeDto = challengeDao.getChallenge(challengeNo);
+	ChallengeListDao challengeListDao = new ChallengeListDao();
 	
+	ChallengeDto challengeDto = challengeDao.getChallenge(challengeNo);
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
@@ -16,6 +18,7 @@
 		<h2>도전글 상세보기</h2>
 	</div>
 	<div class="row">
+		<label>도전글 번호</label>
 		<h2><%=challengeDto.getChallengeNo() %></h2>
 	</div>
 	<div class="row text-left">
@@ -23,6 +26,7 @@
 		<h2><%=challengeDto.getChallengeTitle() %></h2>
 	</div>
 	<div class="row text-left">
+		<!-- 변경 예정 -->
 		<label>도전글 작성자</label>
 		<h2><%=challengeDto.getChallengeWriter() %></h2>
 	</div>
