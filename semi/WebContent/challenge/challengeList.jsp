@@ -150,7 +150,7 @@
 						<td><%=challengeDto.getCategoryNo() %></td>
 						<td>
 							<!-- 제목을 누르면 상세보기 페이지로 이동 -->
-							<a href="challengeDetail.jsp/<%=challengeDto.getChallengeNo()%>">
+							<a href="challengeDetail.jsp?challengeNo=<%=challengeDto.getChallengeNo()%>">
 							<%=challengeDto.getChallengeTitle() %>
 							</a>
 						</td>
@@ -167,7 +167,7 @@
 	</div>
 	
 	<div class="row text-right">
-		<a href="#">글쓰기</a>
+		<a href="challengeJoin.jsp" class="link-btn">글쓰기</a>
 	</div>
 	
 <!-- 페이지 네이게이션 자리 -->
