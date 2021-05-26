@@ -20,6 +20,7 @@ public class ChallengeDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
+
 		
 		int challengeNo = rs.getInt(1);
 		
