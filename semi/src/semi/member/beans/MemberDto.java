@@ -1,6 +1,7 @@
 package semi.member.beans;
 
 public class MemberDto {
+
 	
 	private int memberNo;
 	private String memberId;
@@ -9,6 +10,12 @@ public class MemberDto {
 	private int memberPoint;
 	private String memberEmail;
 	
+	public String getMemberEmail() {
+		return memberEmail;
+	}
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
+	}
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -44,11 +51,4 @@ public class MemberDto {
 		this.memberPoint = memberPoint;
 	}
 	
-	public String getMemberEmail() {
-		return memberEmail;
-	}
-	public void setMemberEmail(String memberEmail) {
-		this.memberEmail = memberEmail;
-	}
-
 }
