@@ -27,6 +27,15 @@
 <body>
 	<main>
 		<header>
+			<div align="right">
+				<%if(isLogin) { %>
+					<button>로그아웃</button>
+				<%} else { %>
+					<button>회원가입</button>
+					<button>로그인</button>
+				<%} %>
+			
+			</div>
 			<h1>세미 프로젝트 (임시)</h1>
 		</header>
 		<nav>
