@@ -110,7 +110,6 @@ public class ChallengeDao {
 			challengeDto.setChallengePercent(rs.getInt("challenge_percent"));
 			challengeDto.setChallengeReward(rs.getInt("challenge_reward"));
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
-			challengeDto.setChallengeContent(rs.getString("challenge_content"));
 			
 			challengeList.add(challengeDto);
 		}
@@ -152,7 +151,6 @@ public class ChallengeDao {
 			challengeDto.setChallengePercent(rs.getInt("challenge_percent"));
 			challengeDto.setChallengeReward(rs.getInt("challenge_reward"));
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
-			challengeDto.setChallengeContent(rs.getString("challenge_content"));
 			
 			challengeList.add(challengeDto);
 		}

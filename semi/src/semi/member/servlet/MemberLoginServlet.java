@@ -26,7 +26,7 @@ public class MemberLoginServlet extends HttpServlet {
 			
 			if(sth !=null){
 				req.getSession().setAttribute("memberNo", sth.getMemberNo());
-				resp.sendRedirect("semi/index.jsp");
+				resp.sendRedirect("/semi/index.jsp");
 			}
 			else {
 				resp.sendRedirect("login.jsp");
