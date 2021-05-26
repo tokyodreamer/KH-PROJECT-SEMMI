@@ -40,11 +40,11 @@
 		</header>
 		<nav>
 			<ul class="menu">
-				<li><a href="#">주 메뉴 01</a>
+				<li><a href="#">챌린저스</a>
 					<ul>
 						<%if(isLogin) { %>
-							<li><a href="<%=root%>/member/logout.kh">로그아웃</a></li>
-							<li><a href="<%=root%>/member/myInfo.jsp">내 정보 보기</a></li>
+							<li><a href="<%=root%>/member/logout.kh">챌린저스란?</a></li>
+							<li><a href="<%=root%>/member/myInfo.jsp">도전하기</a></li>
 							<li><a href="<%=root%>/member/exit.kh">회원 탈퇴</a></li>
 							<li><a href="#">회원 조회/검색</a></li>
 						<%} else { %>
