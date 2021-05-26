@@ -10,7 +10,16 @@ public class ChallengeListDto {
 	private int challengePercent;
 	private int challengeReward;
 	private int challengeDonate;
+	private String challengeContent;
 	
+	public String getChallengeContent() {
+		return challengeContent;
+	}
+
+	public void setChallengeContent(String challengeContent) {
+		this.challengeContent = challengeContent;
+	}
+
 	//회원 정보 저장 변수
 	private int memberNo;
 	private String memberNick;
