@@ -8,9 +8,9 @@ import semi.beans.JDBCUtils;
 
 public class MemberDao {
 	
-	public boolean changePassword(int memberNo,
-			String nowPw, String newPw) throws Exception {
+	public boolean changePassword(int memberNo,String nowPw, String newPw) throws Exception {
 				
+
 			Connection con = JDBCUtils.getConnection();
 
 
@@ -129,5 +129,21 @@ public class MemberDao {
 		}
 	
 
-	
-}
+
+		//회원 탈퇴 메소드(Delete-int count=executeUpdate.)단일조회와 비슷
+	public boolean exit(int memberNo) throws Exception{
+			
+			Connection con = JDBCUtils.getConnection();
+			
+			String sql="delete member where member_no=?";
+			PreparedStatement ps=con.prepareStatement(sql);
+			ps.setInt(1, memberNo);
+			int count =ps.executeUpdate();
+			
+			con.close();
+			
+			return count>0;
+		}
+		
+	}
+
