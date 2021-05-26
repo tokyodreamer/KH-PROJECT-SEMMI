@@ -100,7 +100,7 @@ public class MemberDao {
 		MemberDto sth;
 		if (rs.next()) {
 			sth = new MemberDto();
-
+			sth.setMemberNo(rs.getInt("member_no"));
 			sth.setMemberId(rs.getString("member_id"));
 			sth.setMemberPw(rs.getString("member_pw"));
 		} else {
