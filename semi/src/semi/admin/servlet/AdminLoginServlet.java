@@ -28,7 +28,7 @@ public class AdminLoginServlet extends HttpServlet {
 			
 			if(find!=null) {
 				req.getSession().setAttribute("adminNo", find.getAdminNo());
-				resp.sendRedirect("/auth/authList.jsp");
+				resp.sendRedirect(req.getContextPath()+"/auth/authList.jsp");
 			}
 			else {
 				resp.sendRedirect("adminLogin.jsp?error");

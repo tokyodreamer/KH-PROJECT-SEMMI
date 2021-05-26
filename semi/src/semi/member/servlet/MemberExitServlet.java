@@ -17,13 +17,15 @@ public class MemberExitServlet extends HttpServlet{
 
 		try {
 			//준비(회원번호 자신 )파라미터가 아닌 회원 자신의 번호==세션을 조회??
-			int memberNo=(int)req.getSession().getAttribute("memberNo");
+			
+			int memberNo=(int)req.getSession().getAttribute("memberNo"); //세션 적용 코드
+//			int memberNo=Integer.parseInt(req.getParameter("memberNo")); //세션 없는 코드
 			
 			//처리: 탈퇴 + 로그아웃(Primary Key 로 삭제(?))
 			MemberDao memberDao = new MemberDao();
 			memberDao.exit(memberNo);
 			
-			req.getSession().removeAttribute("memberNo"); //로그아웃 처리
+			req.getSession().removeAttribute("memberNo"); //로그아웃 처리(세션)
 			
 			//출력: 탈퇴 완료 후 메시지로 리다이렉트
 			resp.sendRedirect("memberExitSuccess.jsp");

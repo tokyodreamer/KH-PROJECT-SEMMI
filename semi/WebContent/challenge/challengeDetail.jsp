@@ -1,3 +1,4 @@
+<%@page import="semi.challenge.beans.ChallengeListDao"%>
 <%@page import="semi.challenge.beans.ChallengeDto"%>
 <%@page import="semi.challenge.beans.ChallengeDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +7,8 @@
 	int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
 
 	ChallengeDao challengeDao = new ChallengeDao();
+	ChallengeListDao challengeListDao = new ChallengeListDao();
+	
 	ChallengeDto challengeDto = challengeDao.getChallenge(challengeNo);
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -15,6 +18,7 @@
 		<h2>도전글 상세보기</h2>
 	</div>
 	<div class="row">
+		<label>도전글 번호</label>
 		<h2><%=challengeDto.getChallengeNo() %></h2>
 	</div>
 	<div class="row text-left">
@@ -22,6 +26,7 @@
 		<h2><%=challengeDto.getChallengeTitle() %></h2>
 	</div>
 	<div class="row text-left">
+		<!-- 변경 예정 -->
 		<label>도전글 작성자</label>
 		<h2><%=challengeDto.getChallengeWriter() %></h2>
 	</div>
@@ -37,6 +42,10 @@
 		<label>종료일</label>
 		<h2><%=challengeDto.getChallengeEndDate().substring(0,10) %></h2>
 	</div>
+	<!-- 타임 리미트 : 로직 구현 예정 -->
+	<div class="row text-left">
+		<h2>종료까지 # 일</h2>
+	</div>
 	<div class="row text-left">
 		<label>상금</label>
 		<h2><%=challengeDto.getChallengeReward() %> 포인트</h2>
@@ -49,7 +58,8 @@
 		<!-- 자바스크립트 추가 예정 : 세션값과 작성자가 일치하지 않으면 후원하기 버튼 출력 -->
 		<a href="#" class="link-btn">후원하기</a>
 		<!-- 자바스크립트 추가 예정 : 세션값과 작성자가 일치하면 인증하기 버튼 출력 -->
-		<a href="#" class="link-btn">인증하기</a>
+		<a href="<%=request.getContextPath() %>/auth/authInsert.jsp" class="link-btn">인증하기</a>
+		<a href="challengeList.jsp" class="link-btn">목록</a>
 	</div>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
