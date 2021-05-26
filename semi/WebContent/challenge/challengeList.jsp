@@ -1,3 +1,5 @@
+<%@page import="semi.challenge.beans.ChallengeListDto"%>
+<%@page import="semi.challenge.beans.ChallengeListDao"%>
 <%@page import="semi.challenge.beans.ChallengeDto"%>
 <%@page import="semi.challenge.beans.ChallengeDao"%>
 <%@page import="java.util.List"%>
@@ -45,6 +47,16 @@
 	int startRow = pageNo * pageSize - (pageSize-1);
 	int endRow = pageNo * pageSize;
 	
+	ChallengeListDao challengeListDao = new ChallengeListDao();
+	List<ChallengeListDto> challengeList;
+
+	if(isSearch){
+		challengeList = challengeListDao.search(type, keyword, startRow, endRow);
+	}
+	else{
+		challengeList = challengeListDao.list(startRow, endRow);
+	}
+	
 	/////////////////////////////////////////////////////////////////////
 	// 페이지 네비게이션 영역 계산
 	/////////////////////////////////////////////////////////////////////
@@ -52,22 +64,13 @@
 	// = 하단 네비게이션 숫자는 startBlock 부터 endBlock 까지 출력
 	// = (주의사항) 게시글 개수를 구해서 마지막 블록 번호를 넘어가지 않도록 처리
 	//	목록조회 자바코드(검색, 목록)	
-	ChallengeDao challengeDao = new ChallengeDao();
-	List<ChallengeDto> challengeList;
-
-	if(isSearch){
-		challengeList = challengeDao.search(type, keyword, startRow, endRow);
-	}
-	else{
-		challengeList = challengeDao.list(startRow, endRow);
-	}
-	
+	//	ChallengeDao challengeDao = new ChallengeDao();
 	int count;
 	if(isSearch){
-		count = challengeDao.getCount(type, keyword);
+		count = challengeListDao.getCount(type, keyword);
 	}
 	else{
-		count = challengeDao.getCount();
+		count = challengeListDao.getCount();
 	}
 	
 	int blockSize = 10;
@@ -143,23 +146,23 @@
 			</thead>
 			
 			<tbody>
-					<%for(ChallengeDto challengeDto : challengeList){ %>
+					<%for(ChallengeListDto challengeListDto : challengeList){ %>
 					<tr>
-						<td><%=challengeDto.getChallengeNo() %></td>
-						<td><%=challengeDto.getChallengeWriter() %></td>
-						<td><%=challengeDto.getCategoryNo() %></td>
+						<td><%=challengeListDto.getChallengeNo() %></td>
+						<td><%=challengeListDto.getMemberNick() %></td>
+						<td><%=challengeListDto.getCategorytype() %></td>
 						<td>
 							<!-- 제목을 누르면 상세보기 페이지로 이동 -->
 							<a href="#">
-							<%=challengeDto.getChallengeTitle() %>
+							<%=challengeListDto.getChallengeTitle() %>
 							</a>
 						</td>
-						<td><%=challengeDto.getChallengePushPoint() %>원</td>
-						<td><%=challengeDto.getChallengeStartDate().substring(0,10) %></td>
-						<td><%=challengeDto.getChallengeEndDate().substring(0,10) %></td>
-						<td><%=challengeDto.getChallengePercent() %>%</td>
-						<td><%=challengeDto.getChallengeReward() %>원</td>
-						<td><%=challengeDto.getChallengeDonate() %>원</td>
+						<td><%=challengeListDto.getChallengePushPoint() %>원</td>
+						<td><%=challengeListDto.getChallengeStartDate().substring(0,10) %></td>
+						<td><%=challengeListDto.getChallengeEndDate().substring(0,10) %></td>
+						<td><%=challengeListDto.getChallengePercent() %>%</td>
+						<td><%=challengeListDto.getChallengeReward() %>원</td>
+						<td><%=challengeListDto.getChallengeDonate() %>원</td>
 					</tr>
 					<%} %>
 			</tbody>
@@ -170,27 +173,28 @@
 		<a href="#">글쓰기</a>
 	</div>
 	
+<div class="row">
 <!-- 페이지 네이게이션 자리 -->
-<div class="pagination">
-
-		<%if(startBlock > 1){ %>
-		<a class="move-link">이전</a>
-		<%} %>
-		
-		<%for(int i = startBlock; i <= endBlock; i++){ %>
-			<%if(i == pageNo){%>
-				<a class="on"><%=i %></a>
-			<%}else{ %>
-				<a><%=i %></a>
+	<div class="pagination">
+	
+			<%if(startBlock > 1){ %>
+			<a class="move-link">이전</a>
 			<%} %>
-		<%} %>
+			
+			<%for(int i = startBlock; i <= endBlock; i++){ %>
+				<%if(i == pageNo){%>
+					<a class="on"><%=i %></a>
+				<%}else{ %>
+					<a><%=i %></a>
+				<%} %>
+			<%} %>
+			
+			<%if(endBlock < lastBlock){ %>
+			<a class="move-link">다음</a>
+			<%} %>
 		
-		<%if(endBlock < lastBlock){ %>
-		<a class="move-link">다음</a>
-		<%} %>
-	
-</div>
-	
+	</div>
+</div>	
 	
 	
 	<div class="row">
@@ -201,7 +205,8 @@
 		
 			<select name="type">
 				<option value="challenge_title">제목만</option>
-		
+				<option value="category_type">카테고리</option>
+				<option value="member_nick">글작성자</option>
 			</select>
 		
 			<input type="text" name="keyword" placeholder="검색어">
