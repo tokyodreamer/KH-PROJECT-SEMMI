@@ -29,10 +29,10 @@
 		<header>
 			<div align="right">
 				<%if(isLogin) { %>
-					<button>로그아웃</button>
+					<a href="memberLogout.jsp">로그아웃</a>
 				<%} else { %>
-					<button>회원가입</button>
-					<button>로그인</button>
+					<a href="memberJoin.jsp">회원가입</a>
+					<a href="memberLogin.jsp">로그인</a>
 				<%} %>
 			
 			</div>
