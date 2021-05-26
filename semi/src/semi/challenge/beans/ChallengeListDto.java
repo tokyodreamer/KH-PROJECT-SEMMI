@@ -4,7 +4,7 @@ public class ChallengeListDto {
 	//도전글 정보 저장 변수
 	private int challengeNo;
 	private String challengeTitle;
-	private String challengePushPoint;
+	private int challengePushPoint;
 	private String challengeStartDate;
 	private String challengeEndDate;
 	private int challengePercent;
@@ -39,11 +39,11 @@ public class ChallengeListDto {
 		this.challengeTitle = challengeTitle;
 	}
 
-	public String getChallengePushPoint() {
+	public int getChallengePushPoint() {
 		return challengePushPoint;
 	}
 
-	public void setChallengePushPoint(String challengePushPoint) {
+	public void setChallengePushPoint(int challengePushPoint) {
 		this.challengePushPoint = challengePushPoint;
 	}
 
@@ -118,6 +118,9 @@ public class ChallengeListDto {
 	public void setCategorytype(String categorytype) {
 		this.categorytype = categorytype;
 	}
+
+	
+	
 	
 	
 
