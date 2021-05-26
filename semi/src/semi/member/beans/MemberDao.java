@@ -41,8 +41,13 @@ public class MemberDao {
 		if(rs.next()) {
 			sth = new MemberDto();
 			
+			sth.setMemberNo(rs.getInt("member_no"));
 			sth.setMemberId(rs.getString("member_id"));
 			sth.setMemberPw(rs.getString("member_pw"));
+			sth.setMemberNick(rs.getString("member_nick"));
+			sth.setMemberPoint(rs.getInt("member_point"));
+			sth.setMemberEmail(rs.getString("member_email"));
+			
 		}
 		else {
 			sth = null;

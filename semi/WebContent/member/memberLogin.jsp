@@ -4,8 +4,6 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <div class="container-600">
 	<div class="row">
-		<h1>오늘도 시-작!</h1>
-		<br><br>
 		<input type="button" value="관리자" class="form-btn">
 		<h2>로그인</h2>
 		<hr>
