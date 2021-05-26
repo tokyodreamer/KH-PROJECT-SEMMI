@@ -24,6 +24,7 @@
 			<input type="date" class="form-input" name="challengeEndDate" id="endDate">
 		</div>
 		<div class="row text-left">
+			<label>도전글 내용</label>
 			<textarea name="challengeContent" rows="" cols="" id="content"></textarea>
 		</div>
 		<div class="row">
