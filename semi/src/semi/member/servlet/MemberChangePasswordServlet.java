@@ -1,4 +1,4 @@
-package semi.servlet.member;
+package semi.member.servlet;
 
 import java.io.IOException;
 
@@ -18,6 +18,7 @@ public class MemberChangePasswordServlet extends HttpServlet{
 
 			int memberNo = (int)req.getSession().getAttribute("memberNo");
 			
+			
 			req.setCharacterEncoding("UTF-8");
 			String nowPw = req.getParameter("nowPw");
 			String newPw = req.getParameter("newPw");
@@ -29,10 +30,10 @@ public class MemberChangePasswordServlet extends HttpServlet{
 			
 			
 			if(result) {
-				resp.sendRedirect("");
+				resp.sendRedirect("editPwSuccess.jsp");
 			}
 			else {
-				resp.sendRedirect("");
+				resp.sendRedirect("editPw.jsp?error");
 			}
 		}
 		catch(Exception e) {

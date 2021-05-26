@@ -1,4 +1,4 @@
-package semi.servlet.member;
+package semi.member.servlet;
 
 import java.io.IOException;
 
@@ -19,6 +19,7 @@ public class MemberChangeServlet extends HttpServlet{
 			//준비 : 세션(회원번호) , 파라미터(나머지5개 정보) --> 회원정보(DTO)
 			req.setCharacterEncoding("UTF-8");
 			MemberDto memberDto = new MemberDto();
+//			memberDto.setMemberNo(1); 확인용
 			memberDto.setMemberNo((int)req.getSession().getAttribute("memberNo"));
 			memberDto.setMemberNick(req.getParameter("memberNick"));
 			memberDto.setMemberEmail(req.getParameter("memberEmail"));
@@ -30,10 +31,10 @@ public class MemberChangeServlet extends HttpServlet{
 			
 			//출력
 			if(result) {
-				resp.sendRedirect("");
+				resp.sendRedirect("MemberSuccess.jsp");
 			}
 			else {
-				resp.sendRedirect("");
+				resp.sendRedirect("editMember.jsp?error");
 			}
 		}
 		catch(Exception e) {
