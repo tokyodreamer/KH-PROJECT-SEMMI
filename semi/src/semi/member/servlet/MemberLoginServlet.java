@@ -1,4 +1,4 @@
-package semi.member.beans;
+package semi.member.servlet;
 
 import java.io.IOException;
 
@@ -7,6 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import semi.member.beans.MemberDao;
+import semi.member.beans.MemberDto;
 
 @WebServlet(urlPatterns = "/member/memberLogin.kh")
 public class MemberLoginServlet extends HttpServlet {
@@ -23,7 +26,7 @@ public class MemberLoginServlet extends HttpServlet {
 			
 			if(sth !=null){
 				req.getSession().setAttribute("memberNo", sth.getMemberNo());
-				resp.sendRedirect(req.getContextPath());
+				resp.sendRedirect("semi/index.jsp");
 			}
 			else {
 				resp.sendRedirect("login.jsp");
