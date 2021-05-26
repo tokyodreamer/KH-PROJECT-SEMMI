@@ -9,7 +9,7 @@
 		<hr>
 		</div>
 		
-		<form action="/member/memberLogin.kh" method="post">
+		<form action="memberLogin.kh" method="post">
 
 			<div class="row">
 				<input type="text" name="memberId" placeholder="Username"
@@ -28,8 +28,9 @@
 			
 			<div class="row">
 				<input type="text" value="아직 계정이 없으신가요?" id="goJoin">
-				<input type="button" value="회원가입" id="find">
-				<a href ="/member/memberjoin.jsp"></a>
+<!-- 				<input type="button" value="회원가입" id="find"> -->
+				<a href ="memberJoin.jsp">회원가입</a>
+				
 			</div>
 		</form>
 		
