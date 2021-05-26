@@ -10,6 +10,8 @@ import semi.beans.JDBCUtils;
 
 public class MemberDao {
 	
+	//회원 가입 메소드(insert-ps.execute)
+	
 	//회원 가입 메소드
 	public void regist(MemberDto memberDto) throws Exception{
 			Connection con = JDBCUtils.getConnection();
@@ -57,4 +59,19 @@ public class MemberDao {
 		return sth;
 	}
 
-}
+		//회원 탈퇴 메소드(Delete-int count=executeUpdate.)단일조회와 비슷
+	public boolean exit(int memberNo) throws Exception{
+			
+			Connection con = JDBCUtils.getConnection();
+			
+			String sql="delete member where member_no=?";
+			PreparedStatement ps=con.prepareStatement(sql);
+			ps.setInt(1, memberNo);
+			int count =ps.executeUpdate();
+			
+			con.close();
+			
+			return count>0;
+		}
+		
+	}
