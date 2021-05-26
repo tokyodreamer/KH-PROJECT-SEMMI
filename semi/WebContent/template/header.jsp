@@ -27,6 +27,15 @@
 <body>
 	<main>
 		<header>
+			<div align="right">
+				<%if(isLogin) { %>
+					<a href="memberLogout.jsp">로그아웃</a>
+				<%} else { %>
+					<a href="memberJoin.jsp">회원가입</a>
+					<a href="memberLogin.jsp">로그인</a>
+				<%} %>
+			
+			</div>
 			<h1>세미 프로젝트 (임시)</h1>
 		</header>
 		<nav>
