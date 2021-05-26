@@ -8,7 +8,6 @@ import semi.beans.JDBCUtils;
 
 public class MemberDao {
 
-	
 	public boolean changePassword(int memberNo,String nowPw, String newPw) throws Exception { //비밀번호 변경
 
 				
