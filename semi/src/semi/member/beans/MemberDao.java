@@ -7,13 +7,12 @@ import java.sql.ResultSet;
 import semi.beans.JDBCUtils;
 
 public class MemberDao {
+
 	
 	public boolean changePassword(int memberNo,String nowPw, String newPw) throws Exception { //비밀번호 변경
+
 				
-
 			Connection con = JDBCUtils.getConnection();
-
-
 			String sql="update meber set member_pw=? where member_no=? and member_pw=?";
 
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -49,6 +48,7 @@ public class MemberDao {
 
 	
 	public MemberDto find(int memberNo) throws Exception { //memberno를 기준으로 회원찾기
+
 		Connection con = JDBCUtils.getConnection();
 		
 		String sql = "select * from member where member_no = ?";
