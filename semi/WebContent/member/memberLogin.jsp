@@ -9,7 +9,7 @@
 		<hr>
 		</div>
 		
-		<form action="/member/memberLogin.kh" method="post">
+		<form action="memberLogin.kh" method="post">
 
 			<div class="row">
 				<input type="text" name="memberId" placeholder="Username"

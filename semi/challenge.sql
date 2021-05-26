@@ -11,4 +11,3 @@ select
 from challenge C
     left outer join member M on C.challenge_writer = M.member_no
     left outer join category T on C.category_no = T.category_no;
-    

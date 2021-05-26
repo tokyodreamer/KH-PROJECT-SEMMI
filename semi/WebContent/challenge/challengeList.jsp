@@ -153,9 +153,8 @@
 						<td><%=challengeListDto.getCategorytype() %></td>
 						<td>
 							<!-- 제목을 누르면 상세보기 페이지로 이동 -->
-							<a href="#">
-							<%=challengeListDto.getChallengeTitle() %>
-							</a>
+							<a href="challengeDetail.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>">
+							<%=challengeListDto.getChallengeTitle() %></a>
 						</td>
 						<td><%=challengeListDto.getChallengePushPoint() %>원</td>
 						<td><%=challengeListDto.getChallengeStartDate().substring(0,10) %></td>
@@ -170,7 +169,7 @@
 	</div>
 	
 	<div class="row text-right">
-		<a href="#">글쓰기</a>
+		<a href="challengeJoin.jsp" class="link-btn">글쓰기</a>
 	</div>
 	
 <div class="row">
