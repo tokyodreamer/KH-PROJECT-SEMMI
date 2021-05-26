@@ -4,8 +4,6 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <div class="container-600">
 	<div class="row">
-		<h1>오늘도 시-작!</h1>
-		<br><br>
 		<input type="button" value="관리자" class="form-btn">
 		<h2>로그인</h2>
 		<hr>
@@ -30,7 +28,8 @@
 			
 			<div class="row">
 				<input type="text" value="아직 계정이 없으신가요?" id="goJoin">
-				<button id="goJoin-btn">회원가입</button>
+				<input type="button" value="회원가입" id="find">
+				<a href ="/member/memberjoin.jsp"></a>
 			</div>
 		</form>
 		
@@ -45,9 +44,12 @@
 	}
 	%>
 		<div class="row">
-				<button id="goJoin-btn">challenges 란?</button>
-				
-				<button id="find">아이디/ 비밀번호 찾기</button>
+				<input type="button" value="challenges 란?" id="notify-btn">
+				<a href ="#"></a>
+		</div>		
+		<div class="row">
+				<input type="button" value="아이디/ 비밀번호 찾기" id="find">
+				<a href ="#"></a>
 		</div>
 
 

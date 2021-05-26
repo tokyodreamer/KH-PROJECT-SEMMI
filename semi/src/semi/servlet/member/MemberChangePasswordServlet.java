@@ -1,4 +1,4 @@
-package semi.member.beans;
+package semi.servlet.member;
 
 import java.io.IOException;
 
@@ -8,28 +8,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/member/memberLogin.kh")
-public class MemberLoginServlet extends HttpServlet {
+import semi.member.beans.MemberDao;
+
+@WebServlet(urlPatterns= "/member/editPw.kh")
+public class MemberChangePasswordServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+
+			int memberNo = (int)req.getSession().getAttribute("memberNo");
+			
 			req.setCharacterEncoding("UTF-8");
-			MemberDto memberDto = new MemberDto();
-			memberDto.setMemberId(req.getParameter("memberId"));
-			memberDto.setMemberPw(req.getParameter("memberPw"));
+			String nowPw = req.getParameter("nowPw");
+			String newPw = req.getParameter("newPw");
 			
+
 			MemberDao memberDao = new MemberDao();
-			MemberDto sth = memberDao.login(memberDto);
 			
-			if(sth !=null){
-				req.getSession().setAttribute("memberNo", sth.getMemberNo());
-				resp.sendRedirect(req.getContextPath());
+			boolean result = memberDao.changePassword(memberNo, nowPw, newPw);
+			
+			
+			if(result) {
+				resp.sendRedirect("");
 			}
 			else {
-				resp.sendRedirect("login.jsp");
+				resp.sendRedirect("");
 			}
-			
-		} catch (Exception e) {
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
 		}
