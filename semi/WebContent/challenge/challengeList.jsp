@@ -150,7 +150,7 @@
 						<td><%=challengeDto.getCategoryNo() %></td>
 						<td>
 							<!-- 제목을 누르면 상세보기 페이지로 이동 -->
-							<a href="#">
+							<a href="challengeDetail.jsp/<%=challengeDto.getChallengeNo()%>">
 							<%=challengeDto.getChallengeTitle() %>
 							</a>
 						</td>
