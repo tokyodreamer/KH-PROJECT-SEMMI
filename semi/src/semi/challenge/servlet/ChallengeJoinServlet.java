@@ -27,7 +27,7 @@ public class ChallengeJoinServlet extends HttpServlet {
 			
 			ChallengeDto challengeDto = new ChallengeDto();
 			challengeDto.setChallengeNo(challengeNo); // 시퀀스로 불러온 값 등록
-			challengeDto.setChallengeWriter(1); // 테스트 값
+			challengeDto.setChallengeWriter((int)req.getSession().getAttribute("memberNo")); // 테스트 값
 			challengeDto.setCategoryNo(1); // 테스트 값
 			challengeDto.setChallengeTitle(req.getParameter("challengeTitle")); // 제목
 			challengeDto.setChallengePushPoint(Integer.parseInt(req.getParameter("challengePushPoint"))); // 참가비
