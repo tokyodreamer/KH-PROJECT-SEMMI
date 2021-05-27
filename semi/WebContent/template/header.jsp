@@ -29,7 +29,9 @@
 		<header>
 			<div align="right">
 				<%if(isLogin) { %>
-					<a href="memberLogout.jsp">로그아웃</a>
+					<form method="post" action="logout.kh">
+						<input type="submit" value="로그아웃">
+					</form>
 				<%} else { %>
 					<a href="memberJoin.jsp">회원가입</a>
 					<a href="memberLogin.jsp">로그인</a>

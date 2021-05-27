@@ -8,27 +8,32 @@ import semi.beans.JDBCUtils;
 
 public class MemberDao {
 
-	public boolean changePassword(int memberNo, String nowPw, String newPw) throws Exception { // 비밀번호 변경
+	public boolean changePassword(int memberNo,String nowPw, String newPw) throws Exception { //비밀번호 변경
 
-		Connection con = JDBCUtils.getConnection();
-		String sql = "update meber set member_pw=? where member_no=? and member_pw=?";
+				
+			Connection con = JDBCUtils.getConnection();
+			String sql="update member set member_pw=? where member_no=? and member_pw=?";
 
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, newPw);
-		ps.setInt(2, memberNo);
-		ps.setString(3, nowPw);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, newPw);
+			ps.setInt(2, memberNo);
+			ps.setString(3, nowPw);
 
-		int count = ps.executeUpdate();
+	
+			int count = ps.executeUpdate();
 
-		con.close();
+			con.close();
 
-		return count > 0;
+			return count > 0;
 	}
+	
+
 
 	public boolean changeInformation(MemberDto memberDto) throws Exception { // 회원정보 수정
 		Connection con = JDBCUtils.getConnection();
 
-		String sql = "update member " + "set member_nick=?, member_email=? " + "where member_no=? and member_pw=?";
+		String sql = "update member set member_nick=?, member_email=? where member_no=? and member_pw=?";
+
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, memberDto.getMemberNick());
 		ps.setString(2, memberDto.getMemberEmail());
