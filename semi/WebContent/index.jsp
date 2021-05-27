@@ -21,7 +21,4 @@
 
 <h2>세션 값 : <%=session.getAttribute("memberNo") %></h2>
 
-
-
->>>>>>> refs/remotes/origin/main
 <jsp:include page="/template/footer.jsp"></jsp:include>
