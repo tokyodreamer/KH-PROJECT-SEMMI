@@ -60,7 +60,7 @@
 		<!-- 자바스크립트 추가 예정 : 세션값과 작성자가 일치하지 않으면 후원하기 버튼 출력 -->
 		<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="link-btn">후원하기</a>
 		<!-- 자바스크립트 추가 예정 : 세션값과 작성자가 일치하면 인증하기 버튼 출력 -->
-		<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeDto.getChallengeNo()%>&categoryNo=<%=challengeDto.getCategoryNo()%>" class="link-btn">인증하기</a>
+		<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>&categoryNo=<%=challengeListDto.getCategoryNo()%>" class="link-btn">인증하기</a>
 		<a href="challengeList.jsp" class="link-btn">목록</a>
 	</div>
 </div>
