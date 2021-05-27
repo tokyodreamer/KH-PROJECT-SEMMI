@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.util.TimeZone"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDateTime"%>
@@ -17,17 +19,32 @@
 	String startDate = challengeListDto.getChallengeStartDate(); 
 	String endDate = challengeListDto.getChallengeEndDate();
 	
-	// 1. 문자열 -> 타임 패키지의 인스턴스로 형변환
+	// 1. 문자열 -> 타임 패키지의 인스턴스로 형변환 (일단 밀리세컨으로 변환)
 	SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	format.setTimeZone(TimeZone.getTimeZone("UTC"));
+	Date startDateParsed = format.parse(startDate);
+	Date endDateParsed = format.parse(endDate);
+	
+	// * : 현재 날짜, 종료일 밀리 세컨 뽑아오기 (조건문 활용 예정 : 도전 기한 만료 체크용도)
+	long currentTimeSec = System.currentTimeMillis()/1000;
+	long endTimeSec = endDateParsed.getTime()/1000;
+	
+	// 2. 타임리미트 : 현재시간 - 종료일
+	long timeLimitMills = endDateParsed.getTime() -  System.currentTimeMillis();
+	long timeLimitDay = timeLimitMills/1000/60/60/24;
+	long timeLimitHour = timeLimitMills/1000/60/60%24;
+	long timeLimitMin = timeLimitMills/1000/60%60;
+	long timeLimitSec = timeLimitMills/1000%60;
+	
+	// 3. 구현
+	// - 타임 리미트 실시간 체크 : 종료일이 현재시간보다 크다면 (도전글 기한이 유효하다는 의미!)
+	// - 남은 기간이 실시간으로 초단위로 업데이트 되게끔(? 시간이 줄어들게..)
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <div class="container-900">
 	<div class="row">
 		<h2>도전글 상세보기</h2>
-	</div>
-	<div class="row">
-		<h4>시작날짜 확인 : <%=startDate %></h4>
 	</div>
 	<div class="row">
 		<label>도전글 번호</label>
@@ -57,7 +74,11 @@
 	<!-- 타임 리미트 : 로직 구현 예정 -->
 	<!-- 실시간 계산 예정 :  -->
 	<div class="row text-left">
-		<h2>종료까지 # 일</h2>
+		<%if(currentTimeSec > endTimeSec) {%>
+		<h2>도전기한 만료</h2>
+		<%} else { %>
+		<h4>종료까지 <%=timeLimitDay + "일" + timeLimitHour + "시간" + timeLimitMin + "분" + timeLimitSec + "초" %> 남았습니다</h4>
+		<%} %>
 	</div>
 	<div class="row text-left">
 		<label>상금</label>
@@ -73,7 +94,9 @@
 	</div>
 	<div class="row text-left">
 		<!-- 자바스크립트 추가 예정 : 세션값과 작성자가 일치하지 않으면 후원하기 버튼 출력 -->
+		<%if(currentTimeSec < endTimeSec) {%>
 		<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="link-btn">후원하기</a>
+		<%} %>
 		<!-- 자바스크립트 추가 예정 : 세션값과 작성자가 일치하면 인증하기 버튼 출력 -->
 		<a href="<%=request.getContextPath() %>/auth/authInsert.jsp" class="link-btn">인증하기</a>
 		<a href="challengeList.jsp" class="link-btn">목록</a>
