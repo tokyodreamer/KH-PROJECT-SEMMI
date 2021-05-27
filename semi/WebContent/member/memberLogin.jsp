@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script>
- function con(){
-	 //회원가입 버튼을 누르면 회원가입페이지로 이동한다
-	var btn = document.querySelector(".pop-btn");
-	if(btn.value=="표시"){
-		btn.type ="text";
-	}
+//  function con(){
+// 	 //회원가입 버튼을 누르면 회원가입페이지로 이동한다
+// 	var btn = document.querySelector(".pop-btn");
+// 	if(btn.value=="표시"){
+// 		btn.type ="text";
+// 	}
 
- }
-
+//  }
 
 </script>
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -31,7 +30,7 @@
 				<input type="password" name="memberPw" placeholder="Pw"
 				id="input-pw" class="form-input">
 				
-				<button id="input-pw-btn" class="pop-btn" onclick="con();">표시</button>
+<!-- 			<button id="input-pw-btn" class="pop-btn" onclick="con();">표시</button> -->
 
 					
 					

@@ -38,40 +38,50 @@
 				<%} %>
 			
 			</div>
-			<h1>세미 프로젝트 (임시)</h1>
+			<h1>Challenges</h1>
 		</header>
 		<nav>
 			<ul class="menu">
-				<li><a href="#">챌린저스</a>
+			<li><a href="#">챌린저스란?</a>
+					<ul>
+						<li><a href="<%=root%>/item/itemInsert.jsp">챌린저스 소개</a></li>
+						<li><a href="<%=root%>/item/itemList.jsp">챌린지 100%활용하기</a></li>
+					</ul></li>
+				<li><a href="#">마이페이지</a>
 					<ul>
 						<%if(isLogin) { %>
-							<li><a href="<%=root%>/member/logout.kh">챌린저스란?</a></li>
-							<li><a href="<%=root%>/member/myInfo.jsp">도전하기</a></li>
-							<li><a href="<%=root%>/member/exit.kh">회원 탈퇴</a></li>
+							<li><a href="<%=root%>/item/itemInsert.jsp">★도전하기★</a></li>
+							<li><a href="<%=root%>/member/myInfo.jsp">개인 정보 변경</a></li>
+							<li><a href="<%=root%>/member/exit.kh">도전글 내역</a></li>
+							<li><a href="<%=root%>/member/exit.kh">후원 내역</a></li>
 							<li><a href="#">회원 조회/검색</a></li>
 						<%} else { %>
 							<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
-							<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
 						<%} %>
 					</ul></li>
-				<li><a href="#">주 메뉴 02</a>
+					
+				<li><a href="#">도전 내역</a>
 					<ul>
-						<li><a href="<%=root%>/item/itemInsert.jsp">아이템 등록</a></li>
-						<li><a href="<%=root%>/item/itemList.jsp">아이템 목록</a></li>
-					</ul></li>
 					<%if(isLogin) { %>
-				<li><a href="#">부 메뉴 01</a>
-					<ul>
-						<li><a href="<%=root%>/product/productInsert.jsp">상품 등록</a></li>
-						<li><a href="<%=root%>/product/productList.jsp">상품 목록</a></li>
-						<li><a href="<%=root%>/product/productRank.jsp">상품 검색(1)</a></li>
-						<li><a href="<%=root%>/product/productSearch.jsp">상품 검색(2)</a></li>
-					</ul></li>
+						<li><a href="<%=root%>/item/itemInsert.jsp">도전글 목록</a></li>
+						<li><a href="<%=root%>/item/itemList.jsp">인증글 목록</a></li>
 					<%} %>
-				<li><a href="#">부 메뉴 02</a>
+					</ul></li>
+				
+				<li><a href="#">후기</a>
 					<ul>
-						<li><a href="<%=root%>/board/boardWrite.jsp">게시글 작성</a></li>
-						<li><a href="<%=root%>/board/boardList.jsp">게시글 목록</a></li>
+						<%if(isLogin) { %>
+							<li><a href="<%=root%>/item/itemInsert.jsp">후기 작성</a></li>
+						
+						<%} else { %>
+							<li><a href="<%=root%>/member/memberJoin.jsp">후기 보러가기</a></li>
+						<%} %>
+					</ul></li>
+				
+				<li><a href="#">관리자</a>
+					<ul>
+						<li><a href="<%=root%>/board/boardWrite.jsp">로그인</a></li>
+						<li><a href="<%=root%>/board/boardList.jsp">인증글 목록</a></li>
 					</ul></li>
 			</ul>
 		</nav>
