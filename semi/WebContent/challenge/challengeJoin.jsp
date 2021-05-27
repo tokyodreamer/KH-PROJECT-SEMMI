@@ -52,10 +52,10 @@
 			<textarea name="challengeContent" rows="" cols="" id="content" required></textarea>
 		</div>
 		<div class="row">
-			<input type="submit" class="form-btn form-btn-positive" value="도전하기" >
+			<input type="submit" class="form-btn form-btn-positive"  value="도전하기" >
 		</div>
 		<div class="row">
-			<input type="reset"  class="form-btn form-btn-negative" value="초기화">
+			<input type="reset"  class="form-btn form-btn-negative"  value="초기화">
 		</div>
 	</form>
 </div>

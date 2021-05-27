@@ -44,11 +44,6 @@
 <script type="text/javascript">
 	$(function(){
 		
-		<%-- var dd = <%=timeLimitDay%>;
-		var hh = <%=timeLimitHour%>;
-		var mm = <%=timeLimitMin%>;
-		var ss = <%=timeLimitSec%>; --%>
-		
 		var timeLimitMills = <%=timeLimitMills%>;
 		
 		setInterval(PrintTime, 1000);
@@ -59,7 +54,7 @@
 			var mm = parseInt(timeLimitMills/1000/60%60);
 			var ss = parseInt(timeLimitMills/1000%60);
 			
-			document.getElementById("timeLimit").innerHTML = "종료까지" + dd + "일" + hh + "시간" + mm + "분" + ss + "초 남았습니다";
+			document.getElementById("timeLimit").innerHTML = <h2>"종료까지" + dd + "일" + hh + "시간" + mm + "분" + ss + "초 남았습니다"</h2>;
 			ss--;
 			
 			if(ss === 0) {
