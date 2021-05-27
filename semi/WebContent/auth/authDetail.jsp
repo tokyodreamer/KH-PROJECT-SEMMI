@@ -1,30 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <%@page import="java.util.List"%>
 <%@page import="semi.auth.beans.AuthDto"%>
 <%@page import="semi.auth.beans.AuthDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%
 AuthDao authDao = new AuthDao();
 List<AuthDto> authList = authDao.list();
-
 %>
-<style>
 
-.table.table-hover-title > thead > tr,		
-.table.table-hover-title > tbody > tr:hover > #th-title {
-	background-color:rgb(231, 241, 253);
-}
-
-table.authList th a{
-display: block;
-width:100%;
-height:100%;
-color:black;
-text-decoration: none;
-}
-
-
-</style>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <div class="container-800 ">
@@ -48,7 +35,7 @@ text-decoration: none;
 			<% for (AuthDto authDto: authList ) {%>
 				<tr> 
 					<th> <%=authDto.getAuthNo() %> </th>
-					<th id="th-title"> <a href="authDetail.kh"><%=authDto.getAuthTitle() %> </a></th>
+					<th id="th-title"> <a href="authDetail.jsp"><%=authDto.getAuthTitle() %> </a></th>
 					<th> <%=authDto.getAuthWriter() %> </th>
 					<th> <%=authDto.getAuthTimeLine() %> </th>
 					<th><%= authDto.getAuthResult() %>  </th>
