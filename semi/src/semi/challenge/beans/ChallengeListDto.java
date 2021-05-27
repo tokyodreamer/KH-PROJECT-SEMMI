@@ -4,17 +4,20 @@ public class ChallengeListDto {
 	//도전글 정보 저장 변수
 	private int challengeNo;
 	private String challengeTitle;
-	private String challengePushPoint;
+	private int challengePushPoint;
 	private String challengeStartDate;
 	private String challengeEndDate;
 	private int challengePercent;
 	private int challengeReward;
 	private int challengeDonate;
+	private String challengeContent;
 	
 	//회원 정보 저장 변수
 	private int memberNo;
 	private String memberNick;
+	private int memberPoint;
 	
+
 	//카테고리 정보 저장 변수
 	private int categoryNo;
 	private String categorytype;
@@ -39,11 +42,11 @@ public class ChallengeListDto {
 		this.challengeTitle = challengeTitle;
 	}
 
-	public String getChallengePushPoint() {
+	public int getChallengePushPoint() {
 		return challengePushPoint;
 	}
 
-	public void setChallengePushPoint(String challengePushPoint) {
+	public void setChallengePushPoint(int challengePushPoint) {
 		this.challengePushPoint = challengePushPoint;
 	}
 
@@ -86,7 +89,14 @@ public class ChallengeListDto {
 	public void setChallengeDonate(int challengeDonate) {
 		this.challengeDonate = challengeDonate;
 	}
+	
+	public String getChallengeContent() {
+		return challengeContent;
+	}
 
+	public void setChallengeContent(String challengeContent) {
+		this.challengeContent = challengeContent;
+	}
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -102,7 +112,15 @@ public class ChallengeListDto {
 	public void setMemberNick(String memberNick) {
 		this.memberNick = memberNick;
 	}
+	
+	public int getMemberPoint() {
+		return memberPoint;
+	}
 
+	public void setMemberPoint(int memberPoint) {
+		this.memberPoint = memberPoint;
+	}
+	
 	public int getCategoryNo() {
 		return categoryNo;
 	}
@@ -118,6 +136,9 @@ public class ChallengeListDto {
 	public void setCategorytype(String categorytype) {
 		this.categorytype = categorytype;
 	}
+
+	
+	
 	
 	
 

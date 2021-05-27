@@ -110,7 +110,6 @@ public class ChallengeDao {
 			challengeDto.setChallengePercent(rs.getInt("challenge_percent"));
 			challengeDto.setChallengeReward(rs.getInt("challenge_reward"));
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
-			challengeDto.setChallengeContent(rs.getString("challenge_content"));
 			
 			challengeList.add(challengeDto);
 		}
@@ -152,7 +151,6 @@ public class ChallengeDao {
 			challengeDto.setChallengePercent(rs.getInt("challenge_percent"));
 			challengeDto.setChallengeReward(rs.getInt("challenge_reward"));
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
-			challengeDto.setChallengeContent(rs.getString("challenge_content"));
 			
 			challengeList.add(challengeDto);
 		}
@@ -193,6 +191,22 @@ public class ChallengeDao {
 		
 		return count;
 		
+	}
+	
+	// 후원금 등록 시, 도전글 DB의 후원금 컬럼에 후원금을 더해주는 메소드 (작성자 : 정 계진)
+	// 설명 : 후원금 등록 메소드의 후원금 값과 도전글 번호 값을 활용하여 후원금을 업데이트(누적 형태로) 하는 메소드
+	public boolean donateJoin(int challengeDonate, int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "update challenge set challenge_donate = challenge_donate + ? where challenge_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeDonate);
+		ps.setInt(2, challengeNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
 	}
 	
 }

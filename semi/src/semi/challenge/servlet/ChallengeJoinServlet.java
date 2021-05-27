@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.challenge.beans.ChallengeDao;
 import semi.challenge.beans.ChallengeDto;
+import semi.member.beans.MemberDao;
 
 @WebServlet(urlPatterns = "/challenge/challengeJoin.kh")
 public class ChallengeJoinServlet extends HttpServlet {
@@ -26,7 +27,7 @@ public class ChallengeJoinServlet extends HttpServlet {
 			
 			ChallengeDto challengeDto = new ChallengeDto();
 			challengeDto.setChallengeNo(challengeNo); // 시퀀스로 불러온 값 등록
-			challengeDto.setChallengeWriter(1); // 테스트 값
+			challengeDto.setChallengeWriter((int)req.getSession().getAttribute("memberNo")); // 테스트 값
 			challengeDto.setCategoryNo(1); // 테스트 값
 			challengeDto.setChallengeTitle(req.getParameter("challengeTitle")); // 제목
 			challengeDto.setChallengePushPoint(Integer.parseInt(req.getParameter("challengePushPoint"))); // 참가비
@@ -40,6 +41,10 @@ public class ChallengeJoinServlet extends HttpServlet {
 			
 			// 도전글 등록
 			challengeDao.challengeJoin(challengeDto);
+			
+			// 멤버DB에서 도전글 등록한 해당 회원(=memberNo) 의 포인트 차감(=challengePushPoint)
+			MemberDao memberDao = new MemberDao();
+			memberDao.challengeJoin((int)req.getSession().getAttribute("memberNo"), Integer.parseInt(req.getParameter("challengePushPoint")));
 			
 			resp.sendRedirect("challengeDetail.jsp?challengeNo="+challengeNo);
 			

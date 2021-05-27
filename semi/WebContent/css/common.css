@@ -345,3 +345,13 @@ textarea.form-input {
 .error {
 	color: red;
 }
+.sh_group{
+		display : inline-block;
+		height: 250px;
+		width : 350px;
+		margin: 16px 8px 0;
+		padding: 15px 15px 15px;
+		text-align: left;
+		border: 1px solid #dadada;
+		border-radius: 2px;
+	}
