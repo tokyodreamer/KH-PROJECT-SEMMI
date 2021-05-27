@@ -4,10 +4,10 @@ import java.sql.Date;
 
 public class AuthDto {
 
-	private double authNo;
-	private double authChallengeNo;
-	private double authWriter;
-	private double authCategoryType;
+	private int authNo;
+	private int authChallengeNo;
+	private int authWriter;
+	private int authCategoryType;
 	private String authTitle;
 	private String authContent;
 	private Date authTimeLine;
@@ -17,25 +17,25 @@ public class AuthDto {
 	public double getAuthNo() {
 		return authNo;
 	}
-	public void setAuthNo(double authNo) {
+	public void setAuthNo(int authNo) {
 		this.authNo = authNo;
 	}
 	public double getAuthChallengeNo() {
 		return authChallengeNo;
 	}
-	public void setAuthChallengeNo(double authChallengeNo) {
+	public void setAuthChallengeNo(int authChallengeNo) {
 		this.authChallengeNo = authChallengeNo;
 	}
 	public double getAuthWriter() {
 		return authWriter;
 	}
-	public void setAuthWriter(double authWriter) {
+	public void setAuthWriter(int authWriter) {
 		this.authWriter = authWriter;
 	}
 	public double getAuthCategoryType() {
 		return authCategoryType;
 	}
-	public void setAuthCategoryType(double authCategoryType) {
+	public void setAuthCategoryType(int authCategoryType) {
 		this.authCategoryType = authCategoryType;
 	}
 	public String getAuthTitle() {

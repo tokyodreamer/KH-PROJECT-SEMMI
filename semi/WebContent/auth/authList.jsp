@@ -49,7 +49,7 @@ text-decoration: none;
 			<% for (AuthDto authDto: authList ) {%>
 				<tr> 
 					<th> <%=authDto.getAuthNo() %> </th>
-					<th id="th-title"> <a href="authDetail.jsp?authNo=<%=authDto.getAuthNo() %>"><%=authDto.getAuthTitle() %> </a></th>
+					<th id="th-title"> <a href="authDetail.jsp?authNo=<%=(int)authDto.getAuthNo()%>"><%=authDto.getAuthTitle() %> </a></th>
 					<th> <%=authDto.getAuthWriter() %> </th>
 					<th> <%=authDto.getAuthTimeLine() %> </th>
 					<th><%= authDto.getAuthResult() %>  </th>

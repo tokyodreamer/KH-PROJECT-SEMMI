@@ -24,10 +24,10 @@ public class AuthDao {
 		while (rs.next()) {
 			AuthDto authDto = new AuthDto();
 
-			authDto.setAuthNo(rs.getDouble("auth_no"));
-			authDto.setAuthChallengeNo(rs.getDouble("auth_challengeNo"));
-			authDto.setAuthWriter(rs.getDouble("auth_writer"));
-			authDto.setAuthCategoryType(rs.getDouble("auth_categoryType"));
+			authDto.setAuthNo(rs.getInt("auth_no"));
+			authDto.setAuthChallengeNo(rs.getInt("auth_challengeNo"));
+			authDto.setAuthWriter(rs.getInt("auth_writer"));
+			authDto.setAuthCategoryType(rs.getInt("auth_categoryType"));
 			authDto.setAuthTitle(rs.getString("auth_title"));
 			authDto.setAuthContent(rs.getString("auth_content"));
 			authDto.setAuthTimeLine(rs.getDate("auth_timeLine"));
@@ -54,10 +54,10 @@ public class AuthDao {
 		AuthDto authDto = new AuthDto();
 		if (rs.next()) {
 
-			authDto.setAuthNo(rs.getDouble("auth_no"));
-			authDto.setAuthChallengeNo(rs.getDouble("auth_challengeNo"));
-			authDto.setAuthWriter(rs.getDouble("auth_writer"));
-			authDto.setAuthCategoryType(rs.getDouble("auth_categoryType"));
+			authDto.setAuthNo(rs.getInt("auth_no"));
+			authDto.setAuthChallengeNo(rs.getInt("auth_challengeNo"));
+			authDto.setAuthWriter(rs.getInt("auth_writer"));
+			authDto.setAuthCategoryType(rs.getInt("auth_categoryType"));
 			authDto.setAuthTitle(rs.getString("auth_title"));
 			authDto.setAuthContent(rs.getString("auth_content"));
 			authDto.setAuthTimeLine(rs.getDate("auth_timeLine"));

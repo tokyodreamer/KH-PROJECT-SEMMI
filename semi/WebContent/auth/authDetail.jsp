@@ -1,8 +1,5 @@
 <%@page import="semi.member.beans.MemberDao"%>
 <%@page import="semi.member.beans.MemberDto"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
 <%@page import="java.util.List"%>
 <%@page import="semi.auth.beans.AuthDto"%>
 <%@page import="semi.auth.beans.AuthDao"%>
@@ -10,8 +7,8 @@
 	pageEncoding="UTF-8"%>
 	
 <%
-int authNo = Integer.parseInt(request.getParameter("audhNo"));
-
+int authNo = Integer.parseInt(request.getParameter("authNo"));
+System.out.println(authNo);
 AuthDao authDao = new AuthDao();
 AuthDto authDto = authDao.get(authNo);
 
@@ -43,10 +40,11 @@ MemberDao memberDao = new MemberDao();
 					<th> <%=authDto.getAuthNo() %> </th>
 					<th> <%=authDto.getAuthWriter() %> </th>
 					<%
-					MemberDto memberDto = memberDao.find(authDto.getAuthWriter());
+					MemberDto memberDto = memberDao.find((int)authDto.getAuthWriter());
+					
 					%>
 					<th><%=authDto.getAuthTitle() %> </th>
-					
+					<th> a</th>
 					<th> <%=authDto.getAuthTimeLine() %> </th>
 					<th><%= authDto.getAuthResult() %>  </th>
 				</tr>
