@@ -29,7 +29,9 @@
 		<header>
 			<div align="right">
 				<%if(isLogin) { %>
-					<a href="memberLogout.jsp">로그아웃</a>
+					<form method="post" action="logout.kh">
+						<input type="submit" value="로그아웃">
+					</form>
 				<%} else { %>
 					<a href="memberJoin.jsp">회원가입</a>
 					<a href="memberLogin.jsp">로그인</a>
@@ -40,16 +42,16 @@
 		</header>
 		<nav>
 			<ul class="menu">
-				<li><a href="#">주 메뉴 01</a>
+				<li><a href="#">챌린저스</a>
 					<ul>
 						<%if(isLogin) { %>
-							<li><a href="<%=root%>/member/logout.kh">로그아웃</a></li>
-							<li><a href="<%=root%>/member/myInfo.jsp">내 정보 보기</a></li>
+							<li><a href="<%=root%>/member/logout.kh">챌린저스란?</a></li>
+							<li><a href="<%=root%>/member/myInfo.jsp">도전하기</a></li>
 							<li><a href="<%=root%>/member/exit.kh">회원 탈퇴</a></li>
 							<li><a href="#">회원 조회/검색</a></li>
 						<%} else { %>
-							<li><a href="<%=root%>/member/join.jsp">회원 가입</a></li>
-							<li><a href="<%=root%>/member/login.jsp">로그인</a></li>
+							<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
+							<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
 						<%} %>
 					</ul></li>
 				<li><a href="#">주 메뉴 02</a>

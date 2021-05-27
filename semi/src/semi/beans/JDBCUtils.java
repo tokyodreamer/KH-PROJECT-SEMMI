@@ -1,13 +1,24 @@
 package semi.beans;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class JDBCUtils {
-	// DBCP 연결 기능
+	
+		
+		//연결 기능
+		//= 테이블 종류와 무관하게 전체적으로 이용해야 하므로 객체 생성 없이 쉽게 접근하도록 정적(static) 등록
+		public static Connection getConnection(String username, String password) throws Exception {
+			Class.forName("oracle.jdbc.OracleDriver");
+			Connection con = DriverManager.getConnection(
+					"jdbc:oracle:thin:@localhost:1521:xe", username, password);
+			return con;
+		}
+		// DBCP 연결 기능
 		// = context.xml 에 적용해놓은 설정을 토대로 운영되는 apache-common-dbcp 라이브러리를 이용하여 연결
 		// = 신규 연결을 생성하는 것이 아니라 이미 만들어진 연결을 대여하여 사용하는 방식
 		// = 연결에 소모되는 시간이 사라져서 성능적으로 큰 향상이 있다

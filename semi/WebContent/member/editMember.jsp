@@ -6,17 +6,23 @@
 	<jsp:include page="/template/header.jsp"></jsp:include>
 	
 	<%
-		int memberNo = (int)session.getAttribute("memberNo");
-		MemberDao memberDao = new MemberDao();
+ 		int memberNo = (int)session.getAttribute("memberNo"); 
+		MemberDao memberDao = new MemberDao(); 
 		MemberDto memberDto = memberDao.find(memberNo);
-	%>
+ 	%> 
+	
+<%--테스트용 	<% --%>
+<!-- // 		int memberNo = 1; -->
+<!-- // 		MemberDao memberDao = new MemberDao(); -->
+<!-- // 		MemberDto memberDto = memberDao.find(memberNo); -->
+<%-- 	%> --%>
 	
 	<div class="container-600">
 		<div class="row">
 			<h2>회원 정보 변경</h2>
 		</div>
 		
-		<form action="myedit.kh" method="post">
+		<form action="editMember.kh" method="post">
 			<div class="row text-left">
 				<label>닉네임</label>
 				<input type="text" name="memberNick" required class="form-input form-input-underline"
@@ -27,6 +33,10 @@
 				<label>이메일</label>
 				<input type="text" name="memberEmail" class="form-input form-input-underline"
 								value="<%=memberDto.getMemberEmail()%>">
+			</div>
+			<div class="row text-left">
+				<label>현재 비밀번호</label>
+				<input type="password" name="memberPw" required class="form-input form-input-underline">
 			</div>
 			<!-- 오류인 상황에는 오류 메세지를 추가해준다 -->
 			<%if(request.getParameter("error") != null){ %>
