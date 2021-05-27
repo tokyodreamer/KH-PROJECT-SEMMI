@@ -61,7 +61,19 @@
 			
 			document.getElementById("timeLimit").innerHTML = "종료까지" + dd + "일" + hh + "시간" + mm + "분" + ss + "초 남았습니다";
 			ss--;
-		};
+			
+			if(ss === 0) {
+				mm--;
+				ss = 60;
+			} else if(mm === 0) {
+				hh--;
+				mm = 60;
+			} else if(hh === 0){
+				dd--;
+				hh = 24;
+			}
+			
+		}; 
 		
 		
 	});
