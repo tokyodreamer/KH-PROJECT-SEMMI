@@ -50,6 +50,7 @@ ChallengeDao challengeDao = new ChallengeDao();
 
 	<% 
 	ChallengeDto challengeDto = challengeDao.getChallenge((int)authDto.getAuthNo());
+	CategoryDto categoryDto = categoryDao.ge()
 	%>
 		private int challengeNo;
 	private int challengeWriter; // FK : memberNo
@@ -67,7 +68,7 @@ ChallengeDao challengeDao = new ChallengeDao();
 	계시글 제목: <%=challengeDto.getChallengeTitle() %>
 	</div>
 	<div class="row">
-	계시글 제목: 
+	계시글 카테고리: 
 	</div>
 	<div class="row">
 	계시글 제목: 
