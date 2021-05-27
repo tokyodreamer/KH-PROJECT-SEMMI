@@ -42,26 +42,41 @@
 		</header>
 		<nav>
 			<ul class="menu">
+
 			<li><a href="#">챌린저스란?</a>
 					<ul>
 						<li><a href="<%=root%>/item/itemInsert.jsp">챌린저스 소개</a></li>
 						<li><a href="<%=root%>/item/itemList.jsp">챌린지 100%활용하기</a></li>
 					</ul></li>
 				<li><a href="#">마이페이지</a>
+
+				<li><a href="#">회원기능</a>
+
 					<ul>
 						<%if(isLogin) { %>
+
 							<li><a href="<%=root%>/item/itemInsert.jsp">★도전하기★</a></li>
 							<li><a href="<%=root%>/member/myInfo.jsp">개인 정보 변경</a></li>
 							<li><a href="<%=root%>/member/exit.kh">도전글 내역</a></li>
 							<li><a href="<%=root%>/member/exit.kh">후원 내역</a></li>
+
+							<li><a href="<%=root%>/member/logout.kh">로그아웃</a></li>
+							<li><a href="<%=root%>/member/myInfo.jsp">나의정보</a></li>
+							<li><a href="<%=root%>/member/exit.kh">탈퇴하기</a></li>
+
 							<li><a href="#">회원 조회/검색</a></li>
 						<%} else { %>
 							<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
 						<%} %>
 					</ul></li>
 					
+
 				<li><a href="#">도전 내역</a>
+
+					<li><a href="#">챌린저스이용하기</a>
+
 					<ul>
+
 					<%if(isLogin) { %>
 						<li><a href="<%=root%>/item/itemInsert.jsp">도전글 목록</a></li>
 						<li><a href="<%=root%>/item/itemList.jsp">인증글 목록</a></li>
@@ -69,7 +84,25 @@
 					</ul></li>
 				
 				<li><a href="#">후기</a>
+
+						<li><a href="<%=root%>/intro/intro.jsp">챌린저스란?</a></li>
+						<li><a href="<%=root%>/intro/intro.jsp">도전글 목록</a></li>
+						<li><a href="<%=root%>/item/itemList.jsp">인증글 목록</a></li>
+					</ul></li>
+					
+					
+				<li><a href="#">마이페이지</a>
 					<ul>
+						<li><a href="<%=root%>/item/itemList.jsp">나의 도전글</a></li>
+						<li><a href="<%=root%>/item/itemList.jsp">나의 후원내역</a></li>
+						<li><a href="<%=root%>/item/itemList.jsp">도전하기</a></li>
+						<li><a href="<%=root%>/item/itemList.jsp">내 정보 변경</a></li>
+					</ul></li>
+					
+				<li><a href="#">리뷰</a>
+
+					<ul>
+
 						<%if(isLogin) { %>
 							<li><a href="<%=root%>/item/itemInsert.jsp">후기 작성</a></li>
 						
@@ -82,6 +115,18 @@
 					<ul>
 						<li><a href="<%=root%>/board/boardWrite.jsp">로그인</a></li>
 						<li><a href="<%=root%>/board/boardList.jsp">인증글 목록</a></li>
+
+						<li><a href="<%=root%>/product/productInsert.jsp">사용자 리뷰</a></li>
+						<li><a href="<%=root%>/product/productList.jsp">리뷰 작성</a></li>
+					</ul></li>
+				<li><a href="#">Admin</a>
+					<ul>
+						<li><a href="<%=root%>/board/boardWrite.jsp">로그인</a></li>
+						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
+						
+						
+<%-- 						<li><a href="<%=root%>/board/boardList.jsp">게시글 목록</a></li> --%>
+
 					</ul></li>
 			</ul>
 		</nav>

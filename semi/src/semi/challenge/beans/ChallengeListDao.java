@@ -37,6 +37,7 @@ public class ChallengeListDao {
 
 			challengeListDto.setMemberNo(rs.getInt("member_no"));
 			challengeListDto.setMemberNick(rs.getString("member_nick"));
+			challengeListDto.setMemberPoint(rs.getInt("member_point"));
 
 			challengeListDto.setCategoryNo(rs.getInt("category_no"));
 			challengeListDto.setCategorytype(rs.getString("category_type"));
@@ -138,11 +139,19 @@ public class ChallengeListDao {
 			challengeListDto = new ChallengeListDto();
 			challengeListDto.setChallengeNo(rs.getInt("challenge_no"));
 			challengeListDto.setChallengeTitle(rs.getString("challenge_title"));
-			challengeListDto.setMemberNick(rs.getString("member_nick"));
+			challengeListDto.setChallengePushPoint(rs.getInt("challenge_pushPoint"));
 			challengeListDto.setChallengeStartDate(rs.getString("challenge_startDate"));
 			challengeListDto.setChallengeEndDate(rs.getString("challenge_endDate"));
+			challengeListDto.setChallengePercent(rs.getInt("challenge_percent"));
 			challengeListDto.setChallengeReward(rs.getInt("challenge_reward"));
+			challengeListDto.setChallengeDonate(rs.getInt("challenge_donate"));
 			challengeListDto.setChallengeContent(rs.getString("challenge_content"));
+
+			challengeListDto.setMemberNo(rs.getInt("member_no"));
+			challengeListDto.setMemberNick(rs.getString("member_nick"));
+
+			challengeListDto.setCategoryNo(rs.getInt("category_no"));
+			challengeListDto.setCategorytype(rs.getString("category_type"));
 		} else {
 			challengeListDto = null;
 		}
