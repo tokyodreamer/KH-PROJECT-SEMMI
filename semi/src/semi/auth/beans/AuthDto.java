@@ -3,39 +3,45 @@ package semi.auth.beans;
 import java.sql.Date;
 
 public class AuthDto {
-
-	private double authNo;
-	private double authChallengeNo;
-	private double authWriter;
-	private double authCategoryType;
+	//기존 double -> int 로 수정(05/27) 인증글 등록 서블릿 만들면서 형변환 때문에 변경함
+	private int authNo;
+	private int authChallengeNo;
+	private int authWriter;
+	private int authCategoryType;
 	private String authTitle;
 	private String authContent;
 	private Date authTimeLine;
 	private String authResult;
 	private String authReason;
 	//파일 이름, 파일 타임, 파일 사이즈 추가해야 됨 (인증 사진) 
-	public double getAuthNo() {
+	//authFile 관련 Dto 추가
+	private String authUploadName;
+	private String authSaveName;
+	private String authContentType;
+	private long authFileSize;
+	
+	public int getAuthNo() {
 		return authNo;
 	}
-	public void setAuthNo(double authNo) {
+	public void setAuthNo(int authNo) {
 		this.authNo = authNo;
 	}
-	public double getAuthChallengeNo() {
+	public int getAuthChallengeNo() {
 		return authChallengeNo;
 	}
-	public void setAuthChallengeNo(double authChallengeNo) {
+	public void setAuthChallengeNo(int authChallengeNo) {
 		this.authChallengeNo = authChallengeNo;
 	}
-	public double getAuthWriter() {
+	public int getAuthWriter() {
 		return authWriter;
 	}
-	public void setAuthWriter(double authWriter) {
+	public void setAuthWriter(int authWriter) {
 		this.authWriter = authWriter;
 	}
-	public double getAuthCategoryType() {
+	public int getAuthCategoryType() {
 		return authCategoryType;
 	}
-	public void setAuthCategoryType(double authCategoryType) {
+	public void setAuthCategoryType(int authCategoryType) {
 		this.authCategoryType = authCategoryType;
 	}
 	public String getAuthTitle() {
@@ -67,6 +73,31 @@ public class AuthDto {
 	}
 	public void setAuthReason(String authReason) {
 		this.authReason = authReason;
+	}
+	
+	public String getAuthUploadName() {
+		return authUploadName;
+	}
+	public void setAuthUploadName(String authUploadName) {
+		this.authUploadName = authUploadName;
+	}
+	public String getAuthSaveName() {
+		return authSaveName;
+	}
+	public void setAuthSaveName(String authSaveName) {
+		this.authSaveName = authSaveName;
+	}
+	public String getAuthContentType() {
+		return authContentType;
+	}
+	public void setAuthContentType(String authContentType) {
+		this.authContentType = authContentType;
+	}
+	public long getAuthFileSize() {
+		return authFileSize;
+	}
+	public void setAuthFileSize(long authFileSize) {
+		this.authFileSize = authFileSize;
 	}
 	public AuthDto() {
 		super();
