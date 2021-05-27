@@ -131,12 +131,15 @@
 		<h2><%=challengeListDto.getChallengeContent() %></h2>
 	</div>
 	<div class="row text-left">
-		<!-- 자바스크립트 추가 예정 : 세션값과 작성자가 일치하지 않으면 후원하기 버튼 출력 -->
-		<%if(currentTimeSec < endTimeSec) {%>
-		<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="link-btn">후원하기</a>
-		<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>&categoryNo=<%=challengeListDto.getCategoryNo()%>" class="link-btn">인증하기</a>
+		<!-- 자바 제어문 추가 : 세션값과 작성자가 일치하면 인증하기 버튼 출력 -->
+		<%if(currentTimeSec < endTimeSec && challengeListDto.getMemberNo() == (int) request.getSession().getAttribute("memberNo")) {%>
+			<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>&categoryNo=<%=challengeListDto.getCategoryNo()%>" class="link-btn">인증하기</a>
+		<!-- 자바 제어문 추가 : 아니라면 후원하기 버튼 출력 -->
+		<!-- 자바 제어문 변경 예정 : 세션값과 작성자가 일치하지 않고 && 후원DB를 조회하여 후원하지 않은 회원이면 후원하기 버튼 출력 -->
+		<%}else {%>
+			<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="link-btn">후원하기</a>
 		<%} %>
-		<!-- 자바스크립트 추가 예정 : 세션값과 작성자가 일치하면 인증하기 버튼 출력 -->
+		<!-- 자바 제어문 추가 예정 : 후원DB를 조회하여 해당 도전글에 이미 한 후원이면 후원금과 안내문 출력 -->
 		<a href="challengeList.jsp" class="link-btn">목록</a>
 	</div>
 </div>
