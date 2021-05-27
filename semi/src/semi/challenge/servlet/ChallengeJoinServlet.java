@@ -27,17 +27,13 @@ public class ChallengeJoinServlet extends HttpServlet {
 			
 			ChallengeDto challengeDto = new ChallengeDto();
 			challengeDto.setChallengeNo(challengeNo); // 시퀀스로 불러온 값 등록
-			challengeDto.setChallengeWriter((int)req.getSession().getAttribute("memberNo")); // 테스트 값
-			challengeDto.setCategoryNo(1); // 테스트 값
+			challengeDto.setChallengeWriter((int)req.getSession().getAttribute("memberNo")); 
+			challengeDto.setCategoryNo(Integer.parseInt(req.getParameter("categoryNo"))); 
 			challengeDto.setChallengeTitle(req.getParameter("challengeTitle")); // 제목
 			challengeDto.setChallengePushPoint(Integer.parseInt(req.getParameter("challengePushPoint"))); // 참가비
 			challengeDto.setChallengeStartDate(req.getParameter("challengeStartDate")); // 시작일
 			challengeDto.setChallengeEndDate(req.getParameter("challengeEndDate")); // 종료일
 			challengeDto.setChallengeContent(req.getParameter("challengeContent")); // 도전글 내용
-			
-			// 멤버 테이블 연결용
-			// challengeDto.setChallengeWriter((int)req.getSession().getAttribute("memberNo")); -- 회원 기능 구현되면 로그인 페이지에서 세션값 받아올 예정!
-			// challengeDto.setCategoryNo(Integer.parseInt(req.getParameter("categoryNo"))); -- 카테고리 테이블에서 가져올 예정!
 			
 			// 도전글 등록
 			challengeDao.challengeJoin(challengeDto);
