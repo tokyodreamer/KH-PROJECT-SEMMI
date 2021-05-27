@@ -40,8 +40,33 @@
 	// - 타임 리미트 실시간 체크 : 종료일이 현재시간보다 크다면 (도전글 기한이 유효하다는 의미!)
 	// - 남은 기간이 실시간으로 초단위로 업데이트 되게끔(? 시간이 줄어들게..)
 %>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		<%-- var dd = <%=timeLimitDay%>;
+		var hh = <%=timeLimitHour%>;
+		var mm = <%=timeLimitMin%>;
+		var ss = <%=timeLimitSec%>; --%>
+		
+		var timeLimitMills = <%=timeLimitMills%>;
+		
+		setInterval(PrintTime, 1000);
+		
+		function PrintTime(){
+			var dd = parseInt(timeLimitMills/1000/60/60/24);
+			var hh = parseInt(timeLimitMills/1000/60/60%24);
+			var mm = parseInt(timeLimitMills/1000/60%60);
+			var ss = parseInt(timeLimitMills/1000%60);
+			
+			document.getElementById("timeLimit").innerHTML = "종료까지" + dd + "일" + hh + "시간" + mm + "분" + ss + "초 남았습니다";
+			ss--;
+		};
+		
+		
+	});
+</script>
 <jsp:include page="/template/header.jsp"></jsp:include>
-
 <div class="container-900">
 	<div class="row">
 		<h2>도전글 상세보기</h2>
@@ -74,10 +99,11 @@
 	<!-- 타임 리미트 : 로직 구현 예정 -->
 	<!-- 실시간 계산 예정 :  -->
 	<div class="row text-left">
+		<label>도전글 기한</label><br>
 		<%if(currentTimeSec > endTimeSec) {%>
 		<h2>도전기한 만료</h2>
 		<%} else { %>
-		<h4>종료까지 <%=timeLimitDay + "일" + timeLimitHour + "시간" + timeLimitMin + "분" + timeLimitSec + "초" %> 남았습니다</h4>
+		<span id="timeLimit"></span>
 		<%} %>
 	</div>
 	<div class="row text-left">
@@ -96,9 +122,9 @@
 		<!-- 자바스크립트 추가 예정 : 세션값과 작성자가 일치하지 않으면 후원하기 버튼 출력 -->
 		<%if(currentTimeSec < endTimeSec) {%>
 		<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="link-btn">후원하기</a>
+		<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>&categoryNo=<%=challengeListDto.getCategoryNo()%>" class="link-btn">인증하기</a>
 		<%} %>
 		<!-- 자바스크립트 추가 예정 : 세션값과 작성자가 일치하면 인증하기 버튼 출력 -->
-		<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>&categoryNo=<%=challengeListDto.getCategoryNo()%>" class="link-btn">인증하기</a>
 		<a href="challengeList.jsp" class="link-btn">목록</a>
 	</div>
 </div>
