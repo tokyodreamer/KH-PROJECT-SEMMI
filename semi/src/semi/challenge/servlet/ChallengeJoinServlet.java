@@ -36,7 +36,7 @@ public class ChallengeJoinServlet extends HttpServlet {
 			challengeDto.setChallengeContent(req.getParameter("challengeContent")); // 도전글 내용
 			
 			// 도전글 등록하기 전에 멤버 DB에 포인트가 있는 지 검사
-			int checkPoint = challengeDao.checkMemberPoint(challengeDto);
+			int checkPoint = challengeDao.checkMemberPoint((int)req.getSession().getAttribute("memberNo"));
 			
 			// 만일 입력한 참가비가 검사한 체크포인트보다 많으면(참가비가 모자르면..)
 			if(Integer.parseInt(req.getParameter("challengePushPoint")) > checkPoint) {

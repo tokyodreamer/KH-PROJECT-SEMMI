@@ -28,12 +28,12 @@ public class ChallengeDao {
 	}
 	
 	// 도전글 등록 전에 등록할 수 있는 멤버 포인트가 있는 지 확인하는 메소드 (작성자 : 정 계진)
-		public int checkMemberPoint(ChallengeDto challengeDto) throws Exception {
+		public int checkMemberPoint(int memberNo) throws Exception {
 			Connection con = JDBCUtils.getConnection();
 			
 			String sql = "select member_point from member where member_no = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, challengeDto.getChallengeWriter());
+			ps.setInt(1, memberNo);
 			ResultSet rs = ps.executeQuery();
 			
 			int checkPoint = 0;
