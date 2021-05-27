@@ -7,6 +7,7 @@
 AuthDao authDao = new AuthDao();
 List<AuthDto> authList = authDao.list();
 
+int adminNo = (Integer)session.getAttribute("adminNo");
 %>
 <style>
 
@@ -48,7 +49,7 @@ text-decoration: none;
 			<% for (AuthDto authDto: authList ) {%>
 				<tr> 
 					<th> <%=authDto.getAuthNo() %> </th>
-					<th id="th-title"> <a href="authDetail.kh"><%=authDto.getAuthTitle() %> </a></th>
+					<th id="th-title"> <a href="authDetail.jsp?authNo=<%=authDto.getAuthNo() %>"><%=authDto.getAuthTitle() %> </a></th>
 					<th> <%=authDto.getAuthWriter() %> </th>
 					<th> <%=authDto.getAuthTimeLine() %> </th>
 					<th><%= authDto.getAuthResult() %>  </th>

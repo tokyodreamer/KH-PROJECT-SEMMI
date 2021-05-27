@@ -1,3 +1,5 @@
+<%@page import="semi.member.beans.MemberDao"%>
+<%@page import="semi.member.beans.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -8,39 +10,47 @@
 	pageEncoding="UTF-8"%>
 	
 <%
+int authNo = Integer.parseInt(request.getParameter("audhNo"));
+
 AuthDao authDao = new AuthDao();
-List<AuthDto> authList = authDao.list();
+AuthDto authDto = authDao.get(authNo);
+
+MemberDao memberDao = new MemberDao();
+
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <div class="container-800 ">
 	<div class="row">
-		<h2>인증 테이블</h2>
+		<h2>인증글 상세보기</h2>
 	</div>
 	
 	<div class="row">
-		<table class="table table-hover-title authList">
+		<table class="table ">
 			<thead>
 				<tr>
 					<th> 인증 번호 </th>
-					<th> 인증 제목 </th>
 					<th> 작성자 번호 </th>
+					<th> 작성자 아이디</th>
+					<th> 인증 제목 </th>
+					<th> 인증 내용</th>
 					<th> 인증 날짜 </th>
-					<th> 인증 결과 </th>
 				</tr>
 			</thead>
-			
 			<tbody>
-			<% for (AuthDto authDto: authList ) {%>
 				<tr> 
 					<th> <%=authDto.getAuthNo() %> </th>
-					<th id="th-title"> <a href="authDetail.jsp"><%=authDto.getAuthTitle() %> </a></th>
 					<th> <%=authDto.getAuthWriter() %> </th>
+					<%
+					MemberDto memberDto = memberDao.find(authDto.getAuthWriter());
+					%>
+					<th><%=authDto.getAuthTitle() %> </th>
+					
 					<th> <%=authDto.getAuthTimeLine() %> </th>
 					<th><%= authDto.getAuthResult() %>  </th>
 				</tr>
-				<%} %>
+		
 			</tbody>
 		</table>
 	</div>
