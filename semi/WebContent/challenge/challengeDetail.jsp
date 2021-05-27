@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@page import="semi.challenge.beans.ChallengeListDto"%>
 <%@page import="semi.challenge.beans.ChallengeListDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,12 +11,23 @@
 	ChallengeListDao challengeListDao = new ChallengeListDao();
 	
 	ChallengeListDto challengeListDto = challengeListDao.getChallenge(challengeNo);
+	
+	// 목표 : DB에서 가져온 시작일 과 종료일을 확인하여 남은 기간을 실시간으로 계산하고 싶다!
+	// 준비 : JDBC 에서 불러온 시작 날짜 값 (문자열)
+	String startDate = challengeListDto.getChallengeStartDate(); 
+	String endDate = challengeListDto.getChallengeEndDate();
+	
+	// 1. 문자열 -> 타임 패키지의 인스턴스로 형변환
+	SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <div class="container-900">
 	<div class="row">
 		<h2>도전글 상세보기</h2>
+	</div>
+	<div class="row">
+		<h4>시작날짜 확인 : <%=startDate %></h4>
 	</div>
 	<div class="row">
 		<label>도전글 번호</label>
@@ -41,6 +55,7 @@
 		<h2><%=challengeListDto.getChallengeEndDate().substring(0,10) %></h2>
 	</div>
 	<!-- 타임 리미트 : 로직 구현 예정 -->
+	<!-- 실시간 계산 예정 :  -->
 	<div class="row text-left">
 		<h2>종료까지 # 일</h2>
 	</div>
