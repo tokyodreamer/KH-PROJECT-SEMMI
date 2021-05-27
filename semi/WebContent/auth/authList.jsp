@@ -29,7 +29,7 @@ List<AuthDto> authList = authDao.list();
 			
 			<tbody>
 			<% for (AuthDto authDto: authList ) {%>
-				<tr>
+				<tr> 
 					<th> <%=authDto.getAuthNo() %> </th>
 					<th> <%=authDto.getAuthTitle() %> </th>
 					<th> <%=authDto.getAuthWriter() %> </th>
