@@ -65,10 +65,10 @@
 					
 				<li><a href="#">마이페이지</a>
 					<ul>
-						<li><a href="<%=root%>/item/itemList.jsp">나의 도전글</a></li>
+						<li><a href="<%=root%>/challenge/challengeList.jsp">나의 도전글</a></li>
 						<li><a href="<%=root%>/item/itemList.jsp">나의 후원내역</a></li>
-						<li><a href="<%=root%>/item/itemList.jsp">도전하기</a></li>
-						<li><a href="<%=root%>/item/itemList.jsp">내 정보 변경</a></li>
+						<li><a href="<%=root%>/challenge/challengeJoin.jsp">도전하기</a></li>
+						<li><a href="<%=root%>/member/editMember.jsp">내 정보 변경</a></li>
 					</ul></li>
 					
 				<li><a href="#">리뷰</a>
