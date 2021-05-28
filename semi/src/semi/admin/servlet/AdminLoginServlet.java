@@ -2,6 +2,7 @@ package semi.admin.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,7 @@ import semi.admin.beans.AdminDto;
 
 @WebServlet(urlPatterns = "/admin/adminLogin.kh")
 public class AdminLoginServlet extends HttpServlet {
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
