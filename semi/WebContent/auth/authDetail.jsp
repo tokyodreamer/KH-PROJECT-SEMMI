@@ -10,10 +10,12 @@
 
 <%
 int authNo = Integer.parseInt(request.getParameter("authNo"));
-System.out.println(authNo);
 AuthDao authDao = new AuthDao();
 AuthDto authDto = authDao.get(authNo);
+
 MemberDao memberDao = new MemberDao();
+MemberDto memberDto = memberDao.find((int)authDto.getAuthNo());
+
 ChallengeDao challengeDao = new ChallengeDao();
 %>
 
@@ -27,60 +29,23 @@ ChallengeDao challengeDao = new ChallengeDao();
 	 
 	 
 	<div class="row"> 작성자 번호: <%=authDto.getAuthWriter()%> </div>
-	<div class="row"> 작성자 아이디: 
-	<% MemberDto memberDto = memberDao.find((int)authDto.getAuthNo());%>
-	<%=memberDto.getMemberId() %>
-	</div>
+<%-- 	<div class="row"> 작성자 아이디: <%=memberDto.getMemberId() %></div> --%>
 	
 	
 	<div class="row"> 인증 내용:  <%=authDto.getAuthContent()%></div>
 	<div class="row">  인증 날짜: <%=authDto.getAuthTimeLine()%></div>
-	<form action="authResultChange.kh" method="post">
+	<form action="resultChange.kh" method="post">
 	<div class="row"> 인증 처리 여부:  <%=authDto.getAuthResult()%>
-		<label style="color:blue"> <input type="radio" name="authResult" required>인증 인정O: </label>
-		<label style="color:red"> <input type="radio" name="authResult" required> 인증 불인정X: </label> <br>
+		<input type="hidden" value=<%=authNo %> name=authNo>
+		<label style="color:blue"> <input value="S" type="radio" name="authResult" required>인증 인정O: </label>
+		<label style="color:red"> <input value="D" type="radio" name="authResult" required> 인증 불인정X: </label> <br>
 	</div>
-	<div class="row"in>
+	<div class="row">
 	인증 처리 사유: 
 	<input type="text" name="authReason" value="<%=authDto.getAuthReason()%>" style="width:100%;" class="form-input" required >
 	<input type="submit" value="인증 처리 여뷰 + 이유 저장" class="form-btn ">
 	</div>
 	</form>
 
-	<% 
-	ChallengeDto challengeDto = challengeDao.getChallenge((int)authDto.getAuthNo());
-	%>
-
-	
-	<div class="row">
-	계시글 제목: <%=challengeDto.getChallengeTitle() %>
-	</div>
-	<div class="row">
-	계시글 카테고리: 
-	</div>
-	<div class="row">
-	계시글 제목: 
-	</div>
-	<div class="row">
-	계시글 제목: 
-	</div>
-	<div class="row">
-	계시글 제목: 
-	</div>
-	<div class="row">
-	계시글 제목: 
-	</div>
-	<div class="row">
-	계시글 제목: 
-	</div>
-	<div class="row">
-	계시글 제목: 
-	</div>
-	
-
 </div>
-
-
-
-
 <jsp:include page="/template/footer.jsp"></jsp:include>

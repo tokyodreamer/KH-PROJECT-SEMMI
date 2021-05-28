@@ -141,4 +141,19 @@ public class AuthDao {
 		con.close();
 		return authDto;
 	}
+	
+	public boolean changeResult(AuthDto authDto) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "update auth set auth_result=?, auth_reason=? where auth_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, authDto.getAuthResult());
+		ps.setString(2, authDto.getAuthReason());
+		ps.setInt(3, authDto.getAuthNo());
+		
+		int count = ps.executeUpdate();
+		con.close();
+		return count>0;
+	}
 }
