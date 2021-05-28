@@ -78,7 +78,7 @@
 					</ul></li>
 				<li><a href="#">Admin</a>
 					<ul>
-						<li><a href="<%=root%>/board/boardWrite.jsp">로그인</a></li>
+						<li><a href="<%=root%>/admin/adminLogin.jsp">로그인</a></li>
 						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
 						
 						
