@@ -89,7 +89,7 @@ public class AuthDao {
 	public void insert(AuthDto authDto) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "insert into auth values(?, ?, ?, ?, ?, ?, sysdate, 'n', '미정', ?, ?, ?, ?)";
+		String sql = "insert into auth values(?, ?, ?, ?, ?, ?, sysdate, 'N', '미정', ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, authDto.getAuthNo());
 		ps.setInt(2, authDto.getAuthChallengeNo());
