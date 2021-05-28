@@ -27,17 +27,22 @@ public class ChallengeJoinServlet extends HttpServlet {
 			
 			ChallengeDto challengeDto = new ChallengeDto();
 			challengeDto.setChallengeNo(challengeNo); // 시퀀스로 불러온 값 등록
-			challengeDto.setChallengeWriter((int)req.getSession().getAttribute("memberNo")); // 테스트 값
-			challengeDto.setCategoryNo(1); // 테스트 값
+			challengeDto.setChallengeWriter((int)req.getSession().getAttribute("memberNo")); 
+			challengeDto.setCategoryNo(Integer.parseInt(req.getParameter("categoryNo"))); 
 			challengeDto.setChallengeTitle(req.getParameter("challengeTitle")); // 제목
 			challengeDto.setChallengePushPoint(Integer.parseInt(req.getParameter("challengePushPoint"))); // 참가비
 			challengeDto.setChallengeStartDate(req.getParameter("challengeStartDate")); // 시작일
 			challengeDto.setChallengeEndDate(req.getParameter("challengeEndDate")); // 종료일
 			challengeDto.setChallengeContent(req.getParameter("challengeContent")); // 도전글 내용
 			
-			// 멤버 테이블 연결용
-			// challengeDto.setChallengeWriter((int)req.getSession().getAttribute("memberNo")); -- 회원 기능 구현되면 로그인 페이지에서 세션값 받아올 예정!
-			// challengeDto.setCategoryNo(Integer.parseInt(req.getParameter("categoryNo"))); -- 카테고리 테이블에서 가져올 예정!
+			// 도전글 등록하기 전에 멤버 DB에 포인트가 있는 지 검사
+			int checkPoint = challengeDao.checkMemberPoint((int)req.getSession().getAttribute("memberNo"));
+			
+			// 만일 입력한 참가비가 검사한 체크포인트보다 많으면(참가비가 모자르면..)
+			if(Integer.parseInt(req.getParameter("challengePushPoint")) > checkPoint) {
+				// 수정 예정 : 
+				resp.getWriter().println("참가비 부족");
+			} 
 			
 			// 도전글 등록
 			challengeDao.challengeJoin(challengeDto);
