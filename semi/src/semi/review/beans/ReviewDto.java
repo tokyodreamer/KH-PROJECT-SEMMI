@@ -2,14 +2,14 @@ package semi.review.beans;
 
 import java.sql.Date;
 
-public class reviewDto {
+public class ReviewDto {
 
 	private int reviewNo;
 	private int reviewNick;
 	private Date reviewTime;
 	private String reviewStar;
 	private String reviewContent;
-	public reviewDto() {
+	public ReviewDto() {
 		super();
 	}
 	public int getReviewNo() {
