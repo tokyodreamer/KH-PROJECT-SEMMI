@@ -232,7 +232,7 @@ public class ChallengeDao {
 		
 		String sql = "update challenge set challenge_percent = ("
 				+ "select trunc((select count(auth_result) from auth where auth_result = 'S' and auth_challengeNo = ?) / "
-				+ "(select trunc(challenge_endDate) - trunc(challenge_startDate) from challenge where challenge_no = ?) * 100) from dual) "
+				+ "(select (trunc(challenge_endDate) - trunc(challenge_startDate) + 1) from challenge where challenge_no = ?) * 100) from dual) "
 				+ "where challenge_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, challengeNo);
