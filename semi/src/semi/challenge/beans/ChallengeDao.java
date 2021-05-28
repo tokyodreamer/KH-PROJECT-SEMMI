@@ -227,4 +227,21 @@ public class ChallengeDao {
 		return count > 0;
 	}
 	
+	public boolean challengePercent(int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "update challenge set challenge_point = ("
+				+ "select trunc((select count(auth_result) from auth where auth_result = 'S' and auth_challengeNo = ?) / "
+				+ "(select trunc(challenge_endDate) - trunc(challenge_startDate) from challenge where challenge_no = ?) * 100) from dual) "
+				+ "where challenge_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ps.setInt(2, challengeNo);
+		ps.setInt(3, challengeNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
 }

@@ -31,11 +31,14 @@ public class AuthResultChangeServlet extends HttpServlet{
 			Boolean result = authDao.changeResult(authDto);
 			
 			// 도전글의 달성율 변동 메소드
-			
-			// 필요 준비물 : 도전글 시작일, 도전글 종료일, 도전글 번호 
+			// 필요 준비물 : 도전글 번호 
 			
 			// 준비물 가져오는 메소드
 			int challengeNo = authDao.get(Integer.parseInt(req.getParameter("authNo"))).getAuthChallengeNo();
+			
+			// 달성율 메소드
+			ChallengeDao challengeDao = new ChallengeDao();
+			challengeDao.challengePercent(challengeNo);
 			
 			if(result) {
 				resp.sendRedirect("authList.jsp");
