@@ -13,7 +13,6 @@ int authNo = Integer.parseInt(request.getParameter("authNo"));
 System.out.println(authNo);
 AuthDao authDao = new AuthDao();
 AuthDto authDto = authDao.get(authNo);
-
 MemberDao memberDao = new MemberDao();
 ChallengeDao challengeDao = new ChallengeDao();
 %>
@@ -50,19 +49,8 @@ ChallengeDao challengeDao = new ChallengeDao();
 
 	<% 
 	ChallengeDto challengeDto = challengeDao.getChallenge((int)authDto.getAuthNo());
-	CategoryDto categoryDto = categoryDao.ge()
 	%>
-		private int challengeNo;
-	private int challengeWriter; // FK : memberNo
-	private int categoryNo; // FK : categoryNo -> categoryType
-	private String challengeTitle;
-	private int challengePushPoint;
-	private String challengeStartDate;
-	private String challengeEndDate;
-	private int challengePercent;
-	private int challengeReward;
-	private int challengeDonate;
-	private String challengeContent;
+
 	
 	<div class="row">
 	계시글 제목: <%=challengeDto.getChallengeTitle() %>
