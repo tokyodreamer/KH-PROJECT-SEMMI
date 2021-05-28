@@ -2,17 +2,15 @@ package semi.review.beans;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-<<<<<<< HEAD
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-=======
->>>>>>> refs/remotes/origin/main
+
 
 import semi.beans.JDBCUtils;
 
 public class ReviewDao {
-<<<<<<< HEAD
 	public List<ReviewDto> list() throws Exception{
 		Connection con =  JDBCUtils.getConnection();
 		
@@ -55,7 +53,7 @@ Connection con = JDBCUtils.getConnection();
 		
 		String sql = "insert into ";
 	}
-=======
+	
 //	public List<ReviewDto> list() throws Exception{
 
 //	}
@@ -74,13 +72,6 @@ Connection con = JDBCUtils.getConnection();
 		
 		con.close();
 		
-		
-		
-		
-		
 	}
-	
->>>>>>> refs/remotes/origin/main
-	
-	
+
 }

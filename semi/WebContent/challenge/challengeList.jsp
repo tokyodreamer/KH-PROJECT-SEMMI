@@ -123,7 +123,7 @@
 	});
 </script>
 
-	<div class="row">
+	<div class="row text-center">
 		<h2>도전글 목록</h2>
 	</div>
 <!-- <h3>pageNo = <%=pageNo%>, startRow = <%=startRow %>, endRow = <%=endRow %> </h3> -->
