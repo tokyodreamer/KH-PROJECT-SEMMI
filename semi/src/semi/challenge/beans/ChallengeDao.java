@@ -246,4 +246,5 @@ public class ChallengeDao {
 		
 		return count > 0;
 	}
+	
 }
