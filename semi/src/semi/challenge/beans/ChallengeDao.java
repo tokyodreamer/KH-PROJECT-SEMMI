@@ -49,7 +49,7 @@ public class ChallengeDao {
 	public void challengeJoin(ChallengeDto challengeDto) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?)";
+		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N')";
 		
 		PreparedStatement ps = con.prepareStatement(sql); 
 		ps.setInt(1, challengeDto.getChallengeNo()); // 도전글 번호 
@@ -61,6 +61,7 @@ public class ChallengeDao {
 		ps.setString(7, challengeDto.getChallengeEndDate()); // 종료일
 		ps.setInt(8, (int) (challengeDto.getChallengePushPoint()*0.01)); // 상금 로직 : 참가비 * 0.01
 		ps.setString(9, challengeDto.getChallengeContent()); // 도전글 내용 
+		// 'N' - 컬럼 추가 제어문 : 도전 테이블에 최종 정산 여부를 확인할 용도 (05/28, 작성자 : 정 계진) 
 		ps.execute();
 		
 		con.close();
@@ -227,6 +228,7 @@ public class ChallengeDao {
 		return count > 0;
 	}
 	
+	// 백분율 메소드 (05/28, 작성자 : 정 계진)
 	public boolean challengePercent(int challengeNo) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
@@ -244,4 +246,5 @@ public class ChallengeDao {
 		
 		return count > 0;
 	}
+	
 }
