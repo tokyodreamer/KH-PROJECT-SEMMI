@@ -24,6 +24,9 @@ ChallengeDao challengeDao = new ChallengeDao();
 <div class="container-600">
 	
 	<div class="link-btn"> <a href="authList.jsp"> 인증 리스트로 돌아가기</a> </div>
+	<div class="row">
+		<img src="authDetail.kh?authNo=<%=authNo%>" width="100%" height="400">
+	</div>
 	<div class="row" > 인증 번호: <%=authDto.getAuthNo()%> </div>
 	<div class="row" > 인증 제목: <%=authDto.getAuthTitle()%> </div>
 	 
