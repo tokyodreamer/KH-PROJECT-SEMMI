@@ -16,3 +16,10 @@ auth_fileSize number(19) default 0 not null
 );
 
 create sequence auth_seq nocache;
+
+-- 인증테이블 뷰 추가(member_nick) 가져오기 위함
+create or replace view auth_list as
+select 
+    A.*, M.member_nick 
+from auth A
+    left outer join member M on A.auth_writer = M.member_no;
