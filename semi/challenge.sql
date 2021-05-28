@@ -11,3 +11,6 @@ select
 from challenge C
     left outer join member M on C.challenge_writer = M.member_no
     left outer join category T on C.category_no = T.category_no;
+    
+-- 도전 테이블 정산결과처리 컬럼 추가
+alter table challenge add challenge_result char(1) default 'N' check(challenge_result IN ('N', 'Y'));

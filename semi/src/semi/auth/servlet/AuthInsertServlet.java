@@ -58,7 +58,7 @@ public class AuthInsertServlet extends HttpServlet{
 			authDao.insert(authDto);
 			
 			//출력
-			resp.sendRedirect("authInsertComplete.jsp?authNo="+authNo);
+			resp.sendRedirect("authInsertComplete.jsp");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

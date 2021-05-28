@@ -7,7 +7,7 @@ auth_categoryType number(19) references category(category_no) not null, -- FK : 
 auth_title varchar2(300) not null,
 auth_content varchar2(3000) not null,
 auth_timeLine date default sysdate not null,
-auth_result char(1) default 'n' check(auth_result in ('n', 's', 'd')),
+auth_result char(1) default 'N' check(auth_result in ('N', 'S', 'D')),
 auth_reason varchar2(3000) default '미정' not null,
 auth_uploadName varchar2(256) not null,
 auth_saveName varchar2(256) not null,
@@ -16,3 +16,10 @@ auth_fileSize number(19) default 0 not null
 );
 
 create sequence auth_seq nocache;
+
+-- 인증테이블 뷰 추가(member_nick) 가져오기 위함
+create or replace view auth_list as
+select 
+    A.*, M.member_nick 
+from auth A
+    left outer join member M on A.auth_writer = M.member_no;
