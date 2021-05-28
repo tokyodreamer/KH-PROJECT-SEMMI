@@ -47,7 +47,7 @@
 						<%if(isLogin) { %>
 							<li><a href="<%=root%>/member/logout.kh">로그아웃</a></li>
 							<li><a href="<%=root%>/member/myInfo.jsp">나의정보</a></li>
-							<li><a href="<%=root%>/member/exit.kh">탈퇴하기</a></li>
+							<li><a href="<%=root%>/member/memberExit.kh">탈퇴하기</a></li>
 							<li><a href="#">회원 조회/검색</a></li>
 						<%} else { %>
 							<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
