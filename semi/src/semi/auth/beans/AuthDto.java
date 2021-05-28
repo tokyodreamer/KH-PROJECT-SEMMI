@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class AuthDto {
 	//기존 double -> int 로 수정(05/27) 인증글 등록 서블릿 만들면서 형변환 때문에 변경함
+
 	private int authNo;
 	private int authChallengeNo;
 	private int authWriter;
