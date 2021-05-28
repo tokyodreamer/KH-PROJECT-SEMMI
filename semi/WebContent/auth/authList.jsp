@@ -1,11 +1,17 @@
+<%@page import="semi.auth.beans.AuthListDto"%>
+<%@page import="semi.auth.beans.AuthListDao"%>
 <%@page import="java.util.List"%>
 <%@page import="semi.auth.beans.AuthDto"%>
 <%@page import="semi.auth.beans.AuthDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-AuthDao authDao = new AuthDao();
-List<AuthDto> authList = authDao.list();
+//AuthDao authDao = new AuthDao();
+//List<AuthDto> authList = authDao.list();
+
+//수정 member_nick까지 입력을 위해
+AuthListDao authListDao = new AuthListDao();
+List<AuthListDto> authList = authListDao.list();
 
 int adminNo = (Integer)session.getAttribute("adminNo");
 %>
@@ -39,20 +45,20 @@ text-decoration: none;
 				<tr>
 					<th> 인증 번호 </th>
 					<th> 인증 제목 </th>
-					<th> 작성자 번호 </th>
+					<th> 작성자 </th>
 					<th> 인증 날짜 </th>
 					<th> 인증 결과 </th>
 				</tr>
 			</thead>
 			
 			<tbody>
-			<% for (AuthDto authDto: authList ) {%>
+			<% for (AuthListDto authListDto : authList ) {%>
 				<tr> 
-					<th> <%=authDto.getAuthNo() %> </th>
-					<th id="th-title"> <a href="authDetail.jsp?authNo=<%=(int)authDto.getAuthNo()%>"><%=authDto.getAuthTitle() %> </a></th>
-					<th> <%=authDto.getAuthWriter() %> </th>
-					<th> <%=authDto.getAuthTimeLine() %> </th>
-					<th><%= authDto.getAuthResult() %>  </th>
+					<th> <%=authListDto.getAuthNo() %> </th>
+					<th id="th-title"> <a href="authDetail.jsp?authNo=<%=(int)authListDto.getAuthNo()%>"><%=authListDto.getAuthTitle() %> </a></th>
+					<th> <%=authListDto.getMemberNick() %> </th>
+					<th> <%=authListDto.getAuthTimeLine() %> </th>
+					<th><%= authListDto.getAuthResult() %>  </th>
 				</tr>
 				<%} %>
 			</tbody>
