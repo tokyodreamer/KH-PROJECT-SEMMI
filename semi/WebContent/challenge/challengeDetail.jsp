@@ -31,14 +31,18 @@
 	
 	// 2. 타임리미트 : 현재시간 - 종료일
 	long timeLimitMills = endDateParsed.getTime() -  System.currentTimeMillis();
-	long timeLimitDay = timeLimitMills/1000/60/60/24;
-	long timeLimitHour = timeLimitMills/1000/60/60%24;
-	long timeLimitMin = timeLimitMills/1000/60%60;
-	long timeLimitSec = timeLimitMills/1000%60;
 	
-	// 3. 구현
+	// 3. 구현 (아직 미구현 상태)
 	// - 타임 리미트 실시간 체크 : 종료일이 현재시간보다 크다면 (도전글 기한이 유효하다는 의미!)
 	// - 남은 기간이 실시간으로 초단위로 업데이트 되게끔(? 시간이 줄어들게..)
+	
+	// 4. 정산 구현
+	// 위치 : ?
+	// 위치에 따라 출력되는 달성율을 기준으로 정산 메소드 발동
+	// 조건 : 현재시간 {System.currentTimeMillis()} 이 도전글 종료일보다 크거나 같을 때
+	// EX. 
+	// UPDATE MEMBER SET MEMBER_POINT = MEMBER_POINT + (참가비(CHALLENGE_PUSHPONT) * (달성율(MEMBER_PERCENT)/100)) FORM MEMBER WHERE MEMBER_NO = 도전글 참가자 번호(MEMBER_NO) AND CHALLENGE_PERCENT <= 85 AND CHALLENGE_NO = 도전글 번호;
+	// 주의 : 이 메소드는 오로지 1번만 작동해야 함!
 %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
@@ -54,7 +58,7 @@
 			var mm = parseInt(timeLimitMills/1000/60%60);
 			var ss = parseInt(timeLimitMills/1000%60);
 			
-			document.getElementById("timeLimit").innerHTML = <h2>"종료까지" + dd + "일" + hh + "시간" + mm + "분" + ss + "초 남았습니다"</h2>;
+			document.getElementById("timeLimit").innerHTML = "종료까지" + dd + "일" + hh + "시간" + mm + "분" + ss + "초 남았습니다";
 			ss--;
 			
 			if(ss === 0) {
