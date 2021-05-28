@@ -7,7 +7,7 @@ auth_categoryType number(19) references category(category_no) not null, -- FK : 
 auth_title varchar2(300) not null,
 auth_content varchar2(3000) not null,
 auth_timeLine date default sysdate not null,
-auth_result char(1) default 'n' check(auth_result in ('n', 's', 'd')),
+auth_result char(1) default 'N' check(auth_result in ('N', 'S', 'D')),
 auth_reason varchar2(3000) default '미정' not null,
 auth_uploadName varchar2(256) not null,
 auth_saveName varchar2(256) not null,
