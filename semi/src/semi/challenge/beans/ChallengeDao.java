@@ -230,7 +230,7 @@ public class ChallengeDao {
 	public boolean challengePercent(int challengeNo) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "update challenge set challenge_point = ("
+		String sql = "update challenge set challenge_percent = ("
 				+ "select trunc((select count(auth_result) from auth where auth_result = 'S' and auth_challengeNo = ?) / "
 				+ "(select trunc(challenge_endDate) - trunc(challenge_startDate) from challenge where challenge_no = ?) * 100) from dual) "
 				+ "where challenge_no = ?";
