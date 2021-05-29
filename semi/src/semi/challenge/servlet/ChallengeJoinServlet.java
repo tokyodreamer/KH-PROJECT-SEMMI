@@ -40,8 +40,8 @@ public class ChallengeJoinServlet extends HttpServlet {
 			
 			// 만일 입력한 참가비가 검사한 체크포인트보다 많으면(참가비가 모자르면..)
 			if(Integer.parseInt(req.getParameter("challengePushPoint")) > checkPoint) {
-				// 수정 예정 : 
-				resp.getWriter().println("참가비 부족");
+				// 수정 완료 : 도전 목록으로 이동
+				resp.sendRedirect(req.getContextPath() + "/challenge/challengeList.jsp");
 			} 
 			
 			// 도전글 등록

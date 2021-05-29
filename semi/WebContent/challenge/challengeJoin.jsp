@@ -15,26 +15,27 @@
 		// 등록시점 제어
 		
 		// 시작일 : 현재 날짜보다 지난 날짜는 비활성화 (완료)
-			$("#startDate").attr('min', new Date().toISOString().substring(0, 10));
+		$("#startDate").attr('min', new Date().toISOString().substring(0, 10));
 		
-		// 검사 스크립트
-		$(".join-form").submit(function(){
+		// 시작일 : 현재 날짜에서 일주일 이내만 선택 가능 (완료)
+		$("#startDate").attr('max', new Date(Date.parse(new Date()) + 7 * 1000 * 60 * 60 * 24).toISOString().substring(0, 10));
+		
+		// 종료일 : 
+		$("#endDate").on("focus", function(e){
 			
-			// 1. 참가비 검사
-			if($("#pushPoint").val() > <%= checkMemberPoint %>) {
-				window.alert("참가비 부족");
-			} 
+			// 제어 : 시작일이 입력되어 있지 않다면 메세지 출력 (완료)
+			if($("#startDate").val() == ""){
+				alert("시작일을 먼저 입력해 주세요");
+				$("#startDate").focus();
+			}
 			
-			
-			// 2-1. 참가 등록일 검사 : 현재 날짜를 기준점으로 입력한 시작일이 더 작다면 (= 현재 날짜 이전부터 등록일을 하려 하면)
-				
-			// 2-2. 참가 종료일 검사 : 현재 날짜를 기준점으로 입력한 종료일이 더 작다면 (= 현재 날짜 이전부터 종료일을 하려 하면)
-			
-			// 2-3. 시작일과 종료일 검사 I : 시작일이 종료일 이후에 입력이 된다면 (= 시작일보다 종료일이 더 크다면 / ex. 21-05-28 ~ 21.05.27 (X) )
-			
-			// 2-4. 시작일과 종료일 검사 II : 종료일이 시작일 이전에 입력이 된다면 (= 시작일보다 종료일이 더 크다면 / ex. 21-05-28 ~ 21.05.27 (X) )
-			
+			// 종료일 : 시작일을 기준으로 지난 날짜는 비활성화 (완료)
+			$("#endDate").attr('min', $("#startDate").val());
+		
+			// 종료일 : 시작일을 기준으로 100일까지 선택 가능 (완료) : 회의 필요!
+			$("#endDate").attr('max', new Date(Date.parse($("#startDate").val()) + 100 * 1000 * 60 * 60 * 24).toISOString().substring(0, 10))
 		});
+		
 	});
 </script>
 <div class="container-600">
@@ -59,7 +60,7 @@
 		</div>
 		<div class="row text-left">
 			<label for="startDate">시작일</label>
-			<input type="date" class="form-input" name="challengeStartDate" id="startDate"  min="" required >
+			<input type="date" class="form-input" name="challengeStartDate" id="startDate"  required>
 		</div>
 		<div class="row text-left">
 			<label for="endDate">종료일</label>
