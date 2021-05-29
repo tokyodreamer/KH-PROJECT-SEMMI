@@ -1,3 +1,4 @@
+<%@page import="semi.donate.beans.DonateDao"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.TimeZone"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -32,6 +33,12 @@
 	// 2. 타임리미트 : 현재시간 - 종료일
 	long timeLimitMills = endDateParsed.getTime() -  System.currentTimeMillis();
 	
+	// 해당 도전글의 후원한 기록이 있는 지 확인하는 메소드 호출
+	DonateDao donateDao = new DonateDao();
+	
+	// 도전 기록이 있는 지 확인된 회원번호
+	int checkDonateMember = donateDao.checkDonate(challengeNo);
+	
 %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
@@ -65,8 +72,6 @@
 			}
 			
 		}; 
-		
-		// 도전기한이 만료되었으면 후원 버튼 없애기
 		
 	});
 </script>
@@ -127,12 +132,15 @@
 		<%if(currentTimeSec < endTimeSec && challengeListDto.getMemberNo() == (int) request.getSession().getAttribute("memberNo")) {%>
 			<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>&categoryNo=<%=challengeListDto.getCategoryNo()%>" class="link-btn">인증하기</a>
 		<!-- 자바 제어문 추가 : 아니라면 후원하기 버튼 출력 -->
-		<!-- 자바 제어문 변경 예정 : 세션값과 작성자가 일치하지 않고 && 후원DB를 조회하여 후원하지 않은 회원이면 후원하기 버튼 출력 -->
-		<%}else if(System.currentTimeMillis() < endDateParsed.getTime())  {%>
+		<!-- 자바 제어문 변경 예정 (05/30) : 후원DB를 조회하여 후원하지 않은 회원이면 후원하기 버튼 출력 : DAO 필요! -->
+		<%}else if(System.currentTimeMillis() < endDateParsed.getTime() && checkDonateMember != (int) request.getSession().getAttribute("memberNo"))  {%>
 			<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="link-btn">후원하기</a>
-		<%} %>
+		<%} else {%>
 		<!-- 자바 제어문 추가 예정 : 후원DB를 조회하여 해당 도전글에 이미 한 후원이면 후원금과 안내문 출력 -->
+		<h4>이미 후원하였습니다</h4>
+		<%} %>
 		<a href="challengeList.jsp" class="link-btn">목록</a>
+		
 	</div>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
