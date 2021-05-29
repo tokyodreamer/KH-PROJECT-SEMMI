@@ -25,9 +25,9 @@
 		$("#donatePoint").blur(function(){
 			
 			// 후원금은 참가비의 1%만 가능 (완료)
-			if($("#donatePoint").val() > (<%=memberDto.getMemberPoint()%>*0.01)){
+			if($("#donatePoint").val() > (<%=challengeListDto.getChallengePushPoint()%>*0.01)){
 					alert("후원금은 참가비의 1% 포인트까지 후원할 수 있습니다");
-					$("#donatePoint").val(<%=memberDto.getMemberPoint()%>*0.01);
+					$("#donatePoint").val(<%=challengeListDto.getChallengePushPoint()%>*0.01);
 					$("#donatePoint").focus();
 			}
 		});
@@ -35,10 +35,10 @@
 		$(".donate-form").submit(function(e){
 				
 				// 후원금이 참가비의 1% 이상이면 이벤트 중지 (완료)
-				if($("#donatePoint").val() > (<%=memberDto.getMemberPoint()%>*0.01)){
+				if($("#donatePoint").val() > (<%=challengeListDto.getChallengePushPoint()%>*0.01)){
 					alert("후원금은 참가비의 1% 포인트까지 후원할 수 있습니다");
 					e.preventDefault();
-					$("#donatePoint").val(<%=memberDto.getMemberPoint()%>*0.01);
+					$("#donatePoint").val(<%=challengeListDto.getChallengePushPoint()%>*0.01);
 					$("#donatePoint").focus();
 				}
 				
