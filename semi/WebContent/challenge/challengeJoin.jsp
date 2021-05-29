@@ -20,8 +20,6 @@
 		// 시작일 : 현재 날짜에서 일주일 이내만 선택 가능 (완료)
 		$("#startDate").attr('max', new Date(Date.parse(new Date()) + 7 * 1000 * 60 * 60 * 24).toISOString().substring(0, 10));
 		
-		// Q : 시작일 외에 다른 항목을 입력하거나 커서를 이동한 상태에서도 종료일은 계속 시작일을 향하고 있어야 하는데 ?
-				
 		// 종료일 : 
 		$("#endDate").on("focus", function(){
 			
@@ -45,20 +43,43 @@
 			if($(this).val() < 10000) {
 				alert("참가비는 10000 포인트 부터 가능합니다");
 				$("#pushPoint").val(10000);
+				$("#pushPoint").focus();
 			} 
-			// 제어 : 보유 포인트가 20만 포인트 이하인 회원이 보유 포인트보다 많은 참가비를 입력하였을 때 안내
+			// 제어 : 보유 포인트가 20만 포인트 이하인 회원이 보유 포인트보다 많은 참가비를 입력하였을 때 안내 (완료)
 			else if($(this).val() > <%=checkMemberPoint%> && <%=checkMemberPoint%> < 200000){
 				alert("등록할 수 있는 참가비는 " +<%=checkMemberPoint%> +" 포인트 입니다");
 				$("#pushPoint").val(<%=checkMemberPoint%>);
+				$("#pushPoint").focus();
 			}
-			// 제어 : 최대 20만 포인트 까지 입력 가능
+			// 제어 : 최대 20만 포인트 까지 입력 가능 (완료)
 			else if($(this).val() > 200000){
 				alert("참가비는 최대 200000 포인트까지 가능합니다");
 				$("#pushPoint").val(200000);
+				$("#pushPoint").focus();
 			}
 			
-			$("#pushPoint").focus();
+			
 		});
+		
+		// 서블릿으로 넘어가기 전에 검사 (완료)
+		$(".join-form").submit(function(e){
+				
+				// 유형이 옵션 내 값과 다르게 입력되었을 경우 서블릿 전송 취소 (완료)
+				if($("#category").val() !== 1 || $("#category").val() !== 2) {
+					window.alert("선택 유형이 올바르지 않습니다");
+					e.preventDefault();
+					$("#category").focus();
+				}
+					
+				// 종료일이 시작일보다 빠르면 서블릿 전송 취소 (완료)
+				if(new Date($("#endDate").val()) < new Date($("#startDate").val())) {
+					window.alert("참가종료 날짜를 다시 선택해 주세요");
+					e.preventDefault();
+					$("#endDate").focus();
+				}
+		});
+		
+		// Q : 시작일 외에 다른 항목을 입력하거나 커서를 이동한 상태에서도 종료일은 계속 시작일을 향하고 있어야 하는데 ? (미처리)
 		
 	});
 </script>
@@ -71,9 +92,9 @@
 			<label for="title">제목</label>
 			<input type="text" class="form-input" name="challengeTitle" placeholder="도전글 제목" id="title" required>
 		</div>
-		<div class="row">
-			<label for="">유형</label>
-			<select id="ex_select" name="categoryNo">
+		<div class="row ">
+			<label for="category">유형</label>
+			<select id="category" name="categoryNo" required>
 				<option selected>유형 선택</option>
 				<option value="1">운동</option>
 				<option value="2">공부</option>
