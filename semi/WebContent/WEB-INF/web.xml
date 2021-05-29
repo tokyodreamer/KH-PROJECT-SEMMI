@@ -36,8 +36,8 @@
  	</error-page>
  	
  	<servlet>
- 		<servlet-name>testScheduler</servlet-name>
- 		<servlet-class>semi.scheduler.TestScheduler</servlet-class>
+ 		<servlet-name>ResultPointScheduler</servlet-name>
+ 		<servlet-class>semi.scheduler.ResultPointScheduler</servlet-class>
  		<load-on-startup>1</load-on-startup>
  	</servlet>
  	

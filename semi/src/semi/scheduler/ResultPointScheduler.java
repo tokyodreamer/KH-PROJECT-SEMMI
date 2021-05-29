@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 
 import semi.challenge.beans.ChallengeDao;
 
-public class TestScheduler extends HttpServlet{
+public class ResultPointScheduler extends HttpServlet{
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
