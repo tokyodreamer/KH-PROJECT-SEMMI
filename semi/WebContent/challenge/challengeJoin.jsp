@@ -9,22 +9,13 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		  var selectTarget = $('.selectbox select');
-	
-		 selectTarget.on('blur', function(){
-		   $(this).parent().removeClass('focus');
-		 });
-	
-		  selectTarget.change(function(){
-		    var select_name = $(this).children('option:selected').text();
-	
-		  $(this).siblings('label').text(select_name);
-		  });
-	});
-</script>
-<script type="text/javascript">
 	$(function(){
+		//제이쿼리 구현 예정 : ~ 2021.05.30 까지
+		
+		// 등록시점 제어
+		
+		// 시작일 : 현재 날짜보다 지난 날짜는 비활성화 (완료)
+			$("#startDate").attr('min', new Date().toISOString().substring(0, 10));
 		
 		// 검사 스크립트
 		$(".join-form").submit(function(){
@@ -34,7 +25,6 @@
 				window.alert("참가비 부족");
 			} 
 			
-			// 자바 스크립트 구현 예정 : ~ 2021.05.30 까지
 			
 			// 2-1. 참가 등록일 검사 : 현재 날짜를 기준점으로 입력한 시작일이 더 작다면 (= 현재 날짜 이전부터 등록일을 하려 하면)
 				
@@ -57,7 +47,6 @@
 			<input type="text" class="form-input" name="challengeTitle" placeholder="도전글 제목" id="title" required>
 		</div>
 		<div class="selectbox">
-			<label for="ex_select">참가종목 선택</label>
 			<select id="ex_select" name="categoryNo">
 				<option selected>참가종목 선택</option>
 				<option value="1">운동</option>
@@ -70,7 +59,7 @@
 		</div>
 		<div class="row text-left">
 			<label for="startDate">시작일</label>
-			<input type="date" class="form-input" name="challengeStartDate" id="startDate" required>
+			<input type="date" class="form-input" name="challengeStartDate" id="startDate"  min="" required >
 		</div>
 		<div class="row text-left">
 			<label for="endDate">종료일</label>
@@ -88,5 +77,4 @@
 		</div>
 	</form>
 </div>
-
 <jsp:include page="/template/footer.jsp"></jsp:include>
