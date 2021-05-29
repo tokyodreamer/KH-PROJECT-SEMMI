@@ -10,7 +10,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//제이쿼리 구현 예정 : ~ 2021.05.30 까지
+		// 제이쿼리 구현 예정 : ~ 2021.05.30 까지 (1차 완료 / 2차 : 06.03 ~06.04 전체 테스트 시 확인 예정)
 		
 		// 등록시점 제어
 		

@@ -48,10 +48,13 @@
 <script type="text/javascript">
 	$(function(){
 		
+		// 자바에서 가져온 타임리미트 기간
 		var timeLimitMills = <%=timeLimitMills%>;
 		
 		setInterval(PrintTime, 1000);
 		
+		// 타임리미트 출력 : 
+		// 실시간으로 초 단위가 사라지게끔 출력 (미구현 : 현재 새로고침을 통해 타임리미트 확인은 가능 // 05.30에 구현 예정)
 		function PrintTime(){
 			var dd = parseInt(timeLimitMills/1000/60/60/24);
 			var hh = parseInt(timeLimitMills/1000/60/60%24);
@@ -74,6 +77,7 @@
 			
 		}; 
 		
+		// 도전기한이 만료되었으면 후원 버튼 없애기
 		
 	});
 </script>
@@ -135,7 +139,7 @@
 			<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>&categoryNo=<%=challengeListDto.getCategoryNo()%>" class="link-btn">인증하기</a>
 		<!-- 자바 제어문 추가 : 아니라면 후원하기 버튼 출력 -->
 		<!-- 자바 제어문 변경 예정 : 세션값과 작성자가 일치하지 않고 && 후원DB를 조회하여 후원하지 않은 회원이면 후원하기 버튼 출력 -->
-		<%}else  {%>
+		<%}else if(System.currentTimeMillis() < endDateParsed.getTime())  {%>
 			<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="link-btn">후원하기</a>
 		<%} %>
 		<!-- 자바 제어문 추가 예정 : 후원DB를 조회하여 해당 도전글에 이미 한 후원이면 후원금과 안내문 출력 -->
