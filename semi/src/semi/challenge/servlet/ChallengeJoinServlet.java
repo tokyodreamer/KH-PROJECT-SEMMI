@@ -36,10 +36,11 @@ public class ChallengeJoinServlet extends HttpServlet {
 			challengeDto.setChallengeContent(req.getParameter("challengeContent")); // 도전글 내용
 			
 			// 도전글 등록하기 전에 멤버 DB에 포인트가 있는 지 검사
-			int checkPoint = challengeDao.checkMemberPoint((int)req.getSession().getAttribute("memberNo"));
+			MemberDao memberDao = new MemberDao();
+			memberDao.find((int)req.getSession().getAttribute("memberNo")).getMemberPoint();
 			
 			// 만일 입력한 참가비가 검사한 체크포인트보다 많으면(참가비가 모자르면..)
-			if(Integer.parseInt(req.getParameter("challengePushPoint")) > checkPoint) {
+			if(memberDao.find((int)req.getSession().getAttribute("memberNo")).getMemberPoint() < Integer.parseInt(req.getParameter("challengePushPoint"))) {
 				// 수정 완료 : 도전 목록으로 이동
 				resp.sendRedirect(req.getContextPath() + "/challenge/challengeList.jsp");
 			} 
@@ -48,7 +49,6 @@ public class ChallengeJoinServlet extends HttpServlet {
 			challengeDao.challengeJoin(challengeDto);
 			
 			// 멤버DB에서 도전글 등록한 해당 회원(=memberNo) 의 포인트 차감(=challengePushPoint)
-			MemberDao memberDao = new MemberDao();
 			memberDao.challengeJoin((int)req.getSession().getAttribute("memberNo"), Integer.parseInt(req.getParameter("challengePushPoint")));
 			
 			resp.sendRedirect("challengeDetail.jsp?challengeNo="+challengeNo);
