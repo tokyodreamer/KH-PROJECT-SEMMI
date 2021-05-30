@@ -134,7 +134,7 @@
 			<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="link-btn">후원하기</a>
 		<%} else {%>
 		<!-- 자바 제어문 추가 예정 : 후원DB를 조회하여 해당 도전글에 이미 한 후원이면 후원금과 안내문 출력 -->
-		<h4>이미 후원하였습니다</h4>
+			<h4>이미 후원하였습니다</h4>
 		<%} %>
 		<a href="challengeList.jsp" class="link-btn">목록</a>
 		

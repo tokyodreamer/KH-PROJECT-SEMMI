@@ -7,6 +7,17 @@
  	int checkMemberPoint = memberDao.find((int) request.getSession().getAttribute("memberNo")).getMemberPoint();
  %>
 <jsp:include page="/template/header.jsp"></jsp:include>
+<style>
+	.success-message, .fail-message {
+			display: none;
+	}
+	.success-message {
+			color: green;
+	}
+	.fail-message {
+			color: red;
+	}
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -25,8 +36,10 @@
 			
 			// 제어 : 시작일이 입력되어 있지 않다면 메세지 출력 (완료)
 			if($("#startDate").val() == ""){
-				alert("시작일을 먼저 입력해 주세요");
+				$(this).nextAll(".fail-message-04").show();
 				$("#startDate").focus();
+			} else {
+				$(this).nextAll(".fail-message-04").hide();
 			}
 		
 			// 종료일 : 시작일을 기준으로 지난 날짜는 비활성화 (완료)
@@ -41,21 +54,23 @@
 			
 			// 제어 : 최소 1만 포인트 부터 입력 가능 (완료)
 			if($(this).val() < 10000) {
-				alert("참가비는 10000 포인트 부터 가능합니다");
+				$(this).nextAll(".fail-message-01").show();
 				$("#pushPoint").val(10000);
 				$("#pushPoint").focus();
 			} 
 			// 제어 : 보유 포인트가 20만 포인트 이하인 회원이 보유 포인트보다 많은 참가비를 입력하였을 때 안내 (완료)
 			else if($(this).val() > <%=checkMemberPoint%> && <%=checkMemberPoint%> < 200000){
-				alert("등록할 수 있는 참가비는 " +<%=checkMemberPoint%> +" 포인트 입니다");
+				$(this).nextAll(".fail-message-02").show();
 				$("#pushPoint").val(<%=checkMemberPoint%>);
 				$("#pushPoint").focus();
 			}
 			// 제어 : 최대 20만 포인트 까지 입력 가능 (완료)
 			else if($(this).val() > 200000){
-				alert("참가비는 최대 200000 포인트까지 가능합니다");
+				$(this).nextAll(".fail-message-03").show();
 				$("#pushPoint").val(200000);
 				$("#pushPoint").focus();
+			} else {
+				$(this).nextAll(".fail-message").hide();
 			}
 			
 			
@@ -65,11 +80,11 @@
 		$(".join-form").submit(function(e){
 				
 				// 유형이 옵션 내 값과 다르게 입력되었을 경우 서블릿 전송 취소 (완료)
-				if($("#category").val() !== 1 || $("#category").val() !== 2) {
+				/* if(parseInt() !== 1 || $("#category").val() !== 2) {
 					window.alert("선택 유형이 올바르지 않습니다");
 					e.preventDefault();
 					$("#category").focus();
-				}
+				} */
 					
 				// 종료일이 시작일보다 빠르면 서블릿 전송 취소 (완료)
 				if(new Date($("#endDate").val()) < new Date($("#startDate").val())) {
@@ -107,10 +122,14 @@
 		<div class="row text-left">
 			<label for="endDate">종료일</label>
 			<input type="date" class="form-input" name="challengeEndDate" id="endDate" required>
+			<span class="fail-message fail-message-04">시작일을 먼저 입력해 주세요</span>
 		</div>
 		<div class="row text-left">
 			<label for="pushPoint">참가비</label>
 			<input type="number" class="form-input" name="challengePushPoint" id="pushPoint"  required>
+			<span class="fail-message fail-message-01">참가비는 10000 포인트 부터 가능합니다</span>
+			<span class="fail-message fail-message-02">등록할 수 있는 참가비는 <%=checkMemberPoint%> 포인트 입니다</span>
+			<span class="fail-message fail-message-03">참가비는 최대 200000 포인트까지 가능합니다</span>
 		</div>
 		<div class="row text-left">
 			<label>도전글 내용</label>
