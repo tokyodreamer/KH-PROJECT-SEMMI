@@ -38,8 +38,8 @@ public class ResultPointScheduler extends HttpServlet{
 			}
 		};
 		
-		// DAO 구문 발동 조절용
-		timer.scheduleAtFixedRate(task,1000, 6000);
+		// DAO 구문 실행 조절 (1분에 1번씩 1초 딜레이로 실행)
+		timer.scheduleAtFixedRate(task,1000, 1000*60);
 	}
 	
 	@Override
