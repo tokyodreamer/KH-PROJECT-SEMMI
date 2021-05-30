@@ -57,4 +57,5 @@ public class DonateDao {
 		
 		return checkDonateMember;
 	}
+	
 }
