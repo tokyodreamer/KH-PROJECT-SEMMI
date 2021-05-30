@@ -43,22 +43,18 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function(){
-		
 		// 자바에서 가져온 타임리미트 기간
-		var timeLimitMills = <%=timeLimitMills%>;
+		var timeLimitMills = <%=timeLimitMills %>;
 		
 		setInterval(PrintTime, 1000);
 		
-		// 타임리미트 출력 : 
+		// 카운트다운 출력 : 
 		// 실시간으로 초 단위가 사라지게끔 출력 (미구현 : 현재 새로고침을 통해 타임리미트 확인은 가능 // 05.30에 구현 예정)
 		function PrintTime(){
 			var dd = parseInt(timeLimitMills/1000/60/60/24);
 			var hh = parseInt(timeLimitMills/1000/60/60%24);
 			var mm = parseInt(timeLimitMills/1000/60%60);
 			var ss = parseInt(timeLimitMills/1000%60);
-			
-			document.getElementById("timeLimit").innerHTML = "종료까지" + dd + "일" + hh + "시간" + mm + "분" + ss + "초 남았습니다";
-			ss--;
 			
 			if(ss === 0) {
 				mm--;
@@ -71,6 +67,8 @@
 				hh = 24;
 			}
 			
+			$("#timeLimit").text("종료까지 " + dd + " 일 " + hh + " 시간 " + mm + " 분 " + "남았습니다");
+			ss--;
 		}; 
 		
 	});
@@ -89,7 +87,6 @@
 		<h2><%=challengeListDto.getChallengeTitle() %></h2>
 	</div>
 	<div class="row text-left">
-		<!-- 변경 예정 -->
 		<label>도전글 작성자</label>
 		<h2><%=challengeListDto.getMemberNick()%></h2>
 	</div>
@@ -112,7 +109,7 @@
 		<%if(currentTimeSec > endTimeSec) {%>
 		<h2>도전기한 만료</h2>
 		<%} else { %>
-		<span id="timeLimit"></span>
+		<div id="timeLimit" class="row"></div>
 		<%} %>
 	</div>
 	<div class="row text-left">
