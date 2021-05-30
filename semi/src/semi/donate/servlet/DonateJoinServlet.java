@@ -32,6 +32,12 @@ public class DonateJoinServlet extends HttpServlet {
 			donateDto.setDonateCategoryNo(Integer.parseInt(req.getParameter("donateCategoryNo")));
 			donateDto.setDonatePushPoint(Integer.parseInt(req.getParameter("donatePushPoint")));
 			
+			// 후원 전 체크 :
+			// 후원하기 전에 회원의 보유 포인트가 후원금보다 적으면 후원하기 페이지로 이동
+			if(donateDao.checkDonate(Integer.parseInt(req.getParameter("donateChallengeNo"))) < Integer.parseInt(req.getParameter("donatePushPoint"))) {
+				resp.sendRedirect("donateJoin.jsp");
+			}
+			
 			// 1. 후원하는 사람이 후원을 하게 되면
 			donateDao.donateJoin(donateDto);
 			
