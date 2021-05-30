@@ -37,7 +37,7 @@ public class DonateJoinServlet extends HttpServlet {
 			MemberDao memberDao = new MemberDao();
 			
 			if(memberDao.find((int) req.getSession().getAttribute("memberNo")).getMemberPoint() < Integer.parseInt(req.getParameter("donatePushPoint"))) {
-				resp.sendRedirect("donateJoin.jsp");
+				resp.sendRedirect(req.getContextPath() + "/donate/donateJoin.jsp");
 			}
 			
 			// 1. 후원하는 사람이 후원을 하게 되면
