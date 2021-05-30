@@ -42,8 +42,9 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 		
 		
 		//출력(성공하면 목록 화면으로)
-		resp.getWriter().println("ok");
+//		resp.getWriter().println("ok");
 //		resp.sendRedirect("reviewDetail.jsp?reviewNo=" +reviewNo);
+		resp.sendRedirect("reviewList.jsp");
 		
 	}
 
