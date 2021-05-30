@@ -1,10 +1,10 @@
-<%@page import="semi.challenge.beans.ChallengeDao"%>
+<%@page import="semi.member.beans.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%
- 	ChallengeDao challengeDao = new ChallengeDao();
+ 	MemberDao memberDao = new MemberDao();
  	
- 	int checkMemberPoint = challengeDao.checkMemberPoint((int) request.getSession().getAttribute("memberNo"));
+ 	int checkMemberPoint = memberDao.find((int) request.getSession().getAttribute("memberNo")).getMemberPoint();
  %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
