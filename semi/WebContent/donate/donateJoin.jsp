@@ -19,8 +19,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function(){
-		// 제이쿼리 구현 예정 : ~ 2021.05.30 까지
-		
 		// 참가비 :
 		$("#donatePoint").blur(function(){
 			
