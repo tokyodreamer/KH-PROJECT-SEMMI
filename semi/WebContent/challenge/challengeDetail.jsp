@@ -49,7 +49,7 @@
 		setInterval(PrintTime, 1000);
 		
 		// 카운트다운 출력 : 
-		// 실시간으로 초 단위가 사라지게끔 출력 (미구현 : 현재 새로고침을 통해 타임리미트 확인은 가능 // 05.30에 구현 예정)
+		// 실시간으로 초 단위가 사라지게끔 출력 (미구현 : 현재 새로고침을 통해 타임리미트 확인은 가능 // 05.30에 구현 실패 - > 강사님께 여쭤보기!)
 		function PrintTime(){
 			var dd = parseInt(timeLimitMills/1000/60/60/24);
 			var hh = parseInt(timeLimitMills/1000/60/60%24);
