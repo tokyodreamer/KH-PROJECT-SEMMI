@@ -20,11 +20,11 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 		//준비(reviewDto>아이디 or 닉네임, 내용, 평점)
 		req.setCharacterEncoding("UTF-8");
 		ReviewDto reviewDto = new ReviewDto();
-		reviewDto.setReviewStar(req.getParameter("reviewStar"));
+		reviewDto.setReviewStar(Integer.parseInt(req.getParameter("reviewStar")));
 		reviewDto.setReviewContent(req.getParameter("reviewContent"));
 		
 		int memberNo=(int)req.getSession().getAttribute("memberNo");//회원번호 가져오기
-		reviewDto.setReviewNick(Integer.parseInt(req.getParameter("reviewNick")));
+		reviewDto.setReviewNick(memberNo);
 
 		//시퀀스조회
 		
@@ -35,8 +35,8 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 		
 		
 		//출력(성공하면 목록 화면으로)
-		resp.getWriter().println("ok");
-//		resp.sendRedirect("reviewList.jsp");
+		
+		resp.sendRedirect("reviewList.jsp");
 		
 	}
 

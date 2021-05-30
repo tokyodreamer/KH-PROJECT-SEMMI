@@ -2,44 +2,47 @@ package semi.review.beans;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-<<<<<<< HEAD
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-=======
->>>>>>> refs/remotes/origin/main
+
 
 import semi.beans.JDBCUtils;
 
 public class ReviewDao {
-<<<<<<< HEAD
+
+	//전체값 다 가져오기 r
 	public List<ReviewDto> list() throws Exception{
 		Connection con =  JDBCUtils.getConnection();
 		
-		String sql = "select*from order by review_time asc";
+		String sql = "select*from review order by review_time asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
-		List<ReviewDto> reviewList = new ArrayList();
+		List<ReviewDto> reviewList = new ArrayList<>();
 		
 		while(rs.next()) {
 			ReviewDto reDto = new ReviewDto();
 			
 			reDto.setReviewNo(rs.getInt("review_no"));
-			reDto.setReviewNick(rs.getInt("member_no"));
-			reDto.setReviewTime(rs.getDate("review_time"));
-			reDto.setReviewStar(rs.getString("review_star"));
+			reDto.setReviewNick(rs.getInt("review_nick"));
 			reDto.setReviewContent(rs.getString("review_content"));
+			reDto.setReviewTime(rs.getDate("review_time"));
+			reDto.setReviewStar(rs.getInt("review_star"));
 			
 			reviewList.add(reDto);
 			
 		}
 		return reviewList;
 	}
+	
+	
+	//시퀀스 불러오기
 	public int getSequence()throws Exception{
 Connection con = JDBCUtils.getConnection();
 		
-		String sql ="select review_seq.nextval";
+		String sql ="select review_seq.nextval from dual";
 		PreparedStatement ps= con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
@@ -49,18 +52,10 @@ Connection con = JDBCUtils.getConnection();
 		return reviewNo;
 	}
 	
-	//후기글 등록
-	public void insert(ReviewDto reDto) throws Exception{
-		Connection con = JDBCUtils.getConnection();
-		
-		String sql = "insert into ";
-	}
-=======
-//	public List<ReviewDto> list() throws Exception{
-
-//	}
 	
-	//리뷰 작성 기능??(insert-void)
+
+	
+	//후기글 등록
 	public void write(ReviewDto reviewDto) throws Exception{
 		
 		Connection con = JDBCUtils.getConnection();
@@ -68,19 +63,17 @@ Connection con = JDBCUtils.getConnection();
 		String sql="insert into review values(review_seq.nextval,?,sysdate,?,?)";
 		PreparedStatement ps=con.prepareStatement(sql);
 		ps.setInt(1, reviewDto.getReviewNick());
-		ps.setString(2, reviewDto.getReviewStar());
+		ps.setInt(2, reviewDto.getReviewStar());
 		ps.setString(3, reviewDto.getReviewContent());
 		ps.execute();
 		
 		con.close();
-		
-		
-		
-		
+
 		
 	}
+//수정
 	
->>>>>>> refs/remotes/origin/main
+//삭제
 	
 	
 }
