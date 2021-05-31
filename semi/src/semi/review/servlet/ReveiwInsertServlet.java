@@ -24,19 +24,27 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 		reviewDto.setReviewContent(req.getParameter("reviewContent"));
 		
 		int memberNo=(int)req.getSession().getAttribute("memberNo");//회원번호 가져오기
-		reviewDto.setReviewNick(Integer.parseInt(req.getParameter("reviewNick")));
+		reviewDto.setReviewNick(memberNo);
 
-		//시퀀스조회
+	
+		
+		
+		
 		
 		//계산
 		ReviewDao reviewDao = new ReviewDao();
+//		int reviewNo = reviewDao.getSequence(); 	//게시글 번호  (시퀀스조회)
+//		reviewDto.setReviewNo(reviewNo); //추가
+		
+		
 		reviewDao.write(reviewDto);
 		
 		
 		
 		//출력(성공하면 목록 화면으로)
-		resp.getWriter().println("ok");
-//		resp.sendRedirect("reviewList.jsp");
+//		resp.getWriter().println("ok");
+//		resp.sendRedirect("reviewDetail.jsp?reviewNo=" +reviewNo);
+		resp.sendRedirect("reviewList.jsp");
 		
 	}
 
