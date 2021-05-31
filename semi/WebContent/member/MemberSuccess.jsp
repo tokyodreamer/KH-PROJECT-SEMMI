@@ -3,8 +3,9 @@
     
 	<jsp:include page="/template/header.jsp"></jsp:include>
 
-	<div>
-		<h2> 성공 </h2>
-	</div>
+	<script>
+		alert("개인정보가 수정되었습니다.");
+		location="myPage.jsp";
+	</script>
 
 	<jsp:include page="/template/footer.jsp"></jsp:include>
