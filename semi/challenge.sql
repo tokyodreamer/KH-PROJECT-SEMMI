@@ -31,21 +31,21 @@ alter table challenge add challenge_result char(1) default 'N' check(challenge_r
 -- 정산 처리 뷰 : 달성률 50~85%
 -- 참가자 : 참가비에서 벌금(15%) 뺀 나머지 페이백
 -- 후원자 : (달성률 기준으로) 후원금만 페이백
-CREATE VIEW result_done AS
+CREATE OR REPLACE VIEW result_done AS
 SELECT SUM(TRUNC(c.challenge_pushpoint*0.85) + d.donate_pushpoint) "RESULT_POINT", m.member_no "RESULT_NO"
 FROM MEMBER M 
 LEFT OUTER JOIN challenge C ON m.member_no = c.challenge_writer 
 -- 조건 1 : 달성기간이 지났으면서 정산 되지 않은 ...
 AND SYSDATE >= c.challenge_enddate AND c.challenge_result = 'N' 
--- 조건 2 : 달성율이 50-85% 사이의 도전글 -> 후원 금액 계산하려고...
-AND c.challenge_percent >= 50 AND c.challenge_percent < 85
+-- 조건 2 : 달성율이 -85% 사이의 도전글 -> 후원 금액 계산하려고...
+AND c.challenge_percent >= 0 AND c.challenge_percent < 85
 LEFT OUTER JOIN donate D ON m.member_no = d.member_no
 GROUP BY m.member_point, m.member_no;
 
 -- 정산 처리 뷰 : 달성률 85~99%
 -- 참가자 : 참가비 전액 환급 + 상금
 -- 후원자 : 후원금 + 참가비의 1%
-CREATE VIEW result_good AS
+CREATE OR REPLACE VIEW result_good AS
 SELECT SUM(c.challenge_pushpoint + c.challenge_reward + d.donate_pushpoint + TRUNC(c.challenge_pushpoint*0.01)) "RESULT_POINT", m.member_no "RESULT_NO"
 FROM MEMBER M 
 LEFT OUTER JOIN challenge C ON m.member_no = c.challenge_writer 
@@ -59,7 +59,7 @@ GROUP BY m.member_point, m.member_no;
 -- 정산 처리 뷰 : 달성률 100%
 -- 참가자 : 참가비 전액 환급 + 상금 + 누적 후원금
 -- 후원자 : 후원금 + 참가비의 1% 의 2배 
-CREATE VIEW result_perfect AS
+CREATE OR REPLACE VIEW result_perfect AS
 SELECT SUM(c.challenge_pushpoint + c.challenge_reward + c.challenge_donate + (d.donate_pushpoint + TRUNC(c.challenge_pushpoint*0.01))*2) "RESULT_POINT", m.member_no "RESULT_NO"
 FROM MEMBER M 
 LEFT OUTER JOIN challenge C ON m.member_no = c.challenge_writer 
