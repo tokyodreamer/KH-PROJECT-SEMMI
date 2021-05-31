@@ -18,6 +18,7 @@
 #content{
 border: 1px solid lightgray;
 padding: 10px;
+border-radius: 15px;
 }
 
 h2{
@@ -27,6 +28,7 @@ text-shadow: 5px 5px 3px lightgrey;
 
 #review-box{
 border: 1px solid black;
+border-radius: 5px;
 margin:10px auto;
 padding: 20px;
 }
@@ -64,7 +66,7 @@ margin-left: 10px;
 		<div class="row">
 			<label id="nick" >닉네임:</label><span class="sp-nick"><%= reDto.getMemberNick()%></span>
 		</div>
-		<div class="row">
+		<div class="row text-right">
 <!-- 			<label>작성일</label> -->
 			<h4 id="time"><%= reDto.getReviewTime() %></h4>
 		</div>

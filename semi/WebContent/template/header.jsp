@@ -73,15 +73,16 @@
 					<ul>
 					<%if(isLogin) { %>
 						<li><a href="<%=root%>/review/reviewList.jsp">사용자 리뷰</a></li>
-					<%} else { %>	
 						<li><a href="<%=root%>/review/reviewWrite.jsp">리뷰 작성</a></li>
+					<%} else { %>	
+						<li><a href="<%=root%>/review/reviewList.jsp">사용자 리뷰</a></li>
 					<%} %>
 					</ul></li>
 				<li><a href="#">Admin</a>
 					<ul>
 						<li><a href="<%=root%>/admin/adminLogin.jsp">로그인</a></li>
 						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
-							<li><a href="#">회원 조회/검색</a></li>
+						<li><a href="#">회원 조회/검색</a></li>
 						
 						
 <%-- 						<li><a href="<%=root%>/board/boardList.jsp">게시글 목록</a></li> --%>
