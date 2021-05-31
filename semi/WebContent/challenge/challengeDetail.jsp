@@ -1,3 +1,7 @@
+<%@page import="semi.challenge.beans.ChallengeDao"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
+<%@page import="semi.donate.beans.DonateDao"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.TimeZone"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -11,6 +15,27 @@
 	int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
 
 	ChallengeListDao challengeListDao = new ChallengeListDao();
+	
+	ChallengeDao challengeDao = new ChallengeDao();
+	
+	int memberNo = (int)session.getAttribute("memberNo");
+	Set<Integer> challengeNoSet;
+	if(session.getAttribute("challengeNoSet") != null){
+		challengeNoSet = (Set<Integer>)session.getAttribute("challengeNoSet");
+	}
+	else {
+		challengeNoSet = new HashSet<>();
+	}
+	
+	if(challengeNoSet.add(challengeNo)){
+		challengeDao.read(challengeNo, memberNo);
+		System.out.println("조회수 증가");
+	}
+	
+	System.out.println("저장소 : "+challengeNoSet);
+	
+	//저장소 갱신
+	session.setAttribute("challengeNoSet", challengeNoSet);
 	
 	ChallengeListDto challengeListDto = challengeListDao.getChallenge(challengeNo);
 	
@@ -32,34 +57,28 @@
 	// 2. 타임리미트 : 현재시간 - 종료일
 	long timeLimitMills = endDateParsed.getTime() -  System.currentTimeMillis();
 	
-	// 3. 구현 (아직 미구현 상태)
-	// - 타임 리미트 실시간 체크 : 종료일이 현재시간보다 크다면 (도전글 기한이 유효하다는 의미!)
-	// - 남은 기간이 실시간으로 초단위로 업데이트 되게끔(? 시간이 줄어들게..)
+	// 해당 도전글의 후원한 기록이 있는 지 확인하는 메소드 호출
+	DonateDao donateDao = new DonateDao();
 	
-	// 4. 정산 구현
-	// 위치 : ?
-	// 위치에 따라 출력되는 달성율을 기준으로 정산 메소드 발동
-	// 조건 : 현재시간 {System.currentTimeMillis()} 이 도전글 종료일보다 크거나 같을 때
-	// EX. 
-	// UPDATE MEMBER SET MEMBER_POINT = MEMBER_POINT + (참가비(CHALLENGE_PUSHPONT) * (달성율(MEMBER_PERCENT)/100)) FORM MEMBER WHERE MEMBER_NO = 도전글 참가자 번호(MEMBER_NO) AND CHALLENGE_PERCENT <= 85 AND CHALLENGE_NO = 도전글 번호;
-	// 주의 : 이 메소드는 오로지 1번만 작동해야 함!
+	// 도전 기록이 있는 지 확인된 회원번호
+	int checkDonateMember = donateDao.checkDonate(challengeNo);
+	
 %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function(){
-		
-		var timeLimitMills = <%=timeLimitMills%>;
+		// 자바에서 가져온 타임리미트 기간
+		var timeLimitMills = <%=timeLimitMills %>;
 		
 		setInterval(PrintTime, 1000);
 		
+		// 카운트다운 출력 : 
+		// 실시간으로 초 단위가 사라지게끔 출력 (미구현 : 현재 새로고침을 통해 타임리미트 확인은 가능 // 05.30에 구현 실패 - > 강사님께 여쭤보기!)
 		function PrintTime(){
 			var dd = parseInt(timeLimitMills/1000/60/60/24);
 			var hh = parseInt(timeLimitMills/1000/60/60%24);
 			var mm = parseInt(timeLimitMills/1000/60%60);
 			var ss = parseInt(timeLimitMills/1000%60);
-			
-			document.getElementById("timeLimit").innerHTML = "종료까지" + dd + "일" + hh + "시간" + mm + "분" + ss + "초 남았습니다";
-			ss--;
 			
 			if(ss === 0) {
 				mm--;
@@ -72,8 +91,9 @@
 				hh = 24;
 			}
 			
+			$("#timeLimit").text("종료까지 " + dd + " 일 " + hh + " 시간 " + mm + " 분 " + "남았습니다");
+			ss--;
 		}; 
-		
 		
 	});
 </script>
@@ -91,7 +111,6 @@
 		<h2><%=challengeListDto.getChallengeTitle() %></h2>
 	</div>
 	<div class="row text-left">
-		<!-- 변경 예정 -->
 		<label>도전글 작성자</label>
 		<h2><%=challengeListDto.getMemberNick()%></h2>
 	</div>
@@ -114,7 +133,7 @@
 		<%if(currentTimeSec > endTimeSec) {%>
 		<h2>도전기한 만료</h2>
 		<%} else { %>
-		<span id="timeLimit"></span>
+		<div id="timeLimit" class="row"></div>
 		<%} %>
 	</div>
 	<div class="row text-left">
@@ -130,16 +149,18 @@
 		<h2><%=challengeListDto.getChallengeContent() %></h2>
 	</div>
 	<div class="row text-left">
-		<!-- 자바 제어문 추가 : 세션값과 작성자가 일치하면 인증하기 버튼 출력 -->
+		<!-- 도전 기한이 남았을 때 && 도전글 작성자가 자신의 도전글 페이지에 있을 때 인증하기 버튼 출력 -->
 		<%if(currentTimeSec < endTimeSec && challengeListDto.getMemberNo() == (int) request.getSession().getAttribute("memberNo")) {%>
-			<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>&categoryNo=<%=challengeListDto.getCategoryNo()%>" class="link-btn">인증하기</a>
-		<!-- 자바 제어문 추가 : 아니라면 후원하기 버튼 출력 -->
-		<!-- 자바 제어문 변경 예정 : 세션값과 작성자가 일치하지 않고 && 후원DB를 조회하여 후원하지 않은 회원이면 후원하기 버튼 출력 -->
-		<%}else  {%>
-			<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="link-btn">후원하기</a>
+			<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>&categoryNo=<%=challengeListDto.getCategoryNo()%>" class="ex-btn">인증하기</a>
+		<!-- 도전 기한이 남았을 때 && 로그인한 회원이 해당 도전글에 후원했던 내역이 없으면 후원하기 버튼 출력  -->
+		<%}else if(System.currentTimeMillis() < endDateParsed.getTime() && checkDonateMember != (int) request.getSession().getAttribute("memberNo"))  {%>
+			<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="ex-btn">후원하기</a>
+		<!-- 도전 기한이 남았을 때 && 로그인한 회원이 후원한 내역이 있다면 이미 후원하였다는 문구 출력 -->
+		<%} else  if(System.currentTimeMillis() < endDateParsed.getTime() && checkDonateMember == (int) request.getSession().getAttribute("memberNo"))  {%>
+			<h4>이미 후원하였습니다</h4>
 		<%} %>
-		<!-- 자바 제어문 추가 예정 : 후원DB를 조회하여 해당 도전글에 이미 한 후원이면 후원금과 안내문 출력 -->
-		<a href="challengeList.jsp" class="link-btn">목록</a>
+		<!-- 도전 기한이 만료되었다면 몰고 리스트만 출력 -->
+		<a href="challengeList.jsp" class="ex-btn">목록</a>
 	</div>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

@@ -2,5 +2,5 @@
 
 /*테스트용 테두리 */
 main, header, section, article, aside, div, nav, span, p, label {
-	border: 1px dotted lightgray;
+/* 	border: 1px dotted lightgray; */
 }
