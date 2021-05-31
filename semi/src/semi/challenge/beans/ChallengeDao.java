@@ -28,11 +28,29 @@ public class ChallengeDao {
 		return challengeNo;
 	}
 	
+	// 도전글 등록 전에 등록할 수 있는 멤버 포인트가 있는 지 확인하는 메소드 (작성자 : 정 계진)
+		public int checkMemberPoint(int memberNo) throws Exception {
+			Connection con = JDBCUtils.getConnection();
+			
+			String sql = "select member_point from member where member_no = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, memberNo);
+			ResultSet rs = ps.executeQuery();
+			
+			int checkPoint = 0;
+			if(rs.next()) {
+				checkPoint = rs.getInt("member_point");
+			}
+			con.close();
+			
+			return checkPoint;
+		}
+		
 	// 도전글 가입
 	public void challengeJoin(ChallengeDto challengeDto) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?)";
+		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N')";
 		
 		PreparedStatement ps = con.prepareStatement(sql); 
 		ps.setInt(1, challengeDto.getChallengeNo()); // 도전글 번호 
@@ -44,6 +62,7 @@ public class ChallengeDao {
 		ps.setString(7, challengeDto.getChallengeEndDate()); // 종료일
 		ps.setInt(8, (int) (challengeDto.getChallengePushPoint()*0.01)); // 상금 로직 : 참가비 * 0.01
 		ps.setString(9, challengeDto.getChallengeContent()); // 도전글 내용 
+		// 'N' - 컬럼 추가 제어문 : 도전 테이블에 최종 정산 여부를 확인할 용도 (05/28, 작성자 : 정 계진) 
 		ps.execute();
 		
 		con.close();
@@ -194,6 +213,7 @@ public class ChallengeDao {
 		
 	}
 	
+
 	public ChallengeDto find(int challengeWriter) throws Exception { // write_no를 기준으로 회원찾기
 
 		Connection con = JDBCUtils.getConnection();
@@ -274,5 +294,41 @@ public class ChallengeDao {
 //		}
 //		
 //	}
+
+	// 후원금 등록 시, 도전글 DB의 후원금 컬럼에 후원금을 더해주는 메소드 (작성자 : 정 계진)
+	// 설명 : 후원금 등록 메소드의 후원금 값과 도전글 번호 값을 활용하여 후원금을 업데이트(누적 형태로) 하는 메소드
+	public boolean donateJoin(int challengeDonate, int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "update challenge set challenge_donate = challenge_donate + ? where challenge_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeDonate);
+		ps.setInt(2, challengeNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+	
+	// 백분율 메소드 (05/28, 작성자 : 정 계진)
+	public boolean challengePercent(int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "update challenge set challenge_percent = ("
+				+ "select trunc((select count(auth_result) from auth where auth_result = 'S' and auth_challengeNo = ?) / "
+				+ "(select trunc(challenge_endDate) - trunc(challenge_startDate) from challenge where challenge_no = ?) * 100) from dual) "
+				+ "where challenge_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ps.setInt(2, challengeNo);
+		ps.setInt(3, challengeNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+
 	
 }
