@@ -3,10 +3,10 @@
     
 	<jsp:include page="/template/header.jsp"></jsp:include>
 	
-		<div class="container-600">
+		<div class="container-400">
 	
 			<div class="row">
-				<h2>비밀번호 변경</h2>
+				<h2 align="center">비밀번호 변경</h2>
 			</div>
 			
 			<form action="editPw.kh" method="post">

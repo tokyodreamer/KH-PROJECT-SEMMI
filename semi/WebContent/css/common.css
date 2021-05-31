@@ -231,6 +231,11 @@
 	background-color: rgb(231, 241, 253);
 }
 
+.table.table-hover > thead > tr,		
+.table.table-hover > tbody > tr:hover {
+	background-color:rgb(231, 241, 253);
+}
+
 .table.table-hover>thead>tr, .table.table-hover>tbody>tr:hover {
 	background-color: rgb(231, 241, 253);
 }
@@ -401,6 +406,28 @@ textarea.form-input {
 */
 .error {
 	color: red;
+}
+.myPage_div{
+	width: 800px;
+	margin : auto;
+}
+.myPage_box{
+		min-height : 150px;
+		width : 40%;
+		margin: 20px 20px;
+		border: 1px solid orange;
+		border-radius: 2px;
+		background : ivory;
+}
+.left{
+	float : left;
+
+}
+.right{
+	float : right;
+}
+.wall{
+	clear : both;
 }
 
 .sh_group {
