@@ -3,7 +3,6 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-
 <div class="row">
 <a href="<%=request.getContextPath()%>/intro/intro.jsp">챌린저스 소개</a>
 </div>

@@ -231,6 +231,11 @@
 	background-color: rgb(231, 241, 253);
 }
 
+.table.table-hover > thead > tr,		
+.table.table-hover > tbody > tr:hover {
+	background-color:rgb(231, 241, 253);
+}
+
 .table.table-hover>thead>tr, .table.table-hover>tbody>tr:hover {
 	background-color: rgb(231, 241, 253);
 }
@@ -345,6 +350,7 @@ textarea.form-input {
 	color: rgb(255, 85, 146);
 }
 
+
 /*
 	float 스타일(다단 레이아웃)
 	가상선택자(Virtual Selector)
@@ -396,6 +402,13 @@ textarea.form-input {
 	color: black;
 }
 
+.ex-btn {
+	display: inline-block;
+	padding:0.75rem;
+	border:1px solid lightgray;
+	text-decoration: none;
+	color:gray;	
+}
 /*
 	오류 메세지 스타일
 */

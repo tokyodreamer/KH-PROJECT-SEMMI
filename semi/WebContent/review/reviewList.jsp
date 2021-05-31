@@ -10,11 +10,27 @@
 	List<ReviewListDto> reviewList = reListDao.list();
 %>
 
-<jsp:include page="/template/header.jsp"></jsp:include>
+<!Doctype HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+#container{
+border: 1px solid black;
+}
 
-<h2>후기 목록페이지</h2>
-<!-- 예시 -->
-<div class="contaier-600">
+</style>
+</head>
+
+		
+	
+<body>
+<jsp:include page="/template/header.jsp"></jsp:include>
+<div class="contaier-1000" id="container" >
+	<div class="row">
+<h2>후기</h2>
+</div>
+
 	<div class="row text-right">
 		<%if(request.getSession().getAttribute("memberNo")!=null){ %>
 		<a href="reviewWrite.jsp" class="link-btn">후기 작성하러 가기</a>
@@ -23,7 +39,7 @@
 
 	<%for(ReviewListDto reDto : reviewList){ %>
 	<div class="" id="review-box">
-		<div class="row">
+		<div class="row"  boeder="1px solid black">
 			<label>닉네임</label>
 			<h4><%= reDto.getMemberNick()%></h4>
 		</div>
@@ -52,12 +68,17 @@
 			<h4><%= reDto.getReviewContent() %></h4>
 		</div>
 		<div class="row">
+			<a class="link-btn" href ="#">수정</a>
+		</div>
+		<div class="row">
 			<!-- 작성한 사람이 로그인한 사람하고 동일하면 삭제 버튼 보여주기 (if) -->
 			<a class="link-btn" href="#">삭제</a> <!-- href : 삭제할 때는 후기 작성자 번호가 필요   -->
 		</div>
+		
 	</div>
 	<%} %>
 </div>
-
+</body>
+</html>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

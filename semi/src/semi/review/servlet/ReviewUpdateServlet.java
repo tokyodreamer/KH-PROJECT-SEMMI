@@ -20,7 +20,11 @@ public class ReviewUpdateServlet extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		ReviewDto reviewDto = new ReviewDto();
 		reviewDto.setReviewNo(Integer.parseInt(req.getParameter("reviewNo")));
+
 		reviewDto.setReviewStar(Integer.parseInt(req.getParameter("review_star")));
+
+		reviewDto.setReviewStar(Integer.parseInt(req.getParameter("reviewStar")));
+
 		reviewDto.setReviewContent(req.getParameter("reviewContent"));
 		
 		reviewDto.setReviewNo((int)req.getSession().getAttribute("memberNo")); //세션번호
