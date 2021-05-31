@@ -123,7 +123,7 @@
 	});
 </script>
 
-	<div class="row">
+	<div class="row text-center">
 		<h2>도전글 목록</h2>
 	</div>
 <!-- <h3>pageNo = <%=pageNo%>, startRow = <%=startRow %>, endRow = <%=endRow %> </h3> -->
@@ -169,7 +169,7 @@
 	</div>
 	
 	<div class="row text-right">
-		<a href="challengeJoin.jsp" class="link-btn">글쓰기</a>
+		<a href="challengeJoin.jsp" class="ex-btn">글쓰기</a>
 	</div>
 	
 <div class="row">

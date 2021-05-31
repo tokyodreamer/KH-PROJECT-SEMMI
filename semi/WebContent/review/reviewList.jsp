@@ -4,50 +4,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/common.css">
-	<style>
-	.container{
-	border: 1px soild black;
-	}
-	#review-box{
-	border: 1px soild black;
-	}
-	</style>
-	</head>
-<body>
-
 <%
 	// 리스트 목록 불러오기 
 	ReviewListDao reListDao = new ReviewListDao(); 
 	List<ReviewListDto> reviewList = reListDao.list();
 %>
-<jsp:include page="/template/header.jsp"></jsp:include>
 
-<h2 color: red;>후기</h2>
-<!-- 예시 -->
-<div class="container-1000">
+<!Doctype HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+#content{
+border: 1px solid lightgray;
+padding: 10px;
+border-radius: 15px;
+}
+
+h2{
+text-align: center;
+text-shadow: 5px 5px 3px lightgrey;
+}
+
+#review-box{
+border: 1px solid black;
+border-radius: 5px;
+margin:10px auto;
+padding: 20px;
+}
+
+.link-btn{
+background-color: black;
+color: white;
+}
+
+#nick,#time,#star{
+font-style:italic;
+}
+
+.sp-nick{
+margin-left: 10px;
+}
+</style>
+</head>
+
+		
+	
+<body>
+<jsp:include page="/template/header.jsp"></jsp:include>
+<div class="container-1000" id="container" >
+	
+<h2>후기</h2> 
 	<div class="row text-right">
 		<%if(request.getSession().getAttribute("memberNo")!=null){ %>
-		<a href="reviewWrite.jsp" class="link-btn">후기 작성하러 가기</a>
+		<a href="reviewWrite.jsp" class="link-btn">후기 작성하러 가기!</a>
 		<%} %>
 	</div>
 
 	<%for(ReviewListDto reDto : reviewList){ %>
 	<div class="" id="review-box">
 		<div class="row">
-			<label>닉네임</label>
-			<h4><%= reDto.getMemberNick()%></h4>
+			<label id="nick" >닉네임:</label><span class="sp-nick"><%= reDto.getMemberNick()%></span>
+		</div>
+		<div class="row text-right">
+<!-- 			<label>작성일</label> -->
+			<h4 id="time"><%= reDto.getReviewTime() %></h4>
 		</div>
 		<div class="row">
-			<label>작성일</label>
-			<h4><%= reDto.getReviewTime() %></h4>
-		</div>
-		<div class="row">
-			<label>평점</label>
+        <label id="star">별점:</label>
 			<%if(reDto.getReviewStar() == 5) {%>
 			<h4>★★★★★</h4>
 			<%} else if(reDto.getReviewStar() == 4) {%>
@@ -62,19 +86,23 @@
 			<h4>☆☆☆☆☆</h4>
 			<%} %>
 		</div>
-		<div class="row">
-			<label>내용</label>
+		<div class="row" id="content">
 			<h4><%= reDto.getReviewContent() %></h4>
 		</div>
-		<div class="row">
-			<!-- 작성한 사람이 로그인한 사람하고 동일하면 삭제 버튼 보여주기 (if) -->
-			<a class="link-btn" href="#">삭제</a> <!-- href : 삭제할 때는 후기 작성자 번호가 필요   -->
+		<div class="row text-right">
+			<%if(request.getSession().getAttribute("memberNo")!=null){ %>
+			<a class="link-btn" href ="#">수정</a>
+			<%} %>
+		
+			<%if(request.getSession().getAttribute("memberNo")!=null){ %>
+			<a class="link-btn" href="#">삭제</a> 
+			<%} %>
 		</div>
+		
 	</div>
 	<%} %>
 </div>
 </body>
 </html>
-
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
