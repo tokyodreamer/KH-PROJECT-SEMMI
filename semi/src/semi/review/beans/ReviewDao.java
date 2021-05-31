@@ -71,84 +71,7 @@ Connection con = JDBCUtils.getConnection();
 
 		
 	}
-//수정
-	
-//삭제
-	
-	
-}
-package semi.review.beans;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-
-import semi.beans.JDBCUtils;
-
-public class ReviewDao {
-
-	public List<ReviewDto> list() throws Exception {
-		Connection con = JDBCUtils.getConnection();
-
-		String sql = "select*from order by review_time asc";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-
-		List<ReviewDto> reviewList = new ArrayList();
-
-		while (rs.next()) {
-			ReviewDto reDto = new ReviewDto();
-
-			reDto.setReviewNo(rs.getInt("review_no"));
-			reDto.setReviewNick(rs.getInt("member_no"));
-			reDto.setReviewTime(rs.getDate("review_time"));
-			reDto.setReviewStar(rs.getString("review_star"));
-			reDto.setReviewContent(rs.getString("review_content"));
-
-			reviewList.add(reDto);
-
-		}
-		return reviewList;
-	
-	public int getSequence()throws Exception{
-Connection con = JDBCUtils.getConnection();
-		
-		String sql ="select review_seq.nextval from dual";
-		PreparedStatement ps= con.prepareStatement(sql);
-
-	public int getSequence() throws Exception {
-		Connection con = JDBCUtils.getConnection();
-
-		String sql = "select review_seq.nextval";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		int reviewNo = rs.getInt(1);
-
-		con.close();
-		return reviewNo;
-	}
-	
-	
-
-	// 리뷰 작성 기능??(insert-void)
-	public void write(ReviewDto reviewDto) throws Exception {
-
-		Connection con = JDBCUtils.getConnection();
-
-		String sql = "insert into review values(review_seq.nextval,?,sysdate,?,?)";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, reviewDto.getReviewNick());
-		ps.setString(2, reviewDto.getReviewStar());
-		ps.setString(3, reviewDto.getReviewContent());
-		ps.execute();
-
-		con.close();
-		
-	}
-	
 	//상세보기 기능(작성자 :박준영)
 	public ReviewDto get(int reviewNo) throws Exception {
 		Connection con = JDBCUtils.getConnection();
@@ -168,7 +91,7 @@ Connection con = JDBCUtils.getConnection();
 			reviewDto.setReviewNo(rs.getInt("review_no"));
 			reviewDto.setReviewNick(rs.getInt("review_nick"));
 			reviewDto.setReviewTime(rs.getDate("review_time"));
-			reviewDto.setReviewStar(rs.getString("review_star"));
+			reviewDto.setReviewStar(rs.getInt("review_star"));
 			reviewDto.setReviewContent(rs.getString("review_content"));
 			
 		}
@@ -192,7 +115,7 @@ Connection con = JDBCUtils.getConnection();
 							+ "set review_star=?, review_content=? where review_no=?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, reviewDto.getReviewStar());
+		ps.setInt(1, reviewDto.getReviewStar());
 		ps.setString(2, reviewDto.getReviewContent());
 		ps.setInt(3, reviewDto.getReviewNo());
 		
