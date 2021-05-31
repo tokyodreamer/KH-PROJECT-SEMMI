@@ -129,7 +129,8 @@
 				비밀번호 변경
 			</div>
 		</div>
-
+ 
+ 
 		<!-- 세번째 상자 -->
 		<div class="myPage_box left">
 			<h3>내 챌린저스 도전</h3>
@@ -154,9 +155,10 @@
 				</div>
 			<%} %>
 			
+			
 			</div>
 		</div>
-		
+		<!-- 흠 -->
 		<!-- 네번째 상자 -->
 		<div class="myPage_box left">
 			<h3>내 후원</h3>
