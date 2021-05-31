@@ -39,7 +39,6 @@
 					$("#donatePoint").val(<%=challengeListDto.getChallengePushPoint()%>*0.01);
 					$("#donatePoint").focus();
 				}
-				
 		});
 		
 	});
