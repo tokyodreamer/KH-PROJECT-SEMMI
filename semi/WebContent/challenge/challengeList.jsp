@@ -7,6 +7,7 @@
     pageEncoding="UTF-8"%>
 
 <%	
+	request.setCharacterEncoding("UTF-8");
 	String type = request.getParameter("type");
 	String keyword = request.getParameter("keyword");
 	
@@ -86,7 +87,27 @@
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+<style>
+	.text-deco > a{
+		text-decoration: none;
+		color: black;
+	}
+	
+	.text-deco > a:hover {
+		text-decoration: underline;	
+	}
+	
+	.table-head{
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+		}
+		
+	.table-head > tr > td{
+		border-bottom: 1px solid black;
+	}
+</style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 
 <%if(isSearch){ %>
 <script>
@@ -128,7 +149,7 @@
 	</div>
 <!-- <h3>pageNo = <%=pageNo%>, startRow = <%=startRow %>, endRow = <%=endRow %> </h3> -->
 	<div class="row">
-		<table class="table table-border">
+		<table class="table table-hover table-head">
 			<thead>
 					<tr>
 						<th>번호</th>
@@ -145,13 +166,13 @@
 					</tr>
 			</thead>
 			
-			<tbody>
+			<tbody class = "text-center table-head">
 					<%for(ChallengeListDto challengeListDto : challengeList){ %>
 					<tr>
 						<td><%=challengeListDto.getChallengeNo() %></td>
 						<td><%=challengeListDto.getMemberNick() %></td>
 						<td><%=challengeListDto.getCategorytype() %></td>
-						<td>
+						<td class = "text-left text-deco">
 							<!-- 제목을 누르면 상세보기 페이지로 이동 -->
 							<a href="challengeDetail.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>">
 							<%=challengeListDto.getChallengeTitle() %></a>
