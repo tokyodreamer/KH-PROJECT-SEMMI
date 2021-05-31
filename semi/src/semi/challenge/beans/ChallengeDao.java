@@ -32,7 +32,7 @@ public class ChallengeDao {
 	public void challengeJoin(ChallengeDto challengeDto) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N', 0)";
+		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N')";
 		
 		PreparedStatement ps = con.prepareStatement(sql); 
 		ps.setInt(1, challengeDto.getChallengeNo()); // 도전글 번호 
@@ -324,46 +324,12 @@ public class ChallengeDao {
 	
 	/* 정산 처리 메소드 : 스케쥴러 */
 	
-	// 스케쥴러 : 달성률 0 ~50% 포인트 정산 메소드 (05/29, 작성자 : 정 계진) : 변경될 수도 있으니 회의 필요!
 	
-	// 스케쥴러 : 달성률 50~85% 포인트 정산 메소드 (05/29, 작성자 : 정 계진)
-	public boolean challengeResultDone() throws Exception {
-		Connection con = JDBCUtils.getConnection();
-		
-		String sql = "UPDATE MEMBER M SET m.member_point = m.member_point + (SELECT NVL(r.result_point, 0) FROM RESULT_DONE R WHERE r.result_no = m.member_no)";
-		PreparedStatement ps = con.prepareStatement(sql);
-		int count = ps.executeUpdate();
-		
-		con.close();
-		
-		return count > 0;
-	}
+	// 스케쥴러 : 달성률 0~85% 포인트 정산 메소드 (05/31, 작성자 : 정 계진)
 	
-	// 스케쥴러 : 달성률 85~99% 포인트 정산 메소드 (05/29, 작성자 : 정 계진)
-	public boolean challengeResultGood() throws Exception {
-		Connection con = JDBCUtils.getConnection();
-		
-		String sql = "UPDATE MEMBER M SET m.member_point = m.member_point + (SELECT NVL(r.result_point, 0) FROM RESULT_GOOD R WHERE r.result_no = m.member_no)";
-		PreparedStatement ps = con.prepareStatement(sql);
-		int count = ps.executeUpdate();
-		
-		con.close();
-		
-		return count > 0;
-	}
+	// 스케쥴러 : 달성률 85~99% 포인트 정산 메소드 (05/31, 작성자 : 정 계진)
 	
-	// 스케쥴러 : 달성률 85~99% 포인트 정산 메소드 (05/29, 작성자 : 정 계진)
-	public boolean challengeResultPerfect() throws Exception {
-		Connection con = JDBCUtils.getConnection();
-		
-		String sql = "UPDATE MEMBER M SET m.member_point = m.member_point + (SELECT NVL(r.result_point, 0) FROM RESULT_PERFECT R WHERE r.result_no = m.member_no)";
-		PreparedStatement ps = con.prepareStatement(sql);
-		int count = ps.executeUpdate();
-		
-		con.close();
-		
-		return count > 0;
-	}
+	// 스케쥴러 : 달성률 85~99% 포인트 정산 메소드 (05/31, 작성자 : 정 계진)
 	
 	// 스케쥴러 : 멤버 포인트 정산 처리 후 정산 결과를 처리하는 메소드 (05/29, 작성자 : 정 계진)
 	public boolean challengeResult() throws Exception {

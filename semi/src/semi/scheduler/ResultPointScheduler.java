@@ -25,9 +25,7 @@ public class ResultPointScheduler extends HttpServlet{
 					ChallengeDao challengeDao = new ChallengeDao();
 					
 					// 포인트 정산 작업 처리
-					//challengeDao.challengeResultDone();
-					//challengeDao.challengeResultGood();
-					//challengeDao.challengeResultPerfect();
+					
 					
 					// 포인트 정산 후 정산결과를 완료 처리
 					//challengeDao.challengeResult();
