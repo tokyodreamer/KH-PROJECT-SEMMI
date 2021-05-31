@@ -30,6 +30,7 @@ public class MemberLoginServlet extends HttpServlet {
 			}
 			else {
 				resp.sendRedirect("memberLogin.jsp");
+				resp.sendRedirect("memberLogin.jsp?error");
 			}
 			
 		} catch (Exception e) {
