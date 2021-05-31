@@ -38,5 +38,24 @@ public class DonateDao {
 		con.close();
 	}
 	
+	public int checkDonate(int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select member_no from donate where challenge_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ResultSet rs = ps.executeQuery();
+		
+		int checkDonateMember;
+		
+		if(rs.next()) {
+			checkDonateMember = rs.getInt("member_no");
+		} else {
+			checkDonateMember = 0;
+		}
+		con.close();
+		
+		return checkDonateMember;
+	}
 	
 }

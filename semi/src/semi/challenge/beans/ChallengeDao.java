@@ -27,24 +27,6 @@ public class ChallengeDao {
 		return challengeNo;
 	}
 	
-	// 도전글 등록 전에 등록할 수 있는 멤버 포인트가 있는 지 확인하는 메소드 (작성자 : 정 계진)
-		public int checkMemberPoint(int memberNo) throws Exception {
-			Connection con = JDBCUtils.getConnection();
-			
-			String sql = "select member_point from member where member_no = ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, memberNo);
-			ResultSet rs = ps.executeQuery();
-			
-			int checkPoint = 0;
-			if(rs.next()) {
-				checkPoint = rs.getInt("member_point");
-			}
-			con.close();
-			
-			return checkPoint;
-		}
-		
 	// 도전글 가입
 	public void challengeJoin(ChallengeDto challengeDto) throws Exception {
 		Connection con = JDBCUtils.getConnection();
@@ -240,6 +222,63 @@ public class ChallengeDao {
 		ps.setInt(1, challengeNo);
 		ps.setInt(2, challengeNo);
 		ps.setInt(3, challengeNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+	
+	/* 정산 처리 메소드 : 스케쥴러 */
+	
+	// 스케쥴러 : 달성률 0 ~50% 포인트 정산 메소드 (05/29, 작성자 : 정 계진) : 변경될 수도 있으니 회의 필요!
+	
+	// 스케쥴러 : 달성률 50~85% 포인트 정산 메소드 (05/29, 작성자 : 정 계진)
+	public boolean challengeResultDone() throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "UPDATE MEMBER M SET m.member_point = m.member_point + (SELECT NVL(r.result_point, 0) FROM RESULT_DONE R WHERE r.result_no = m.member_no)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+	
+	// 스케쥴러 : 달성률 85~99% 포인트 정산 메소드 (05/29, 작성자 : 정 계진)
+	public boolean challengeResultGood() throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "UPDATE MEMBER M SET m.member_point = m.member_point + (SELECT NVL(r.result_point, 0) FROM RESULT_GOOD R WHERE r.result_no = m.member_no)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+	
+	// 스케쥴러 : 달성률 85~99% 포인트 정산 메소드 (05/29, 작성자 : 정 계진)
+	public boolean challengeResultPerfect() throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "UPDATE MEMBER M SET m.member_point = m.member_point + (SELECT NVL(r.result_point, 0) FROM RESULT_PERFECT R WHERE r.result_no = m.member_no)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+	
+	// 스케쥴러 : 멤버 포인트 정산 처리 후 정산 결과를 처리하는 메소드 (05/29, 작성자 : 정 계진)
+	public boolean challengeResult() throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		// ↓달성률 0 ~50% 이면서 도전 기한이 만료된 도전글은 정산되지 않은 형태로 적용되는 상태
+		String sql = "UPDATE CHALLENGE SET CHALLENGE_RESULT = 'Y' WHERE SYSDATE >= CHALLENGE_ENDDATE AND CHALLENGE_RESULT = 'N'";
+		PreparedStatement ps = con.prepareStatement(sql);
 		int count = ps.executeUpdate();
 		
 		con.close();
