@@ -35,7 +35,7 @@
 		    <label for="nick-input">닉네임을 입력하세요</label>
 		    <input type="text" name="memberNick" id="nick-input" class="form-input form-input-underline"
 		    required placeholder="한글1~10글자, 영문 대소문자 2~20글자, 숫자 가능">
-    </div>
+    </div>ㅗ
     
     <div class="row text-left">
 		    <label for="email-input">이메일 주소를 입력하세요</label>
