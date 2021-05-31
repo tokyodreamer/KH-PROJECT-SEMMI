@@ -1,50 +1,101 @@
-<%@page import="semi.challenge.beans.ChallengeDao"%>
+<%@page import="semi.member.beans.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%
- 	ChallengeDao challengeDao = new ChallengeDao();
+ 	MemberDao memberDao = new MemberDao();
  	
- 	int checkMemberPoint = challengeDao.checkMemberPoint((int) request.getSession().getAttribute("memberNo"));
+ 	int checkMemberPoint = memberDao.find((int) request.getSession().getAttribute("memberNo")).getMemberPoint();
  %>
 <jsp:include page="/template/header.jsp"></jsp:include>
+<style>
+	.success-message, .fail-message {
+			display: none;
+	}
+	.success-message {
+			color: green;
+	}
+	.fail-message {
+			color: red;
+	}
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		  var selectTarget = $('.selectbox select');
-	
-		 selectTarget.on('blur', function(){
-		   $(this).parent().removeClass('focus');
-		 });
-	
-		  selectTarget.change(function(){
-		    var select_name = $(this).children('option:selected').text();
-	
-		  $(this).siblings('label').text(select_name);
-		  });
-	});
-</script>
-<script type="text/javascript">
 	$(function(){
+		// 제이쿼리 구현 예정 : ~ 2021.05.30 까지 (1차 완료 / 2차 : 06.03 ~06.04 전체 테스트 시 확인 예정)
 		
-		// 검사 스크립트
-		$(".join-form").submit(function(){
+		// 등록시점 제어
+		
+		// 시작일 : 현재 날짜보다 지난 날짜는 비활성화 (완료)
+		$("#startDate").attr('min', new Date().toISOString().substring(0, 10));
+		
+		// 시작일 : 현재 날짜에서 일주일 이내만 선택 가능 (완료)
+		$("#startDate").attr('max', new Date(Date.parse(new Date()) + 7 * 1000 * 60 * 60 * 24).toISOString().substring(0, 10));
+		
+		// 종료일 : 
+		$("#endDate").on("focus", function(){
 			
-			// 1. 참가비 검사
-			if($("#pushPoint").val() > <%= checkMemberPoint %>) {
-				window.alert("참가비 부족");
+			// 제어 : 시작일이 입력되어 있지 않다면 메세지 출력 (완료)
+			if($("#startDate").val() == ""){
+				$(this).nextAll(".fail-message-04").show();
+				$("#startDate").focus();
+			} else {
+				$(this).nextAll(".fail-message-04").hide();
+			}
+		
+			// 종료일 : 시작일을 기준으로 지난 날짜는 비활성화 (완료)
+			$("#endDate").attr('min', $("#startDate").val());
+		
+			// 종료일 : 시작일을 기준으로 100일까지 선택 가능 (완료) : 회의 필요!
+			$("#endDate").attr('max', new Date(Date.parse($("#startDate").val()) + 100 * 1000 * 60 * 60 * 24).toISOString().substring(0, 10));
+		});
+		
+		// 참가비 : 
+		$("#pushPoint").on("blur", function(){
+			
+			// 제어 : 최소 1만 포인트 부터 입력 가능 (완료)
+			if($(this).val() < 10000) {
+				$(this).nextAll(".fail-message-01").show();
+				$("#pushPoint").val(10000);
+				$("#pushPoint").focus();
 			} 
+			// 제어 : 보유 포인트가 20만 포인트 이하인 회원이 보유 포인트보다 많은 참가비를 입력하였을 때 안내 (완료)
+			else if($(this).val() > <%=checkMemberPoint%> && <%=checkMemberPoint%> < 200000){
+				$(this).nextAll(".fail-message-02").show();
+				$("#pushPoint").val(<%=checkMemberPoint%>);
+				$("#pushPoint").focus();
+			}
+			// 제어 : 최대 20만 포인트 까지 입력 가능 (완료)
+			else if($(this).val() > 200000){
+				$(this).nextAll(".fail-message-03").show();
+				$("#pushPoint").val(200000);
+				$("#pushPoint").focus();
+			} else {
+				$(this).nextAll(".fail-message").hide();
+			}
 			
-			// 자바 스크립트 구현 예정 : ~ 2021.05.30 까지
-			
-			// 2-1. 참가 등록일 검사 : 현재 날짜를 기준점으로 입력한 시작일이 더 작다면 (= 현재 날짜 이전부터 등록일을 하려 하면)
-				
-			// 2-2. 참가 종료일 검사 : 현재 날짜를 기준점으로 입력한 종료일이 더 작다면 (= 현재 날짜 이전부터 종료일을 하려 하면)
-			
-			// 2-3. 시작일과 종료일 검사 I : 시작일이 종료일 이후에 입력이 된다면 (= 시작일보다 종료일이 더 크다면 / ex. 21-05-28 ~ 21.05.27 (X) )
-			
-			// 2-4. 시작일과 종료일 검사 II : 종료일이 시작일 이전에 입력이 된다면 (= 시작일보다 종료일이 더 크다면 / ex. 21-05-28 ~ 21.05.27 (X) )
 			
 		});
+		
+		// 서블릿으로 넘어가기 전에 검사 (완료)
+		$(".join-form").submit(function(e){
+				
+				// 유형이 옵션 내 값과 다르게 입력되었을 경우 서블릿 전송 취소 (완료)
+				/* if(parseInt() !== 1 || $("#category").val() !== 2) {
+					window.alert("선택 유형이 올바르지 않습니다");
+					e.preventDefault();
+					$("#category").focus();
+				} */
+					
+				// 종료일이 시작일보다 빠르면 서블릿 전송 취소 (완료)
+				if(new Date($("#endDate").val()) < new Date($("#startDate").val())) {
+					window.alert("참가종료 날짜를 다시 선택해 주세요");
+					e.preventDefault();
+					$("#endDate").focus();
+				}
+		});
+		
+		// Q : 시작일 외에 다른 항목을 입력하거나 커서를 이동한 상태에서도 종료일은 계속 시작일을 향하고 있어야 하는데 ? (미처리)
+		
 	});
 </script>
 <div class="container-600">
@@ -56,25 +107,29 @@
 			<label for="title">제목</label>
 			<input type="text" class="form-input" name="challengeTitle" placeholder="도전글 제목" id="title" required>
 		</div>
-		<div class="selectbox">
-			<label for="ex_select">참가종목 선택</label>
-			<select id="ex_select" name="categoryNo">
-				<option selected>참가종목 선택</option>
+		<div class="row ">
+			<label for="category">유형</label>
+			<select id="category" name="categoryNo" required>
+				<option selected>유형 선택</option>
 				<option value="1">운동</option>
 				<option value="2">공부</option>
 			</select>
 		</div>
 		<div class="row text-left">
-			<label for="pushPoint">참가비</label>
-			<input type="number" class="form-input" name="challengePushPoint" id="pushPoint" required>
-		</div>
-		<div class="row text-left">
 			<label for="startDate">시작일</label>
-			<input type="date" class="form-input" name="challengeStartDate" id="startDate" required>
+			<input type="date" class="form-input" name="challengeStartDate" id="startDate"  required>
 		</div>
 		<div class="row text-left">
 			<label for="endDate">종료일</label>
 			<input type="date" class="form-input" name="challengeEndDate" id="endDate" required>
+			<span class="fail-message fail-message-04">시작일을 먼저 입력해 주세요</span>
+		</div>
+		<div class="row text-left">
+			<label for="pushPoint">참가비</label>
+			<input type="number" class="form-input" name="challengePushPoint" id="pushPoint"  required>
+			<span class="fail-message fail-message-01">참가비는 10000 포인트 부터 가능합니다</span>
+			<span class="fail-message fail-message-02">등록할 수 있는 참가비는 <%=checkMemberPoint%> 포인트 입니다</span>
+			<span class="fail-message fail-message-03">참가비는 최대 200000 포인트까지 가능합니다</span>
 		</div>
 		<div class="row text-left">
 			<label>도전글 내용</label>
@@ -88,5 +143,4 @@
 		</div>
 	</form>
 </div>
-
 <jsp:include page="/template/footer.jsp"></jsp:include>
