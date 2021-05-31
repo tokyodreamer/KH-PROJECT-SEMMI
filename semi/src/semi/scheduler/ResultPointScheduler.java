@@ -30,7 +30,7 @@ public class ResultPointScheduler extends HttpServlet{
 					//challengeDao.challengeResultPerfect();
 					
 					// 포인트 정산 후 정산결과를 완료 처리
-					//ㅉchallengeDao.challengeResult();
+					//challengeDao.challengeResult();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
