@@ -1,3 +1,5 @@
+<%@page import="semi.donate.beans.DonateDto"%>
+<%@page import="semi.donate.beans.DonateDao"%>
 <%@page import="semi.challenge.beans.ChallengeDto"%>
 <%@page import="semi.challenge.beans.ChallengeDao"%>
 <%@page import="semi.member.beans.MemberDao"%>
@@ -14,12 +16,16 @@
 		int memberPoint= memberDto.getMemberPoint();
 		int writerCheck;
 		String writerTitle;
+		int count;
+		
 		try{
 			
 			ChallengeDao challengeDao = new ChallengeDao();
 			ChallengeDto challengeDto = challengeDao.find(memberNo);
 			writerCheck= challengeDto.getChallengeWriter();
 			writerTitle= challengeDto.getChallengeTitle();
+			DonateDao donateDao = new DonateDao();
+			DonateDto donateDto = new DonateDto();
 			
 		}catch(Exception e){
 			writerCheck = 0;

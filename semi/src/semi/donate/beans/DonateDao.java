@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import semi.beans.JDBCUtils;
+import semi.member.beans.MemberDto;
 
 public class DonateDao {
 
@@ -57,5 +58,52 @@ public class DonateDao {
 		
 		return checkDonateMember;
 	}
+	
+	public DonateDto find(int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select * from donate where challenge_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ResultSet rs = ps.executeQuery();
+		
+		DonateDto donateDto;
+		if (rs.next()) {
+
+			donateDto = new DonateDto();
+
+			donateDto.setDonateNo(rs.getInt("donate_no"));
+			donateDto.setDonateChallengeNo(rs.getInt("challenge_no"));
+			donateDto.setDonateMemberNo(rs.getInt("member_no"));
+			donateDto.setDonateCategoryNo(rs.getInt("category_no"));
+			donateDto.setDonatePushPoint(rs.getInt("donate_pushPoint"));
+			
+		} else {
+			donateDto = null;
+		}
+		
+		
+		con.close();
+		return donateDto;
+	}
+	
+//	public int count(int memberNo) throws Exception{
+//		Connection con = JDBCUtils.getConnection();
+//		
+//		String sql = "select count(*) from donate where member_no = ?";
+//		PreparedStatement ps = con.prepareStatement(sql);
+//		ps.setInt(1, memberNo);
+//		ResultSet rs = ps.executeQuery();
+//		
+//		int count;
+//		
+//		if(rs.next()) {
+//			count = rs.get;
+//		} else {
+//			count = 0;
+//		}
+//		
+//		return count;
+//	}
 	
 }

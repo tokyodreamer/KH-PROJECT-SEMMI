@@ -42,7 +42,7 @@
 		</header>
 		<nav>
 			<ul class="menu">
-				<li><a href="#">마이 페이지</a>
+				<li><a href="<%=root%>/member/myPage.jsp">마이 페이지</a>
 					<ul>
 						<%if(isLogin) { %>
 							<li><a href="<%=root%>/member/myInfo.jsp">내 정보 보기</a></li>

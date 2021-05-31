@@ -14,26 +14,26 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <div class="container-600">
 	<div class="row">
-		<input type="button" value="관리자" class="form-btn">
-		<h2>로그인</h2>
+		
+		<div>
+			<h1>LOGIN</h1>
+		</div>
 		<hr>
 		</div>
 		
 		<form action="memberLogin.kh" method="post">
 
 			<div class="row">
-				<input type="text" name="memberId" placeholder="Username"
+				<input type="text" name="memberId" placeholder="아이디 또는 이메일"
 					class="form-input">
 			</div>
 
 			<div class="row">
-				<input type="password" name="memberPw" placeholder="Pw"
+				<input type="password" name="memberPw" placeholder="비밀번호"
 				id="input-pw" class="form-input">
 				
 <!-- 			<button id="input-pw-btn" class="pop-btn" onclick="con();">표시</button> -->
 
-					
-					
 			</div>
 
 			<div class="row">
