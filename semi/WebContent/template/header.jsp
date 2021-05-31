@@ -33,16 +33,10 @@
 		</div>
 			<div class="right" >
 				<%if(isLogin) { %>
-<<<<<<< HEAD
-					<form method="get" action="<%=request.getContextPath() %>/member/memberLogout.kh">
-						<input type="submit" value="로그아웃">
-					</form>
-=======
 				<a href="<%=root%>/member/memberLogout.kh" class="link-btn loginlogout" style="font-size: 20px; background-color:black; color: white">로그아웃</a>
->>>>>>> refs/remotes/origin/main
 				<%} else { %>
 					<a href="<%=root%>/member/memberJoin.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:white; color: black">회원가입</a>
-					<a href="<%=root%>/member/memberLogin.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:black; color:white;">&nbsp로그인&nbsp</a>
+					<a href="<%=root%>/member/memberLogin.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:black; color:white;">&nbsp;로그인&nbsp;</a>
 				<%} %>
 			
 			</div>
