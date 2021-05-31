@@ -96,15 +96,52 @@
 	.text-deco > a:hover {
 		text-decoration: underline;	
 	}
-	
-	.table-head{
-		border-top: 1px solid black;
-		border-bottom: 1px solid black;
-		}
-		
-	.table-head > tr > td{
-		border-bottom: 1px solid black;
+	.table {
+	border-collapse: collapse;
+	border-top: 0.5px solid rgb(51,51,51);
 	}
+	
+	.table th {
+      color: #168;
+      background: #f0f6f9;
+      text-align: center;
+	}
+	
+	.table th, .table td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+	
+	.table.table-hover > tbody > tr:hover {
+	background-color:rgb(242,242,242);
+	}
+	
+	.subt-btn {
+		display: inline-block;
+		width: 56px;
+    	height: 40px;
+    	background-color: black;
+   		border: 0;	
+   		color: #fff;
+   		margin-left: -6px;
+   		position: relative; 
+   		top: 1px;
+   		cursor: pointer;
+	}
+	.write-btn {
+	text-decoration: none;
+	width : 100px;
+	background-color: black;
+	font-size: 15px;
+	display: inline-block;
+	text-align: center;
+	border-radius:10px;
+	color:#fff;
+    padding: 10px 0;
+	margin: 4px;
+	cursor: pointer;
+	}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -126,12 +163,12 @@
 		$(".pagination > a").click(function(){
 			//주인공 == a태그
 			var pageNo = $(this).text();
-			if(pageNo == "이전"){//이전 링크 : 현재 링크 중 첫 번째 항목 값 - 1
+			if(pageNo == "<이전"){//이전 링크 : 현재 링크 중 첫 번째 항목 값 - 1
 				pageNo = parseInt($(".pagination > a:not(.move-link)").first().text()) - 1;
 				$("input[name=pageNo]").val(pageNo);
 				$(".search-form").submit();//강제 submit 발생
 			}	
-			else if(pageNo == "다음"){//다음 링크 : 현재 링크 중 마지막 항목 값 + 1
+			else if(pageNo == "다음>"){//다음 링크 : 현재 링크 중 마지막 항목 값 + 1
 				pageNo = parseInt($(".pagination > a:not(.move-link)").last().text()) + 1;
 				$("input[name=pageNo]").val(pageNo);
 				$(".search-form").submit();//강제 submit 발생
@@ -143,9 +180,15 @@
 		});
 	});
 </script>
-
-	<div class="row text-center">
-		<h2>도전글 목록</h2>
+	
+	<div class="row">
+		<h2>전체 도전글 보기</h2>
+	</div>
+	<div class="float-container">
+		<div class="left" style="font-size:20x;">
+			<span style="font-weight: bold; margin-right: -3px;"><%=count%></span>
+			개의 글
+		</div>
 	</div>
 <!-- <h3>pageNo = <%=pageNo%>, startRow = <%=startRow %>, endRow = <%=endRow %> </h3> -->
 	<div class="row">
@@ -161,7 +204,8 @@
 						<th width="10%">도전 종료일</th>
 						<th>달성률</th>
 						<th>상금</th>
-						<th>누적후원금</th>
+						<th width="10%">누적후원금</th>
+						<th>조회수</th>
 						<!-- <th>도전글내용</th> -->
 					</tr>
 			</thead>
@@ -183,6 +227,7 @@
 						<td><%=challengeListDto.getChallengePercent() %>%</td>
 						<td><%=challengeListDto.getChallengeReward() %>원</td>
 						<td><%=challengeListDto.getChallengeDonate() %>원</td>
+						<td><%=challengeListDto.getChallengeRead() %></td>
 					</tr>
 					<%} %>
 			</tbody>
@@ -190,15 +235,15 @@
 	</div>
 	
 	<div class="row text-right">
-		<a href="challengeJoin.jsp" class="link-btn">글쓰기</a>
+		<a href="challengeJoin.jsp" class="write-btn">글쓰기</a>
 	</div>
 	
 <div class="row">
 <!-- 페이지 네이게이션 자리 -->
-	<div class="pagination">
+	<div class="pagination text-center">
 	
 			<%if(startBlock > 1){ %>
-			<a class="move-link">이전</a>
+			<a class="move-link">&lt;이전</a>
 			<%} %>
 			
 			<%for(int i = startBlock; i <= endBlock; i++){ %>
@@ -210,28 +255,28 @@
 			<%} %>
 			
 			<%if(endBlock < lastBlock){ %>
-			<a class="move-link">다음</a>
+			<a class="move-link">다음&gt;</a>
 			<%} %>
 		
 	</div>
 </div>	
 	
 	
-	<div class="row">
+	<div class="row text-center">
 	
 		<!-- 검색화면 구현 -->
 		<form class="search-form" action="challengeList.jsp" method="get">
 			<input type="hidden" name="pageNo">
 		
-			<select name="type">
+			<select name="type" style="height: 40px; padding : 0px 10px;">
 				<option value="challenge_title">제목만</option>
 				<option value="category_type">카테고리</option>
 				<option value="member_nick">글작성자</option>
 			</select>
 		
-			<input type="text" name="keyword" placeholder="검색어">
+			<input type="text" name="keyword" placeholder="검색어" style="height: 40px; padding : 0px 10px;">
 		
-			<input type="submit" value="검색">
+			<input type="submit" value="검색" class="subt-btn">
 		
 		</form>
 	</div>

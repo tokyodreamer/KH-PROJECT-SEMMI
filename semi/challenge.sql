@@ -6,7 +6,8 @@
 create or replace view challenge_list as
 select 
     C.challenge_no, C.Challenge_title, C.Challenge_pushpoint, C.challenge_startdate,
-    C.challenge_enddate, C.challenge_percent, C.challenge_reward, C.challenge_donate, c.challenge_content,
+    C.challenge_enddate, C.challenge_percent, C.challenge_reward, C.challenge_donate, 
+    c.challenge_content, C.challenge_result, C.challenge_read,
     M.member_no, M.member_nick, M.member_point, T.category_no, T.category_type
 from challenge C
     left outer join member M on C.challenge_writer = M.member_no
@@ -25,7 +26,8 @@ from challenge C
 
 -- 도전 테이블 정산결과처리 컬럼 추가
 alter table challenge add challenge_result char(1) default 'N' check(challenge_result IN ('N', 'Y'));
-
+-- 도전 테이블 조회수 컬럼 추가
+alter table challenge add challenge_read number(19) default 0 not null check(challenge_read >= 0);
 -- 도전결과 정산
 
 -- 정산 처리 뷰 : 달성률 50~85%
