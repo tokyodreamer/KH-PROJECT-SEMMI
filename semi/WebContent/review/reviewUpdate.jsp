@@ -10,7 +10,6 @@ int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 //상세보기를 가져오기 위해 dao를 사용해서 get(상세보기)을 불러옴
 ReviewDao reviewDao = new ReviewDao();
 ReviewDto reviewDto = reviewDao.get(reviewNo);
-
 %>
 
 
