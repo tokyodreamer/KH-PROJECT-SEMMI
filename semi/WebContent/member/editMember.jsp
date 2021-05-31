@@ -17,9 +17,9 @@
 <!-- // 		MemberDto memberDto = memberDao.find(memberNo); -->
 <%-- 	%> --%>
 	
-	<div class="container-600">
+	<div class="container-400">
 		<div class="row">
-			<h2>회원 정보 변경</h2>
+			<h2 align="center">회원 정보 변경</h2>
 		</div>
 		
 		<form action="editMember.kh" method="post">
@@ -48,6 +48,13 @@
 				<input type="submit" value="수정하기" class="form-btn form-btn-negative">
 			</div>
 		</form>
+		
+<!-- 		<form action="memberExit.kh" method="post"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<input type="submit" value="탈퇴하기" class="form-btn form-btn-negative"> -->
+<!-- 			</div> -->
+		
+<!-- 		</form> -->
 		
 	</div>
 	<jsp:include page="/template/footer.jsp"></jsp:include>

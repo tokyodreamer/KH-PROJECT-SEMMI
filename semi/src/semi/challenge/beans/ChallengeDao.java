@@ -9,6 +9,7 @@ import java.util.List;
 
 
 import semi.beans.JDBCUtils;
+import semi.member.beans.MemberDto;
 
 public class ChallengeDao {
 	
@@ -192,5 +193,86 @@ public class ChallengeDao {
 		return count;
 		
 	}
+	
+	public ChallengeDto find(int challengeWriter) throws Exception { // write_no를 기준으로 회원찾기
+
+		Connection con = JDBCUtils.getConnection();
+
+		String sql = "select * from challenge where challenge_writer = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeWriter);
+		ResultSet rs = ps.executeQuery();
+		
+		
+
+		ChallengeDto challengeDto;
+		if (rs.next()) {
+
+			challengeDto = new ChallengeDto();
+
+			challengeDto.setChallengeNo(rs.getInt("challenge_no"));
+			challengeDto.setChallengeWriter(rs.getInt("challenge_writer"));
+			challengeDto.setChallengeTitle(rs.getString("challenge_title"));
+
+		} else {
+			challengeDto = null;
+		}
+
+		con.close();
+		
+		return challengeDto;
+
+	}
+	
+//	내 게시글목록
+	public List<ChallengeDto> myList(int memberNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select * from challenge where challenge_writer = ?"; 
+							
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, memberNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<ChallengeDto> challengeList = new ArrayList<>();
+		while(rs.next()) {
+			ChallengeDto challengeDto = new ChallengeDto();
+			challengeDto.setChallengeNo(rs.getInt("challenge_no"));
+			challengeDto.setChallengeWriter(rs.getInt("challenge_writer"));
+//			challengeDto.setCategoryNo(rs.getInt("category_no")); 
+			challengeDto.setChallengeTitle(rs.getString("challenge_title"));
+			challengeDto.setChallengePushPoint(rs.getInt("challenge_pushPoint"));
+			challengeDto.setChallengeStartDate(rs.getString("challenge_startDate"));
+			challengeDto.setChallengeEndDate(rs.getString("challenge_endDate"));
+			challengeDto.setChallengePercent(rs.getInt("challenge_percent"));
+			challengeDto.setChallengeReward(rs.getInt("challenge_reward"));
+			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
+			
+			challengeList.add(challengeDto);
+		}
+		
+		con.close();
+		return challengeList;
+		
+	}
+	
+	
+//	진행중임돠
+//	public boolean rfind(int memberNo) throws Exception {
+//		
+//		Connection con = JDBCUtils.getConnection();
+//		String sql = "select * from challenge where challenge_writer = ?";
+//		PreparedStatement ps = con.prepareStatement(sql);
+//		ps.setInt(1, memberNo);
+//		ResultSet rs = ps.executeQuery();
+//		
+//		if(rs.next()) {
+//			return true;
+//		}
+//		else {
+//			return false;
+//		}
+//		
+//	}
 	
 }
