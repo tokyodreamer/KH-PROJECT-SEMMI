@@ -24,7 +24,6 @@
 	<style type="text/css">
 	</style>
 
-
 </head>
 <body>
 	<main>
