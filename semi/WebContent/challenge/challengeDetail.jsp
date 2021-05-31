@@ -1,3 +1,6 @@
+<%@page import="semi.challenge.beans.ChallengeDao"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
 <%@page import="semi.donate.beans.DonateDao"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.TimeZone"%>
@@ -12,6 +15,27 @@
 	int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
 
 	ChallengeListDao challengeListDao = new ChallengeListDao();
+	
+	ChallengeDao challengeDao = new ChallengeDao();
+	
+	int memberNo = (int)session.getAttribute("memberNo");
+	Set<Integer> challengeNoSet;
+	if(session.getAttribute("challengeNoSet") != null){
+		challengeNoSet = (Set<Integer>)session.getAttribute("challengeNoSet");
+	}
+	else {
+		challengeNoSet = new HashSet<>();
+	}
+	
+	if(challengeNoSet.add(challengeNo)){
+		challengeDao.read(challengeNo, memberNo);
+		System.out.println("조회수 증가");
+	}
+	
+	System.out.println("저장소 : "+challengeNoSet);
+	
+	//저장소 갱신
+	session.setAttribute("challengeNoSet", challengeNoSet);
 	
 	ChallengeListDto challengeListDto = challengeListDao.getChallenge(challengeNo);
 	
