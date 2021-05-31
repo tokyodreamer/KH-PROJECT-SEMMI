@@ -18,6 +18,7 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
 .donate-container {
+	width: 600px;
 }
 
 .donate-form {
@@ -184,7 +185,7 @@
 		})
 	});
 </script>
-<div class="container-600">
+<div class="donate-container">
 	<div class="row">
 		<h2>후원 페이지</h2>
 	</div>
