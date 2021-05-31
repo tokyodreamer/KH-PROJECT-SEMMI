@@ -23,7 +23,17 @@ ChallengeDao challengeDao = new ChallengeDao();
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$(function(){
+		$(".delete-btn").click(function(e){
+			var choice = window.confirm("삭제하시겠습니까?");
+			if(!choice){
+				e.preventDefault();
+			}
+		});
+	});
+</script>
 <div class="container-600">
 	
 	<div class="link-btn"> <a href="authList.jsp"> 인증 리스트로 돌아가기</a> </div>
@@ -52,6 +62,10 @@ ChallengeDao challengeDao = new ChallengeDao();
 	<input type="submit" value="인증 처리 여뷰 + 이유 저장" class="form-btn ">
 	</div>
 	</form>
-
+	
+	<a href="authList.jsp" class="link-btn">수정</a>
+	<a href="authList.jsp" class="link-btn delete-btn">삭제</a>
+	<a href="authList.jsp" class="link-btn">목록</a>
+	
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

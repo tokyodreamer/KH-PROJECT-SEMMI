@@ -231,8 +231,13 @@
 	background-color: rgb(231, 241, 253);
 }
 
+.table.table-hover > thead > tr,		
+.table.table-hover > tbody > tr:hover {
+	background-color:rgb(231, 241, 253);
+}
+
 .table.table-hover>thead>tr, .table.table-hover>tbody>tr:hover {
-	background-color: rgb(231, 241, 253);
+	background-color:rgb(231, 241, 253);
 }
 
 /*
@@ -303,7 +308,7 @@ textarea.form-input {
 	Pagination 스타일
 */
 .pagination>a {
-	color: grey;
+	color: black;
 	text-decoration: none;
 	display: inline-block;
 	min-width: 35px;
@@ -312,9 +317,14 @@ textarea.form-input {
 	text-align: center;
 }
 
-.pagination>a:hover, .pagination>a.on {
+.pagination>a:hover {
+	text-decoration : underline;
+	cursor: pointer;
+}
+
+.pagination>a.on {
 	border: 1px solid lightgray;
-	color: rgb(255, 85, 146);
+	color : green;
 }
 
 .pagination-list {
@@ -344,6 +354,7 @@ textarea.form-input {
 .pagination-list>li:hover>a, .pagination-list>li.on>a {
 	color: rgb(255, 85, 146);
 }
+
 
 /*
 	float 스타일(다단 레이아웃)
@@ -396,6 +407,13 @@ textarea.form-input {
 	color: black;
 }
 
+.ex-btn {
+	display: inline-block;
+	padding:0.75rem;
+	border:1px solid black;
+	text-decoration: none;
+	color:black;	
+}
 /*
 	오류 메세지 스타일
 */
