@@ -169,7 +169,7 @@
 	</div>
 	
 	<div class="row text-right">
-		<a href="challengeJoin.jsp" class="link-btn">글쓰기</a>
+		<a href="challengeJoin.jsp" class="ex-btn">글쓰기</a>
 	</div>
 	
 <div class="row">
