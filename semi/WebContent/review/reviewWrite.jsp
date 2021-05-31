@@ -41,7 +41,6 @@
     </div>
     
      <jsp:include page="/template/footer.jsp"></jsp:include>
-=======
 
     <jsp:include page="/template/header.jsp"></jsp:include>
     <div class="container-600">
@@ -73,4 +72,3 @@
     	</form>
     </div>
     <jsp:include page="/template/footer.jsp"></jsp:include>
->>>>>>> refs/remotes/origin/main

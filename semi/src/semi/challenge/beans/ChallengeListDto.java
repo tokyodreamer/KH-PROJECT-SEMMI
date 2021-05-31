@@ -11,6 +11,8 @@ public class ChallengeListDto {
 	private int challengeReward;
 	private int challengeDonate;
 	private String challengeContent;
+	private String challengeResult;
+	private int challengeRead;
 	
 	//회원 정보 저장 변수
 	private int memberNo;
@@ -97,6 +99,24 @@ public class ChallengeListDto {
 	public void setChallengeContent(String challengeContent) {
 		this.challengeContent = challengeContent;
 	}
+	
+	
+	public String getChallengeResult() {
+		return challengeResult;
+	}
+
+	public void setChallengeResult(String challengeResult) {
+		this.challengeResult = challengeResult;
+	}
+
+	public int getChallengeRead() {
+		return challengeRead;
+	}
+
+	public void setChallengeRead(int challengeRead) {
+		this.challengeRead = challengeRead;
+	}
+
 	public int getMemberNo() {
 		return memberNo;
 	}

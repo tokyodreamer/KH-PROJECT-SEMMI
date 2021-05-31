@@ -9,6 +9,7 @@ import java.util.List;
 
 
 import semi.beans.JDBCUtils;
+import semi.member.beans.MemberDto;
 
 public class ChallengeDao {
 	
@@ -31,7 +32,7 @@ public class ChallengeDao {
 	public void challengeJoin(ChallengeDto challengeDto) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N')";
+		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N', 0)";
 		
 		PreparedStatement ps = con.prepareStatement(sql); 
 		ps.setInt(1, challengeDto.getChallengeNo()); // 도전글 번호 
@@ -43,7 +44,8 @@ public class ChallengeDao {
 		ps.setString(7, challengeDto.getChallengeEndDate()); // 종료일
 		ps.setInt(8, (int) (challengeDto.getChallengePushPoint()*0.01)); // 상금 로직 : 참가비 * 0.01
 		ps.setString(9, challengeDto.getChallengeContent()); // 도전글 내용 
-		// 'N' - 컬럼 추가 제어문 : 도전 테이블에 최종 정산 여부를 확인할 용도 (05/28, 작성자 : 정 계진) 
+		// 'N' - 컬럼 추가 제어문 : 도전 테이블에 최종 정산 여부를 확인할 용도 (05/28, 작성자 : 정 계진)
+		// 0 - 컬럼 추가 : 도전 테이블에 조회수 기능 추가(05/31, 작성자 : 박 민웅)
 		ps.execute();
 		
 		con.close();
@@ -74,6 +76,8 @@ public class ChallengeDao {
 			challengeDto.setChallengeReward(rs.getInt("challenge_reward"));
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
 			challengeDto.setChallengeContent(rs.getString("challenge_content"));
+			challengeDto.setChallengeResult(rs.getString("challenge_result"));
+			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
 		} else {
 			challengeDto = null;
 		}
@@ -111,6 +115,8 @@ public class ChallengeDao {
 			challengeDto.setChallengePercent(rs.getInt("challenge_percent"));
 			challengeDto.setChallengeReward(rs.getInt("challenge_reward"));
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
+			challengeDto.setChallengeResult(rs.getString("challenge_result"));
+			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
 			
 			challengeList.add(challengeDto);
 		}
@@ -152,6 +158,8 @@ public class ChallengeDao {
 			challengeDto.setChallengePercent(rs.getInt("challenge_percent"));
 			challengeDto.setChallengeReward(rs.getInt("challenge_reward"));
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
+			challengeDto.setChallengeResult(rs.getString("challenge_result"));
+			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
 			
 			challengeList.add(challengeDto);
 		}
@@ -194,6 +202,90 @@ public class ChallengeDao {
 		
 	}
 	
+
+	public ChallengeDto find(int challengeWriter) throws Exception { // write_no를 기준으로 회원찾기
+
+		Connection con = JDBCUtils.getConnection();
+
+		String sql = "select * from challenge where challenge_writer = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeWriter);
+		ResultSet rs = ps.executeQuery();
+		
+		
+
+		ChallengeDto challengeDto;
+		if (rs.next()) {
+
+			challengeDto = new ChallengeDto();
+
+			challengeDto.setChallengeNo(rs.getInt("challenge_no"));
+			challengeDto.setChallengeWriter(rs.getInt("challenge_writer"));
+			challengeDto.setChallengeTitle(rs.getString("challenge_title"));
+
+		} else {
+			challengeDto = null;
+		}
+
+		con.close();
+		
+		return challengeDto;
+
+	}
+	
+//	내 게시글목록
+	public List<ChallengeDto> myList(int memberNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select * from challenge where challenge_writer = ?"; 
+							
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, memberNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<ChallengeDto> challengeList = new ArrayList<>();
+		while(rs.next()) {
+			ChallengeDto challengeDto = new ChallengeDto();
+			challengeDto.setChallengeNo(rs.getInt("challenge_no"));
+			challengeDto.setChallengeWriter(rs.getInt("challenge_writer"));
+//			challengeDto.setCategoryNo(rs.getInt("category_no")); 
+			challengeDto.setChallengeTitle(rs.getString("challenge_title"));
+			challengeDto.setChallengePushPoint(rs.getInt("challenge_pushPoint"));
+			challengeDto.setChallengeStartDate(rs.getString("challenge_startDate"));
+			challengeDto.setChallengeEndDate(rs.getString("challenge_endDate"));
+			challengeDto.setChallengePercent(rs.getInt("challenge_percent"));
+			challengeDto.setChallengeReward(rs.getInt("challenge_reward"));
+			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
+			challengeDto.setChallengeResult(rs.getString("challenge_result"));
+			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
+			
+			challengeList.add(challengeDto);
+		}
+		
+		con.close();
+		return challengeList;
+		
+	}
+	
+	
+//	진행중임돠
+//	public boolean rfind(int memberNo) throws Exception {
+//		
+//		Connection con = JDBCUtils.getConnection();
+//		String sql = "select * from challenge where challenge_writer = ?";
+//		PreparedStatement ps = con.prepareStatement(sql);
+//		ps.setInt(1, memberNo);
+//		ResultSet rs = ps.executeQuery();
+//		
+//		if(rs.next()) {
+//			return true;
+//		}
+//		else {
+//			return false;
+//		}
+//		
+//	}
+
 	// 후원금 등록 시, 도전글 DB의 후원금 컬럼에 후원금을 더해주는 메소드 (작성자 : 정 계진)
 	// 설명 : 후원금 등록 메소드의 후원금 값과 도전글 번호 값을 활용하여 후원금을 업데이트(누적 형태로) 하는 메소드
 	public boolean donateJoin(int challengeDonate, int challengeNo) throws Exception {
@@ -228,6 +320,7 @@ public class ChallengeDao {
 		
 		return count > 0;
 	}
+
 	
 	/* 정산 처리 메소드 : 스케쥴러 */
 	
@@ -285,5 +378,21 @@ public class ChallengeDao {
 		
 		return count > 0;
 	}
+	
+	//조회수 증가 기능 : 특정 번호의 게시글을 작성자가 아닌 사람이 읽을 경우에만 증가되도록 구현(05/31, 작성자 : 박 민웅)
+		public boolean read(int challengeNo, int memberNo) throws Exception{
+			Connection con = JDBCUtils.getConnection();
+			
+			String sql = "update challenge "
+					+ "set challenge_read = challenge_read + 1 "
+					+ "where challenge_no = ? and challenge_writer != ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, challengeNo);
+			ps.setInt(2, memberNo);
+			int count = ps.executeUpdate();
+			
+			con.close();
+			return count > 0;
+		}
 	
 }

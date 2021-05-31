@@ -3,8 +3,11 @@
     
 	<jsp:include page="/template/header.jsp"></jsp:include>
 
-		<div>
-			<h2> 성공 </h2>
-		</div>
+		<script>
+			alert("비밀번호가 변경되었습니다.");
+			location="myPage.jsp";
+		</script>
+		
+		
 
 	<jsp:include page="/template/footer.jsp"></jsp:include>

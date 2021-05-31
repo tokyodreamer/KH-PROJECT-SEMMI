@@ -32,7 +32,11 @@
 		- box-sizing:border-box; 로 설정하면 width 가 테두리를 기준으로 설정
 */
 * {
+<<<<<<< HEAD
 	font-family: Neo Sans Pro, sans-serif;
+=======
+	font-family: inherit, sans-serif;
+>>>>>>> refs/heads/main
 	box-sizing: border-box;
 }
 
@@ -235,6 +239,13 @@
 	background-color: rgb(231, 241, 253);
 }
 
+<<<<<<< HEAD
+=======
+.table.table-hover>thead>tr, .table.table-hover>tbody>tr:hover {
+	background-color:rgb(231, 241, 253);
+}
+
+>>>>>>> refs/heads/main
 /*
 	입력창 스타일링
 	
@@ -303,7 +314,11 @@ textarea.form-input {
 	Pagination 스타일
 */
 .pagination>a {
+<<<<<<< HEAD
 	color: grey;
+=======
+	color: black;
+>>>>>>> refs/heads/main
 	text-decoration: none;
 	display: inline-block;
 	min-width: 35px;
@@ -312,15 +327,51 @@ textarea.form-input {
 	text-align: center;
 }
 
+<<<<<<< HEAD
 .pagination>a:hover, .pagination>a.on {
 	border: 1px solid lightgray;
 	color: rgb(255, 85, 146);
+=======
+.pagination>a:hover {
+	text-decoration : underline;
+	cursor: pointer;
+}
+
+.pagination>a.on {
+	border: 1px solid lightgray;
+	color : green;
+>>>>>>> refs/heads/main
 }
 
 .pagination-list {
 	list-style: none;
 	margin: 0px;
 	padding: 0px;
+<<<<<<< HEAD
+=======
+}
+
+.pagination-list>li {
+	display: inline-block;
+	min-width: 35px;
+	border: 1px solid transparent;
+	padding: 0.5rem;
+	text-align: center;
+	cursor: pointer;
+}
+
+.pagination-list>li>a {
+	color: gray;
+	text-decoration: none;
+}
+
+.pagination-list>li:hover, .pagination-list>li.on {
+	border: 1px solid lightgray;
+}
+
+.pagination-list>li:hover>a, .pagination-list>li.on>a {
+	color: rgb(255, 85, 146);
+>>>>>>> refs/heads/main
 }
 
 .pagination-list>li {
@@ -374,12 +425,24 @@ textarea.form-input {
 /*
 	링크 태그르 버튼처럼 보이게 변경
 */
+<<<<<<< HEAD
 .link-btn {
+=======
+.link-btn.loginlogout {
 	display: inline-block;
 	padding: 0.75rem;
-	border: 1px solid lightgray;
+	padding-left: 4rem;
+	padding-right:4rem;
+	border: 2px solid black ;
 	text-decoration: none;
-	color: gray;
+	border-radius: 1.5rem;
+	margin-left:25px;
+	margin-right:25px;
+}
+.link-btn.homebutton {
+	display: inline-block;
+	padding: 0.75rem;
+	text-decoration: none;
 }
 
 .link-btn:hover {
@@ -387,12 +450,35 @@ textarea.form-input {
 	color: black;
 }
 
+.ex-btn {
+>>>>>>> refs/heads/main
+	display: inline-block;
+<<<<<<< HEAD
+	padding: 0.75rem;
+	border: 1px solid lightgray;
+=======
+	padding:0.75rem;
+	border:1px solid black;
+>>>>>>> refs/heads/main
+	text-decoration: none;
+<<<<<<< HEAD
+	color: gray;
+}
+
+.link-btn:hover {
+	border-color: black;
+	color: black;
+=======
+	color:black;	
+>>>>>>> refs/heads/main
+}
 /*
 	오류 메세지 스타일
 */
 .error {
 	color: red;
 }
+<<<<<<< HEAD
 
 .sh_group {
 	display: inline-block;
@@ -419,3 +505,38 @@ textarea.form-input {
 .fail-message {
 	color: red;
 }
+=======
+.myPage_div{
+	width: 800px;
+	margin : auto;
+}
+.myPage_box{
+		min-height : 150px;
+		width : 40%;
+		margin: 20px 20px;
+		border: 1px solid orange;
+		border-radius: 2px;
+		background : ivory;
+}
+.left{
+	float : left;
+
+}
+.right{
+	float : right;
+}
+.wall{
+	clear : both;
+}
+
+.sh_group {
+	display: inline-block;
+	height: 250px;
+	width: 350px;
+	margin: 16px 8px 0;
+	padding: 15px 15px 15px;
+	text-align: left;
+	border: 1px solid #dadada;
+	border-radius: 2px;
+}
+>>>>>>> refs/heads/main
