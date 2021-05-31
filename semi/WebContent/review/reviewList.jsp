@@ -15,10 +15,34 @@
 <head>
 <meta charset="UTF-8">
 <style>
-#container{
-border: 1px solid black;
+#content{
+border: 1px solid lightgray;
+padding: 10px;
 }
 
+h2{
+text-align: center;
+text-shadow: 5px 5px 3px lightgrey;
+}
+
+#review-box{
+border: 1px solid black;
+margin:10px auto;
+padding: 20px;
+}
+
+.link-btn{
+background-color: black;
+color: white;
+}
+
+#nick,#time{
+font-style:italic;
+}
+
+.sp-nick{
+margin-left: 10px;
+}
 </style>
 </head>
 
@@ -26,29 +50,26 @@ border: 1px solid black;
 	
 <body>
 <jsp:include page="/template/header.jsp"></jsp:include>
-<div class="contaier-1000" id="container" >
-	<div class="row">
-<h2>후기</h2>
-</div>
-
+<div class="container-1000" id="container" >
+	
 	<div class="row text-right">
+<h2>후기</h2> 
 		<%if(request.getSession().getAttribute("memberNo")!=null){ %>
-		<a href="reviewWrite.jsp" class="link-btn">후기 작성하러 가기</a>
+		<a href="reviewWrite.jsp" class="link-btn">후기 작성하러 가기!</a>
 		<%} %>
 	</div>
 
 	<%for(ReviewListDto reDto : reviewList){ %>
 	<div class="" id="review-box">
-		<div class="row"  boeder="1px solid black">
-			<label>닉네임</label>
-			<h4><%= reDto.getMemberNick()%></h4>
+		<div class="row">
+			<label id="nick" >닉네임:</label><span class="sp-nick"><%= reDto.getMemberNick()%></span>
 		</div>
 		<div class="row">
-			<label>작성일</label>
-			<h4><%= reDto.getReviewTime() %></h4>
+<!-- 			<label>작성일</label> -->
+			<h4 id="time"><%= reDto.getReviewTime() %></h4>
 		</div>
 		<div class="row">
-			<label>평점</label>
+<!-- 			<label>평점</label> -->
 			<%if(reDto.getReviewStar() == 5) {%>
 			<h4>★★★★★</h4>
 			<%} else if(reDto.getReviewStar() == 4) {%>
@@ -63,16 +84,17 @@ border: 1px solid black;
 			<h4>☆☆☆☆☆</h4>
 			<%} %>
 		</div>
-		<div class="row">
-			<label>내용</label>
+		<div class="row" id="content">
 			<h4><%= reDto.getReviewContent() %></h4>
 		</div>
-		<div class="row">
+		<div class="row text-right">
+			<%if(request.getSession().getAttribute("memberNo")!=null){ %>
 			<a class="link-btn" href ="#">수정</a>
-		</div>
-		<div class="row">
-			<!-- 작성한 사람이 로그인한 사람하고 동일하면 삭제 버튼 보여주기 (if) -->
-			<a class="link-btn" href="#">삭제</a> <!-- href : 삭제할 때는 후기 작성자 번호가 필요   -->
+			<%} %>
+		
+			<%if(request.getSession().getAttribute("memberNo")!=null){ %>
+			<a class="link-btn" href="#">삭제</a> 
+			<%} %>
 		</div>
 		
 	</div>

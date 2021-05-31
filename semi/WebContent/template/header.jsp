@@ -71,8 +71,11 @@
 					
 				<li><a href="#">리뷰</a>
 					<ul>
-						<li><a href="<%=root%>/product/productInsert.jsp">사용자 리뷰</a></li>
-						<li><a href="<%=root%>/product/productList.jsp">리뷰 작성</a></li>
+					<%if(isLogin) { %>
+						<li><a href="<%=root%>/review/reviewList.jsp">사용자 리뷰</a></li>
+					<%} else { %>	
+						<li><a href="<%=root%>/review/reviewWrite.jsp">리뷰 작성</a></li>
+					<%} %>
 					</ul></li>
 				<li><a href="#">Admin</a>
 					<ul>
