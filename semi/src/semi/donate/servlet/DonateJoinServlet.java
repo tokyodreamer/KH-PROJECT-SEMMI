@@ -32,11 +32,18 @@ public class DonateJoinServlet extends HttpServlet {
 			donateDto.setDonateCategoryNo(Integer.parseInt(req.getParameter("donateCategoryNo")));
 			donateDto.setDonatePushPoint(Integer.parseInt(req.getParameter("donatePushPoint")));
 			
+			// 후원 전 체크 :
+			// 후원하기 전에 회원의 보유 포인트가 후원금보다 적으면 후원하기 페이지로 이동
+			MemberDao memberDao = new MemberDao();
+			
+			if(memberDao.find((int) req.getSession().getAttribute("memberNo")).getMemberPoint() < Integer.parseInt(req.getParameter("donatePushPoint"))) {
+				resp.sendRedirect(req.getContextPath() + "/donate/donateJoin.jsp");
+			}
+			
 			// 1. 후원하는 사람이 후원을 하게 되면
 			donateDao.donateJoin(donateDto);
 			
 			// 2. 회원 DB의 후원금 컬럼에서 후원금을 차감하고 
-			MemberDao memberDao = new MemberDao();
 			memberDao.challengeJoin((int) req.getSession().getAttribute("memberNo"), Integer.parseInt(req.getParameter("donatePushPoint")));
 			
 			// 3. 도전글 DB의 해당 도전글 후원금 컬럼에 후원금을 더해준다
