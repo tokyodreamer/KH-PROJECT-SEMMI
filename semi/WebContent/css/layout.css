@@ -4,13 +4,11 @@
 	홈페이지 레이아웃과 관련된 스타일 코드가 작성된 파일
 */
 main {
-	width: 1200px;
+	width: 1600px;
 	margin-left: auto;
 	margin-right: auto;
 }
 header{
-	
-	text-align: center;
 	padding : 0px;
 	margin-top : 0px;
 }

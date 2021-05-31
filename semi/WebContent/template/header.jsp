@@ -26,29 +26,31 @@
 </head>
 <body>
 	<main>
-		<header>
-			<div align="right">
+		<header class="float-container " style="padding:1.4rem;">
+		<div class="left" >
+		<a class="link-btn" style="font-size: 43px;  "><span style="font-weight: bold">SEMI</span> Project </a>
+		</div>
+			<div class="right" >
 				<%if(isLogin) { %>
-					<form method="post" action="logout.kh">
-						<input type="submit" value="로그아웃">
-					</form>
+				<a href="<%=root%>/member/memberLogout.kh" class="link-btn loginlogout" style="font-size: 20px; background-color:black; color: white">로그아웃</a>
 				<%} else { %>
-					<a href="memberJoin.jsp">회원가입</a>
-					<a href="memberLogin.jsp">로그인</a>
+					<a href="<%=root%>/member/memberJoin.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:white; color: black">회원가입</a>
+					<a href="<%=root%>/member/memberLogin.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:black; color:white;">&nbsp로그인&nbsp</a>
 				<%} %>
 			
 			</div>
-			<h1>세미 프로젝트 (임시)</h1>
 		</header>
 		<nav>
 			<ul class="menu">
-				<li><a href="#">회원기능</a>
+				<li><a href="#">마이 페이지</a>
 					<ul>
 						<%if(isLogin) { %>
-							<li><a href="<%=root%>/member/memberLogout.kh">로그아웃</a></li>
-							<li><a href="<%=root%>/member/myInfo.jsp">나의정보</a></li>
+							<li><a href="<%=root%>/member/myInfo.jsp">내 정보 보기</a></li>
+							<li><a href="<%=root%>/challenge/challengeList.jsp">나의 도전글</a></li>
+						<li><a href="<%=root%>/item/itemList.jsp">나의 후원내역</a></li>
+						<li><a href="<%=root%>/member/editMember.jsp">내 정보 변경</a></li>
 							<li><a href="<%=root%>/member/memberExit.kh">탈퇴하기</a></li>
-							<li><a href="#">회원 조회/검색</a></li>
+						
 						<%} else { %>
 							<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
 							<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
@@ -63,13 +65,7 @@
 					</ul></li>
 					
 					
-				<li><a href="#">마이페이지</a>
-					<ul>
-						<li><a href="<%=root%>/challenge/challengeList.jsp">나의 도전글</a></li>
-						<li><a href="<%=root%>/item/itemList.jsp">나의 후원내역</a></li>
-						<li><a href="<%=root%>/challenge/challengeJoin.jsp">도전하기</a></li>
-						<li><a href="<%=root%>/member/editMember.jsp">내 정보 변경</a></li>
-					</ul></li>
+			
 					
 				<li><a href="#">리뷰</a>
 					<ul>
@@ -80,6 +76,7 @@
 					<ul>
 						<li><a href="<%=root%>/admin/adminLogin.jsp">로그인</a></li>
 						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
+							<li><a href="#">회원 조회/검색</a></li>
 						
 						
 <%-- 						<li><a href="<%=root%>/board/boardList.jsp">게시글 목록</a></li> --%>
