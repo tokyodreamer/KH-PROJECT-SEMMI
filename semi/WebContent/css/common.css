@@ -410,9 +410,9 @@ textarea.form-input {
 .ex-btn {
 	display: inline-block;
 	padding:0.75rem;
-	border:1px solid lightgray;
+	border:1px solid black;
 	text-decoration: none;
-	color:gray;	
+	color:black;	
 }
 /*
 	오류 메세지 스타일

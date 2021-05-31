@@ -149,19 +149,18 @@
 		<h2><%=challengeListDto.getChallengeContent() %></h2>
 	</div>
 	<div class="row text-left">
-		<!-- 자바 제어문 추가 : 세션값과 작성자가 일치하면 인증하기 버튼 출력 -->
+		<!-- 도전 기한이 남았을 때 && 도전글 작성자가 자신의 도전글 페이지에 있을 때 인증하기 버튼 출력 -->
 		<%if(currentTimeSec < endTimeSec && challengeListDto.getMemberNo() == (int) request.getSession().getAttribute("memberNo")) {%>
-			<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>&categoryNo=<%=challengeListDto.getCategoryNo()%>" class="link-btn">인증하기</a>
-		<!-- 자바 제어문 추가 : 아니라면 후원하기 버튼 출력 -->
-		<!-- 자바 제어문 변경 예정 (05/30) : 후원DB를 조회하여 후원하지 않은 회원이면 후원하기 버튼 출력 : DAO 필요! -->
+			<a href="<%=request.getContextPath() %>/auth/authInsert.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>&categoryNo=<%=challengeListDto.getCategoryNo()%>" class="ex-btn">인증하기</a>
+		<!-- 도전 기한이 남았을 때 && 로그인한 회원이 해당 도전글에 후원했던 내역이 없으면 후원하기 버튼 출력  -->
 		<%}else if(System.currentTimeMillis() < endDateParsed.getTime() && checkDonateMember != (int) request.getSession().getAttribute("memberNo"))  {%>
-			<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="link-btn">후원하기</a>
-		<%} else {%>
-		<!-- 자바 제어문 추가 예정 : 후원DB를 조회하여 해당 도전글에 이미 한 후원이면 후원금과 안내문 출력 -->
+			<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="ex-btn">후원하기</a>
+		<!-- 도전 기한이 남았을 때 && 로그인한 회원이 후원한 내역이 있다면 이미 후원하였다는 문구 출력 -->
+		<%} else  if(System.currentTimeMillis() < endDateParsed.getTime() && checkDonateMember == (int) request.getSession().getAttribute("memberNo"))  {%>
 			<h4>이미 후원하였습니다</h4>
 		<%} %>
-		<a href="challengeList.jsp" class="link-btn">목록</a>
-		
+		<!-- 도전 기한이 만료되었다면 몰고 리스트만 출력 -->
+		<a href="challengeList.jsp" class="ex-btn">목록</a>
 	</div>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
