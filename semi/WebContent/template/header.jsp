@@ -65,9 +65,6 @@
 						<li><a href="<%=root%>/item/itemList.jsp">인증글 목록</a></li>
 					</ul></li>
 					
-					
-			
-					
 				<li><a href="#">리뷰</a>
 					<ul>
 						<li><a href="<%=root%>/product/productInsert.jsp">사용자 리뷰</a></li>
