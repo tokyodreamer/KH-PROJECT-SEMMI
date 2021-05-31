@@ -235,7 +235,11 @@
 	</div>
 	
 	<div class="row text-right">
+<<<<<<< HEAD
 		<a href="challengeJoin.jsp" class="write-btn">글쓰기</a>
+=======
+		<a href="challengeJoin.jsp" class="ex-btn">글쓰기</a>
+>>>>>>> refs/remotes/origin/main
 	</div>
 	
 <div class="row">

@@ -407,6 +407,13 @@ textarea.form-input {
 	color: black;
 }
 
+.ex-btn {
+	display: inline-block;
+	padding:0.75rem;
+	border:1px solid lightgray;
+	text-decoration: none;
+	color:gray;	
+}
 /*
 	오류 메세지 스타일
 */
