@@ -33,6 +33,19 @@ public class ReviewDao {
 		}
 		return reviewList;
 	}
+  
+	public int getSequence() throws Exception {
+		Connection con = JDBCUtils.getConnection();
+
+		String sql = "select review_seq.nextval";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int reviewNo = rs.getInt(1);
+
+		con.close();
+		return reviewNo;
+	}
 
 	// 리뷰 작성 기능??(insert-void)
 	public void write(ReviewDto reviewDto) throws Exception {
@@ -123,3 +136,4 @@ public class ReviewDao {
 	}
 
 }
+
