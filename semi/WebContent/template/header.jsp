@@ -24,7 +24,6 @@
 	<style type="text/css">
 	</style>
 
-
 </head>
 <body>
 	<main>
@@ -65,9 +64,6 @@
 						<li><a href="<%=root%>/challenge/challengeList.jsp">도전글 목록</a></li>
 						<li><a href="<%=root%>/item/itemList.jsp">인증글 목록</a></li>
 					</ul></li>
-					
-					
-			
 					
 				<li><a href="#">리뷰</a>
 					<ul>

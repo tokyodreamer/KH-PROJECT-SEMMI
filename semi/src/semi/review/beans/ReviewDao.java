@@ -36,11 +36,13 @@ public class ReviewDao {
 		}
 		return reviewList;
 	}
+	
+
   
 	public int getSequence() throws Exception {
 		Connection con = JDBCUtils.getConnection();
 
-		String sql = "select review_seq.nextval from dual";
+		String sql ="select review_seq.nextval from dual";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
@@ -95,6 +97,7 @@ public class ReviewDao {
 
 		return reviewDto;
 	}
+	
 
 	// 게시글 수정 기능(작성자: 박준영)
 	// update, delete 같은 경우는 반환형을 boolean으로 작성해주는게 좋다.
@@ -102,19 +105,24 @@ public class ReviewDao {
 	public boolean edit(ReviewDto reviewDto) throws Exception {
 
 		Connection con = JDBCUtils.getConnection();
+		
+		//update 하겠습니다 review 테이블을. 그리고 set(바꾸겠습니다)
+		String sql="update review set review_star=?, review_content=? where review_no=?";
+		
 
-		// update 하겠습니다 review 테이블을. 그리고 set(바꾸겠습니다)
-		String sql = "update review " + "set review_star=?, review_content=? where review_no=?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, reviewDto.getReviewStar());
 		ps.setString(2, reviewDto.getReviewContent());
 		ps.setInt(3, reviewDto.getReviewNo());
+		System.out.println(reviewDto.getReviewNo());
 
 		int count = ps.executeUpdate();
+		
 		con.close();
+		
+		return count>0;
 
-		return count > 0;
 
 	}
 
@@ -137,5 +145,5 @@ public class ReviewDao {
 		return count > 0;
 
 	}
-
+	
 }
