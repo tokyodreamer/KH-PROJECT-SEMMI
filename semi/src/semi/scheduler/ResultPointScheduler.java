@@ -33,10 +33,16 @@ public class ResultPointScheduler extends HttpServlet{
 		
 		// DAO 구문 실행 조절 (1분에 1번씩 1초 딜레이로 실행)
 		timer.scheduleAtFixedRate(task,1000, 1000*60);
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	@Override
 	public void destroy() {
-		super.destroy();
+		System.out.println("정산 작업 종료");	
+		
 	}
 }
