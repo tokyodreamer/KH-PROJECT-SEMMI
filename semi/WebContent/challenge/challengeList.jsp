@@ -128,6 +128,7 @@
    		top: 1px;
    		cursor: pointer;
 	}
+	
 	.write-btn {
 	text-decoration: none;
 	width : 100px;
@@ -196,16 +197,16 @@
 			<thead>
 					<tr>
 						<th>번호</th>
-						<th width="100px">작성자</th>
-						<th width="100px">카테고리</th>
-						<th>제목</th>
+						<th>카테고리</th>
+						<th width="20%">제목</th>
+						<th>작성자</th>
 						<th>참가비</th>
-						<th width="10%">도전 시작일</th>
-						<th width="10%">도전 종료일</th>
+						<th>도전 시작일</th>
+						<th>도전 종료일</th>
 						<th>달성률</th>
 						<th>상금</th>
-						<th width="10%">누적후원금</th>
-						<th>조회수</th>
+						<th>누적후원금</th>
+						<th width="5%">조회수</th>
 						<!-- <th>도전글내용</th> -->
 					</tr>
 			</thead>
@@ -214,13 +215,13 @@
 					<%for(ChallengeListDto challengeListDto : challengeList){ %>
 					<tr>
 						<td><%=challengeListDto.getChallengeNo() %></td>
-						<td><%=challengeListDto.getMemberNick() %></td>
 						<td><%=challengeListDto.getCategorytype() %></td>
 						<td class = "text-left text-deco">
 							<!-- 제목을 누르면 상세보기 페이지로 이동 -->
 							<a href="challengeDetail.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>">
 							<%=challengeListDto.getChallengeTitle() %></a>
 						</td>
+						<td><%=challengeListDto.getMemberNick() %></td>
 						<td><%=challengeListDto.getChallengePushPoint() %>원</td>
 						<td><%=challengeListDto.getChallengeStartDate().substring(0,10) %></td>
 						<td><%=challengeListDto.getChallengeEndDate().substring(0,10) %></td>
@@ -237,8 +238,6 @@
 	<div class="row text-right">
 
 		<a href="challengeJoin.jsp" class="write-btn">글쓰기</a>
-
-		<a href="challengeJoin.jsp" class="ex-btn">글쓰기</a>
 
 	</div>
 	
