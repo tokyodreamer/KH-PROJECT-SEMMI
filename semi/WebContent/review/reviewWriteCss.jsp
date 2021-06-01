@@ -1,6 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<style>
+.link-btn{
+background-color: black;
+color: white;
+font-size:20px;
+}
+
+
+
+</style>
+
+
+
+
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 
@@ -27,7 +43,7 @@
 			<textarea name="reviewContent"></textarea>
 
 			<br>
-			<br> <input type="submit" value="등록하기">
+			<br> <input type="submit" value="등록하기" class="link-btn">
 		
 		</form>
 	</div>
