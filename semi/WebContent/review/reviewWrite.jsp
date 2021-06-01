@@ -28,9 +28,13 @@
 
 			<br>
 			<br> <input type="submit" value="등록하기">
+		
 		</form>
 	</div>
 
 </div>
 
+
 <jsp:include page="/template/footer.jsp"></jsp:include>
+
+
