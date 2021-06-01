@@ -32,11 +32,8 @@
 		- box-sizing:border-box; 로 설정하면 width 가 테두리를 기준으로 설정
 */
 * {
-<<<<<<< HEAD
 	font-family: Neo Sans Pro, sans-serif;
-=======
 	font-family: inherit, sans-serif;
->>>>>>> refs/heads/main
 	box-sizing: border-box;
 }
 
@@ -168,10 +165,6 @@
 	- .image-blur : 이미지를 뿌옇게 표시(단, 마우스가 올라가면 선명하게 표시)
 	- .image-leaf : 이미지를 나뭇잎 모양으로 표시
 */
-.image {
-	
-}
-
 .image.image-circle {
 	border-radius: 50%;
 }
@@ -239,13 +232,10 @@
 	background-color: rgb(231, 241, 253);
 }
 
-<<<<<<< HEAD
-=======
 .table.table-hover>thead>tr, .table.table-hover>tbody>tr:hover {
 	background-color:rgb(231, 241, 253);
 }
 
->>>>>>> refs/heads/main
 /*
 	입력창 스타일링
 	
@@ -314,11 +304,8 @@ textarea.form-input {
 	Pagination 스타일
 */
 .pagination>a {
-<<<<<<< HEAD
 	color: grey;
-=======
 	color: black;
->>>>>>> refs/heads/main
 	text-decoration: none;
 	display: inline-block;
 	min-width: 35px;
@@ -327,11 +314,6 @@ textarea.form-input {
 	text-align: center;
 }
 
-<<<<<<< HEAD
-.pagination>a:hover, .pagination>a.on {
-	border: 1px solid lightgray;
-	color: rgb(255, 85, 146);
-=======
 .pagination>a:hover {
 	text-decoration : underline;
 	cursor: pointer;
@@ -340,15 +322,12 @@ textarea.form-input {
 .pagination>a.on {
 	border: 1px solid lightgray;
 	color : green;
->>>>>>> refs/heads/main
 }
 
 .pagination-list {
 	list-style: none;
 	margin: 0px;
 	padding: 0px;
-<<<<<<< HEAD
-=======
 }
 
 .pagination-list>li {
@@ -371,7 +350,6 @@ textarea.form-input {
 
 .pagination-list>li:hover>a, .pagination-list>li.on>a {
 	color: rgb(255, 85, 146);
->>>>>>> refs/heads/main
 }
 
 .pagination-list>li {
@@ -425,9 +403,6 @@ textarea.form-input {
 /*
 	링크 태그르 버튼처럼 보이게 변경
 */
-<<<<<<< HEAD
-.link-btn {
-=======
 .link-btn.loginlogout {
 	display: inline-block;
 	padding: 0.75rem;
@@ -451,26 +426,19 @@ textarea.form-input {
 }
 
 .ex-btn {
->>>>>>> refs/heads/main
 	display: inline-block;
-<<<<<<< HEAD
 	padding: 0.75rem;
 	border: 1px solid lightgray;
-=======
 	padding:0.75rem;
 	border:1px solid black;
->>>>>>> refs/heads/main
 	text-decoration: none;
-<<<<<<< HEAD
 	color: gray;
 }
 
 .link-btn:hover {
 	border-color: black;
 	color: black;
-=======
 	color:black;	
->>>>>>> refs/heads/main
 }
 /*
 	오류 메세지 스타일
@@ -478,7 +446,6 @@ textarea.form-input {
 .error {
 	color: red;
 }
-<<<<<<< HEAD
 
 .sh_group {
 	display: inline-block;
@@ -505,7 +472,7 @@ textarea.form-input {
 .fail-message {
 	color: red;
 }
-=======
+
 .myPage_div{
 	width: 800px;
 	margin : auto;
@@ -539,4 +506,3 @@ textarea.form-input {
 	border: 1px solid #dadada;
 	border-radius: 2px;
 }
->>>>>>> refs/heads/main
