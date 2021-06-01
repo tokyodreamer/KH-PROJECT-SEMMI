@@ -14,7 +14,8 @@
 
 		<form action="reviewWrite.kh" method="post">
 
-			<label>별점</label> <select name="reviewStar" id="star">
+			<label>별점</label> 
+			<select name="reviewStar" id="star">
 				<option value="5" selected>★★★★★</option>
 				<option value="4">★★★★☆</option>
 				<option value="3">★★★☆☆</option>
@@ -28,13 +29,9 @@
 
 			<br>
 			<br> <input type="submit" value="등록하기">
-		
 		</form>
 	</div>
 
 </div>
 
-
 <jsp:include page="/template/footer.jsp"></jsp:include>
-
-
