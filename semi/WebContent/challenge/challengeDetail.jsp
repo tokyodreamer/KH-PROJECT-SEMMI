@@ -58,7 +58,7 @@
 			var mm = parseInt(timeLimitMills/1000/60%60);
 			var ss = parseInt(timeLimitMills/1000%60);
 			
-			document.getElementById("timeLimit").innerHTML = "종료까지" + dd + "일" + hh + "시간" + mm + "분" + ss + "초 남았습니다";
+			document.getElementById("timeLimit").innerHTML = "종료까지: " + dd + "일" + hh + "시간";
 			ss--;
 			
 			if(ss === 0) {
@@ -77,58 +77,79 @@
 		
 	});
 </script>
+<style>
+.title{
+font-size: 40px;
+font-weight: bold;
+text-align: center;
+margin-left: -5%;
+
+}
+.content{
+margin-left: auto;
+margin-right: auto;
+min-height:100px;
+font-size:23px;
+width:90%;
+border: 2px dashed black;
+padding:2rem;
+margin-top: 20px;
+border-radius: .7em;
+}
+.title-content{
+margin:none;
+width:55%;
+display:inline-block;
+}
+.description{
+margin-top: 40px;
+margin-right:18%;
+float: right;
+height:200px;
+width:25%;
+display: inline-block;
+border: 1px solid black;
+font-size: 30px;
+padding: .5rem;
+border-radius: 1em;
+}
+.description  li{
+list-style: armenian;
+}
+.leftTime >li {
+}
+
+</style>
 <jsp:include page="/template/header.jsp"></jsp:include>
-<div class="container-900">
-	<div class="row">
-		<h2>도전글 상세보기</h2>
+<div class="container-1500">
+	<div class="title-content"> 
+	
+	<div class="title"> <%=challengeListDto.getChallengeTitle() %>
+	<span style="font-family:cursive; font-size: 20px; position: relative; left:50px;"> by. <%=challengeListDto.getMemberNick()%> </span>
 	</div>
-	<div class="row">
-		<label>도전글 번호</label>
-		<h2><%=challengeListDto.getChallengeNo() %></h2>
-	</div>
-	<div class="row text-left">
-		<label>도전글 제목</label>
-		<h2><%=challengeListDto.getChallengeTitle() %></h2>
-	</div>
-	<div class="row text-left">
-		<!-- 변경 예정 -->
-		<label>도전글 작성자</label>
-		<h2><%=challengeListDto.getMemberNick()%></h2>
-	</div>
-	<div class="row text-left">
-		<label>참가비</label>
-		<h2><%=challengeListDto.getChallengePushPoint() %> 포인트</h2>
-	</div>
-	<div class="row text-left">
-		<label>시작일</label>
-		<h2><%=challengeListDto.getChallengeStartDate().substring(0,10) %></h2>
-	</div>
-	<div class="row text-left">
-		<label>종료일</label>
-		<h2><%=challengeListDto.getChallengeEndDate().substring(0,10) %></h2>
-	</div>
-	<!-- 타임 리미트 : 로직 구현 예정 -->
-	<!-- 실시간 계산 예정 :  -->
-	<div class="row text-left">
-		<label>도전글 기한</label><br>
+	<div class=" content"> <%=challengeListDto.getChallengeContent() %></div>
+</div>
+
+
+<div class="description">
+<ul>
+<div class="percent"><li> <span style="font-size:22px; font-weight:bold;">현재 달성률:</span> <%=challengeListDto.getChallengePercent() %> %</li></div>
+<div class="duration"> <li> <span style="font-size:22px; font-weight:bold;">도전 기간: </span><%=challengeListDto.getChallengeStartDate().substring(5,10) %>
+~ <%=challengeListDto.getChallengeEndDate().substring(5,10) %> </li>
+<div class="totalPoint"><li> <span style="font-size:22px; font-weight:bold;"> 누적 후원금: </span> <%=challengeListDto.getChallengeDonate() %> Point</li> </div>
+
+<div class="leftTime"> <li>
 		<%if(currentTimeSec > endTimeSec) {%>
-		<h2>도전기한 만료</h2>
+		<span style="font-size:22px; font-weight:bold;">도전기한 만료 </span>
 		<%} else { %>
-		<span id="timeLimit"></span>
-		<%} %>
-	</div>
-	<div class="row text-left">
-		<label>상금</label>
-		<h2><%=challengeListDto.getChallengeReward() %> 포인트</h2>
-	</div>
-	<div class="row tex-left">
-		<label>누적 후원금</label>
-		<h2><%=challengeListDto.getChallengeDonate() %> 포인트</h2>
-	</div>
-	<div class="row text-left">
-		<label>도전글 내용</label>
-		<h2><%=challengeListDto.getChallengeContent() %></h2>
-	</div>
+		<span id="timeLimit" style="font-size:22px; font-weight: bold; "></span>
+		<%} %> </li>
+</div>
+</ul>
+</div>
+
+	
+	
 	<div class="row text-left">
 		<!-- 자바 제어문 추가 : 세션값과 작성자가 일치하면 인증하기 버튼 출력 -->
 		<%if(currentTimeSec < endTimeSec && challengeListDto.getMemberNo() == (int) request.getSession().getAttribute("memberNo")) {%>

@@ -1,19 +1,16 @@
 package semi.review.beans;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
-<<<<<<< HEAD
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-=======
->>>>>>> refs/remotes/origin/main
 
 import semi.beans.JDBCUtils;
 
 public class ReviewDao {
-<<<<<<< HEAD
-	public List<ReviewDto> list() throws Exception{
+		public List<ReviewDto> list() throws Exception{
 		Connection con =  JDBCUtils.getConnection();
 		
 		String sql = "select*from order by review_time asc";
@@ -55,7 +52,6 @@ Connection con = JDBCUtils.getConnection();
 		
 		String sql = "insert into ";
 	}
-=======
 //	public List<ReviewDto> list() throws Exception{
 
 //	}
@@ -79,8 +75,6 @@ Connection con = JDBCUtils.getConnection();
 		
 		
 	}
-	
->>>>>>> refs/remotes/origin/main
 	
 	
 }
