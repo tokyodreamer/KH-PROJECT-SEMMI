@@ -21,14 +21,9 @@ public class ResultPointScheduler extends HttpServlet{
 				try {
 					// 달성기간이 지났으면서 아직 정산이 이루어지지 않은 항목들에 대해서 정산하는 작업 코드를 작성
 					
-					// DAO : 서버 켜지는 순간 4번의 메소드 실행
 					ChallengeDao challengeDao = new ChallengeDao();
 					
-					// 포인트 정산 작업 처리
-					
-					
-					// 포인트 정산 후 정산결과를 완료 처리
-					//challengeDao.challengeResult();
+					// 1. 달성률에 따라 정산 작업을 다르게 한다 (달성률 조회)
 					
 				} catch (Exception e) {
 					e.printStackTrace();
