@@ -48,7 +48,7 @@ font-size: 30px;
 			<br><br>
 			<textarea name="reviewContent" class="form-input"></textarea>
 
-			<br>
+			<br><br>
 			<br> <input type="submit" value="등록하기" class="link-btn loginlogout ">
 		
 		</form>
