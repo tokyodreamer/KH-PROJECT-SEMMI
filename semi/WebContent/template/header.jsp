@@ -29,7 +29,7 @@
 	<main>
 		<header class="float-container " style="padding:1.4rem;">
 		<div class="left" >
-		<a class="link-btn" style="font-size: 43px;  "><span style="font-weight: bold">SEMI</span> Project </a>
+		<a href="<%=root%> "class="link-btn" style="font-size: 43px; text-decoration: none; color:black"><span style="font-weight: bold">SEMI</span> Project </a>
 		</div>
 			<div class="right" >
 				<%if(isLogin) { %>
