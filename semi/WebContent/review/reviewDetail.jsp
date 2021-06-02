@@ -1,3 +1,5 @@
+<%@page import="semi.review.beans.ReviewListDto"%>
+<%@page import="semi.review.beans.ReviewListDao"%>
 <%@page import="semi.review.beans.ReviewDto"%>
 <%@page import="semi.review.beans.ReviewDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,6 +12,9 @@
     	//번호를 받은 후 조회를 한다
 	   ReviewDao reviewDao= new ReviewDao();
 	   ReviewDto reviewDto = reviewDao.get(reviewNo);
+// ReviewListDao reviewListDao = new ReviewListDao(); 
+// ReviewListDto reviewListDto = reviewListDao.findReview(reviewNo);
+
    %>
    
    <jsp:include page="/template/header.jsp"></jsp:include>
@@ -21,7 +26,7 @@
    <p><%=reviewDto.getReviewContent() %></p>
    
    
-   
+   <a href="reviewList.jsp">후기 목록으로</a>
    
    
    

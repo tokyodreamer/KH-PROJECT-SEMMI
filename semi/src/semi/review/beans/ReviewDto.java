@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ReviewDto {
 
 	private int reviewNo;
-	private int reviewNick;
+	private int reviewNick; // 후기 작성자
 	private Date reviewTime;
 	private int reviewStar;
 	private String reviewContent;

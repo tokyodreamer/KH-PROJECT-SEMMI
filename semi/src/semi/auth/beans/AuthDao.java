@@ -156,4 +156,18 @@ public class AuthDao {
 		con.close();
 		return count>0;
 	}
+	
+	//인증글 삭제 기능
+	public boolean delete(int authNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "delete auth where auth_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, authNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count > 0;
+	}
 }

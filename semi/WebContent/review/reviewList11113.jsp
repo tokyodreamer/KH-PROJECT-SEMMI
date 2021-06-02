@@ -10,19 +10,48 @@
 	List<ReviewListDto> reviewList = reListDao.list();
 %>
 
-<jsp:include page="/template/header.jsp"></jsp:include>
 
-<h2>후기 목록페이지</h2>
-<!-- 예시 -->
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<style>
+#review-title{
+color:skyblue;
+border:thick;
+box-sizing: border-box;
+margin-left: auto;
+margin-right: auto;
+}
+.linkbtn{
+font-size:20px;
+background-color:black;
+color:white;
+}
+
+
+
+</style>
+
+
+<jsp:include page="/template/header.jsp"></jsp:include>
+<div class="row text-center">
+<h2 id="review-title">후기 목록페이지</h2>
+</div>
+
+
+
 <div class="contaier-600">
 	<div class="row text-right">
 		<%if(request.getSession().getAttribute("memberNo")!=null){ %>
-		<a href="reviewWrite.jsp" class="link-btn">후기 작성하러 가기</a>
+			<a href="reviewWrite.jsp" class="link-btn">후기 작성하러 가기</a>
 		<%} %>
 	</div>
-
+	
+	<button class="linkbtn">버튼</button>
+	
 	<%for(ReviewListDto reDto : reviewList){ %>
 	<div class="" id="review-box">
+		<div class="row">
+			<h4><%=reDto.getReviewNo() %></h4>
+		</div>
 		<div class="row">
 			<label>닉네임</label>
 			<h4><%= reDto.getMemberNick()%></h4>
@@ -51,10 +80,13 @@
 			<label>내용</label>
 			<h4><%= reDto.getReviewContent() %></h4>
 		</div>
+		<!-- 조건절 : 비회원이 아닌 상태일 때(세션에 값이 있을 때) && 작성자와 세션 번호(로그인한 사람)이 일치할 떼 -->
+		<%if(request.getSession().getAttribute("memberNo") != null && reDto.getReviewNick() == (int) request.getSession().getAttribute("memberNo")) {%>
 		<div class="row">
-			<!-- 작성한 사람이 로그인한 사람하고 동일하면 삭제 버튼 보여주기 (if) -->
-			<a class="link-btn" href="#">삭제</a> <!-- href : 삭제할 때는 후기 작성자 번호가 필요   -->
+			<a class="link-btn" href="<%=request.getContextPath()%>/review/reviewUpdate.jsp?reviewNo=<%=reDto.getReviewNo()%>">수정</a>
+			<a class="link-btn" href="<%=request.getContextPath()%>/review/reviewDelete.kh?reviewNo=<%=reDto.getReviewNo()%>">삭제</a> <!-- href : 삭제할 때는 후기 작성자 번호가 필요   -->
 		</div>
+		<%}%>
 	</div>
 	<%} %>
 </div>

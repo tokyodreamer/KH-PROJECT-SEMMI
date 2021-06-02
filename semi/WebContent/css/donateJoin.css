@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+.donate-container {
+	width: 600px;
+}
+
+.donate-input {
+	width: 30%;
+	padding: 1rem;
+	outline: none;
+}
+
+.donate-input.donate-input-underline {
+	border: none;
+	font-size: 20px;
+	font-weight:bold;
+}
+
+.donate-input.donate-input-underline:focus {
+	border-bottom: 3px solid black;
+	border-bottom-color: black;
+}
+
+.donate-input.donate-input-inline {
+	width: auto;
+}
+
+/* 후원 보유 포인트 (완료) */
+.donate-checkPoint{
+	display:none;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* 후원 라벨 (완료) */
+.donate-label {
+	font-size: 25px;
+	font-weight:bold;
+}
+
+/* 후원 안내 (완료)*/
+.donate-span {
+	font-size: 20px;
+	font-weight: bold;
+}
+/* 후원 에러 메세지 (완료) : */
+.fail-message-01 {
+	display: none;
+	color: red;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.fail-message-02 {
+	display: none;
+	color: red;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* 후원 성공 메세지 (완료) : */
+.success-message {
+	display: none;
+	color: green;
+	font-size: 20px;
+	font-weight: bold;
+}
+/* 후원하기 버튼 (완료)*/
+.donate-btn {
+	margin-top: 20px;
+	width: 30%;
+	border: none;
+	background-color: black;
+	color: white;
+	height: 50px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* 후원하기 버튼 : HOVER (완료)*/
+.donate-btn:hover {
+	background-color: rgb(46, 163, 79);
+	color: white;
+}
+
+/* 목록 버튼 (완료) */
+.donate-btn.donate-btn-list {
+	margin-left: 10%;
+	width: 30%;
+	background-color: white;
+	color: black;
+	border: 1px solid black;
+	height: 50px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* 목록 버튼 : HOVER (완료) */
+.donate-btn.donate-btn-list:hover {
+	background-color: lightgrey;
+}
