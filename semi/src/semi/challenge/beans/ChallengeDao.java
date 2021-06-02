@@ -322,23 +322,6 @@ public class ChallengeDao {
 	}
 
 	
-	/* 정산 처리 메소드 : 스케쥴러 */
-	
-	// 1. 달성률에 따라 정산 작업을 다르게 한다 (달성률 조회)
-	
-	public boolean challengeResult() throws Exception {
-		Connection con = JDBCUtils.getConnection();
-		
-		// ↓달성률 0 ~50% 이면서 도전 기한이 만료된 도전글은 정산되지 않은 형태로 적용되는 상태
-		String sql = "UPDATE CHALLENGE SET CHALLENGE_RESULT = 'Y' WHERE SYSDATE >= CHALLENGE_ENDDATE AND CHALLENGE_RESULT = 'N'";
-		PreparedStatement ps = con.prepareStatement(sql);
-		int count = ps.executeUpdate();
-		
-		con.close();
-		
-		return count > 0;
-	}
-	
 	//조회수 증가 기능 : 특정 번호의 게시글을 작성자가 아닌 사람이 읽을 경우에만 증가되도록 구현(05/31, 작성자 : 박 민웅)
 		public boolean read(int challengeNo, int memberNo) throws Exception{
 			Connection con = JDBCUtils.getConnection();
@@ -355,4 +338,63 @@ public class ChallengeDao {
 			return count > 0;
 		}
 	
+	/*정산 작업 */
+	
+	// 0. 정산 작업물이 있는 지 확인
+		public boolean checkResult() throws Exception {
+			Connection con = JDBCUtils.getConnection();
+			
+			String sql = "select count(*) from challenge where sysdate >= challenge_endDate and challenge_result = 'N'";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			boolean check = false;
+			
+			if(rs.next()) {
+				check = true;
+			}
+			
+			con.close();
+			
+			return check;
+		}
+	
+	// 1. 도전 정산 작업 
+		public boolean changeChallenge() throws Exception {
+			Connection con = JDBCUtils.getConnection();
+			
+			String sql = "merge into member M using complete_challenge C on (C.challenge_writer = M.member_no) "
+					+ "when matched then update set M.member_point = M.member_point + C.challenge_calc_total";
+			PreparedStatement ps = con.prepareStatement(sql);
+			int count = ps.executeUpdate();
+			
+			con.close();
+			return count > 0;
+		}
+		
+	// 2. 후원 정산 작업
+		public boolean changeDonate() throws Exception {
+			Connection con = JDBCUtils.getConnection();
+			
+			String sql = "merge into member M using complete_donate d on (d.member_no = M.member_no) "
+					+ "when matched then update set M.member_point = M.member_point + d.donate_calc_total";
+			PreparedStatement ps = con.prepareStatement(sql);
+			int count = ps.executeUpdate();
+			
+			con.close();
+			return count > 0;
+		}
+		
+	// 3. 해당 기한 만료 도전글에 대하여 정산 결과 변경 (완료)
+		public boolean changeResult() throws Exception {
+			Connection con = JDBCUtils.getConnection();
+			
+			String sql = "update challenge set challenge_result = 'Y' where sysdate >= challenge_endDate and challenge_result = 'N'";
+			PreparedStatement ps = con.prepareStatement(sql);
+			int count = ps.executeUpdate();
+			
+			con.close();
+			return count > 0;
+		}
+		
 }

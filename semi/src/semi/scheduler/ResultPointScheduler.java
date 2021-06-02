@@ -23,7 +23,23 @@ public class ResultPointScheduler extends HttpServlet{
 					
 					ChallengeDao challengeDao = new ChallengeDao();
 					
-					// 1. 달성률에 따라 정산 작업을 다르게 한다 (달성률 조회)
+					// SQL 실행 : 총 3회
+					
+					// 0. 조건 - 정산 작업이 이루어지지 않은 파일이 존재한다면 | 존재하지 않는다면 스케줄러 종료
+					//boolean result = challengeDao.checkResult();
+					
+					//if(result == true) {
+						// 1. 도전글 정산 실행 (생성한 뷰 : COMPLETE_CHALLENGE 활용)
+						challengeDao.changeChallenge();
+						
+						// 2. 후원글 정산 실행 (생성한 뷰 : COMPLETE_DONATE 활용)
+						challengeDao.changeDonate();
+						
+						// 3. 해당 기한 만료 도전글에 대하여 정산 결과 변경
+						challengeDao.changeResult();
+					//} else {
+						System.out.println("정산 작업 종료");
+					//}
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +53,7 @@ public class ResultPointScheduler extends HttpServlet{
 	
 	@Override
 	public void destroy() {
-		System.out.println("정산 작업 종료");	
+		
 	}
 	
 }
