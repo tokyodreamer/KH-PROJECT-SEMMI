@@ -32,8 +32,6 @@ font-size: 30px;
 
 		<form action="reviewWrite.kh" method="post">
 
-			<label>별점</label> 
-			<select name="reviewStar" id="star">
 			<label class="title">도전은 어떠셨나요</label> 
 			<br><br>
 			<select name="reviewStar" id="star" class="score">
@@ -46,7 +44,6 @@ font-size: 30px;
 
 			</select> <br>
 			<br>
-			<br> <input type="submit" value="등록하기">
 			<label class="title"> 소감을 남겨주세요</label>
 			<br><br>
 			<textarea name="reviewContent" class="form-input"></textarea>
@@ -54,10 +51,10 @@ font-size: 30px;
 			<br><br>
 			<br> <input type="submit" value="등록하기" class="link-btn loginlogout ">
 		
->>>>>>> branch 'main' of https://github.com/tokyodreamer/kh7semi_dummy.git
 		</form>
 	</div>
 
 </div>
+
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
