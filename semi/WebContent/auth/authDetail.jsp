@@ -61,19 +61,24 @@ ChallengeDao challengeDao = new ChallengeDao();
 	<form action="resultChange.kh" method="post">
 	<div class="row"> 인증 처리 여부:  <%=authListDto.getAuthResult()%>
 		<input type="hidden" value=<%=authNo %> name=authNo>
+		
 		<label style="color:blue"> <input value="S" type="radio" name="authResult" required>인증 인정O: </label>
 		<label style="color:red"> <input value="D" type="radio" name="authResult" required> 인증 불인정X: </label> <br>
+
 	</div>
 	<div class="row">
 	인증 처리 사유: 
+
 	<input type="text" name="authReason" value="<%=authListDto.getAuthReason()%>" style="width:100%;" class="form-input" required >
 	<input type="submit" value="인증 처리 여뷰 + 이유 저장" class="form-btn ">
+	
 	</div>
 	</form>
 	
-	<a href="authList.jsp" class="link-btn">수정</a>
-	<a href="authList.jsp" class="link-btn delete-btn">삭제</a>
-	<a href="authList.jsp" class="link-btn">목록</a>
-	
+	<div class = "row">
+	<a href="authList.jsp" class="ex-btn">수정</a>
+	<a href="authList.jsp" class="ex-btn">삭제</a>
+	<a href="authList.jsp" class="ex-btn">목록</a>
+	</div>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
