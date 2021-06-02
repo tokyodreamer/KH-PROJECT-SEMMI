@@ -142,6 +142,11 @@
 	margin: 4px;
 	cursor: pointer;
 	}
+	
+	.write-btn:hover {
+		background-color: rgb(46, 163, 79);
+		color: white;
+	}
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -211,6 +216,8 @@
 					</tr>
 			</thead>
 			
+			<tbody>
+					<!-- 정산 결과 처리 여부로 제어문 추가 요청 : 정 계진 -->
 			<tbody class = "text-center table-head">
 					<%for(ChallengeListDto challengeListDto : challengeList){ %>
 					<tr>

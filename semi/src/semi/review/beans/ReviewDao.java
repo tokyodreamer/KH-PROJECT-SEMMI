@@ -1,6 +1,8 @@
 package semi.review.beans;
 
 import java.sql.Connection;
+
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,7 +11,6 @@ import java.util.List;
 import semi.beans.JDBCUtils;
 
 public class ReviewDao {
-
 	public List<ReviewDto> list() throws Exception {
 		Connection con = JDBCUtils.getConnection();
 

@@ -11,11 +11,17 @@ import semi.beans.JDBCUtils;
 public class AuthListDao {
 	
 	//member 테이블과 조인 후 목록 출력 구문
-	public List<AuthListDto> list()	throws Exception{
+	public List<AuthListDto> list(int startRow, int endRow)	throws Exception{
 			Connection con = JDBCUtils.getConnection();
 			
-			String sql = "select * from auth_list order by auth_no desc";
+			String sql = "select * from("
+									+ "select rownum rn, TMP.* from ("
+											+ "select * from auth_list order by auth_no desc"
+									+ ") TMP"
+								+ ") where rn between ? and ?";
 			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, startRow);
+			ps.setInt(2, endRow);
 			ResultSet rs = ps.executeQuery();
 			
 			List<AuthListDto> authList = new ArrayList<>();
@@ -41,7 +47,7 @@ public class AuthListDao {
 			con.close();
 			return authList;
 	}
-	
+
 	//단일 조회(준비물 인증글번호 authNo)
 	public AuthListDto get(int authNo) throws Exception {
 
@@ -75,4 +81,20 @@ public class AuthListDao {
 		return authListDto;
 
 	}
+	
+	// 페이지블럭 계산을 위한 카운트 기능(목록/검색)
+		public int getCount() throws Exception {
+			Connection con = JDBCUtils.getConnection();
+
+			String sql = "select count(*) from auth_list";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+
+			int count = rs.getInt(1);
+
+			con.close();
+
+			return count;
+		}
 }

@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="semi.auth.beans.AuthDao"%>
 <%@page import="semi.challenge.beans.ChallengeDao"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
@@ -5,8 +7,7 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.util.TimeZone"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.time.format.DateTimeFormatter"%>
-<%@page import="java.time.LocalDateTime"%>
+
 <%@page import="semi.challenge.beans.ChallengeListDto"%>
 <%@page import="semi.challenge.beans.ChallengeListDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -19,7 +20,7 @@
 	ChallengeDao challengeDao = new ChallengeDao();
 	
 	int memberNo = (int)session.getAttribute("memberNo");
-	Set<Integer> challengeNoSet;
+	/* Set<Integer> challengeNoSet;
 	if(session.getAttribute("challengeNoSet") != null){
 		challengeNoSet = (Set<Integer>)session.getAttribute("challengeNoSet");
 	}
@@ -35,7 +36,7 @@
 	System.out.println("저장소 : "+challengeNoSet);
 	
 	//저장소 갱신
-	session.setAttribute("challengeNoSet", challengeNoSet);
+	session.setAttribute("challengeNoSet", challengeNoSet); */
 	
 	ChallengeListDto challengeListDto = challengeListDao.getChallenge(challengeNo);
 	
@@ -91,63 +92,114 @@
 				hh = 24;
 			}
 			
-			$("#timeLimit").text("종료까지 " + dd + " 일 " + hh + " 시간 " + mm + " 분 " + "남았습니다");
+			$("#timeLimit").text("종료까지 " + dd + " 일 " + hh + " 시간 " + mm + " 분 ");
 			ss--;
 		}; 
 		
 	});
 </script>
+<style>
+.title{
+font-size: 40px;
+font-weight: bold;
+text-align: center;
+margin-left: -5%;
+
+}
+.content{
+margin-left: auto;
+margin-right: auto;
+min-height:100px;
+font-size:23px;
+width:90%;
+border: 2px dashed black;
+padding:2rem;
+margin-top: 20px;
+border-radius: .7em;
+}
+.title-content{
+margin:none;
+width:55%;
+display:inline-block;
+}
+.description{
+margin-top: 40px;
+margin-right:18%;
+float: right;
+height:200px;
+width:25%;
+display: inline-block;
+border: 1px solid black;
+font-size: 30px;
+padding: .5rem;
+border-radius: 1em;
+}
+.description  li{
+list-style: armenian;
+}
+.leftTime >li {
+}
+.authList{
+width:70%;
+}
+</style>
 <jsp:include page="/template/header.jsp"></jsp:include>
-<div class="container-900">
-	<div class="row">
-		<h2>도전글 상세보기</h2>
+<div class="container-1500">
+	<div class="title-content"> 
+	
+	<div class="title"> <%=challengeListDto.getChallengeTitle() %>
+	<span style="font-family:cursive; font-size: 20px; position: relative; left:50px;"> by. <%=challengeListDto.getMemberNick()%> </span>
 	</div>
-	<div class="row">
-		<label>도전글 번호</label>
-		<h2><%=challengeListDto.getChallengeNo() %></h2>
-	</div>
-	<div class="row text-left">
-		<label>도전글 제목</label>
-		<h2><%=challengeListDto.getChallengeTitle() %></h2>
-	</div>
-	<div class="row text-left">
-		<label>도전글 작성자</label>
-		<h2><%=challengeListDto.getMemberNick()%></h2>
-	</div>
-	<div class="row text-left">
-		<label>참가비</label>
-		<h2><%=challengeListDto.getChallengePushPoint() %> 포인트</h2>
-	</div>
-	<div class="row text-left">
-		<label>시작일</label>
-		<h2><%=challengeListDto.getChallengeStartDate().substring(0,10) %></h2>
-	</div>
-	<div class="row text-left">
-		<label>종료일</label>
-		<h2><%=challengeListDto.getChallengeEndDate().substring(0,10) %></h2>
-	</div>
-	<!-- 타임 리미트 : 로직 구현 예정 -->
-	<!-- 실시간 계산 예정 :  -->
-	<div class="row text-left">
-		<label>도전글 기한</label><br>
+	<div class=" content"> <%=challengeListDto.getChallengeContent() %></div>
+</div>
+
+
+<div class="description">
+<ul>
+<div class="percent"><li> <span style=" font-size:22px; font-weight:bold;">현재 달성률:&nbsp&nbsp </span> <%=challengeListDto.getChallengePercent() %> %</li></div>
+<div class="duration"> <li> <span style="font-size:22px; font-weight:bold;">도전 기간:&nbsp&nbsp</span><%=challengeListDto.getChallengeStartDate().substring(5,10) %>
+~ <%=challengeListDto.getChallengeEndDate().substring(5,10) %> </li>
+<%-- <div class="totalPoint"><li> <span style="font-size:22px; font-weight:bold;"> 누적 후원금: </span> <%=challengeListDto.getChallengeDonate() %> Point</li> </div> --%>
+
+<div class="leftTime"> <li>
 		<%if(currentTimeSec > endTimeSec) {%>
-		<h2>도전기한 만료</h2>
+		<span style="font-size:22px; font-weight:bold;">도전기한 만료됨 </span>
 		<%} else { %>
-		<div id="timeLimit" class="row"></div>
-		<%} %>
+		<span id="timeLimit" style="font-size:22px; font-weight: bold; "></span>
+		<%} %> </li>
+</div>
+</ul>
+</div>
+
+<%-- <% --%>
+// AuthDao authDao = new AuthDao();
+// List authNoList = authDao.getNoByChallengeNo(challengeNo);
+<%-- %> --%>
+	<div >
+	<table class="table table-border authlist">
+		<thead>
+		<tr>
+			<th colspan="2"> 인증1</th>
+				
+		</tr>
+		</thead>
+		
+		<tbody>
+<%-- 		<%for (int i=0; i<authNoList.size(); i++) {%> --%>
+			<tr>
+<%-- 				<td> <img src="authDetail.kh?authNo=<%=authNoList.get(i)%>" width="100%" height="400"></td> --%>
+				<td> 제목, 날짜</td>
+				<td> 내용</td>
+				<td> 결과, 이유</td>
+			</tr>
+<%-- 			<%} %> --%>
+		</tbody>
+	
+	</table>
+	
 	</div>
-	<div class="row text-left">
-		<label>상금</label>
-		<h2><%=challengeListDto.getChallengeReward() %> 포인트</h2>
-	</div>
-	<div class="row tex-left">
-		<label>누적 후원금</label>
-		<h2><%=challengeListDto.getChallengeDonate() %> 포인트</h2>
-	</div>
-	<div class="row text-left">
-		<label>도전글 내용</label>
-		<h2><%=challengeListDto.getChallengeContent() %></h2>
-	</div>
+	
+	
 	<div class="row text-left">
 		<!-- 도전 기한이 남았을 때 && 도전글 작성자가 자신의 도전글 페이지에 있을 때 인증하기 버튼 출력 -->
 		<%if(currentTimeSec < endTimeSec && challengeListDto.getMemberNo() == (int) request.getSession().getAttribute("memberNo")) {%>
@@ -162,5 +214,6 @@
 		<!-- 도전 기한이 만료되었다면 몰고 리스트만 출력 -->
 		<a href="challengeList.jsp" class="ex-btn">목록</a>
 	</div>
+	
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
