@@ -114,7 +114,8 @@
 		<br>
 		<div class="row text-left">
 			<label for="pushPoint" class="join-label">참가비</label><br><br>
-			<span class="join-span">포인트 : </span><input type="number" class="join-point join-point-underline" name="challengePushPoint" id="pushPoint"  required>
+			<span class="join-span">보유 포인트 : <%=checkMemberPoint %></span><br><br>
+			<span class="join-span">참가비 : </span><input type="number" class="join-point join-point-underline" name="challengePushPoint" id="pushPoint"  required>
 			<br>
 			<span class="fail-message fail-message-01">참가비는 10000 포인트 부터 가능합니다</span>
 			<span class="fail-message fail-message-02">등록할 수 있는 참가비는 <%=checkMemberPoint%> 포인트 입니다</span>
