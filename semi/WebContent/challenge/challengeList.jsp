@@ -142,6 +142,11 @@
 	margin: 4px;
 	cursor: pointer;
 	}
+	
+	.write-btn:hover {
+		background-color: rgb(46, 163, 79);
+		color: white;
+	}
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

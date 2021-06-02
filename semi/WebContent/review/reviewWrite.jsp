@@ -17,6 +17,20 @@ background-color: black;
 color:white;
 font-size: 20px;
 }
+.link-btn.cancle{
+	display: inline-block;
+	padding: 0.75rem;
+	padding-left: 4rem;
+	padding-right:4rem;
+	border: 2px solid black ;
+	text-decoration: none;
+	border-radius: 1.5rem;
+	margin-left:25px;
+	margin-right:25px;
+	background-color: white;
+	color:black;
+	font-size: 20px;
+}
 .container-600{
 text-align: center;
 }
@@ -45,11 +59,15 @@ font-size: 30px;
 			<br>
 			<label class="title"> 소감을 남겨주세요</label>
 			<br><br>
-			<textarea name="reviewContent" class="form-input"></textarea>
+			<div class="row">
+				<label class="title"> 소감을 남겨주세요</label>
+				<br><br>
+				<textarea name="reviewContent" class="form-input"></textarea>
+			</div>
 
 			<br><br>
 			<br> <input type="submit" value="등록하기" class="link-btn loginlogout ">
-		
+						<a href="reviewList.jsp" class="link-btn cancle">취소하기</a>
 		</form>
 	</div>
 

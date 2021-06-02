@@ -20,23 +20,23 @@
 	
 	</style>
 	
-		<div class="container-400">
+		<div class="container-500">
 	
 			<div class="row">
-				<div class="login_title">비밀번호 변경</div>
+				<div class="login_title">비밀번호 찾기</div>
 			</div>
 			
-			<form action="editPw.kh" method="post">
+			<form action="findPw.kh" method="post">
 				<div class="row">
-					<input type="password" name="nowPw" placeholder="현재 비밀번호" required
+					<input type="text" name="id" placeholder="아이디" required
 							class="form-input form-input-underline">
 				</div>
 				<div class="row">
-					<input type="password" name="newPw" placeholder="변경할 비밀번호" required
+					<input type="text" name="nick" placeholder="닉네임" required
 							class="form-input form-input-underline">
 				</div>
 				<div class="row">
-					<input type="submit" value="변경하기" class="form-btn edit_btn">
+					<input type="submit" value="비밀번호 찾기" class="form-btn edit_btn">
 				</div>
 				
 				<!-- 오류인 상황에는 오류 메세지를 추가해준다 -->
