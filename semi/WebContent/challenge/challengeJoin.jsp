@@ -7,141 +7,7 @@
  	int checkMemberPoint = memberDao.find((int) request.getSession().getAttribute("memberNo")).getMemberPoint();
  %>
 <jsp:include page="/template/header.jsp"></jsp:include>
-<style>
-	/* 참가비 실패 메세지 (완료) */
-	.fail-message {
-		display: none;
-		color: red;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	
-	.fail-message.fail-message-01 {
-		display: none;
-		color: red;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	
-	.fail-message.fail-message-02 {
-		display: none;
-		color: red;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	
-	.fail-message.fail-message-03 {
-		display: none;
-		color: red;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	
-	/* 참가비 성공 메세지 (완료)  */
-	.success-message {
-		display: none;
-		color: green;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	
-	/*도전하기 입력 칸 (완료)*/
-	.join-input {
-		width: 100%;
-		padding: 1rem;
-		outline: none;
-	}
-
-	.join-input.join-input-underline {
-		border: none;
-		font-size: 20px;
-		font-weight:bold;
-	}
-	
-	.join-input.join-input-underline:focus {
-		border-bottom: 3px solid black;
-		border-bottom-color: black;
-	}
-	
-	/*참가비 입력 칸 (완료) */
-	.join-point {
-		width: 70%;
-		padding: 1rem;
-		outline: none;
-	}
-
-	.join-point.join-point-underline {
-		border: none;
-		font-size: 20px;
-		font-weight:bold;
-	}
-	
-	.join-point.join-point-underline:focus {
-		border-bottom: 3px solid black;
-		border-bottom-color: black;
-	}
-	.join-input.join-input-inline {
-		width: auto;
-	}
-	
-	/* 참가비 안내 칸 (완료)*/
-	.join-span {
-		font-size: 20px;
-		font-weight: bold;
-	}
-	
-	/* 도전하기 내용 */
-	.join-textarea {
-		resize:none;
-		border: none;
-		border-bottom: 3px solid black;
-		border-bottom-color: black;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	
-	/* 도전하기 라벨 (완료) */
-	.join-label {
-		font-size: 25px;
-		font-weight:bold;
-	}
-		
-	/* 도전하기 버튼 (완료)*/
-	.join-btn {
-		margin-top: 20px;
-		margin-left:15%;
-		width: 30%;
-		border: none;
-		background-color: black;
-		color: white;
-		height: 50px;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	
-	/* 도전하기 버튼 : HOVER (완료)*/
-	.join-btn:hover {
-		background-color: rgb(46, 163, 79);
-		color: white;
-	}
-	
-	/* 목록 버튼 (완료) */
-	.join-btn.join-btn-list {
-		margin-left: 10%;
-		width: 30%;
-		background-color: white;
-		color: black;
-		border: 1px solid black;
-		height: 50px;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	
-	/* 목록 버튼 : HOVER (완료) */
-	.join-btn.join-btn-list:hover {
-		background-color: lightgrey;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/challengeJoin.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -155,22 +21,13 @@
 		// 시작일 : 현재 날짜에서 일주일 이내만 선택 가능 (완료)
 		$("#startDate").attr('max', new Date(Date.parse(new Date()) + 7 * 1000 * 60 * 60 * 24).toISOString().substring(0, 10));
 		
-		// 종료일 : 
-		$("#endDate").on("focus", function(){
-			// 제어 : 시작일이 입력되어 있지 않다면 메세지 출력 (완료)
-			if($("#startDate").val() == ""){
-				$(this).nextAll(".fail-message-04").show();
-				$("#startDate").focus();
-			} else {
-				$(this).nextAll(".fail-message-04").hide();
-			}
+		// 종료일 : 현재 날짜보다 날짜보다 하루 지난 날짜를 기준 (완료)
+		var now = new Date();
 			
-			// 종료일 : 시작일을 기준으로 지난 날짜는 비활성화 (완료)
-			$("#endDate").attr('min', $("#startDate").val());
-			
-			// 종료일 : 시작일을 기준으로 100일까지 선택 가능 (완료) : 회의 필요!
-			$("#endDate").attr('max', new Date(Date.parse($("#startDate").val()) + 100 * 1000 * 60 * 60 * 24).toISOString().substring(0, 10));
-		});
+		$("#endDate").attr('min', new Date(now.setDate(now.getDate() + 1)).toISOString().substring(0, 10));
+		
+		// 종료일 : 100일까지 선택 가능 (완료)
+		$("#endDate").attr('max', new Date(now.setDate(now.getDate() + 1) + 100 * 1000 * 60 * 60 * 24).toISOString().substring(0, 10));
 		
 		// 참가비 : 
 		$("#pushPoint").on("blur", function(){
@@ -208,8 +65,11 @@
 		
 		// 서블릿으로 넘어가기 전에 검사 (완료)
 		$(".join-form").submit(function(e){
-				// 종료일이 시작일보다 빠르면 서블릿 전송 취소 (완료)
-				if(new Date($("#endDate").val()) < new Date($("#startDate").val())) {
+				// 현재 날짜
+				var now = new Date();
+				
+				// 종료일이 현재 날짜보다 빠르거나 같으면 서블릿 전송 취소 (완료)
+				if($("#startDate").val() >= $("#endDate").val()) {
 					window.alert("참가종료 날짜를 다시 선택해 주세요");
 					e.preventDefault();
 					$("#endDate").focus();
@@ -227,7 +87,7 @@
 		
 	});
 </script>
-<div class="container-600">
+<div class="join-container">
 	<div class="row">
 		<h2>도전글 작성 게시판 (임시 템플릿)</h2>
 	</div>
@@ -269,7 +129,7 @@
 		<br>
 		<div class="row text-left">
 			<label for="content" class="join-label">도전글 내용</label><br><br>
-			<textarea name="challengeContent"  rows="7"  cols="100%"  id="content" class="join-textarea" required></textarea>
+			<textarea name="challengeContent"  rows="7"  cols="60%"  id="content" class="join-textarea" required></textarea>
 		</div>
 		<br>
 		<div class="row">
