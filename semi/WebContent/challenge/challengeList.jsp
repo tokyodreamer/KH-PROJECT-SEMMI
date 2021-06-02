@@ -211,6 +211,8 @@
 					</tr>
 			</thead>
 			
+			<tbody>
+					<!-- 정산 결과 처리 여부로 제어문 추가 요청 : 정 계진 -->
 			<tbody class = "text-center table-head">
 					<%for(ChallengeListDto challengeListDto : challengeList){ %>
 					<tr>
