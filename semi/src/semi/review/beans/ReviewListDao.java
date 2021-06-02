@@ -34,4 +34,40 @@ public class ReviewListDao {
 		}
 		return reviewList;
 	}
+	
+	//후기게시판(목록에서) 상세보기 조회
+	public ReviewListDto findReview(int reviewNick)  throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select * from review_list where review_no = ?";
+		PreparedStatement ps=con.prepareStatement(sql);
+		ps.setInt(1, reviewNick);
+		ResultSet rs = ps.executeQuery();
+		
+		ReviewListDto reviewListDto;
+		if(rs.next()) {
+			reviewListDto = new ReviewListDto();
+			
+			reviewListDto.setReviewNo(rs.getInt("review_no"));
+			reviewListDto.setReviewNick(rs.getInt("review_nick"));
+			reviewListDto.setReviewContent(rs.getString("review_content"));
+			reviewListDto.setReviewTime(rs.getDate("review_time"));
+			reviewListDto.setReviewStar(rs.getInt("review_star"));
+			reviewListDto.setMemberNick(rs.getString("member_nick"));
+			
+		}
+		else {
+			reviewListDto=null;
+		}
+		
+		con.close();
+		
+		return reviewListDto;
+	}
+	
+	
+	
+	
+	
+	
 }

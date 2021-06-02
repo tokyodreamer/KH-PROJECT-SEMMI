@@ -10,7 +10,7 @@
 	// - 세션에 memberNo 가 null 이 아니면 로그인 상태로 간주
 	// - 세션에 memberNo 가 null 이면 로그아웃 상태로 간주
 	Integer memberNo = (Integer) session.getAttribute("memberNo");
-	boolean isLogin = memberNo != null; 
+	boolean isLogin = memberNo != null ; 
 %>
 <!DOCTYPE html>
 <html>
@@ -23,19 +23,20 @@
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/common.css">
 	<style type="text/css">
 	</style>
+
 </head>
 <body>
 	<main>
 		<header class="float-container " style="padding:1.4rem;">
 		<div class="left" >
-		<a class="link-btn" style="font-size: 43px;  "><span style="font-weight: bold">SEMI</span> Project </a>
+		<a href="<%=root%> "class="link-btn" style="font-size: 43px; text-decoration: none; color:black"><span style="font-weight: bold">SEMI</span> Project </a>
 		</div>
 			<div class="right" >
 				<%if(isLogin) { %>
 				<a href="<%=root%>/member/memberLogout.kh" class="link-btn loginlogout" style="font-size: 20px; background-color:black; color: white">로그아웃</a>
 				<%} else { %>
 					<a href="<%=root%>/member/memberJoin.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:white; color: black">회원가입</a>
-					<a href="<%=root%>/member/memberLogin.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:black; color:white;">&nbsp로그인&nbsp</a>
+					<a href="<%=root%>/member/memberLogin.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:black; color:white;">&nbsp;로그인&nbsp;</a>
 				<%} %>
 			
 			</div>
@@ -60,12 +61,9 @@
 					<li><a href="#">챌린저스이용하기</a>
 					<ul>
 						<li><a href="<%=root%>/intro/intro.jsp">챌린저스란?</a></li>
-						<li><a href="<%=root%>/intro/intro.jsp">도전글 목록</a></li>
+						<li><a href="<%=root%>/challenge/challengeList.jsp">도전글 목록</a></li>
 						<li><a href="<%=root%>/item/itemList.jsp">인증글 목록</a></li>
 					</ul></li>
-					
-					
-			
 					
 				<li><a href="#">리뷰</a>
 					<ul>

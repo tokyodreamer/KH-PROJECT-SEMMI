@@ -22,7 +22,7 @@ public class AuthInsertServlet extends HttpServlet{
 		try {
 //			1. 라이브러리를 이용해서 multipart/form-data 방식의 요청을 해석
 //			= 파일 저장할 위치 및 기본설정을 정한다.
-			String path = "C:\\Users\\administer\\Desktop\\dev\\semi";//해당 위치에 폴더 생성!!
+			String path = "D:/auth";//해당 위치에 폴더 생성!!
 			int maximumSize = 10 * 1024 * 1024;
 			String encoding = "UTF-8";
 			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
@@ -58,7 +58,7 @@ public class AuthInsertServlet extends HttpServlet{
 			authDao.insert(authDto);
 			
 			//출력
-			resp.sendRedirect("authInsertComplete.jsp");
+			resp.sendRedirect("authDetail.jsp?authNo="+authNo);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
