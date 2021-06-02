@@ -41,8 +41,7 @@ font-size: 30px;
 				<option value="2">★★☆☆☆</option>
 				<option value="1">★☆☆☆☆</option>
 				<option value="0">☆☆☆☆☆</option>
-
-			</select> <br>
+			</select><br>
 			<br>
 			<label class="title"> 소감을 남겨주세요</label>
 			<br><br>
