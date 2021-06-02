@@ -10,6 +10,65 @@
     	padding-right: 5%
 	} 
 	
+	/* 폼 태그 (완료) */
+	.join-form {
+		margin-top: 50px;
+    	margin-bottom: 50px;
+	}
+	
+	/* 도전하기 라벨 (완료) */
+	.join-label {
+		font-size: 25px;
+		font-weight:bold;
+	}
+	
+	/*도전하기 입력 칸 (완료)*/
+	.join-input {
+		width: 100%;
+		padding: 1rem;
+		outline: none;
+		margin-top: 10px;
+	}
+
+	.join-input.join-input-underline {
+		border: none;
+		font-size: 20px;
+		font-weight:bold;
+	}
+	
+	.join-input.join-input-underline:focus {
+		border-bottom: 3px solid black;
+		border-bottom-color: black;
+	}
+	
+	/* 유형 셀렉트 박스 (완료) */
+	.join-selectbox {
+		border: none;
+		box-sizing: border-box;
+    	font-size: 20px;
+   		font-weight: bold;
+    	margin-top: 30px;
+    	margin-bottom: 10px;
+	}
+	
+	/* 시작일 */
+	.join-startdate {
+		border: none;
+   	 	margin-top: 30px;
+    	font-size: 20px;
+    	font-weight: bold;
+    	margin-bottom: 10px;
+	}
+	
+	/* 종료일 */
+	.join-enddate {
+		border: none;
+   	 	margin-top: 30px;
+    	font-size: 20px;
+    	font-weight: bold;
+    	margin-bottom: 10px;
+	}
+	
 	/* 참가비 실패 메세지 (완료) */
 	.fail-message {
 		display: none;
@@ -47,23 +106,6 @@
 		font-weight: bold;
 	}
 	
-	/*도전하기 입력 칸 (완료)*/
-	.join-input {
-		width: 100%;
-		padding: 1rem;
-		outline: none;
-	}
-
-	.join-input.join-input-underline {
-		border: none;
-		font-size: 20px;
-		font-weight:bold;
-	}
-	
-	.join-input.join-input-underline:focus {
-		border-bottom: 3px solid black;
-		border-bottom-color: black;
-	}
 	
 	/*참가비 입력 칸 (완료) */
 	.join-point {
@@ -82,6 +124,7 @@
 		border-bottom: 3px solid black;
 		border-bottom-color: black;
 	}
+	
 	.join-input.join-input-inline {
 		width: auto;
 	}
@@ -102,11 +145,6 @@
 		font-weight: bold;
 	}
 	
-	/* 도전하기 라벨 (완료) */
-	.join-label {
-		font-size: 25px;
-		font-weight:bold;
-	}
 		
 	/* 도전하기 버튼 (완료)*/
 	.join-btn {

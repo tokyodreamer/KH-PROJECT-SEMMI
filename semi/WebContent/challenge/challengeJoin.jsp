@@ -70,14 +70,12 @@
 				
 				// 종료일이 현재 날짜보다 빠르거나 같으면 서블릿 전송 취소 (완료)
 				if($("#startDate").val() >= $("#endDate").val()) {
-					window.alert("참가종료 날짜를 다시 선택해 주세요");
+					window.alert("참가종료 날짜는 시작일 이후로 선택 가능합니다");
 					e.preventDefault();
 					$("#endDate").focus();
 				}
 				
 		});
-		
-		// Q : 시작일 외에 다른 항목을 입력하거나 커서를 이동한 상태에서도 종료일은 계속 시작일을 향하고 있어야 하는데 ? (미처리)
 		
 		// 목록 페이지 이동 (완료)
 		$("#list").click(function(e){
@@ -88,9 +86,6 @@
 	});
 </script>
 <div class="join-container">
-	<div class="row">
-		<h2>도전글 작성 게시판 (임시 템플릿)</h2>
-	</div>
 	<form action="challengeJoin.kh" method="post" class="join-form">
 		<div class="row text-left">
 			<label for="title" class="join-label">제목</label><br><br>
@@ -99,7 +94,7 @@
 		<br>
 		<div class="row ">
 			<label for="category" class="join-label">유형</label><br><br>
-			<select id="category" name="categoryNo" required>
+			<select id="category" name="categoryNo" class="join-selectbox"  required>
 				<option selected>유형 선택</option>
 				<option value="1">운동</option>
 				<option value="2">공부</option>
@@ -108,12 +103,12 @@
 		<br>
 		<div class="row text-left">
 			<label for="startDate" class="join-label">시작일</label><br><br>
-			<input type="date" class="form-input" name="challengeStartDate" id="startDate"  required>
+			<input type="date" class="join-startdate" name="challengeStartDate" id="startDate"  required>
 		</div>
 		<br>
 		<div class="row text-left">
 			<label for="endDate" class="join-label">종료일</label><br><br>
-			<input type="date" class="form-input" name="challengeEndDate" id="endDate" required>
+			<input type="date" class="join-enddate" name="challengeEndDate" id="endDate" required>
 			<span class="fail-message">시작일을 먼저 입력해 주세요</span>
 		</div>
 		<br>
