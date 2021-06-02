@@ -27,7 +27,11 @@
 		</div>
 		<div class="row">
 			<label>닉네임</label>
-			<h4><%= reDto.getMemberNick()%></h4>
+			<%if(reDto.getMemberNick() == null) {%>
+				<h4>탈퇴 회원</h4>
+			<%} else { %>
+				<%= reDto.getMemberNick()%>
+			<%} %>
 		</div>
 		<div class="row">
 			<label>작성일</label>
