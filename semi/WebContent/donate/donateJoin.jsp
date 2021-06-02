@@ -79,7 +79,8 @@
 		$("#list").click(function(e){
 			e.preventDefault();
 			location.href="<%=request.getContextPath()%>/challenge/challengeList.jsp";
-		})
+		});
+		
 	});
 </script>
 <div class="donate-container">
