@@ -15,8 +15,11 @@ public class ChallengeListDao {
 	public List<ChallengeListDto> list(int startRow, int endRow) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 
-		String sql = "select * from (" + "select rownum rn, TMP.* from ("
-				+ "select * from challenge_list order by challenge_no desc" + ")TMP" + ") where rn between ? and ?";
+		String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from challenge_list where sysdate <= challenge_endDate and challenge_result  = 'N' order by challenge_no desc"
+										+ ") TMP"
+								+ ") where rn between ? and ?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, startRow);
@@ -34,6 +37,8 @@ public class ChallengeListDao {
 			challengeListDto.setChallengePercent(rs.getInt("challenge_percent"));
 			challengeListDto.setChallengeReward(rs.getInt("challenge_reward"));
 			challengeListDto.setChallengeDonate(rs.getInt("challenge_donate"));
+			challengeListDto.setChallengeResult(rs.getString("challenge_result"));
+			challengeListDto.setChallengeRead(rs.getInt("challenge_read"));
 
 			challengeListDto.setMemberNo(rs.getInt("member_no"));
 			challengeListDto.setMemberNick(rs.getString("member_nick"));
@@ -54,8 +59,12 @@ public class ChallengeListDao {
 	public List<ChallengeListDto> search(String type, String keyword, int startRow, int endRow) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 
-		String sql = "select * from (" + "select rownum rn, TMP.* from (" + "select * from challenge_list "
-				+ "where instr(#1, ?) > 0 order by challenge_no desc" + ")TMP" + ") where rn between ? and ?";
+		String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from challenge_list "
+									+ "where instr(#1, ?) > 0 and sysdate <= challenge_endDate and challenge_result  = 'N' order by challenge_no desc"
+								+ ") TMP"
+							+ ") where rn between ? and ?";
 
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -75,6 +84,8 @@ public class ChallengeListDao {
 			challengeListDto.setChallengePercent(rs.getInt("challenge_percent"));
 			challengeListDto.setChallengeReward(rs.getInt("challenge_reward"));
 			challengeListDto.setChallengeDonate(rs.getInt("challenge_donate"));
+			challengeListDto.setChallengeResult(rs.getString("challenge_result"));
+			challengeListDto.setChallengeRead(rs.getInt("challenge_read"));
 
 			challengeListDto.setMemberNo(rs.getInt("member_no"));
 			challengeListDto.setMemberNick(rs.getString("member_nick"));
@@ -94,7 +105,7 @@ public class ChallengeListDao {
 	public int getCount() throws Exception {
 		Connection con = JDBCUtils.getConnection();
 
-		String sql = "select count(*) from challenge_list";
+		String sql = "select count(*) from challenge_list where sysdate <= challenge_endDate and challenge_result = 'N'";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
@@ -110,7 +121,7 @@ public class ChallengeListDao {
 
 		Connection con = JDBCUtils.getConnection();
 
-		String sql = "select count(*) from challenge_list where instr(#1, ?) > 0";
+		String sql = "select count(*) from challenge_list where instr(#1, ?) > 0 and sysdate <= challenge_endDate and challenge_result = 'N'";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
@@ -146,6 +157,8 @@ public class ChallengeListDao {
 			challengeListDto.setChallengeReward(rs.getInt("challenge_reward"));
 			challengeListDto.setChallengeDonate(rs.getInt("challenge_donate"));
 			challengeListDto.setChallengeContent(rs.getString("challenge_content"));
+			// challengeListDto.setChallengeResult(rs.getString("challenge_result"));
+			// challengeListDto.setChallengeRead(rs.getInt("challenge_read"));
 
 			challengeListDto.setMemberNo(rs.getInt("member_no"));
 			challengeListDto.setMemberNick(rs.getString("member_nick"));
@@ -159,4 +172,5 @@ public class ChallengeListDao {
 		
 		return challengeListDto;
 	}
+	
 }
