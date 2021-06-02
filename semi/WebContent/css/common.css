@@ -321,7 +321,7 @@ textarea.form-input {
 
 .pagination>a.on {
 	border: 1px solid lightgray;
-	color : green;
+	color : #168;
 }
 
 .pagination-list {
