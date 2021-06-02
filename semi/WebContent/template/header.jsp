@@ -14,6 +14,9 @@
 	
 	boolean isLogin = memberNo != null;
 	boolean isAdminLogin = adminNo != null;
+
+	boolean isLogin = memberNo != null || adminNo != null; 
+
 %>
 <!DOCTYPE html>
 <html>
@@ -80,8 +83,11 @@
 						<li><a href="<%=root%>/intro/intro.jsp">챌린저스란?</a></li>
 						<!-- 비회원인 경우에도 도전글을 볼 수 있도록 할 것인가?  -->
 						<li><a href="<%=root%>/challenge/challengeList.jsp">도전글 목록</a></li>
+
 						<!-- 유저가 작성한 인증글 목록  -->
 						<!-- <li><a href="<%=root%>/item/itemList.jsp">인증글 목록</a></li> -->
+
+						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
 					</ul></li>
 					
 				<li><a href="#">후기</a>
@@ -94,7 +100,12 @@
 				<%if(isAdminLogin) {%>	
 				<li><a href="#">관리자</a>
 					<ul>
+
 						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
+
+						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
+            <li><a href="#">회원 조회/검색</a></li>
+
 					</ul></li>
 				<%} %>
 			</ul>
