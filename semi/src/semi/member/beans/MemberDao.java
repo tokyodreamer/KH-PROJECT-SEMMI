@@ -146,5 +146,51 @@ public class MemberDao {
 		
 		return count > 0;
 	}
+	//아이디 찾기
 	
+	public String searchId(String email,String nick)throws Exception {
+		
+		Connection con = JDBCUtils.getConnection();
+
+		String sql = "select member_id from member where member_email= ? and member_nick =?" ;
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1,email);
+		ps.setString(2,nick);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			String id = rs.getString("member_id");
+			con.close();
+			return id;
+		}
+		else {
+			con.close();
+			return null;
+		}
+		
+		
+	}
+	
+	//비밀번호 찾기
+	public String searchPw(String id,String nick) throws Exception {
+
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql ="select member_pw from member where member_id= ? and member_nick =?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1,id);
+		ps.setString(2,nick);
+
+		ResultSet rs = ps.executeQuery();
+		if(rs.next()) {
+			String pw = rs.getString("member_pw");
+			con.close();
+			return pw;
+		}
+		else {
+			con.close();
+			return null;
+		}
+	}
 }

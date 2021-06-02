@@ -3,8 +3,11 @@ package semi.donate.beans;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import semi.beans.JDBCUtils;
+import semi.challenge.beans.ChallengeDto;
 import semi.member.beans.MemberDto;
 
 public class DonateDao {
@@ -105,5 +108,33 @@ public class DonateDao {
 //		
 //		return count;
 //	}
+	
+//	내 후원목록
+	public List<DonateDto> myList(int memberNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select * from donate where member_no = ?"; 
+							
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, memberNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<DonateDto> donateList = new ArrayList<>();
+		while(rs.next()) {
+			DonateDto DonateDto = new DonateDto();
+			DonateDto.setDonateNo(rs.getInt("donate_no"));
+			DonateDto.setDonateChallengeNo(rs.getInt("challenge_no"));
+			DonateDto.setDonateMemberNo(rs.getInt("member_no"));
+//			DonateDto.setDonateCategoryNo(rs.getInt("donateCategory_no"));
+			DonateDto.setDonatePushPoint(rs.getInt("donatePushPoint"));
+			
+			
+			donateList.add(DonateDto);
+		}
+		
+		con.close();
+		return donateList;
+		
+	}
 	
 }

@@ -103,6 +103,7 @@
 		<!-- 첫번째 상자 -->
 		<div class="myPage_box left">
 			<h3>챌린저스 프로필</h3>
+		
 			<div class="first_box left">
 					
 				<%if(memberPoint <=100000) { %>
@@ -170,7 +171,7 @@
 			<h3>내 후원</h3>
 			<div>
 				<h4 style="text-align:center">현재 후원중 게시글 수 : </h4>
-				<div class="third_box"onclick="location.href='#'" style="cursor:pointer;">
+				<div class="third_box"onclick="location.href='myDonate.jsp'" style="cursor:pointer;">
 					<h4>내 후원 목록 바로 가기</h4>
 				</div>
 			
