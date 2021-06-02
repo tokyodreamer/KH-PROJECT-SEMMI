@@ -26,6 +26,21 @@
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/common.css">
 <style type="text/css">
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		$("#memberExit").click(function(){
+			
+			if($(this).confirm("정말 탈퇴하시겠습니까?")) { // 확인
+				location.replace("<%=root%>/member/memberExit.kh");
+			} else {
+				return;
+			}
+		});
+		
+	});
+ </script>
 </head>
 <body>
 	<main>
@@ -45,14 +60,14 @@
 		</header>
 		<nav>
 			<ul class="menu">
-				<li><a href="#">마이 페이지</a>
+				<li><a href="<%=root%>/member/myPage.jsp">마이 페이지</a>
 					<ul>
 						<%if(isLogin) { %>
 							<li><a href="<%=root%>/member/myPage.jsp">내 정보 보기</a></li>
 							<li><a href="<%=root%>/member/myChallenge.jsp">나의 도전글</a></li>
-						<li><a href="<%=root%>/member/myDonate.jsp">나의 후원내역</a></li> 
-						<li><a href="<%=root%>/member/editMember.jsp">내 정보 변경</a></li>
-							<li><a href="<%=root%>/member/memberExit.kh">탈퇴하기</a></li>
+							<li><a href="<%=root%>/member/myDonate.jsp">나의 후원내역</a></li> 
+							<li><a href="<%=root%>/member/editMember.jsp">내 정보 변경</a></li>
+							<li><a href="<%=root%>/member/memberExit.kh" id="memberExit">탈퇴하기</a></li>
 						
 						<%} else { %>
 							<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
@@ -79,7 +94,6 @@
 				<%if(isAdminLogin) {%>	
 				<li><a href="#">관리자</a>
 					<ul>
-						<li><a href="<%=root%>/admin/adminLogin.jsp">로그인</a></li>
 						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
 					</ul></li>
 				<%} %>
