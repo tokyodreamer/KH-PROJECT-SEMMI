@@ -15,6 +15,11 @@ int authNo = Integer.parseInt(request.getParameter("authNo"));
 //AuthDao authDao = new AuthDao();
 //AuthDto authDto = authDao.get(authNo);
 
+//추가 : 관리자만 인증 처리여부를 수정할 수 있도록 권한 부여(2021/06/01 작성 자 : 박민웅)
+Integer adminNo = (Integer)session.getAttribute("adminNo");
+System.out.println(adminNo);
+
+
 //수정 member_nick까지 입력을 위해
 AuthListDao authListDao = new AuthListDao();
 AuthListDto authListDto = authListDao.get(authNo);
@@ -34,9 +39,12 @@ ChallengeDao challengeDao = new ChallengeDao();
 		});
 	});
 </script>
+
+
 <div class="container-600">
-	
-	<div class="link-btn"> <a href="authList.jsp"> 인증 리스트로 돌아가기</a> </div>
+	<div class="row">
+		<h2>인증글 상세 보기</h2>
+	</div>
 	<div class="row">
 		<img src="authDetail.kh?authNo=<%=authNo%>" width="100%" height="400">
 	</div>
