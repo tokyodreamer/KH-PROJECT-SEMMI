@@ -41,7 +41,7 @@ public class AuthListDao {
 			con.close();
 			return authList;
 	}
-	
+
 	//단일 조회(준비물 인증글번호 authNo)
 	public AuthListDto get(int authNo) throws Exception {
 

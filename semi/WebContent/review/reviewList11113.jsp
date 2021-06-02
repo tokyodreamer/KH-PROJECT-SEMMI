@@ -10,9 +10,33 @@
 	List<ReviewListDto> reviewList = reListDao.list();
 %>
 
-<jsp:include page="/template/header.jsp"></jsp:include>
 
-<h2>후기 목록페이지</h2>
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<style>
+#review-title{
+color:skyblue;
+border:thick;
+box-sizing: border-box;
+margin-left: auto;
+margin-right: auto;
+}
+.linkbtn{
+font-size:20px;
+background-color:black;
+color:white;
+}
+
+
+
+</style>
+
+
+<jsp:include page="/template/header.jsp"></jsp:include>
+<div class="row text-center">
+<h2 id="review-title">후기 목록페이지</h2>
+</div>
+
+
 <!-- 예시 -->
 <div class="contaier-600">
 	<div class="row text-right">
@@ -20,6 +44,9 @@
 			<a href="reviewWrite.jsp" class="link-btn">후기 작성하러 가기</a>
 		<%} %>
 	</div>
+	
+	<button class="linkbtn">버튼</button>
+	
 	<%for(ReviewListDto reDto : reviewList){ %>
 	<div class="" id="review-box">
 		<div class="row">

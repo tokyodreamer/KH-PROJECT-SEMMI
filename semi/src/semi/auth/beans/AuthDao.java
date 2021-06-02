@@ -156,4 +156,35 @@ public class AuthDao {
 		con.close();
 		return count>0;
 	}
+	
+	//인증글 삭제 기능
+	public boolean delete(int authNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "delete auth where auth_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, authNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count > 0;
+	}
+	
+	public List getNoByChallengeNo(int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select auth_no from auth where auth_challengeNo=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List list = new ArrayList();
+		while(rs.next()) {
+			int authNo = rs.getInt("auth_no");
+			list.add(authNo);
+		}
+		
+		return list;
+	}
 }

@@ -6,11 +6,9 @@
 create or replace view challenge_list as
 select 
     C.challenge_no, C.Challenge_title, C.Challenge_pushpoint, C.challenge_startdate,
-    C.challenge_enddate, C.challenge_percent, C.challenge_reward, C.challenge_donate, c.challenge_content,
+    C.challenge_enddate, C.challenge_percent, C.challenge_reward, C.challenge_donate, 
+    c.challenge_content, C.challenge_result, C.challenge_read,
     M.member_no, M.member_nick, M.member_point, T.category_no, T.category_type
 from challenge C
     left outer join member M on C.challenge_writer = M.member_no
     left outer join category T on C.category_no = T.category_no;
-    
--- 도전 테이블 정산결과처리 컬럼 추가
-alter table challenge add challenge_result char(1) default 'N' check(challenge_result IN ('N', 'Y'));

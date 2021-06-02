@@ -35,4 +35,10 @@
  		<location>/error/500.jsp</location>
  	</error-page>
  	
+ 	<servlet>
+ 		<servlet-name>ResultPointScheduler</servlet-name>
+ 		<servlet-class>semi.scheduler.ResultPointScheduler</servlet-class>
+ 		<load-on-startup>1</load-on-startup>
+ 	</servlet>
+ 	
  </web-app>
