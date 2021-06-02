@@ -18,6 +18,6 @@
 </div>
 <br><br>
 
-<h2>세션 값 : <%=session.getAttribute("memberNo") %></h2>
-
+<h2>회원 세션 값 : <%=session.getAttribute("memberNo") %></h2>
+<h2>관리자 세션 값 : <%=session.getAttribute("adminNo") %></h2>
 <jsp:include page="/template/footer.jsp"></jsp:include>
