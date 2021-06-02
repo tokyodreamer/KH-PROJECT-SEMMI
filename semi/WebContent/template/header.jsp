@@ -10,7 +10,9 @@
 	// - 세션에 memberNo 가 null 이 아니면 로그인 상태로 간주
 	// - 세션에 memberNo 가 null 이면 로그아웃 상태로 간주
 	Integer memberNo = (Integer) session.getAttribute("memberNo");
-	boolean isLogin = memberNo != null ; 
+	Integer adminNo = (Integer) session.getAttribute("adminNo");
+	
+	boolean isLogin = memberNo != null || adminNo != null; 
 %>
 <!DOCTYPE html>
 <html>
@@ -62,7 +64,7 @@
 					<ul>
 						<li><a href="<%=root%>/intro/intro.jsp">챌린저스란?</a></li>
 						<li><a href="<%=root%>/challenge/challengeList.jsp">도전글 목록</a></li>
-						<li><a href="<%=root%>/item/itemList.jsp">인증글 목록</a></li>
+						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
 					</ul></li>
 					
 				<li><a href="#">리뷰</a>
@@ -72,10 +74,8 @@
 					</ul></li>
 				<li><a href="#">Admin</a>
 					<ul>
-						<li><a href="<%=root%>/admin/adminLogin.jsp">로그인</a></li>
-						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
+						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
 							<li><a href="#">회원 조회/검색</a></li>
-						
 						
 <%-- 						<li><a href="<%=root%>/board/boardList.jsp">게시글 목록</a></li> --%>
 					</ul></li>

@@ -8,6 +8,7 @@
 
 
 <jsp:include page="/template/header.jsp"></jsp:include>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/challengeJoin.css">
 <style>
 	.table {
 	border-collapse: collapse;
@@ -64,6 +65,10 @@
   border: 0;
 }
 
+	.join-btn{
+		cursor: pointer;
+	}
+
 
 
 </style>
@@ -88,6 +93,8 @@
 //			$("#testfrm").submit(function(){
 //				alert("등록되었습니다");
 //			});
+
+
 	});
 
 </script>
@@ -117,7 +124,7 @@
 			<tr>
 				<th><label>인증 사진</label></th>
 				<td class = "filebox">
-					<input type=text" id="fileName" disabled="disabled" style="padding: 2px;">
+					<input type=text" id="fileName" disabled="disabled" style="padding: 2px; width: 30%;">
 					<label for="upload">업로드</label>
 					<input type="file" name="authFile" accept=".png, .jpg, .gif"  id = "upload" required>
 				</td>
@@ -130,11 +137,9 @@
 			<input type="submit" value="등록" class="form-btn form-btn-positive">
 		</div>	
 			
-		<div>
+		<div class="row">
 			<input type="reset" value="초기화" class="form-btn form-btn-negative">
 		</div>
-	
-	
 	</form>
 </div>
 
