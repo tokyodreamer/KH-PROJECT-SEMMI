@@ -93,7 +93,7 @@ public class ChallengeDao {
 		
 		String sql = "select * from ("
 					 	+ "select rownum rn, TMP.* from ("
-					 		+ "select * from challenge order by challenge_no desc"
+					 		+ "select * from challenge where sysdate <= challenge_endDate and challenge_result = 'N' order by challenge_no desc"
 					 	+ ")TMP"
 			          +") where rn between ? and ?"; 
 							
@@ -134,7 +134,7 @@ public class ChallengeDao {
 		String sql = "select * from ("
 			 			+ "select rownum rn, TMP.* from ("
 			 				+ "select * from challenge "
-			 				+ "where instr(#1, ?) > 0 order by challenge_no desc"
+			 				+ "where instr(#1, ?) > 0 and sysdate <= challenge_endDate and challenge_result = 'N' order by challenge_no desc"
 			 			+ ")TMP"
 			 		+") where rn between ? and ?"; 
 				
@@ -172,7 +172,7 @@ public class ChallengeDao {
 	public int getCount() throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "select count(*) from challenge";
+		String sql = "select count(*) from challenge where sysdate <= challenge_endDate and challenge_result = 'N'";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
@@ -187,7 +187,7 @@ public class ChallengeDao {
 	public int getCount(String type, String keyword) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "select count(*) from challenge where instr(#1, ?) > 0";
+		String sql = "select count(*) from challenge where instr(#1, ?) > 0 and sysdate <= challenge_endDate and challenge_result = 'N'";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
