@@ -11,9 +11,9 @@
 	// - 세션에 memberNo 가 null 이면 로그아웃 상태로 간주
 	Integer memberNo = (Integer) session.getAttribute("memberNo");
 	Integer adminNo = (Integer) session.getAttribute("adminNo");
-	
 
 	boolean isLogin = memberNo != null || adminNo != null;
+
 
 %>
 <!DOCTYPE html>
