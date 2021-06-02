@@ -3,17 +3,12 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%
-// 리스트 목록 불러오기 
-ReviewListDao reListDao = new ReviewListDao();
-List<ReviewListDto> reviewList = reListDao.list();
+	// 리스트 목록 불러오기 
+	ReviewListDao reListDao = new ReviewListDao();
+	List<ReviewListDto> reviewList = reListDao.list();
 %>
-
-<!Doctype HTML>
-<html>
-<head>
-<meta charset="UTF-8">
+<jsp:include page="/template/header.jsp"></jsp:include>
 <style>
 h2 {
 	text-align: center;
@@ -34,52 +29,39 @@ h2 {
 
 #nick, #time, #star {
 	font-style: italic;
+    margin-left: 70%;
+    font-size: 15px;
 }
 
 #nick, #star {
-	margin: 20px;
+	margin: 10px;
 }
 
-.sp-nick {
-	margin-left: 10px;
-}
 
 #content {
 	width: 300px;
 	height: 150px;
 }
+
+#textarea{
+	resize: none;
+	text-align:left;
+	overflow:auto;
+}
 </style>
-<script>
-$(function()){
-	$(!reDto.getReviewNick() === (int) request.getSession().getAttribute("memberNo")){
-	 		window.alert("본인 글만 수정할 수 있습니다")
-	 	} 
-	 	else{
-	 		window.alert("수정이 완료되었습니다")
-	 	}
-	 });
-	 
-$(function()){
-	$("#delete-btn").click(function()){
-		
-		var 
-	 	if(!reDto.getReviewNick() == (int) request.getSession().getAttribute("memberNo")){
-	 		window.alert("본인 글만 삭제할 수 있습니다")
-	 		
-	 	} 
-	 	else{
-	 		window.alert("삭제가 완료되었습니다")
-	 	}
-	 });
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+$(function(){
 	
+	$("#delete-btn").click(function(e){
+		var a = window.confirm("정말로 삭제하시겠습니까?")
+			if(!a){
+				e.preventDefault();
+			}
+	});
+
 });
-
 </script>
-</head>
-
-<body>
-	<jsp:include page="/template/header.jsp"></jsp:include>
-
 	<div class="container-1000">
 		<h2>후기</h2>
 		<div class="row text-right">
@@ -91,104 +73,52 @@ $(function()){
 			}
 			%>
 		</div>
-
-		<%
-		for (ReviewListDto reDto : reviewList) {
-		%>
-
+		<% for (ReviewListDto reDto : reviewList) { %>
 		<div class="row" id="review-box">
-
 			<div class="row">
 				<img src="#" alt="profileIMG">
 			</div>
-
 			<div class="row">
-				<label id="nick">닉네임:</label><span class="sp-nick"><%=reDto.getMemberNick()%></span>
+				<label id="nick">닉네임:</label>
+				<span class="sp-nick">
+				<%if(reDto.getMemberNick()==null){%>
+				 예전 회원
+				<%}else{ %>
+				<%=reDto.getMemberNick()%>
+				<%}%>
+				</span>
 			</div>
-
-			<div class="row text-right">
-				<!-- 			<label>작성일</label> -->
-				<h4 id="time"><%=reDto.getReviewTime()%></h4>
-
-				<h4><%=reDto.getReviewNo()%></h4>
-			</div>
-
 			<div class="row">
 				<label id="star"></label>
-				<%
-				if (reDto.getReviewStar() == 5) {
-				%>
-				<h4>★★★★★</h4>
-				<%
-				} else if (reDto.getReviewStar() == 4) {
-				%>
-				<h4>★★★★☆</h4>
-				<%
-				} else if (reDto.getReviewStar() == 3) {
-				%>
-				<h4>★★★☆☆</h4>
-				<%
-				} else if (reDto.getReviewStar() == 2) {
-				%>
-				<h4>★★☆☆☆</h4>
-				<%
-				} else if (reDto.getReviewStar() == 1) {
-				%>
-				<h4>★☆☆☆☆</h4>
-				<%
-				} else if (reDto.getReviewStar() == 0) {
-				%>
-				<h4>☆☆☆☆☆</h4>
-				<%
-				}
-				%>
+				<% if (reDto.getReviewStar() == 5) { %>
+				<span>★★★★★</span>
+				<%} else if (reDto.getReviewStar() == 4) { %>
+				<span>★★★★☆</span>
+				<%} else if (reDto.getReviewStar() == 3) { %>
+				<span>★★★☆☆</span>
+				<%} else if (reDto.getReviewStar() == 2) {%>
+				<span>★★☆☆☆</span>
+				<%} else if (reDto.getReviewStar() == 1) {%>
+				<span>★☆☆☆☆</span>
+				<%} else if (reDto.getReviewStar() == 0) {%>
+				<span>☆☆☆☆☆</span>
+				<%}%>
+				<span id="time"><%=reDto.getReviewTime()%></span>
 			</div>
-			<div class="row">
-				<textarea  cols="100" row="50"><%=reDto.getReviewContent()%></textarea>
+			<div class="row text-left">
+				<textarea  cols="140" rows="10" id="textarea"  readonly>
+				<%=reDto.getReviewContent()%>
+			</textarea>
 			</div>
 
-			<div class="row text-right">
-				<%
-				if (request.getSession().getAttribute("memberNo") != null) {
-				%>
-				<a class="link-btn" id="edit-btn" href="#">수정</a>
-				<%
-				}
-				%>
-
-				<%
-				if (request.getSession().getAttribute("memberNo") != null) {
-				%>
-				<a class="link-btn" id="delete-btn" href="#">삭제</a>
-				<%
-				}
-				%>
-
-				<!-- 조건절 : 비회원이 아닌 상태일 때(세션에 값이 있을 때) && 작성자와 세션 번호(로그인한 사람)이 일치할 떼 -->
-				<%
-				if (request.getSession().getAttribute("memberNo") != null
-						&& reDto.getReviewNick() == (int) request.getSession().getAttribute("memberNo")) {
-				%>
-				<div class="row">
-					<a class="link-btn"
-						href="<%=request.getContextPath()%>/review/reviewUpdate.jsp?reviewNo=<%=reDto.getReviewNo()%>">수정</a>
-					<a class="link-btn"
-						href="<%=request.getContextPath()%>/review/reviewDelete.kh?reviewNo=<%=reDto.getReviewNo()%>">삭제</a>
-					<!-- href : 삭제할 때는 후기 작성자 번호가 필요   -->
-				</div>
-				<%
-				} else {
-				%>
-				resp.sendError(403);
-				<%
-				}
-				%>
-
-				<%
-				}
-				%>
-			</div>
+		<% if (request.getSession().getAttribute("memberNo") != null && reDto.getReviewNick() == (int) request.getSession().getAttribute("memberNo")) { %>
+			<a class="link-btn" href="<%=request.getContextPath()%>/review/reviewUpdate.jsp?reviewNo=<%=reDto.getReviewNo()%>">수정</a>
+			<a class="link-btn" href="<%=request.getContextPath()%>/review/reviewDelete.kh?reviewNo=<%=reDto.getReviewNo()%>" id="delete-btn">삭제</a>
+		<%} %>
+		<!-- 반복문 종료  -->
 		</div>
+		<%} %>
+	</div>
 </body>
 </html>
 

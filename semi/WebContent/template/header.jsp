@@ -25,23 +25,6 @@
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/menu.css">
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/layout.css">
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/common.css">
-<style type="text/css">
-</style>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script type="text/javascript">
-	$(function(){
-		
-		$("#memberExit").click(function(){
-			
-			if($(this).confirm("정말 탈퇴하시겠습니까?")) { // 확인
-				location.replace("<%=root%>/member/memberExit.kh");
-			} else {
-				return;
-			}
-		});
-		
-	});
- </script>
 </head>
 <body>
 	<main>
@@ -110,11 +93,6 @@
 
 						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
 						<li><a href="#">회원 조회/검색</a></li>
-						
-						
-<%-- 						<li><a href="<%=root%>/board/boardList.jsp">게시글 목록</a></li> --%>
-
-
 						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
             <li><a href="#">회원 조회/검색</a></li>
 
