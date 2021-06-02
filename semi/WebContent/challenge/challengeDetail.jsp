@@ -19,7 +19,7 @@
 	ChallengeDao challengeDao = new ChallengeDao();
 	
 	int memberNo = (int)session.getAttribute("memberNo");
-	Set<Integer> challengeNoSet;
+	/* Set<Integer> challengeNoSet;
 	if(session.getAttribute("challengeNoSet") != null){
 		challengeNoSet = (Set<Integer>)session.getAttribute("challengeNoSet");
 	}
@@ -35,7 +35,7 @@
 	System.out.println("저장소 : "+challengeNoSet);
 	
 	//저장소 갱신
-	session.setAttribute("challengeNoSet", challengeNoSet);
+	session.setAttribute("challengeNoSet", challengeNoSet); */
 	
 	ChallengeListDto challengeListDto = challengeListDao.getChallenge(challengeNo);
 	
