@@ -14,7 +14,7 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <div class="container-600">
 	<div class="row">
-		<input type="button" value="관리자" class="form-btn">
+		<input type="button" value="관리자" class="form-btn" onclick="location.href='<%=request.getContextPath()%>/admin/adminLogin.jsp'">
 		<h2>로그인</h2>
 		<hr>
 		</div>

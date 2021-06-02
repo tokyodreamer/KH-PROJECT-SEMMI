@@ -57,5 +57,3 @@ font-size: 30px;
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
-
-
