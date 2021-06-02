@@ -38,6 +38,7 @@ public class ResultPointScheduler extends HttpServlet{
 						// 3. 해당 기한 만료 도전글에 대하여 정산 결과 변경
 						challengeDao.changeResult();
 					//} else {
+					//destroy();
 						System.out.println("정산 작업 종료");
 					//}
 					
