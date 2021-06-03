@@ -9,7 +9,6 @@ import java.util.List;
 
 
 import semi.beans.JDBCUtils;
-import semi.member.beans.MemberDto;
 
 public class ChallengeDao {
 	
@@ -361,40 +360,40 @@ public class ChallengeDao {
 	
 	// 1. 도전 정산 작업 
 		public boolean changeChallenge() throws Exception {
-			Connection con = JDBCUtils.getConnection();
+			try(Connection con = JDBCUtils.getConnection();) {
+				
+				String sql = "merge into member M using complete_challenge C on (C.challenge_writer = M.member_no) "
+						+ "when matched then update set M.member_point = M.member_point + C.challenge_calc_total";
+				PreparedStatement ps = con.prepareStatement(sql);
+				int count = ps.executeUpdate();
+				
+				return count > 0;
+			} 
 			
-			String sql = "merge into member M using complete_challenge C on (C.challenge_writer = M.member_no) "
-					+ "when matched then update set M.member_point = M.member_point + C.challenge_calc_total";
-			PreparedStatement ps = con.prepareStatement(sql);
-			int count = ps.executeUpdate();
-			
-			con.close();
-			return count > 0;
 		}
 		
 	// 2. 후원 정산 작업
 		public boolean changeDonate() throws Exception {
-			Connection con = JDBCUtils.getConnection();
+			try(Connection con = JDBCUtils.getConnection();) {
+				String sql = "merge into member M using complete_donate d on (d.member_no = M.member_no) "
+						+ "when matched then update set M.member_point = M.member_point + d.donate_calc_total";
+				PreparedStatement ps = con.prepareStatement(sql);
+				int count = ps.executeUpdate();
+				
+				return count > 0;
+			} 
 			
-			String sql = "merge into member M using complete_donate d on (d.member_no = M.member_no) "
-					+ "when matched then update set M.member_point = M.member_point + d.donate_calc_total";
-			PreparedStatement ps = con.prepareStatement(sql);
-			int count = ps.executeUpdate();
-			
-			con.close();
-			return count > 0;
 		}
 		
 	// 3. 해당 기한 만료 도전글에 대하여 정산 결과 변경 (완료)
 		public boolean changeResult() throws Exception {
-			Connection con = JDBCUtils.getConnection();
-			
-			String sql = "update challenge set challenge_result = 'Y' where sysdate >= challenge_endDate and challenge_result = 'N'";
-			PreparedStatement ps = con.prepareStatement(sql);
-			int count = ps.executeUpdate();
-			
-			con.close();
-			return count > 0;
+			try(Connection con = JDBCUtils.getConnection();) {
+				String sql = "update challenge set challenge_result = 'Y' where sysdate >= challenge_endDate and challenge_result = 'N'";
+				PreparedStatement ps = con.prepareStatement(sql);
+				int count = ps.executeUpdate();
+				
+				return count > 0;
+			} 
 		}
 		
 }
