@@ -1,11 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="/template/header.jsp"></jsp:include>
+<style>
+	.login_title{
+			font-size : 40px;
+			font-family: Arial Black,"Times New Roman",Monospace;
+			text-align : center;
+		}
+		
+		.login_btn{
+		background : black;
+		color : white;
+		font-size : 25px;
+		font-family: arial black,"Times New Roman", Sans-serif;
+		}
+		
+		.login_user{
+		text-align : center;
+		padding: 5px 0px;
+		}
 
+</style>
 <div class="container-600">
 
 	<div class="row">
-		<h1>관리자 로그인</h1>
+		<div class="login_title">LOGIN</div>
+		<div class="login_btn login_user">관리자</div>
+		<h2>로그인</h2>
+		<hr>
 	</div>
 	
 	<form action="adminLogin.kh" method="post">
@@ -18,8 +40,9 @@
 				class="form-input">
 		</div>
 		<div class="row">
-			<input type="submit" value="로그인" class="btn-input">
+			<input type="submit" value="LOGIN" class="form-btn login_btn">
 		</div>
+		<hr>
 	</form>
 	<% if (request.getParameter("error")!=null) {%>
 	<div class="error">

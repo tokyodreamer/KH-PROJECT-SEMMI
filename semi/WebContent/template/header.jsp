@@ -12,8 +12,7 @@
 	Integer memberNo = (Integer) session.getAttribute("memberNo");
 	Integer adminNo = (Integer) session.getAttribute("adminNo");
 
-	boolean isLogin = memberNo != null || adminNo != null;
-
+	boolean isLogin = memberNo != null || adminNo != null; 
 
 %>
 <!DOCTYPE html>
