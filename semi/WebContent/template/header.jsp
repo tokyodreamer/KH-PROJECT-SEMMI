@@ -32,18 +32,6 @@
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/menu.css">
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/layout.css">
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/common.css">
-<style>
-	.logo{
-		font-size: 43px;
-		text-decoration: none;
-		color: black;
-	}
-	
-	li.point {
-		margin-left: 30%;
-    	width: 300px;
-	} 
-</style>
 </head>
 <body>
 	<main>
