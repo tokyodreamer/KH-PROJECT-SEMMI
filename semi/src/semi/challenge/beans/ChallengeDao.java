@@ -32,7 +32,7 @@ public class ChallengeDao {
 	public void challengeJoin(ChallengeDto challengeDto) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N')";
+		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N', 0)";
 		
 		PreparedStatement ps = con.prepareStatement(sql); 
 		ps.setInt(1, challengeDto.getChallengeNo()); // 도전글 번호 

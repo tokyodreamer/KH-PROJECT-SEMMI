@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
 .title{
@@ -41,7 +40,6 @@ font-size: 30px;
 <h2>후기등록</h2>
 <div class="container-600">
 
-
 	<div class="row">
 
 		<form action="reviewWrite.kh" method="post">
@@ -72,6 +70,5 @@ font-size: 30px;
 	</div>
 
 </div>
-
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
