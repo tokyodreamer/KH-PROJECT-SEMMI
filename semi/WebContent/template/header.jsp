@@ -26,7 +26,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/layout.css">
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/common.css">
 </head>
-<body>
+
 	<main>
 		<header class="float-container " style="padding:1.4rem;">
 		<div class="left" >

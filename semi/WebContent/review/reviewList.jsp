@@ -29,18 +29,23 @@ h2 {
 
 #nick, #time, #star {
 	font-style: italic;
-    margin-left: 70%;
     font-size: 15px;
 }
-
+#time{
+margin-left: 70%;
+}
 #nick, #star {
 	margin: 10px;
 }
 
 
 #content {
-	width: 300px;
+border: 1px solid lightgrey;
+border-radius: 15px;
+	width: 100%;
 	height: 150px;
+	padding: 30px;
+	
 }
 
 #textarea{
@@ -106,9 +111,11 @@ $(function(){
 				<span id="time"><%=reDto.getReviewTime()%></span>
 			</div>
 			<div class="row text-left">
-				<textarea  cols="140" rows="10" id="textarea"  readonly>
+			<!--  <textarea  cols="140" rows="10" id="textarea"  readonly>
 				<%=reDto.getReviewContent()%>
-			</textarea>
+			</textarea>-->
+			<pre id="content"><%=reDto.getReviewContent()%></pre>
+			
 			</div>
 
 		<% if (request.getSession().getAttribute("memberNo") != null && reDto.getReviewNick() == (int) request.getSession().getAttribute("memberNo")) { %>
