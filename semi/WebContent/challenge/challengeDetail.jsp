@@ -1,6 +1,8 @@
+<%@page import="semi.auth.beans.AuthDto"%>
 <%@page import="java.util.List"%>
 <%@page import="semi.auth.beans.AuthDao"%>
 <%@page import="semi.challenge.beans.ChallengeDao"%>
+<%@page import="semi.challenge.beans.ChallengeDto"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
 <%@page import="semi.donate.beans.DonateDao"%>
@@ -20,24 +22,6 @@
 	ChallengeDao challengeDao = new ChallengeDao();
 	
 	int memberNo = (int)session.getAttribute("memberNo");
-	/* Set<Integer> challengeNoSet;
-	if(session.getAttribute("challengeNoSet") != null){
-		challengeNoSet = (Set<Integer>)session.getAttribute("challengeNoSet");
-	}
-	else {
-		challengeNoSet = new HashSet<>();
-	}
-	
-	if(challengeNoSet.add(challengeNo)){
-		challengeDao.read(challengeNo, memberNo);
-		System.out.println("조회수 증가");
-	}
-	
-	System.out.println("저장소 : "+challengeNoSet);
-	
-	//저장소 갱신
-	session.setAttribute("challengeNoSet", challengeNoSet); */
-	
 	ChallengeListDto challengeListDto = challengeListDao.getChallenge(challengeNo);
 	
 	// 목표 : DB에서 가져온 시작일 과 종료일을 확인하여 남은 기간을 실시간으로 계산하고 싶다!
@@ -103,7 +87,6 @@
 font-size: 40px;
 font-weight: bold;
 text-align: center;
-margin-left: -5%;
 
 }
 .content{
@@ -131,16 +114,18 @@ width:25%;
 display: inline-block;
 border: 1px solid black;
 font-size: 30px;
-padding: .5rem;
 border-radius: 1em;
 }
 .description  li{
-list-style: armenian;
+list-style: none;
 }
 .leftTime >li {
 }
-.authList{
-width:70%;
+.table.authList{
+margin-top: 3%;
+width:50%;
+}
+.table.authList {
 }
 </style>
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -148,7 +133,7 @@ width:70%;
 	<div class="title-content"> 
 	
 	<div class="title"> <%=challengeListDto.getChallengeTitle() %>
-	<span style="font-family:cursive; font-size: 20px; position: relative; left:50px;"> by. <%=challengeListDto.getMemberNick()%> </span>
+	<span style="font-family:cursive; font-size: 20px; position: relative;"> ( 도전자: <%=challengeListDto.getMemberNick()%> )</span>
 	</div>
 	<div class=" content"> <%=challengeListDto.getChallengeContent() %></div>
 </div>
@@ -159,40 +144,72 @@ width:70%;
 <div class="percent"><li> <span style=" font-size:22px; font-weight:bold;">현재 달성률:&nbsp&nbsp </span> <%=challengeListDto.getChallengePercent() %> %</li></div>
 <div class="duration"> <li> <span style="font-size:22px; font-weight:bold;">도전 기간:&nbsp&nbsp</span><%=challengeListDto.getChallengeStartDate().substring(5,10) %>
 ~ <%=challengeListDto.getChallengeEndDate().substring(5,10) %> </li>
-<%-- <div class="totalPoint"><li> <span style="font-size:22px; font-weight:bold;"> 누적 후원금: </span> <%=challengeListDto.getChallengeDonate() %> Point</li> </div> --%>
+<div class="totalPoint"><li> <span style="font-size:22px; font-weight:bold;"> 누적 후원금: </span> <%=challengeListDto.getChallengeDonate() %> Point</li> </div>
 
 <div class="leftTime"> <li>
 		<%if(currentTimeSec > endTimeSec) {%>
-		<span style="font-size:22px; font-weight:bold;">도전기한 만료됨 </span>
+		<span style="font-size:22px; font-weight:bold; color:red;">도전기한 만료됨 </span>
 		<%} else { %>
-		<span id="timeLimit" style="font-size:22px; font-weight: bold; "></span>
+		<span id="timeLimit" style="font-size:22px; font-weight: bold; color:blue;"></span>
 		<%} %> </li>
 </div>
 </ul>
 </div>
 
-<%-- <% --%>
-// AuthDao authDao = new AuthDao();
-// List authNoList = authDao.getNoByChallengeNo(challengeNo);
-<%-- %> --%>
-	<div >
+<% 
+AuthDao authDao = new AuthDao();
+List<AuthDto> authListByChallenge = authDao.listByChallenge(challengeNo);
+%>
+	<div class="authList">
 	<table class="table table-border authlist">
 		<thead>
 		<tr>
-			<th colspan="2"> 인증1</th>
+			<th colspan="4" style="font-size:22px"> 인증</th>
 				
 		</tr>
 		</thead>
-		
 		<tbody>
-<%-- 		<%for (int i=0; i<authNoList.size(); i++) {%> --%>
+		
+	<%for(AuthDto authDto : authListByChallenge){ %>
 			<tr>
-<%-- 				<td> <img src="authDetail.kh?authNo=<%=authNoList.get(i)%>" width="100%" height="400"></td> --%>
-				<td> 제목, 날짜</td>
-				<td> 내용</td>
-				<td> 결과, 이유</td>
+  			<th style=" width:120px; height:120px"> <img src="<%=request.getContextPath()%>/auth/authDetail.kh?authNo=<%=authDto.getAuthNo()%>" width="100%;" height="100%;"></th>
+			<th style="font-size:22px; width:200px"> <%=authDto.getAuthTitle() %> <br>(
+				<%=authDto.getAuthTimeLine() %>
+				)</th>
+				<td style="width:270px;"> <%=authDto.getAuthContent() %></td>
+				<th>
+				<%
+				String authResult;
+				String color;
+				if(authDto.getAuthResult().equals("N")){
+					authResult = "승인 대기 중";
+					color = "green";
+				}
+				else if(authDto.getAuthResult().equals("S")){
+					authResult = "인증 승인 됨";
+					color = "blue";
+				}
+				else{
+					authResult = "인증 실패";
+					color = "red";
+				}
+				
+				%>
+				<span style="color:<%=color %>"><%=authResult%></span> <hr>
+				<%=authDto.getAuthReason() %> </th>
+			
 			</tr>
-<%-- 			<%} %> --%>
+ 			<%} %> 
+ 			<%int listSize = authListByChallenge.size();
+ 			%>
+ 			
+ 			
+			<%if(listSize==0){ %>
+			<tr>
+				<th>아직 도전자 <%=challengeListDto.getMemberNick()%>님이 올리신 인증글이 없습니다. 
+				</th>
+			</tr>
+			<%} %>
 		</tbody>
 	
 	</table>
