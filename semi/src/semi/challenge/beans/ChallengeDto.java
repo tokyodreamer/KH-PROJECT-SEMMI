@@ -16,6 +16,7 @@ public class ChallengeDto {
 	private String challengeContent;
 	private String challengeResult;
 	private int challengeRead;
+	private int challengeReply;
 	
 	public ChallengeDto() {
 		super();
@@ -123,6 +124,14 @@ public class ChallengeDto {
 
 	public void setChallengeRead(int challengeRead) {
 		this.challengeRead = challengeRead;
+	}
+
+	public int getChallengeReply() {
+		return challengeReply;
+	}
+
+	public void setChallengeReply(int challengeReply) {
+		this.challengeReply = challengeReply;
 	}
 	
 	

@@ -32,7 +32,7 @@ public class ChallengeDao {
 	public void challengeJoin(ChallengeDto challengeDto) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N', 0)";
+		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N', 0, 0)";
 		
 		PreparedStatement ps = con.prepareStatement(sql); 
 		ps.setInt(1, challengeDto.getChallengeNo()); // 도전글 번호 
@@ -46,6 +46,7 @@ public class ChallengeDao {
 		ps.setString(9, challengeDto.getChallengeContent()); // 도전글 내용 
 		// 'N' - 컬럼 추가 제어문 : 도전 테이블에 최종 정산 여부를 확인할 용도 (05/28, 작성자 : 정 계진)
 		// 0 - 컬럼 추가 : 도전 테이블에 조회수 기능 추가(05/31, 작성자 : 박 민웅)
+		// 0 - 컬럼 추가 : 도전 테이블에 댓글 기능 추가(06/03, 작성자 : 박 민웅)
 		ps.execute();
 		
 		con.close();
@@ -78,6 +79,7 @@ public class ChallengeDao {
 			challengeDto.setChallengeContent(rs.getString("challenge_content"));
 			challengeDto.setChallengeResult(rs.getString("challenge_result"));
 			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
+			challengeDto.setChallengeReply(rs.getInt("challenge_reply"));
 		} else {
 			challengeDto = null;
 		}
@@ -117,6 +119,7 @@ public class ChallengeDao {
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
 			challengeDto.setChallengeResult(rs.getString("challenge_result"));
 			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
+			challengeDto.setChallengeReply(rs.getInt("challenge_reply"));
 			
 			challengeList.add(challengeDto);
 		}
@@ -160,6 +163,7 @@ public class ChallengeDao {
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
 			challengeDto.setChallengeResult(rs.getString("challenge_result"));
 			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
+			challengeDto.setChallengeReply(rs.getInt("challenge_reply"));
 			
 			challengeList.add(challengeDto);
 		}
@@ -233,6 +237,39 @@ public class ChallengeDao {
 
 	}
 	
+	
+	//조회수 증가 기능 : 특정 번호의 게시글을 작성자가 아닌 사람이 읽을 경우에만 증가되도록 구현(05/31, 작성자 : 박 민웅)
+	public boolean read(int challengeNo, int memberNo) throws Exception{
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "update challenge "
+				+ "set challenge_read = challenge_read + 1 "
+				+ "where challenge_no = ? and challenge_writer != ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ps.setInt(2, memberNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count > 0;
+	}
+	
+	//댓글 개수 갱신 기능 구현(06/03 작성자 : 박민웅)
+	public boolean refreshChallengeReply(int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "update challenge "
+						+ "set challenge_reply = (select count(*) from reply where reply_origin = ? ) "
+					+ "where challenge_no = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ps.setInt(2, challengeNo);
+		int count = ps.executeUpdate();
+		con.close();
+		return count > 0;
+	}
+	
 //	내 게시글목록
 	public List<ChallengeDto> myList(int memberNo) throws Exception {
 		Connection con = JDBCUtils.getConnection();
@@ -258,6 +295,7 @@ public class ChallengeDao {
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
 			challengeDto.setChallengeResult(rs.getString("challenge_result"));
 			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
+			//challengeDto.setChallengeReply(rs.getInt("challenge_reply"));
 			
 			challengeList.add(challengeDto);
 		}
@@ -320,23 +358,6 @@ public class ChallengeDao {
 		
 		return count > 0;
 	}
-
-	
-	//조회수 증가 기능 : 특정 번호의 게시글을 작성자가 아닌 사람이 읽을 경우에만 증가되도록 구현(05/31, 작성자 : 박 민웅)
-		public boolean read(int challengeNo, int memberNo) throws Exception{
-			Connection con = JDBCUtils.getConnection();
-			
-			String sql = "update challenge "
-					+ "set challenge_read = challenge_read + 1 "
-					+ "where challenge_no = ? and challenge_writer != ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, challengeNo);
-			ps.setInt(2, memberNo);
-			int count = ps.executeUpdate();
-			
-			con.close();
-			return count > 0;
-		}
 	
 	/*정산 작업 */
 	
