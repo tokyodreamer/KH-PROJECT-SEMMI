@@ -64,9 +64,9 @@ $(function(){
 				e.preventDefault();
 			}
 	});
-
-});
 </script>
+
+
 	<div class="container-1000">
 		<h2>후기</h2>
 		<div class="row text-right">
@@ -126,7 +126,5 @@ $(function(){
 		</div>
 		<%} %>
 	</div>
-</body>
-</html>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

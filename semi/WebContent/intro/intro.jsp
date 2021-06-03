@@ -3,11 +3,27 @@
 
     <jsp:include page="/template/header.jsp"></jsp:include>
 
+<style>
+.joinMsg{
+		font-size : 40px;
+		font-family: Arial Black,"Times New Roman",Monospace;
+		text-align : center;
+		font-weight: bolder;
+	}
+
+</style>
+
+
 	<div class="container-600">
 		<div class="row text-center">
-		<h1>챌린저스를 소개합니다! 너도 도전 나도 도전 </h1>		
+		<div class="joinMsg">챌린저스를 소개합니다! </div>
 		</div>
 
+<br>
+
+	<div class="row text-center">
+		<img src="<%=request.getContextPath()%>/image/Can.png" class="intro" >
+	</div>
 		
 		
 	</div>

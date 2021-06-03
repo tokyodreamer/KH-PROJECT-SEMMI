@@ -20,7 +20,66 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 
+	<style>
+	.text-deco > a{
+		text-decoration: none;
+		color: black;
+	}
+	
+	.text-deco > a:hover {
+		text-decoration: underline;	
+	}
+	.table {
+	border-collapse: collapse;
+	border-top: 0.5px solid rgb(51,51,51);
+	}
+	
+	.table th {
+      color: #168;
+      background: #f0f6f9;
+      text-align: center;
+	}
+	
+	.table th, .table td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+	
+	.table.table-hover > tbody > tr:hover {
+	background-color:rgb(242,242,242);
+	}
+	
 
+	
+
+	
+	.abcd{
+		background:black;
+		color:white;
+		width:100px;
+		height:40px;
+		text-aling :center;
+		margin-left : 10px;
+	}
+	.abc:hover{
+		background : ivory;
+	}
+	.abcd:hover{
+		background : grey;
+	}
+	.left{
+		float : left;
+	}
+	.right{
+		float : right;
+	}
+	.wall {
+		clear : both;
+	}
+	.bb{
+		text-align : center;
+	}
+</style>
 
 
 	<div class="row">
@@ -40,7 +99,7 @@
 						<th>달성률</th>
 						<th>상금</th>
 						<th>누적후원금</th>
-						<!-- <th>도전글내용</th> -->
+						
 					</tr>
 			</thead>
 			
@@ -51,7 +110,8 @@
 						<td><%=challengeDto.getChallengeWriter() %></td>
 <%-- 						<td><%=challengeDto.getCategoryNo() %></td> --%>
 			
-						<td>
+						<td class="abc" onClick="location.href='#'">
+						
 							<!-- 제목을 누르면 상세보기 페이지로 이동 -->
 							<a href="#">
 							<%=challengeDto.getChallengeTitle() %></a>
@@ -67,6 +127,14 @@
 			</tbody>
 		</table>
 		
+	</div>
+	
+	<div class="bb">
+	
+		<div class="abcd right" onclick="location.href='myPage.jsp'">마이페이지</div>
+		<div class="abcd right" onclick="location.href='#'">도전게시글</div>
+		<div class="wall"></div>
+	
 	</div>
 	
 	

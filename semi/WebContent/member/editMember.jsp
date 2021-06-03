@@ -11,30 +11,46 @@
 		MemberDto memberDto = memberDao.find(memberNo);
  	%> 
 	
-<%--테스트용 	<% --%>
-<!-- // 		int memberNo = 1; -->
-<!-- // 		MemberDao memberDao = new MemberDao(); -->
-<!-- // 		MemberDto memberDto = memberDao.find(memberNo); -->
-<%-- 	%> --%>
+	<style>
+		.login_btn{
+		background : grey;
+		color : white;
+		font-size : 25px;
+		font-family: arial black,"Times New Roman", Sans-serif;
+	}
+		.login_user{
+		text-align : center;
+		padding-top: 10px;
+	}
+		.login_title{
+		background : black;
+		color : white;
+		font-size : 40px;
+		font-family: Arial Black,"Times New Roman",Monospace;
+		text-align : center;
+	}
+	
+	
+	</style>
 	
 	<div class="container-400">
 		<div class="row">
-			<h2 align="center">회원 정보 변경</h2>
+			<div class="login_title">회원 정보 변경</div>
 		</div>
 		
 		<form action="editMember.kh" method="post">
-			<div class="row text-left">
+			<div class="row text-left login_btn">
 				<label>닉네임</label>
 				<input type="text" name="memberNick" required class="form-input form-input-underline"
 								value="<%=memberDto.getMemberNick()%>">
 			</div>
 			
-			<div class="row text-left">
+			<div class="row text-left login_btn">
 				<label>이메일</label>
 				<input type="text" name="memberEmail" class="form-input form-input-underline"
 								value="<%=memberDto.getMemberEmail()%>">
 			</div>
-			<div class="row text-left">
+			<div class="row text-left login_btn">
 				<label>현재 비밀번호</label>
 				<input type="password" name="memberPw" required class="form-input form-input-underline">
 			</div>
@@ -45,7 +61,7 @@
 			</div>
 			<%} %>
 			<div class="row">
-				<input type="submit" value="수정하기" class="form-btn form-btn-negative">
+				<input type="submit" value="수정하기" class="form-btn login_btn">
 			</div>
 		</form>
 		
