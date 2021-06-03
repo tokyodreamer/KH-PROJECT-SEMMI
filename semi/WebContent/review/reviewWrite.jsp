@@ -40,7 +40,6 @@ font-size: 30px;
 <h2>후기등록</h2>
 <div class="container-600">
 
-
 	<div class="row">
 
 		<form action="reviewWrite.kh" method="post">
@@ -54,8 +53,9 @@ font-size: 30px;
 				<option value="2">★★☆☆☆</option>
 				<option value="1">★☆☆☆☆</option>
 				<option value="0">☆☆☆☆☆</option>
-
-			</select> 
+			</select><br>
+			<br>
+			<label class="title"> 소감을 남겨주세요</label>
 			<br><br>
 			<div class="row">
 				<label class="title"> 소감을 남겨주세요</label>
@@ -70,6 +70,5 @@ font-size: 30px;
 	</div>
 
 </div>
-
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
