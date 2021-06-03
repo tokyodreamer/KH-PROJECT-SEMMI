@@ -11,7 +11,7 @@
 	// - 세션에 memberNo 가 null 이면 로그아웃 상태로 간주
 	Integer memberNo = (Integer) session.getAttribute("memberNo");
 	Integer adminNo = (Integer) session.getAttribute("adminNo");
-	
+
 	boolean isLogin = memberNo != null || adminNo != null; 
 
 %>
@@ -24,23 +24,6 @@
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/menu.css">
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/layout.css">
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/common.css">
-<style type="text/css">
-</style>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script type="text/javascript">
-	$(function(){
-		
-		$("#memberExit").click(function(){
-			
-			if($(this).confirm("정말 탈퇴하시겠습니까?")) { // 확인
-				location.replace("<%=root%>/member/memberExit.kh");
-			} else {
-				return;
-			}
-		});
-		
-	});
- </script>
 </head>
 <body>
 	<main>
@@ -73,6 +56,7 @@
 							<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
 							<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
 						<%} %>
+						
 					</ul></li>
 					
 					<li><a href="#">챌린저스 (가제)</a>
@@ -89,6 +73,14 @@
 					
 				<li><a href="#">후기</a>
 					<ul>
+
+					<%if(isLogin) { %>
+						<li><a href="<%=root%>/review/reviewList.jsp">사용자 리뷰</a></li>
+						<li><a href="<%=root%>/review/reviewWrite.jsp">리뷰 작성</a></li>
+					<%} else { %>	
+						<li><a href="<%=root%>/review/reviewList.jsp">사용자 리뷰</a></li>
+					<%} %>
+
 						<li><a href="<%=root%>/review/reviewList.jsp">챌린저스 이용후기</a></li>
 						<%if(isLogin) {%>
 						<li><a href="<%=root%>/review/reviewWrite.jsp">이용후기 작성</a></li>
@@ -99,9 +91,10 @@
 					<ul>
 
 						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
-
+						<li><a href="#">회원 조회/검색</a></li>
 						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
             <li><a href="#">회원 조회/검색</a></li>
+
 
 					</ul></li>
 				<%} %>

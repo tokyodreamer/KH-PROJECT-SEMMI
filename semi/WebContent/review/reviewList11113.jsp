@@ -14,16 +14,17 @@
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 <style>
 #review-title{
-	color:skyblue;
-	border:thick;
-	box-sizing: border-box;
-	margin-left: auto;
-	margin-right: auto;
+
+color:skyblue;
+border:thick;
+box-sizing: border-box;
+margin-left: auto;
+margin-right: auto;
 }
 .linkbtn{
-	font-size:20px;
-	background-color:black;
-	color:white;
+font-size:20px;
+background-color:black;
+color:white;
 }
 
 
@@ -37,7 +38,7 @@
 </div>
 
 
-<!-- 예시 -->
+
 <div class="contaier-600">
 	<div class="row text-right">
 		<%if(request.getSession().getAttribute("memberNo")!=null){ %>
@@ -82,10 +83,12 @@
 		</div>
 		<!-- 조건절 : 비회원이 아닌 상태일 때(세션에 값이 있을 때) && 작성자와 세션 번호(로그인한 사람)이 일치할 떼 -->
 		<%if(request.getSession().getAttribute("memberNo") != null && reDto.getReviewNick() == (int) request.getSession().getAttribute("memberNo")) {%>
-			<div class="row">
-				<a class="link-btn" href="<%=request.getContextPath()%>/review/reviewUpdate.jsp?reviewNo=<%=reDto.getReviewNo()%>">수정</a>
-				<a class="link-btn" href="<%=request.getContextPath()%>/review/reviewDelete.kh?reviewNo=<%=reDto.getReviewNo()%>">삭제</a> <!-- href : 삭제할 때는 후기 작성자 번호가 필요   -->
-			</div>
+
+		<div class="row">
+			<a class="link-btn" href="<%=request.getContextPath()%>/review/reviewUpdate.jsp?reviewNo=<%=reDto.getReviewNo()%>">수정</a>
+			<a class="link-btn" href="<%=request.getContextPath()%>/review/reviewDelete.kh?reviewNo=<%=reDto.getReviewNo()%>">삭제</a> <!-- href : 삭제할 때는 후기 작성자 번호가 필요   -->
+		</div>
+
 		<%}%>
 	</div>
 	<%} %>
