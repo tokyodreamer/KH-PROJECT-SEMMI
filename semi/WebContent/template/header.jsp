@@ -17,16 +17,15 @@
 
 %>
 <!DOCTYPE html>
+	<meta charset="UTF-8">
 <html>
 <head>
-	<meta charset="UTF-8">
 	<title>세미 프로젝트 템플릿(임시)</title>
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/test.css">
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/menu.css">
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/layout.css">
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/common.css">
 </head>
-
 	<main>
 		<header class="float-container " style="padding:1.4rem;">
 		<div class="left" >

@@ -111,9 +111,9 @@ $(function(){
 				<span id="time"><%=reDto.getReviewTime()%></span>
 			</div>
 			<div class="row text-left">
-			<!--  <textarea  cols="140" rows="10" id="textarea"  readonly>
-				<%=reDto.getReviewContent()%>
-			</textarea>-->
+<!-- 			 <textarea  cols="140" rows="10" id="textarea"  readonly> -->
+<%-- 				<%=reDto.getReviewContent()%> --%>
+<!-- 			</textarea> -->
 			<pre id="content"><%=reDto.getReviewContent()%></pre>
 			
 			</div>
