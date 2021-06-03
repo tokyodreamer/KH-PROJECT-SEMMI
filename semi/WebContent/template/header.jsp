@@ -12,8 +12,7 @@
 	Integer memberNo = (Integer) session.getAttribute("memberNo");
 	Integer adminNo = (Integer) session.getAttribute("adminNo");
 	
-	boolean isLogin = memberNo != null;
-	boolean isAdminLogin = adminNo != null;
+	
 
 	boolean isLogin = memberNo != null || adminNo != null; 
 
@@ -97,7 +96,7 @@
 						<li><a href="<%=root%>/review/reviewWrite.jsp">이용후기 작성</a></li>
 						<%} %>
 					</ul></li>
-				<%if(isAdminLogin) {%>	
+				<%if(isLogin) {%>	
 				<li><a href="#">관리자</a>
 					<ul>
 
