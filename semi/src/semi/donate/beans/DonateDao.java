@@ -42,18 +42,19 @@ public class DonateDao {
 		con.close();
 	}
 	
-	public int checkDonate(int challengeNo) throws Exception {
+	public int checkDonate(int challengeNo, int memberNo) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "select member_no from donate where challenge_no = ?";
+		String sql = "select donate_no from donate where challenge_no = ? and member_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, challengeNo);
+		ps.setInt(2, memberNo);
 		ResultSet rs = ps.executeQuery();
 		
 		int checkDonateMember;
 		
 		if(rs.next()) {
-			checkDonateMember = rs.getInt("member_no");
+			checkDonateMember = rs.getInt("donate_no");
 		} else {
 			checkDonateMember = 0;
 		}
