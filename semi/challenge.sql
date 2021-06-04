@@ -11,7 +11,7 @@ create or replace view challenge_list as
 select 
     C.challenge_no, C.Challenge_title, C.Challenge_pushpoint, C.challenge_startdate,
     C.challenge_enddate, C.challenge_percent, C.challenge_reward, C.challenge_donate, 
-    c.challenge_content, C.challenge_result, C.challenge_read,
+    c.challenge_content, C.challenge_result, C.challenge_read, C.challenge_reply,
     M.member_no, M.member_nick, M.member_point, T.category_no, T.category_type
 from challenge C
     left outer join member M on C.challenge_writer = M.member_no

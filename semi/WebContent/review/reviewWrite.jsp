@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
 .title{
@@ -41,13 +40,14 @@ font-size: 30px;
 <h2>후기등록</h2>
 <div class="container-600">
 
-
 	<div class="row">
 
 		<form action="reviewWrite.kh" method="post">
 
+		<div class="row">
 			<label class="title">도전은 어떠셨나요</label> 
 			<br><br>
+			
 			<select name="reviewStar" id="star" class="score">
 				<option value="5" selected>★★★★★</option>
 				<option value="4">★★★★☆</option>
@@ -55,22 +55,23 @@ font-size: 30px;
 				<option value="2">★★☆☆☆</option>
 				<option value="1">★☆☆☆☆</option>
 				<option value="0">☆☆☆☆☆</option>
-
-			</select> 
-			<br><br>
+			</select>
+			</div>
+			
+			<br>
 			<div class="row">
 				<label class="title"> 소감을 남겨주세요</label>
 				<br><br>
 				<textarea name="reviewContent" class="form-input"></textarea>
 			</div>
 
+
 			<br><br>
-			<br> <input type="submit" value="등록하기" class="link-btn loginlogout ">
+		 	 <input type="submit" value="등록하기" class="link-btn loginlogout ">
 						<a href="reviewList.jsp" class="link-btn cancle">취소하기</a>
 		</form>
 	</div>
 
 </div>
-
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

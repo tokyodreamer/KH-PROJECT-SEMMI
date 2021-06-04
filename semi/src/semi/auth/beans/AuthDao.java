@@ -170,4 +170,58 @@ public class AuthDao {
 		con.close();
 		return count > 0;
 	}
+	
+	public List getNoByChallengeNo(int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "select auth_no from auth where auth_challengeNo=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List list = new ArrayList();
+		while(rs.next()) {
+			int authNo = rs.getInt("auth_no");
+			list.add(authNo);
+		}
+		
+		return list;
+	}
+	
+	public List<AuthDto> listByChallenge(int challengeNo) throws Exception {
+
+		Connection con = JDBCUtils.getConnection();
+
+		String sql = "select * from auth where auth_challengeNo = ? order by auth_no desc";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ResultSet rs = ps.executeQuery();
+
+		List<AuthDto> authList = new ArrayList<>();
+
+		while (rs.next()) {
+			AuthDto authDto = new AuthDto();
+			authDto.setAuthNo(rs.getInt("auth_no"));
+			authDto.setAuthChallengeNo(rs.getInt("auth_challengeNo"));
+			authDto.setAuthWriter(rs.getInt("auth_writer"));
+			authDto.setAuthCategoryType(rs.getInt("auth_categoryType"));
+			authDto.setAuthTitle(rs.getString("auth_title"));
+			authDto.setAuthContent(rs.getString("auth_content"));
+			authDto.setAuthTimeLine(rs.getDate("auth_timeLine"));
+			authDto.setAuthResult(rs.getString("auth_result"));
+			authDto.setAuthReason(rs.getString("auth_reason"));
+			
+			authDto.setAuthUploadName(rs.getString("auth_uploadName"));
+			authDto.setAuthSaveName(rs.getString("auth_saveName"));
+			authDto.setAuthContentType(rs.getString("auth_contentType"));
+			authDto.setAuthFileSize(rs.getLong("auth_fileSize"));
+
+			authList.add(authDto);
+		}
+
+		return authList;
+
+	}
+
 }

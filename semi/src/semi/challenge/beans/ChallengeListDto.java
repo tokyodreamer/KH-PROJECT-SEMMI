@@ -13,6 +13,7 @@ public class ChallengeListDto {
 	private String challengeContent;
 	private String challengeResult;
 	private int challengeRead;
+	private int challengeReply;
 	
 	//회원 정보 저장 변수
 	private int memberNo;
@@ -115,6 +116,16 @@ public class ChallengeListDto {
 
 	public void setChallengeRead(int challengeRead) {
 		this.challengeRead = challengeRead;
+	}
+	
+	
+
+	public int getChallengeReply() {
+		return challengeReply;
+	}
+
+	public void setChallengeReply(int challengeReply) {
+		this.challengeReply = challengeReply;
 	}
 
 	public int getMemberNo() {

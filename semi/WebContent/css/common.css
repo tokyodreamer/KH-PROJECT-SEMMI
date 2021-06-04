@@ -419,7 +419,21 @@ textarea.form-input {
 	padding: 0.75rem;
 	text-decoration: none;
 }
-
+.link-btn.board-a-title {
+	display: inline-block;
+	padding: 0.3rem;
+	text-decoration: none;
+	color: black;
+	width:100%;
+}
+.link-btn.Info {
+	display: inline-block;
+	padding: 0.75rem;
+	text-decoration: none;
+	border:1px dotted black;
+	background-color: lightgray;
+	border-radius: 2em;
+}
 .link-btn:hover {
 	border-color: black;
 	color: black;
