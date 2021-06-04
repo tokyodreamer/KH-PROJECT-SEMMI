@@ -56,55 +56,73 @@
 }
 
 /* 인증 기준 안내 */
-.index-auth-container {
-	border: dotted;
-	width: 100%;
-	height: 1500px;
-}
 
 .index-auth-title {
 	height: 150px;
-	width: 100%;
-	background-color: black;
-	color: white;
-	font-weight: bold;
+    width: 100%;
+    background-color: black;
+    color: white;
+    font-weight: bold;
     font-size: 80px;
     padding: 10px;
+    text-align: center;
 }
 
-.index-auth-01-container {
-	border: dotted;
-	height: 40%;
+.index-auth-container {
+	width: 100%;
+	height: 800px;
 }
 
-.index-auth-02-container {
-	border: dotted;
-	height: 40%;
-}
-.index-auth-01-float-left {
-	border: dotted;
-	float: left;
-	width: 30%;
-    height: 40%;
+.index-auth-float-left {
+    float: left;
+    width: 50%;
+    height: 100%;
 }
 
-.index-auth-01-float-right {
-	border: dotted;
-	float: right;
-	width: 30%;
-    height: 40%;
+.index-auth-float-right {
+    float: left;
+    width: 50%;
+    height: 100%;
 }
 
-.index-auth-02-float-left {
-	border: dotted;
-	float: left;
-	width: 30%;
-    height: 40%;
+.index-auth-image-title {
+    width: 100%;
+    height: 20%;
+    font-size: 100px;
+    font-weight: bold;
+    text-align: center;
+    color: #87CEFA;
 }
 
-.index-auth-02-float-right {
-	border: dotted;
-	float: right;
-	width: 30%;
-    height: 40%;
+.index-auth-image-content {
+	width: 100%;
+	height: 80%;
+}
+
+.index-auth-explain-title {
+    height: 20%;
+    background-color: lightgray;
+    font-size: 50px;
+    text-align: center;
+    padding: 35px;
+    font-weight: bold
+}
+
+.index-auth-explain-content-01 {
+    height: 10%;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 15px;
+    text-align: left;
+    background-color: black;
+    color: white;
+}
+
+.index-auth-explain-content-02 {
+	margin-top: 10%;
+    height: 50%;
+    padding: 15%;
+    color: red;
+    font-size: 80px;
+    font-weight: bold;
 }
