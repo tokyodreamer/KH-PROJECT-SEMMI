@@ -81,18 +81,6 @@
 						<%} %>
 					</ul></li>
 				<%if(isLogin) {%>	
-				<li><a href="#">관리자</a>
-					<ul>
-
-						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
-
-						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
-            <li><a href="#">회원 조회/검색</a></li>
-
-					</ul></li>
-					</ul>
-				</li>
-				<%if(isLogin) {%>	
 					<li class="point"><a href="#">보유포인트 : <%=memberDto.getMemberPoint() %></a></li>
 				<%} %>
 			</ul>
