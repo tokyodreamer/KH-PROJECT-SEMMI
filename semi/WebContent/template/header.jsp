@@ -79,8 +79,7 @@
 						<%if(isLogin) {%>
 						<li><a href="<%=root%>/review/reviewWrite.jsp">후기 작성</a></li>
 						<%} %>
-					</ul>
-				</li>
+					</ul></li>
 				<%if(isLogin) {%>	
 					<li class="point"><a href="#">보유포인트 : <%=memberDto.getMemberPoint() %></a></li>
 				<%} %>
