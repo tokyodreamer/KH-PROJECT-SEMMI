@@ -443,6 +443,7 @@ List<AuthDto> authListByChallenge = authDao.listByChallenge(challengeNo);
 	</table>
 	</div>
 	<%int a =1; %>
+	<jsp:include page="/reply/reply.jsp?challengeNo=<%=challengeNo %>"></jsp:include>
 	<button class="donate-btn donate-btn-list" id="list">목록</button>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
