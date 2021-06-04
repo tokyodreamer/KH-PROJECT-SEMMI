@@ -3,8 +3,7 @@
     pageEncoding="UTF-8"%>
 
 <%
-MemberDto memberDto= new MemberDto();
-
+	MemberDto memberDto= new MemberDto();
 %>
 
 
@@ -47,7 +46,7 @@ background : white;
 		
 			<div class="joinMsg">Challengers(가제)	</div>
 			<br><br><br>
-			<div class="welcomeMsg">"<%=memberDto.getMemberNick() %>" 님 회원가입을 축하드립니다</div>
+			<div class="welcomeMsg">"<%=(String)request.getSession().getAttribute("nick")%>" 님 회원가입을 축하드립니다</div>
 		</div>
 		
 					<br><br>
@@ -60,9 +59,9 @@ background : white;
 		
 		<br>
 		
-			<div>
-				<input type="submit" value="LOGIN"	class="form-btn login_btn">
-			</div>
+		<div>
+			<input type="submit" value="LOGIN"	class="form-btn login_btn">
+		</div>
 		
 <!-- 		<a href="memberLogin.jsp" class="link-btn">로그인하기</a> -->
 		</div>

@@ -46,12 +46,17 @@
 					class="link-btn loginlogout"
 					style="font-size: 20px; background-color: black; color: white">로그아웃</a>
 				<%} else { %>
+
+					<a href="<%=root%>/member/emailCheck.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:white; color: black">회원가입</a>
+					<a href="<%=root%>/member/memberLogin.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:black; color:white;">&nbsp;로그인&nbsp;</a>
+
 				<a href="<%=root%>/member/memberJoin.jsp"
 					class="link-btn loginlogout"
 					style="font-size: 20px; background-color: white; color: black">회원가입</a>
 				<a href="<%=root%>/member/memberLogin.jsp"
 					class="link-btn loginlogout"
 					style="font-size: 20px; background-color: black; color: white;">&nbsp;로그인&nbsp;</a>
+
 				<%} %>
 
 
@@ -59,6 +64,7 @@
 		</header>
 		<nav>
 			<ul class="menu">
+				
 				<li><a href="<%=root%>/member/myPage.jsp">마이 페이지</a>
 					<ul>
 						<%if(isLogin) { %>
@@ -76,8 +82,13 @@
 							<li><a href="<%=root%>/member/memberExit.kh" id="memberExit">탈퇴하기</a></li>
 
 						<%} else { %>
+
+							<li><a href="<%=root%>/member/emailCheck.jsp">회원 가입</a></li>
+							<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
+
 						<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
 						<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
+
 						<%} %>
 
 					</ul></li>
@@ -138,7 +149,24 @@
 						<%} %>
 					</ul></li>
 				<%if(isLogin) {%>	
+
+				<li><a href="#">관리자</a>
+					<ul>
+
+						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
+
+						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
+            			<li><a href="#">회원 조회/검색</a></li>
+
+					</ul></li>
+					<%} %>
+					</ul>
+				</li>
+				<%if(isLogin) {%>	
+					<li class="point"><a href="#">보유포인트 : <%=memberDto.getMemberPoint() %></a></li>
+
 					<li class="point"><a href="#"><%=memberDto.getMemberNick() %> 님의 보유포인트 : <%=memberDto.getMemberPoint() %></a></li>
+
 				<%} %>
 
 			</ul>
