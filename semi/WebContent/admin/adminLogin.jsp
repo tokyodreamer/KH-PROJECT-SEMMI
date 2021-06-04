@@ -32,11 +32,11 @@
 	
 	<form action="adminLogin.kh" method="post">
 		<div class="row">
-			<label> 아이디 </label> <input type="text" name="adminId" required
+			<input type="text" name="adminId" placeholder = "아이디 또는 이메일" required
 				class="form-input">
 		</div>
 		<div class="row">
-			<label> 비밀번호 </label> <input type="password" name="adminPw" required
+			<input type="password" name="adminPw" placeholder="비밀번호" required
 				class="form-input">
 		</div>
 		<div class="row">

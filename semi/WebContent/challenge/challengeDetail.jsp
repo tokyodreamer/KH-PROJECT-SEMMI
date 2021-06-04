@@ -21,7 +21,28 @@
 	
 	ChallengeDao challengeDao = new ChallengeDao();
 	
+	//조회수 증가는 무조건 이루어지는 작업이 아니다.
+	//= 조회수는 자신의 글을 읽는 경우에는 늘어나면 안된다
+	//		= 현재 회원의 번호를 조회수 증가 기능에 같이 전달하여 조건으로 사용
+	//= 한 번 읽었던 글을 또 읽는 경우에는 늘어나면 안된다(세션)
+	
 	int memberNo = (int)session.getAttribute("memberNo");
+	Set<Integer> challengeNoSet;
+	if(session.getAttribute("challengeNoSet") != null){//세션에 boardNoSet이라는 이름의 저장소가 있다면 --> 저장소 추출
+		challengeNoSet = (Set<Integer>)session.getAttribute("challengeNoSet");
+	}
+	else{//세션에 boardNoSet이라는 이름의 저장소가 없다면 --> 저장소 생성
+		challengeNoSet = new HashSet<>();
+	}
+	if(challengeNoSet.add(challengeNo)){//challengeNoSet에 현재 도전글번호(challengedNo)가 추가되었다면 --> 처음 읽는 글이라면
+		challengeDao.read(challengeNo, memberNo); //조회수 증가
+ 	//	System.out.println("조회수 증가");
+	}
+ 	//  System.out.println("저장소 : "+challengeNoSet);
+	
+	//저장소 갱신
+	session.setAttribute("challengeNoSet", challengeNoSet);
+	
 	ChallengeListDto challengeListDto = challengeListDao.getChallenge(challengeNo);
 	MemberDao memberDao = new MemberDao();
 	MemberDto memberDto = memberDao.find(memberNo);
@@ -157,6 +178,62 @@
 	});
 </script>
 <style>
+	.title{
+	font-size: 40px;
+	font-weight: bold;
+	text-align: center;
+	
+	}
+	.content{
+	margin-left: auto;
+	margin-right: auto;
+	min-height:100px;
+	font-size:23px;
+	width:90%;
+	border: 2px dashed black;
+	padding:2rem;
+	margin-top: 20px;
+	border-radius: .7em;
+	}
+	.title-content{
+	margin:none;
+	width:55%;
+	display:inline-block;
+	}
+	.description{
+	margin-top: 40px;
+	margin-right:18%;
+	float: right;
+	height:200px;
+	width:25%;
+	display: inline-block;
+	border: 1px solid black;
+	font-size: 30px;
+	border-radius: 1em;
+	}
+	.description  li{
+	list-style: none;
+	}
+	.leftTime >li {
+	}
+	.table.authList{
+	margin-top: 30px;
+	width:50%;
+	}
+	.table.authList {
+	}
+	.donatePage{
+	margin-top: 30px;
+	width:45%;
+	border-top: 2px dotted black;
+	border-bottom: 2px dotted black;
+	text-align: center;
+	}
+	.donateInfo{
+	font-size:18px;
+	font-weight: bold;
+	padding-top:0.5rem;
+	}
 .title{
 font-size: 40px;
 font-weight: bold;
@@ -241,6 +318,7 @@ padding-top:0.5rem;
 	padding-right:1rem;
 	border-radius:1.5em;
 	}
+
 </style>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <div class="container-1500">
