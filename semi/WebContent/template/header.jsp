@@ -86,22 +86,10 @@
 					</ul>
 				</li>
 					
-
-				<li><a href="#">챌린저스 (가제)</a>
+				<li><a href="#">더 챌린지</a>
 					<ul>
-						<li><a href="<%=root%>/intro/intro.jsp">챌린저스란?</a></li>
-
-						<!-- 비회원인 경우에도 도전글을 볼 수 있도록 할 것인가?  -->
-						<li><a href="<%=root%>/challenge/challengeList.jsp">도전글
-								목록</a></li>
-
-						<!-- 유저가 작성한 인증글 목록  -->
-						<!-- <li><a href="<%=root%>/item/itemList.jsp">인증글 목록</a></li> -->
-
-					<li><a href="<%=root%>/challenge/challengeList.jsp">도전글 목록</a></li>
-
+						<li><a href="<%=root%>/challenge/challengeList.jsp">도전글 목록</a></li>
 						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
-
 					</ul></li>
 
 				<li><a href="#">후기</a>
@@ -144,41 +132,13 @@
 						%>
 
 					</ul></li>
-				<%
-				if (isLogin) {
-				%>
-				<li><a href="#">관리자</a>
-					<ul>
-
-						<li><a href="<%=root%>/board/boardWrite.jsp">인증글 목록</a></li>
-
-						<li><a href="#">회원 조회/검색</a></li>
-
-
-						<%-- 						<li><a href="<%=root%>/board/boardList.jsp">게시글 목록</a></li> --%>
-
-
-						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
-						<li><a href="#">회원 조회/검색</a></li>
-
-
-						<li><a href="#">회원 조회/검색</a></li>
-						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
-						<li><a href="#">회원 조회/검색</a></li>
-
-
-					</ul></li>
-				<%
-				}
-				%>
-
 						<li><a href="<%=root%>/review/reviewList.jsp">이용 후기</a></li>
 						<%if(isLogin) {%>
 						<li><a href="<%=root%>/review/reviewWrite.jsp">후기 작성</a></li>
 						<%} %>
 					</ul></li>
 				<%if(isLogin) {%>	
-					<li class="point"><a href="#">보유포인트 : <%=memberDto.getMemberPoint() %></a></li>
+					<li class="point"><a href="#"><%=memberDto.getMemberNick() %> 님의 보유포인트 : <%=memberDto.getMemberPoint() %></a></li>
 				<%} %>
 
 			</ul>
