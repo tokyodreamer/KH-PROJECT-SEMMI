@@ -13,8 +13,8 @@ import semi.member.beans.MemberDto;
 
 @WebServlet(urlPatterns="/member/memberJoin.kh")
 public class MemberJoinServlet extends HttpServlet{
-@Override
-protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
  
 		try {
 			//준비(회원정보)
@@ -30,15 +30,14 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 			MemberDao memberDao = new MemberDao();
 			memberDao.regist(memberDto);
 			
-			
+			req.getSession().setAttribute("email", req.getParameter("memberEmail"));
+			req.getSession().setAttribute("nick", req.getParameter("memberNick"));
 			//출력(리다이렉트)
 			resp.sendRedirect("memberJoinSuccess.jsp");
-		}
-
-		catch(Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
-			resp.sendError(500);
-		}
+			resp.sendRedirect("registError.jsp");
+	}
 
 
 
