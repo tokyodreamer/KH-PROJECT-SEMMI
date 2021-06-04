@@ -69,21 +69,37 @@
 
 
 <style>
-
-.table.table-hover-title > thead > tr,		
-.table.table-hover-title > tbody > tr:hover > #th-title {
-	background-color:rgb(231, 241, 253);
-}
-
-table.authList th a{
-display: block;
-width:100%;
-height:100%;
-color:black;
-text-decoration: none;
-}
-
-
+	.text-deco > a{
+		text-decoration: none;
+		color: black;
+	}
+	
+	.text-deco > a:hover {
+		text-decoration: underline;	
+	}
+	
+	.table {
+	border-collapse: collapse;
+	border-top: 0.5px solid rgb(51,51,51);
+	}
+	
+	.table th {
+      color: #168;
+      background: #f0f6f9;
+      text-align: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+	}
+	
+	.table td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+	
+    
+    .table.table-hover > tbody > tr:hover {
+	background-color:rgb(242,242,242);
+	}
 </style>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -117,11 +133,11 @@ text-decoration: none;
 
 <div class="container-800 ">
 	<div class="row">
-		<h2>인증 테이블</h2>
+		<h2>전체 인증글 보기</h2>
 	</div>
 	
 	<div class="row">
-		<table class="table table-hover-title authList">
+		<table class="table table-hover"">
 			<thead>
 				<tr>
 					<th> 인증 번호 </th>
@@ -132,14 +148,21 @@ text-decoration: none;
 				</tr>
 			</thead>
 			
-			<tbody>
+			<tbody class = "text-center">
 			<% for (AuthListDto authListDto : authList ) {%>
 				<tr> 
-					<th> <%=authListDto.getAuthNo() %> </th>
-					<th id="th-title"> <a href="authDetail.jsp?authNo=<%=(int)authListDto.getAuthNo()%>"><%=authListDto.getAuthTitle() %> </a></th>
-					<th> <%=authListDto.getMemberNick() %> </th>
-					<th> <%=authListDto.getAuthTimeLine() %> </th>
-					<th><%= authListDto.getAuthResult() %>  </th>
+					<td> <%=authListDto.getAuthNo() %> </td>
+					<td class = "text-left text-deco"> <a href="authDetail.jsp?authNo=<%=(int)authListDto.getAuthNo()%>"><%=authListDto.getAuthTitle() %> </a></td>
+					<td> <%=authListDto.getMemberNick() %> </td>
+					<td> <%=authListDto.getAuthTimeLine() %> </td>
+					
+					<%if(authListDto.getAuthResult().equals("N")){ %>
+					<td style="font-weight:bold;">승인 대기중</td>
+					<%} else if(authListDto.getAuthResult().equals("D")){ %>
+					<td style="color:red; font-weight: bold;">승인 거절</td>
+					<%} else { %>
+					<td style="color:blue; font-weight: bold;">승인 완료</td>
+					<%} %>
 				</tr>
 				<%} %>
 			</tbody>
