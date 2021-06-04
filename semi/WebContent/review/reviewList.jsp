@@ -90,7 +90,7 @@ $(function(){
 			<img src="#" alt="profileIMG">
 		</div>
 		<div class="row">
-			<label id="nick">닉네임:</label> <span class="sp-nick"> <%
+		<label id="nick">닉네임:</label> <span class="sp-nick"> <%
  if (reDto.getMemberNick() == null) {
  %>
 				예전 회원 <%

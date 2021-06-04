@@ -70,6 +70,25 @@ public class ReviewDao {
 
 		
 	}
+	
+	//닉네임 이미지 불러오기 기능
+	public void image(int reviewNick)throws Exception{
+		Connection con = JDBCUtils.getConnection();
+		String sql = "SELECT M.MEMBER_POINT, R.REVIEW_NICK  \n"
+				+ "FROM MEMBER M LEFT OUTER JOIN REVIEW R \n"
+				+ "ON(M.MEMBER_NO = R.REVIEW_NICK); ";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, reviewNick);
+		ResultSet rs = ps.executeQuery();
+		
+		ReviewDto reDto;
+		if(rs.next()) {
+			reDto = new ReviewDto();
+			reDto.setReviewNick(rs.getInt(reviewNick));
+		}
+		con.close();
+		return;
+	}
 
 
 	// 상세보기 기능(작성자 :박준영)
