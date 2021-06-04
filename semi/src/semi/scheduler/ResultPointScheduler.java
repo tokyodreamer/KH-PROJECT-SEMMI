@@ -23,18 +23,9 @@ public class ResultPointScheduler extends HttpServlet{
 					
 					ChallengeDao challengeDao = new ChallengeDao();
 
-					// 포인트 정산 작업 처리
-					//challengeDao.challengeResultDone();
-					//challengeDao.challengeResultGood();
-					//challengeDao.challengeResultPerfect();
 
-					// SQL 실행 : 총 3회
-
-					// 포인트 정산 후 정산결과를 완료 처리
-					//challengeDao.challengeResult();
 
 					// 0. 조건 - 정산 작업이 이루어지지 않은 파일이 존재한다면 | 존재하지 않는다면 스케줄러 종료
-					//boolean result = challengeDao.checkResult();
 					
 					//if(result == true) {
 						// 1. 도전글 정산 실행 (생성한 뷰 : COMPLETE_CHALLENGE 활용)

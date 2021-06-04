@@ -9,8 +9,7 @@ public class ReviewListDto {
 	private Date reviewTime;
 	private int reviewStar;
 	private String reviewContent;
-	
-
+	private int memberPoint;
 	private String memberNick;
 
 	public ReviewListDto() {
@@ -57,6 +56,14 @@ public class ReviewListDto {
 		this.reviewContent = reviewContent;
 	}
 
+	public int getMemberPoint() {
+		return memberPoint;
+	}
+
+	public void setMemberPoint(int memberPoint) {
+		this.memberPoint = memberPoint;
+	}
+
 	public String getMemberNick() {
 		return memberNick;
 	}
@@ -64,7 +71,5 @@ public class ReviewListDto {
 	public void setMemberNick(String memberNick) {
 		this.memberNick = memberNick;
 	}
-	
-	
-	
+
 }
