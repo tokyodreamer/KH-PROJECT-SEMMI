@@ -31,45 +31,48 @@
 	margin-top:10px;
 	}
 	
-.filebox label {
-  display: inline-block;
-  padding: .3em .75em;
-  color: #fff;
-  font-size: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: #5cb85c;
-  cursor: pointer;
-  border: 1px solid #4cae4c;
-  border-radius: .25em;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
-}
-
-.filebox label:hover {
-  background-color: #6ed36e;
-}
-
-.filebox label:active {
-  background-color: #367c36;
-}
-
-.filebox input[type="file"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
-	.join-btn{
-		cursor: pointer;
+	.filebox label {
+	  display: inline-block;
+	  padding: .3em .75em;
+	  color: #fff;
+	  font-size: inherit;
+	  line-height: normal;
+	  vertical-align: middle;
+	  background-color: #5cb85c;
+	  cursor: pointer;
+	  border: 1px solid #4cae4c;
+	  border-radius: .25em;
+	  -webkit-transition: background-color 0.2s;
+	  transition: background-color 0.2s;
 	}
-
-
+	
+	.filebox label:hover {
+	  background-color: #6ed36e;
+	}
+	
+	.filebox label:active {
+	  background-color: #367c36;
+	}
+	
+	.filebox input[type="file"] {
+	  position: absolute;
+	  width: 1px;
+	  height: 1px;
+	  padding: 0;
+	  margin: -1px;
+	  overflow: hidden;
+	  clip: rect(0, 0, 0, 0);
+	  border: 0;
+	}
+	
+	#fileName{
+	style="padding: 2px; 
+	width: 30%;"
+	}
+	
+	.join-btn{
+			cursor: pointer;
+	}
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -81,13 +84,13 @@
 			});	
 
 // 			새로고침 or 뒤로가기 or 나가기 버튼 클릭시 경고창 이벤트			
-//			var checkload = true;
-//			$("input[type=submit]").click(function() {
-//					checkload = false;
-//			});
-//			$(window).on("beforeunload", function() {
-//				if(checkload == true) return "정말로 나가시겠습니까?";
-//			});
+			var checkload = true;
+			$("input[type=submit]").click(function() {
+					checkload = false;
+			});
+			$(window).on("beforeunload", function() {
+			if(checkload == true) return "정말로 나가시겠습니까?";
+			});
 
 //			등록 완료 메세지..			
 //			$("#testfrm").submit(function(){
@@ -124,7 +127,7 @@
 			<tr>
 				<th><label>인증 사진</label></th>
 				<td class = "filebox">
-					<input type=text" id="fileName" disabled="disabled" style="padding: 2px; width: 30%;">
+					<input type=text" id="fileName" disabled="disabled">
 					<label for="upload">업로드</label>
 					<input type="file" name="authFile" accept=".png, .jpg, .gif"  id = "upload" required>
 				</td>
