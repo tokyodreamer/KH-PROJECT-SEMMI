@@ -106,12 +106,14 @@
 		
 			<div class="first_box left">
 					
-				<%if(memberPoint <=100000) { %>
+				<%if(memberPoint <=200000) { %>
 				<img src="https://via.placeholder.com/100x50.png?text=B" >
-				<%} else if(memberPoint <=200000) { %>
+				<%} else if(memberPoint <=400000) { %>
 				<img src="https://via.placeholder.com/100x100.png?text=S" >
+				<%} else if(memberPoint <=600000) { %>
+				<img src="https://via.placeholder.com/100x100.png?text=G" >
 				<%} else { %>
-				프로필
+				<img src="https://via.placeholder.com/100x100.png?text=P" >
 				<%} %>
 			</div>
 			<div class="first_box right">
