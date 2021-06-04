@@ -97,6 +97,7 @@
 		}; 
 		
 	});
+	
 </script>
 <style>
 .title{
@@ -142,6 +143,7 @@ list-style: armenian;
 .authList{
 width:70%;
 }
+
 </style>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <div class="container-1500">
@@ -199,7 +201,9 @@ width:70%;
 	
 	</div>
 	
-	
+
+<jsp:include page="/reply/reply.jsp?challengeNo=<%=challengeNo %>"></jsp:include>
+
 	<div class="row text-left">
 		<!-- 도전 기한이 남았을 때 && 도전글 작성자가 자신의 도전글 페이지에 있을 때 인증하기 버튼 출력 -->
 		<%if(currentTimeSec < endTimeSec && challengeListDto.getMemberNo() == (int) request.getSession().getAttribute("memberNo")) {%>

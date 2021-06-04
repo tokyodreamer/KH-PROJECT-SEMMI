@@ -125,7 +125,6 @@
    		color: #fff;
    		margin-left: -6px;
    		position: relative; 
-   		top: 1px;
    		cursor: pointer;
 	}
 	
@@ -146,6 +145,16 @@
 	.write-btn:hover {
 		background-color: rgb(46, 163, 79);
 		color: white;
+	}
+	
+	#reply_count {
+		font-weight: bold;
+		color: #ff2f3b;
+	}
+	
+	.search-box {
+		height: 40px; 
+		padding : 0px 10px;
 	}
 
 </style>
@@ -224,9 +233,18 @@
 						<td><%=challengeListDto.getChallengeNo() %></td>
 						<td><%=challengeListDto.getCategorytype() %></td>
 						<td class = "text-left text-deco">
+							
 							<!-- 제목을 누르면 상세보기 페이지로 이동 -->
 							<a href="challengeDetail.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>">
-							<%=challengeListDto.getChallengeTitle() %></a>
+								<%=challengeListDto.getChallengeTitle() %>
+							</a>
+							
+							<%if(challengeListDto.getChallengeReply() > 0){ %>
+							<!-- 댓글 개수 출력 : 0보다 클 경우만 출력 -->
+							<a href="challengeDetail.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>" id="reply_count">
+							[<%=challengeListDto.getChallengeReply() %>]
+							</a>
+							<%} %>
 						</td>
 						<td><%=challengeListDto.getMemberNick() %></td>
 						<td><%=challengeListDto.getChallengePushPoint() %>원</td>
@@ -278,13 +296,13 @@
 		<form class="search-form" action="challengeList.jsp" method="get">
 			<input type="hidden" name="pageNo">
 		
-			<select name="type" style="height: 40px; padding : 0px 10px;">
+			<select name="type" class ="search-box">
 				<option value="challenge_title">제목만</option>
 				<option value="category_type">카테고리</option>
 				<option value="member_nick">글작성자</option>
 			</select>
 		
-			<input type="text" name="keyword" placeholder="검색어" style="height: 40px; padding : 0px 10px;">
+			<input type="text" name="keyword" placeholder="검색어" class="search-box">
 		
 			<input type="submit" value="검색" class="subt-btn">
 		

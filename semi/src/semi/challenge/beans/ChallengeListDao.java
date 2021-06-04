@@ -39,7 +39,8 @@ public class ChallengeListDao {
 			challengeListDto.setChallengeDonate(rs.getInt("challenge_donate"));
 			challengeListDto.setChallengeResult(rs.getString("challenge_result"));
 			challengeListDto.setChallengeRead(rs.getInt("challenge_read"));
-
+			challengeListDto.setChallengeReply(rs.getInt("challenge_reply"));
+			
 			challengeListDto.setMemberNo(rs.getInt("member_no"));
 			challengeListDto.setMemberNick(rs.getString("member_nick"));
 			challengeListDto.setMemberPoint(rs.getInt("member_point"));
@@ -86,7 +87,8 @@ public class ChallengeListDao {
 			challengeListDto.setChallengeDonate(rs.getInt("challenge_donate"));
 			challengeListDto.setChallengeResult(rs.getString("challenge_result"));
 			challengeListDto.setChallengeRead(rs.getInt("challenge_read"));
-
+			challengeListDto.setChallengeReply(rs.getInt("challenge_reply"));
+			
 			challengeListDto.setMemberNo(rs.getInt("member_no"));
 			challengeListDto.setMemberNick(rs.getString("member_nick"));
 
@@ -159,7 +161,8 @@ public class ChallengeListDao {
 			challengeListDto.setChallengeContent(rs.getString("challenge_content"));
 			// challengeListDto.setChallengeResult(rs.getString("challenge_result"));
 			// challengeListDto.setChallengeRead(rs.getInt("challenge_read"));
-
+			// challengeListDto.setChallengeReply(rs.getInt("challenge_reply"));
+			
 			challengeListDto.setMemberNo(rs.getInt("member_no"));
 			challengeListDto.setMemberNick(rs.getString("member_nick"));
 
