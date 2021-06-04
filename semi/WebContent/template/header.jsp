@@ -82,13 +82,13 @@
 							<li><a href="<%=root%>/member/memberExit.kh" id="memberExit">탈퇴하기</a></li>
 
 						<%} else { %>
-<<<<<<< HEAD
+
 							<li><a href="<%=root%>/member/emailCheck.jsp">회원 가입</a></li>
 							<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
-=======
+
 						<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
 						<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
->>>>>>> refs/remotes/origin/main
+
 						<%} %>
 
 					</ul></li>
@@ -149,7 +149,7 @@
 						<%} %>
 					</ul></li>
 				<%if(isLogin) {%>	
-<<<<<<< HEAD
+
 				<li><a href="#">관리자</a>
 					<ul>
 
@@ -164,9 +164,9 @@
 				</li>
 				<%if(isLogin) {%>	
 					<li class="point"><a href="#">보유포인트 : <%=memberDto.getMemberPoint() %></a></li>
-=======
+
 					<li class="point"><a href="#"><%=memberDto.getMemberNick() %> 님의 보유포인트 : <%=memberDto.getMemberPoint() %></a></li>
->>>>>>> refs/remotes/origin/main
+
 				<%} %>
 
 			</ul>
