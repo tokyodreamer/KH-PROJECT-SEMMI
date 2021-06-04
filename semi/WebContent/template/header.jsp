@@ -53,10 +53,8 @@
 					class="link-btn loginlogout"
 					style="font-size: 20px; background-color: black; color: white;">&nbsp;로그인&nbsp;</a>
 				<%} %>
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/main
+
 			</div>
 		</header>
 		<nav>
@@ -64,7 +62,7 @@
 				<li><a href="<%=root%>/member/myPage.jsp">마이 페이지</a>
 					<ul>
 						<%if(isLogin) { %>
-<<<<<<< HEAD
+
 						<li><a href="<%=root%>/member/myPage.jsp">내 정보 보기</a></li>
 						<li><a href="<%=root%>/member/myChallenge.jsp">나의 도전글</a></li>
 						<li><a href="<%=root%>/member/myDonate.jsp">나의 후원내역</a></li>
