@@ -12,6 +12,15 @@ public class ReviewListDto {
 	
 
 	private String memberNick;
+	private int memberPoint;
+	
+	public int getMemberPoint() {
+		return memberPoint;
+	}
+
+	public void setMemberPoint(int memberPoint) {
+		this.memberPoint = memberPoint;
+	}
 
 	public ReviewListDto() {
 		super();
