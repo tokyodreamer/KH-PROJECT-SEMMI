@@ -20,8 +20,7 @@
 	List<ReplyListDto> replyList = replyListDao.list(challengeNo);
 
 %>
-	<style>
-	
+<style>
 	textarea.form-input {
 	resize: vertical;
 	min-height: 100px; /*수치는 자유롭게 설정*/
@@ -65,6 +64,7 @@
 	margin-left:5%; 
 	margin-top:20px;
 	}
+	
 	.reply-edit-btn{
 	text-decoration: underline; 
 	cursor: pointer; 
@@ -74,7 +74,7 @@
 	.reply-delete-btn{
 	padding-right: 20px;
 	}
-	</style>
+</style>
 	
 	
 	<script>

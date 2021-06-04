@@ -69,7 +69,7 @@
 	DonateDao donateDao = new DonateDao();
 	
 	// 도전 기록이 있는 지 확인된 회원번호
-	int checkDonateMember = donateDao.checkDonate(challengeNo);
+	int checkDonateMember = donateDao.checkDonate(challengeNo, memberNo);
 	
 %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -344,7 +344,7 @@ padding-top:0.5rem;
 		<%} %> </li>
 </ul>
 </div>
-<%if (currentTimeSec < endTimeSec && challengeListDto.getMemberNo() == (int) request.getSession().getAttribute("memberNo")) { %>
+<%if (challengeListDto.getMemberNo() == memberNo) { %>
 	<div class="authInsertPage">
 	<span class="authInsertInfo"> "사진과 글로 자신의 도전을 공유 및 증명 할 수 있습니다." </span>
 	<br><br>
@@ -356,7 +356,7 @@ padding-top:0.5rem;
 	<br> 
 	</div>
 	<%}
-else if(System.currentTimeMillis() < endDateParsed.getTime() && checkDonateMember != (int) request.getSession().getAttribute("memberNo"))  {%>
+else if(checkDonateMember == 0)  {%>
 		<div class="donatePage">
 	<form action="<%=request.getContextPath()%>/donate/donateJoin.kh?donateChallengeNo=<%=challengeNo%>&donateMemberNo=<%=memberNo%>&donateCategoryNo=<%=challengeListDto.getCategoryNo()%>" class="donate-form" method="post">
 		<span class="donateInfo"> "후원자가 되어 <%=challengeListDto.getMemberNick()%>님의 도전을 응원해 주세요."
@@ -375,7 +375,7 @@ else if(System.currentTimeMillis() < endDateParsed.getTime() && checkDonateMembe
 	</form>
 	</div>
 	<%} 
-else if(checkDonateMember == (int) request.getSession().getAttribute("memberNo")){ %>
+else if(checkDonateMember != 0){ %>
 		<div class="donatePage">
 		<span class="donateInfo"> "후원자가 되어 <%=challengeListDto.getMemberNick()%>님의 도전을 응원해 주세요."
 		<a href="#" class="link-btn Info">후원 혜택 알아보기</a></span> 
@@ -442,6 +442,7 @@ List<AuthDto> authListByChallenge = authDao.listByChallenge(challengeNo);
 	
 	</table>
 	</div>
+
 	<%int a =1; %>
 	<jsp:include page="/reply/reply.jsp?challengeNo=<%=challengeNo %>"></jsp:include>
 	<button class="donate-btn donate-btn-list" id="list">목록</button>
