@@ -364,7 +364,7 @@ List<AuthDto> authListByChallenge = authDao.listByChallenge(challengeNo);
 	
 	</table>
 	</div>
-	
+	<%int a =1; %>
 	<button class="donate-btn donate-btn-list" id="list">목록</button>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
