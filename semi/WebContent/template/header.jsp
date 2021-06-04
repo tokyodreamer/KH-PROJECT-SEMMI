@@ -1,3 +1,5 @@
+<%@page import="semi.member.beans.MemberDto"%>
+<%@page import="semi.member.beans.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -11,9 +13,15 @@
 	// - 세션에 memberNo 가 null 이면 로그아웃 상태로 간주
 	Integer memberNo = (Integer) session.getAttribute("memberNo");
 	Integer adminNo = (Integer) session.getAttribute("adminNo");
-
+	
 	boolean isLogin = memberNo != null || adminNo != null; 
-
+	
+	// 보유포인트 출력
+	MemberDto memberDto = new MemberDto();
+	if((Integer) session.getAttribute("memberNo") != null){
+		MemberDao memberDao = new MemberDao();
+		memberDto = memberDao.find((int) session.getAttribute("memberNo"));
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -27,13 +35,12 @@
 
 </head>
 	<main>
-		<header class="float-container " style="padding: 1.4rem;">
-			<div class="left">
-				<a href="<%=root%> " class="link-btn"
-					style="font-size: 43px; text-decoration: none; color: black"><span
-					style="font-weight: bold">SEMI</span> Project </a>
-			</div>
-			<div class="right">
+		<header class="float-container " style="padding:1.4rem;">
+		<div class="left" >
+		<a href="<%=root%>" class="logo" ><span style="font-weight: bold">SEMI</span> Project </a>
+		</div>
+			<div class="right" >
+
 				<%if(isLogin) { %>
 				<a href="<%=root%>/member/memberLogout.kh"
 					class="link-btn loginlogout"
@@ -46,7 +53,10 @@
 					class="link-btn loginlogout"
 					style="font-size: 20px; background-color: black; color: white;">&nbsp;로그인&nbsp;</a>
 				<%} %>
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/main
 			</div>
 		</header>
 		<nav>
@@ -54,11 +64,18 @@
 				<li><a href="<%=root%>/member/myPage.jsp">마이 페이지</a>
 					<ul>
 						<%if(isLogin) { %>
+<<<<<<< HEAD
 						<li><a href="<%=root%>/member/myPage.jsp">내 정보 보기</a></li>
 						<li><a href="<%=root%>/member/myChallenge.jsp">나의 도전글</a></li>
 						<li><a href="<%=root%>/member/myDonate.jsp">나의 후원내역</a></li>
 						<li><a href="<%=root%>/member/editMember.jsp">내 정보 변경</a></li>
 						<li><a href="<%=root%>/member/memberExit.kh" id="memberExit">탈퇴하기</a></li>
+
+							<li><a href="<%=root%>/member/myPage.jsp">내 정보 보기</a></li>
+							<li><a href="<%=root%>/member/myChallenge.jsp">나의 도전글</a></li>
+							<li><a href="<%=root%>/member/myDonate.jsp">나의 후원내역</a></li> 
+							<li><a href="<%=root%>/member/editMember.jsp">내 정보 변경</a></li>
+							<li><a href="<%=root%>/member/memberExit.kh" id="memberExit">탈퇴하기</a></li>
 
 						<%} else { %>
 						<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
@@ -67,9 +84,15 @@
 
 					</ul></li>
 
+
+					</ul>
+				</li>
+					
+
 				<li><a href="#">챌린저스 (가제)</a>
 					<ul>
 						<li><a href="<%=root%>/intro/intro.jsp">챌린저스란?</a></li>
+
 						<!-- 비회원인 경우에도 도전글을 볼 수 있도록 할 것인가?  -->
 						<li><a href="<%=root%>/challenge/challengeList.jsp">도전글
 								목록</a></li>
@@ -77,11 +100,18 @@
 						<!-- 유저가 작성한 인증글 목록  -->
 						<!-- <li><a href="<%=root%>/item/itemList.jsp">인증글 목록</a></li> -->
 
+					<li><a href="<%=root%>/challenge/challengeList.jsp">도전글 목록</a></li>
+
 						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
+
 					</ul></li>
 
 				<li><a href="#">후기</a>
-					<ul>
+
+					</ul>
+				</li>
+					
+				<li><a href="#" >후기</a>
 
 						<%
 						if (isLogin) {
@@ -143,6 +173,17 @@
 				<%
 				}
 				%>
+
+						<li><a href="<%=root%>/review/reviewList.jsp">이용 후기</a></li>
+						<%if(isLogin) {%>
+						<li><a href="<%=root%>/review/reviewWrite.jsp">후기 작성</a></li>
+						<%} %>
+					</ul>
+				</li>
+				<%if(isLogin) {%>	
+					<li class="point"><a href="#">보유포인트 : <%=memberDto.getMemberPoint() %></a></li>
+				<%} %>
+
 			</ul>
 		</nav>
 		<section>

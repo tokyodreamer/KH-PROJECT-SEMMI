@@ -1,6 +1,10 @@
+<%@page import="semi.member.beans.MemberDto"%>
+<%@page import="semi.member.beans.MemberDao"%>
+<%@page import="semi.auth.beans.AuthDto"%>
 <%@page import="java.util.List"%>
 <%@page import="semi.auth.beans.AuthDao"%>
 <%@page import="semi.challenge.beans.ChallengeDao"%>
+<%@page import="semi.challenge.beans.ChallengeDto"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
 <%@page import="semi.donate.beans.DonateDao"%>
@@ -13,6 +17,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
+
+
+
 	int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
 
 	ChallengeListDao challengeListDao = new ChallengeListDao();
@@ -20,25 +27,9 @@
 	ChallengeDao challengeDao = new ChallengeDao();
 	
 	int memberNo = (int)session.getAttribute("memberNo");
-	/* Set<Integer> challengeNoSet;
-	if(session.getAttribute("challengeNoSet") != null){
-		challengeNoSet = (Set<Integer>)session.getAttribute("challengeNoSet");
-	}
-	else {
-		challengeNoSet = new HashSet<>();
-	}
-	
-	if(challengeNoSet.add(challengeNo)){
-		challengeDao.read(challengeNo, memberNo);
-		System.out.println("조회수 증가");
-	}
-	
-	System.out.println("저장소 : "+challengeNoSet);
-	
-	//저장소 갱신
-	session.setAttribute("challengeNoSet", challengeNoSet); */
-	
 	ChallengeListDto challengeListDto = challengeListDao.getChallenge(challengeNo);
+	MemberDao memberDao = new MemberDao();
+	MemberDto memberDto = memberDao.find(memberNo);
 	
 	// 목표 : DB에서 가져온 시작일 과 종료일을 확인하여 남은 기간을 실시간으로 계산하고 싶다!
 	// 준비 : JDBC 에서 불러온 시작 날짜 값 (문자열)
@@ -97,13 +88,84 @@
 		}; 
 		
 	});
+	
+</script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/donateJoin.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// 참가비 :
+		
+		$("#donatePoint").focus(function(){
+			$(this).nextAll(".fail-message-01").hide();
+			$(this).nextAll(".fail-message-02").hide();
+			$(this).nextAll(".success-message").hide();
+			$(this).nextAll(".donate-checkPoint").show();
+		});
+	
+		$("#donatePoint").submit(function(){
+			$(this).nextAll(".donate-checkPoint").hide();
+			
+			// 후원금은 참가비의 1%까지만 가능하며 최소 후원 포인트는 100 포인트 이상 (완료)
+			if($("#donatePoint").val() > (<%=challengeListDto.getChallengePushPoint()%>*0.01)){
+					$(this).nextAll(".donate-checkPoint").hide();
+					$(this).nextAll(".success-message").hide();
+					$(this).nextAll(".fail-message-02").hide();
+					$(this).nextAll(".fail-message-01").show();
+					$("#donatePoint").val(<%=challengeListDto.getChallengePushPoint()%>*0.01);
+			// 조건절 : 
+			} else if($("#donatePoint").val() == "") {
+				$(this).nextAll(".donate-checkPoint").hide();
+				$(this).nextAll(".success-message").hide();
+				$(this).nextAll(".fail-message-01").hide();
+				$(this).nextAll(".fail-message-02").show();
+				$("#donatePoint").val(100);
+			// 조건절 : 
+			} else if( $("#donatePoint").val() < 100){
+				$(this).nextAll(".donate-checkPoint").hide();
+				$(this).nextAll(".success-message").hide();
+				$(this).nextAll(".fail-message-01").hide();
+				$(this).nextAll(".fail-message-02").show();
+				$("#donatePoint").val(100);
+			} else {
+				$(this).nextAll(".fail-message-01").hide();
+				$(this).nextAll(".fail-message-02").hide();
+				$(this).nextAll(".donate-checkPoint").hide();
+				$(this).nextAll(".success-message").show();
+			}
+			
+		});
+		
+		$(".donate-form").submit(function(e){
+				
+				// 후원금이 참가비의 1% 이상이면 이벤트 중지 (완료)
+				if($("#donatePoint").val() > (<%=challengeListDto.getChallengePushPoint()%>*0.01)){
+					alert("후원은 도전자 <%=challengeListDto.getMemberNick()%>님의 도전 참가비인 <%=challengeListDto.getChallengePushPoint()%>Point의 1%까지 할 수 있습니다.");
+					e.preventDefault();
+					$("#donatePoint").val(<%=challengeListDto.getChallengePushPoint()%>*0.01);
+					$("#donatePoint").focus();
+				}
+				else if($("#donatePoint").val() < 100){
+					alert("최소 후원금은 100Point 입니다");
+					e.preventDefault();
+					$("#donatePoint").val(100);
+					$("#donatePoint").focus();
+					}	
+		});
+		
+		// 목록 페이지 이동 (완료)
+		$("#list").click(function(e){
+			e.preventDefault();
+			location.href="<%=request.getContextPath()%>/challenge/challengeList.jsp";
+		});
+		
+	});
 </script>
 <style>
 .title{
 font-size: 40px;
 font-weight: bold;
 text-align: center;
-margin-left: -5%;
 
 }
 .content{
@@ -131,24 +193,39 @@ width:25%;
 display: inline-block;
 border: 1px solid black;
 font-size: 30px;
-padding: .5rem;
 border-radius: 1em;
 }
 .description  li{
-list-style: armenian;
+list-style: none;
 }
 .leftTime >li {
 }
-.authList{
-width:70%;
+.table.authList{
+margin-top: 30px;
+width:50%;
 }
+.table.authList {
+}
+.donatePage{
+margin-top: 30px;
+width:45%;
+border-top: 2px dotted black;
+border-bottom: 2px dotted black;
+text-align: center;
+}
+.donateInfo{
+font-size:18px;
+font-weight: bold;
+padding-top:0.5rem;
+}
+
 </style>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <div class="container-1500">
 	<div class="title-content"> 
 	
 	<div class="title"> <%=challengeListDto.getChallengeTitle() %>
-	<span style="font-family:cursive; font-size: 20px; position: relative; left:50px;"> by. <%=challengeListDto.getMemberNick()%> </span>
+	<span style="font-family:cursive; font-size: 20px; position: relative;"> ( 도전자: <%=challengeListDto.getMemberNick()%> )</span>
 	</div>
 	<div class=" content"> <%=challengeListDto.getChallengeContent() %></div>
 </div>
@@ -159,47 +236,98 @@ width:70%;
 <div class="percent"><li> <span style=" font-size:22px; font-weight:bold;">현재 달성률:&nbsp&nbsp </span> <%=challengeListDto.getChallengePercent() %> %</li></div>
 <div class="duration"> <li> <span style="font-size:22px; font-weight:bold;">도전 기간:&nbsp&nbsp</span><%=challengeListDto.getChallengeStartDate().substring(5,10) %>
 ~ <%=challengeListDto.getChallengeEndDate().substring(5,10) %> </li>
-<%-- <div class="totalPoint"><li> <span style="font-size:22px; font-weight:bold;"> 누적 후원금: </span> <%=challengeListDto.getChallengeDonate() %> Point</li> </div> --%>
+<div class="totalPoint"><li> <span style="font-size:22px; font-weight:bold;"> 누적 후원금: </span> <%=challengeListDto.getChallengeDonate() %> Point</li> </div>
 
 <div class="leftTime"> <li>
 		<%if(currentTimeSec > endTimeSec) {%>
-		<span style="font-size:22px; font-weight:bold;">도전기한 만료됨 </span>
+		<span style="font-size:22px; font-weight:bold; color:red;">도전기한 만료됨 </span>
 		<%} else { %>
-		<span id="timeLimit" style="font-size:22px; font-weight: bold; "></span>
+		<span id="timeLimit" style="font-size:22px; font-weight: bold; color:blue;"></span>
 		<%} %> </li>
 </div>
 </ul>
 </div>
 
-<%-- <% --%>
-// AuthDao authDao = new AuthDao();
-// List authNoList = authDao.getNoByChallengeNo(challengeNo);
-<%-- %> --%>
-	<div >
+	<div class="donatePage">
+
+	<form action="<%=request.getContextPath()%>/donate/donateJoin.kh?donateChallengeNo=<%=challengeNo%>&donateMemberNo=<%=memberNo%>&donateCategoryNo=<%=challengeListDto.getCategoryNo()%>" class="donate-form" method="post">
+		<span class="donateInfo"> "후원자가 되어 <%=challengeListDto.getMemberNick()%>님의 도전을 응원해 주세요."
+	&nbsp<a href="#" class="link-btn Info">후원 혜택 알아보기</a></span> 
+	<div>
+			<span class="donate-span">To. <%=challengeListDto.getMemberNick()%></span>
+			<input type="number" class="donate-input donate-input-underline" name="donatePushPoint"  id="donatePoint" >
+			<input type="submit"  class="donate-btn" value="후원하기">
+			<br>
+			<span class="fail-message-01">후원은 도전자 <%=challengeListDto.getMemberNick()%>님의
+			도전 참가비인 <%=challengeListDto.getChallengePushPoint()%>Point의 1%까지 할 수 있습니다.</span>
+			<span class="fail-message-02">최소 후원금은 100 포인트 입니다</span>
+			<span class="donate-checkPoint">후원은 100Point ~ <%=challengeListDto.getChallengePushPoint() *1/100%>Point 사이에서 할 수 있습니다.</span>
+			<span class="success-message"> 후원 성공</span>
+			</div>
+	</form>
+	</div>
+	
+<% 
+AuthDao authDao = new AuthDao();
+List<AuthDto> authListByChallenge = authDao.listByChallenge(challengeNo);
+%>
+	<div class="authList">
 	<table class="table table-border authlist">
 		<thead>
 		<tr>
-			<th colspan="2"> 인증1</th>
+			<th colspan="4" style="font-size:22px"> 인증</th>
 				
 		</tr>
 		</thead>
-		
 		<tbody>
-<%-- 		<%for (int i=0; i<authNoList.size(); i++) {%> --%>
+		
+	<%for(AuthDto authDto : authListByChallenge){ %>
 			<tr>
-<%-- 				<td> <img src="authDetail.kh?authNo=<%=authNoList.get(i)%>" width="100%" height="400"></td> --%>
-				<td> 제목, 날짜</td>
-				<td> 내용</td>
-				<td> 결과, 이유</td>
+  			<th style=" width:120px; height:120px"> <img src="<%=request.getContextPath()%>/auth/authDetail.kh?authNo=<%=authDto.getAuthNo()%>" width="100%;" height="100%;"></th>
+			<th style="font-size:22px; width:200px"> <%=authDto.getAuthTitle() %> <br>(
+				<%=authDto.getAuthTimeLine() %>
+				)</th>
+				<td style="width:270px;"> <%=authDto.getAuthContent() %></td>
+				<th>
+				<%
+				String authResult;
+				String color;
+				if(authDto.getAuthResult().equals("N")){
+					authResult = "승인 대기 중";
+					color = "green";
+				}
+				else if(authDto.getAuthResult().equals("S")){
+					authResult = "인증 승인 됨";
+					color = "blue";
+				}
+				else{
+					authResult = "인증 실패";
+					color = "red";
+				}
+				
+				%>
+				<span style="color:<%=color %>"><%=authResult%></span> <hr>
+				<%=authDto.getAuthReason() %> </th>
+			
 			</tr>
-<%-- 			<%} %> --%>
+ 			<%} %> 
+ 			<%int listSize = authListByChallenge.size();
+ 			%>
+ 			
+ 			
+			<%if(listSize==0){ %>
+			<tr>
+				<th>아직 도전자 <%=challengeListDto.getMemberNick()%>님이 올리신 인증글이 없습니다. 
+				</th>
+			</tr>
+			<%} %>
 		</tbody>
 	
 	</table>
-	
 	</div>
 	
-	
+<jsp:include page="/reply/reply.jsp?challengeNo=<%=challengeNo %>"></jsp:include>
+
 	<div class="row text-left">
 		<!-- 도전 기한이 남았을 때 && 도전글 작성자가 자신의 도전글 페이지에 있을 때 인증하기 버튼 출력 -->
 		<%if(currentTimeSec < endTimeSec && challengeListDto.getMemberNo() == (int) request.getSession().getAttribute("memberNo")) {%>
@@ -209,11 +337,11 @@ width:70%;
 			<a href="<%=request.getContextPath() %>/donate/donateJoin.jsp?challengeNo=<%=challengeNo%>" class="ex-btn">후원하기</a>
 		<!-- 도전 기한이 남았을 때 && 로그인한 회원이 후원한 내역이 있다면 이미 후원하였다는 문구 출력 -->
 		<%} else  if(System.currentTimeMillis() < endDateParsed.getTime() && checkDonateMember == (int) request.getSession().getAttribute("memberNo"))  {%>
-			<h4>이미 후원하였습니다</h4>
+			<a>이미 후원하였습니다<a>
 		<%} %>
 		<!-- 도전 기한이 만료되었다면 몰고 리스트만 출력 -->
-		<a href="challengeList.jsp" class="ex-btn">목록</a>
+		
 	</div>
-	
+	<button class="donate-btn donate-btn-list" id="list">목록</button>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

@@ -5,21 +5,22 @@
 }
 
 .donate-input {
-	width: 30%;
-	padding: 1rem;
+	text-align: center;
+	width: 100px;
+	padding:.6em;
 	outline: none;
+	
 }
 
 .donate-input.donate-input-underline {
-	border: none;
-	font-size: 20px;
+	border-top: none;
+	border-left:none;
+	border-right: none;
+	border-bottom: 1px solid black;
+	font-size: 24px;
 	font-weight:bold;
 }
 
-.donate-input.donate-input-underline:focus {
-	border-bottom: 3px solid black;
-	border-bottom-color: black;
-}
 
 .donate-input.donate-input-inline {
 	width: auto;
@@ -30,6 +31,7 @@
 	display:none;
 	font-size: 20px;
 	font-weight: bold;
+	color: green;
 }
 
 /* 후원 라벨 (완료) */
@@ -40,7 +42,7 @@
 
 /* 후원 안내 (완료)*/
 .donate-span {
-	font-size: 20px;
+	font-size: 24px;
 	font-weight: bold;
 }
 /* 후원 에러 메세지 (완료) : */
@@ -68,13 +70,15 @@
 /* 후원하기 버튼 (완료)*/
 .donate-btn {
 	margin-top: 20px;
-	width: 30%;
+	width: 200px;
 	border: none;
 	background-color: black;
 	color: white;
 	height: 50px;
-	font-size: 20px;
+	font-size: 24px;
 	font-weight: bold;
+	padding:0.3rem;
+	border-radius: 1.5em;
 }
 
 /* 후원하기 버튼 : HOVER (완료)*/
