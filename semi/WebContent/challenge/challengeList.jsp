@@ -105,9 +105,11 @@
       color: #168;
       background: #f0f6f9;
       text-align: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
 	}
 	
-	.table th, .table td {
+	.table td {
       padding: 10px;
       border-bottom: 1px solid #ddd;
     }
@@ -147,9 +149,17 @@
 		color: white;
 	}
 	
-	#reply_count {
+	#reply-count {
 		font-weight: bold;
 		color: #ff2f3b;
+	}
+	.list-count {
+		font-size:20x;
+	}
+	
+	.list-count > span {
+		font-weight: bold; 
+		margin-right: -3px;
 	}
 	
 	.search-box {
@@ -200,14 +210,14 @@
 		<h2>전체 도전글 보기</h2>
 	</div>
 	<div class="float-container">
-		<div class="left" style="font-size:20x;">
-			<span style="font-weight: bold; margin-right: -3px;"><%=count%></span>
+		<div class="left list-count">
+			<span><%=count%></span>
 			개의 글
 		</div>
 	</div>
 <!-- <h3>pageNo = <%=pageNo%>, startRow = <%=startRow %>, endRow = <%=endRow %> </h3> -->
 	<div class="row">
-		<table class="table table-hover table-head">
+		<table class="table table-hover">
 			<thead>
 					<tr>
 						<th>번호</th>
@@ -227,7 +237,7 @@
 			
 			<tbody>
 					<!-- 정산 결과 처리 여부로 제어문 추가 요청 : 정 계진 -->
-			<tbody class = "text-center table-head">
+			<tbody class = "text-center">
 					<%for(ChallengeListDto challengeListDto : challengeList){ %>
 					<tr>
 						<td><%=challengeListDto.getChallengeNo() %></td>
@@ -241,7 +251,7 @@
 							
 							<%if(challengeListDto.getChallengeReply() > 0){ %>
 							<!-- 댓글 개수 출력 : 0보다 클 경우만 출력 -->
-							<a href="challengeDetail.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>" id="reply_count">
+							<a href="challengeDetail.jsp?challengeNo=<%=challengeListDto.getChallengeNo()%>" id="reply-count">
 							[<%=challengeListDto.getChallengeReply() %>]
 							</a>
 							<%} %>
@@ -262,7 +272,7 @@
 	
 	<div class="row text-right">
 
-		<a href="challengeJoin.jsp" class="write-btn">글쓰기</a>
+		<a href="challengeJoin.jsp" class="write-btn">도전하기</a>
 
 	</div>
 	
