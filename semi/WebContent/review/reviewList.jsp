@@ -1,3 +1,4 @@
+<%@page import="semi.review.beans.ReviewDao"%>
 <%@page import="semi.review.beans.ReviewListDto"%>
 <%@page import="semi.review.beans.ReviewListDao"%>
 <%@page import="java.util.List"%>
@@ -7,6 +8,8 @@
 	// 리스트 목록 불러오기 
 	ReviewListDao reListDao = new ReviewListDao();
 	List<ReviewListDto> reviewList = reListDao.list();
+	//1. dao를 활용하여 회원 포인트를 불어온다
+	ReviewDao reDao = new ReviewDao();
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
