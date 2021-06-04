@@ -11,7 +11,7 @@ public class ReviewListDto {
 	private String reviewContent;
 	private int memberPoint;
 	private String memberNick;
-
+	
 	public ReviewListDto() {
 		super();
 	}

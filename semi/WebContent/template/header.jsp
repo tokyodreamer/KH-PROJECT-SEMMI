@@ -40,7 +40,6 @@
 		<a href="<%=root%>" class="logo" ><span style="font-weight: bold">SEMI</span> Project </a>
 		</div>
 			<div class="right" >
-
 				<%if(isLogin) { %>
 				<a href="<%=root%>/member/memberLogout.kh"
 					class="link-btn loginlogout"
@@ -58,8 +57,6 @@
 					style="font-size: 20px; background-color: black; color: white;">&nbsp;로그인&nbsp;</a>
 
 				<%} %>
-
-
 			</div>
 		</header>
 		<nav>
@@ -68,19 +65,11 @@
 				<li><a href="<%=root%>/member/myPage.jsp">마이 페이지</a>
 					<ul>
 						<%if(isLogin) { %>
-
 						<li><a href="<%=root%>/member/myPage.jsp">내 정보 보기</a></li>
 						<li><a href="<%=root%>/member/myChallenge.jsp">나의 도전글</a></li>
 						<li><a href="<%=root%>/member/myDonate.jsp">나의 후원내역</a></li>
 						<li><a href="<%=root%>/member/editMember.jsp">내 정보 변경</a></li>
 						<li><a href="<%=root%>/member/memberExit.kh" id="memberExit">탈퇴하기</a></li>
-
-							<li><a href="<%=root%>/member/myPage.jsp">내 정보 보기</a></li>
-							<li><a href="<%=root%>/member/myChallenge.jsp">나의 도전글</a></li>
-							<li><a href="<%=root%>/member/myDonate.jsp">나의 후원내역</a></li> 
-							<li><a href="<%=root%>/member/editMember.jsp">내 정보 변경</a></li>
-							<li><a href="<%=root%>/member/memberExit.kh" id="memberExit">탈퇴하기</a></li>
-
 						<%} else { %>
 
 							<li><a href="<%=root%>/member/emailCheck.jsp">회원 가입</a></li>
@@ -90,64 +79,22 @@
 						<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
 
 						<%} %>
-
 					</ul></li>
-
-
-					</ul>
-				</li>
 					
 				<li><a href="#">더 챌린지</a>
 					<ul>
 						<li><a href="<%=root%>/challenge/challengeList.jsp">도전글 목록</a></li>
 						<li><a href="<%=root%>/auth/authList.jsp">인증글 목록</a></li>
 					</ul></li>
-
-				<li><a href="#">후기</a>
-
-					</ul>
-				</li>
-					
+				
 				<li><a href="#" >후기</a>
-
-						<%
-						if (isLogin) {
-						%>
-						<li><a href="<%=root%>/review/reviewList.jsp">사용자 리뷰</a></li>
-						<li><a href="<%=root%>/review/reviewWrite.jsp">리뷰 작성</a></li>
-						<%
-						} else {
-						%>
-						<li><a href="<%=root%>/review/reviewList.jsp">사용자 리뷰</a></li>
-						<%
-						}
-						%>
-
-						<li><a href="<%=root%>/review/reviewList.jsp">챌린저스 이용후기</a></li>
-						<%
-						if (isLogin) {
-						%>
-						<li><a href="<%=root%>/review/reviewWrite.jsp">이용후기 작성</a></li>
-						<%
-						}
-						%>
-
-
-						<li><a href="<%=root%>/review/reviewList.jsp">챌린저스 이용후기</a></li>
-						<%
-						if (isLogin) {
-						%>
-						<li><a href="<%=root%>/review/reviewWrite.jsp">이용후기 작성</a></li>
-						<%
-						}
-						%>
-
-					</ul></li>
+					<ul>
 						<li><a href="<%=root%>/review/reviewList.jsp">이용 후기</a></li>
 						<%if(isLogin) {%>
 						<li><a href="<%=root%>/review/reviewWrite.jsp">후기 작성</a></li>
 						<%} %>
 					</ul></li>
+				
 				<%if(isLogin) {%>	
 
 				<li><a href="#">관리자</a>
