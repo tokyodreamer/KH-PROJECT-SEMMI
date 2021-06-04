@@ -8,8 +8,6 @@
 // 리스트 목록 불러오기 
 ReviewListDao reListDao = new ReviewListDao();
 List<ReviewListDto> reviewList = reListDao.list();
-//1. dao를 활용하여 회원 포인트를 불어온다
-ReviewDao reDao = new ReviewDao();
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
@@ -87,7 +85,15 @@ $(function(){
 	%>
 	<div class="row" id="review-box">
 		<div class="row">
-			<img src="#" alt="profileIMG">
+<%-- 				<%if(memberPoint <=200000) { %> --%>
+<!-- 				<img src="/image/bronze.jpg" > -->
+<%-- 				<%} else if(memberPoint <=400000) { %> --%>
+<!-- 				<img src="/image/silver.jpg"> -->
+<%-- 				<%} else if(memberPoint <=600000) { %> --%>
+<!-- 				<img src="/image/gold.jpg"> -->
+<%-- 				<%} else { %> --%>
+<!-- 				<img src="/image/platinum.jpg"> -->
+<%-- 				<%} %> --%>
 		</div>
 		<div class="row">
 		<label id="nick">닉네임:</label> <span class="sp-nick"> <%

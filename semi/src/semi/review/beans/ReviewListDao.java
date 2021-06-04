@@ -27,7 +27,7 @@ public class ReviewListDao {
 			reListDto.setReviewTime(rs.getDate("review_time"));
 			reListDto.setReviewStar(rs.getInt("review_star"));
 			reListDto.setMemberNick(rs.getString("member_nick"));
-	
+			reListDto.setMemberPoint(rs.getInt("member_point"));
 			
 			reviewList.add(reListDto);
 			
