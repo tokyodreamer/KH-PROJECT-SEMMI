@@ -9,7 +9,6 @@ import java.util.List;
 
 
 import semi.beans.JDBCUtils;
-import semi.member.beans.MemberDto;
 
 public class ChallengeDao {
 	
@@ -32,7 +31,7 @@ public class ChallengeDao {
 	public void challengeJoin(ChallengeDto challengeDto) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N')";
+		String sql = "insert into challenge values(?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, 'N', 0, 0)";
 		
 		PreparedStatement ps = con.prepareStatement(sql); 
 		ps.setInt(1, challengeDto.getChallengeNo()); // 도전글 번호 
@@ -46,6 +45,7 @@ public class ChallengeDao {
 		ps.setString(9, challengeDto.getChallengeContent()); // 도전글 내용 
 		// 'N' - 컬럼 추가 제어문 : 도전 테이블에 최종 정산 여부를 확인할 용도 (05/28, 작성자 : 정 계진)
 		// 0 - 컬럼 추가 : 도전 테이블에 조회수 기능 추가(05/31, 작성자 : 박 민웅)
+		// 0 - 컬럼 추가 : 도전 테이블에 댓글 기능 추가(06/03, 작성자 : 박 민웅)
 		ps.execute();
 		
 		con.close();
@@ -78,6 +78,7 @@ public class ChallengeDao {
 			challengeDto.setChallengeContent(rs.getString("challenge_content"));
 			challengeDto.setChallengeResult(rs.getString("challenge_result"));
 			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
+			challengeDto.setChallengeReply(rs.getInt("challenge_reply"));
 		} else {
 			challengeDto = null;
 		}
@@ -93,7 +94,7 @@ public class ChallengeDao {
 		
 		String sql = "select * from ("
 					 	+ "select rownum rn, TMP.* from ("
-					 		+ "select * from challenge order by challenge_no desc"
+					 		+ "select * from challenge where sysdate <= challenge_endDate and challenge_result = 'N' order by challenge_no desc"
 					 	+ ")TMP"
 			          +") where rn between ? and ?"; 
 							
@@ -117,6 +118,7 @@ public class ChallengeDao {
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
 			challengeDto.setChallengeResult(rs.getString("challenge_result"));
 			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
+			challengeDto.setChallengeReply(rs.getInt("challenge_reply"));
 			
 			challengeList.add(challengeDto);
 		}
@@ -134,7 +136,7 @@ public class ChallengeDao {
 		String sql = "select * from ("
 			 			+ "select rownum rn, TMP.* from ("
 			 				+ "select * from challenge "
-			 				+ "where instr(#1, ?) > 0 order by challenge_no desc"
+			 				+ "where instr(#1, ?) > 0 and sysdate <= challenge_endDate and challenge_result = 'N' order by challenge_no desc"
 			 			+ ")TMP"
 			 		+") where rn between ? and ?"; 
 				
@@ -160,6 +162,7 @@ public class ChallengeDao {
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
 			challengeDto.setChallengeResult(rs.getString("challenge_result"));
 			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
+			challengeDto.setChallengeReply(rs.getInt("challenge_reply"));
 			
 			challengeList.add(challengeDto);
 		}
@@ -172,7 +175,7 @@ public class ChallengeDao {
 	public int getCount() throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "select count(*) from challenge";
+		String sql = "select count(*) from challenge where sysdate <= challenge_endDate and challenge_result = 'N'";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
@@ -187,7 +190,7 @@ public class ChallengeDao {
 	public int getCount(String type, String keyword) throws Exception {
 		Connection con = JDBCUtils.getConnection();
 		
-		String sql = "select count(*) from challenge where instr(#1, ?) > 0";
+		String sql = "select count(*) from challenge where instr(#1, ?) > 0 and sysdate <= challenge_endDate and challenge_result = 'N'";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
@@ -233,6 +236,39 @@ public class ChallengeDao {
 
 	}
 	
+	
+	//조회수 증가 기능 : 특정 번호의 게시글을 작성자가 아닌 사람이 읽을 경우에만 증가되도록 구현(05/31, 작성자 : 박 민웅)
+	public boolean read(int challengeNo, int memberNo) throws Exception{
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "update challenge "
+				+ "set challenge_read = challenge_read + 1 "
+				+ "where challenge_no = ? and challenge_writer != ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ps.setInt(2, memberNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count > 0;
+	}
+	
+	//댓글 개수 갱신 기능 구현(06/03 작성자 : 박민웅)
+	public boolean refreshChallengeReply(int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "update challenge "
+						+ "set challenge_reply = (select count(*) from reply where reply_origin = ? ) "
+					+ "where challenge_no = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		ps.setInt(2, challengeNo);
+		int count = ps.executeUpdate();
+		con.close();
+		return count > 0;
+	}
+	
 //	내 게시글목록
 	public List<ChallengeDto> myList(int memberNo) throws Exception {
 		Connection con = JDBCUtils.getConnection();
@@ -258,6 +294,7 @@ public class ChallengeDao {
 			challengeDto.setChallengeDonate(rs.getInt("challenge_donate"));
 			challengeDto.setChallengeResult(rs.getString("challenge_result"));
 			challengeDto.setChallengeRead(rs.getInt("challenge_read"));
+			//challengeDto.setChallengeReply(rs.getInt("challenge_reply"));
 			
 			challengeList.add(challengeDto);
 		}
@@ -320,23 +357,6 @@ public class ChallengeDao {
 		
 		return count > 0;
 	}
-
-	
-	//조회수 증가 기능 : 특정 번호의 게시글을 작성자가 아닌 사람이 읽을 경우에만 증가되도록 구현(05/31, 작성자 : 박 민웅)
-		public boolean read(int challengeNo, int memberNo) throws Exception{
-			Connection con = JDBCUtils.getConnection();
-			
-			String sql = "update challenge "
-					+ "set challenge_read = challenge_read + 1 "
-					+ "where challenge_no = ? and challenge_writer != ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, challengeNo);
-			ps.setInt(2, memberNo);
-			int count = ps.executeUpdate();
-			
-			con.close();
-			return count > 0;
-		}
 	
 	/*정산 작업 */
 	
@@ -361,40 +381,40 @@ public class ChallengeDao {
 	
 	// 1. 도전 정산 작업 
 		public boolean changeChallenge() throws Exception {
-			Connection con = JDBCUtils.getConnection();
+			try(Connection con = JDBCUtils.getConnection();) {
+				
+				String sql = "merge into member M using complete_challenge C on (C.challenge_writer = M.member_no) "
+						+ "when matched then update set M.member_point = M.member_point + C.challenge_calc_total";
+				PreparedStatement ps = con.prepareStatement(sql);
+				int count = ps.executeUpdate();
+				
+				return count > 0;
+			} 
 			
-			String sql = "merge into member M using complete_challenge C on (C.challenge_writer = M.member_no) "
-					+ "when matched then update set M.member_point = M.member_point + C.challenge_calc_total";
-			PreparedStatement ps = con.prepareStatement(sql);
-			int count = ps.executeUpdate();
-			
-			con.close();
-			return count > 0;
 		}
 		
 	// 2. 후원 정산 작업
 		public boolean changeDonate() throws Exception {
-			Connection con = JDBCUtils.getConnection();
+			try(Connection con = JDBCUtils.getConnection();) {
+				String sql = "merge into member M using complete_donate d on (d.member_no = M.member_no) "
+						+ "when matched then update set M.member_point = M.member_point + d.donate_calc_total";
+				PreparedStatement ps = con.prepareStatement(sql);
+				int count = ps.executeUpdate();
+				
+				return count > 0;
+			} 
 			
-			String sql = "merge into member M using complete_donate d on (d.member_no = M.member_no) "
-					+ "when matched then update set M.member_point = M.member_point + d.donate_calc_total";
-			PreparedStatement ps = con.prepareStatement(sql);
-			int count = ps.executeUpdate();
-			
-			con.close();
-			return count > 0;
 		}
 		
 	// 3. 해당 기한 만료 도전글에 대하여 정산 결과 변경 (완료)
 		public boolean changeResult() throws Exception {
-			Connection con = JDBCUtils.getConnection();
-			
-			String sql = "update challenge set challenge_result = 'Y' where sysdate >= challenge_endDate and challenge_result = 'N'";
-			PreparedStatement ps = con.prepareStatement(sql);
-			int count = ps.executeUpdate();
-			
-			con.close();
-			return count > 0;
+			try(Connection con = JDBCUtils.getConnection();) {
+				String sql = "update challenge set challenge_result = 'Y' where sysdate >= challenge_endDate and challenge_result = 'N'";
+				PreparedStatement ps = con.prepareStatement(sql);
+				int count = ps.executeUpdate();
+				
+				return count > 0;
+			} 
 		}
 		
 }

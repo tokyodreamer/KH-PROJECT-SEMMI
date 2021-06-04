@@ -18,55 +18,78 @@
 			8. 글자 또는 메뉴에 hover를 부여
 			9. 서서브 메뉴부터는 우측에 나오도록 구현
 		*/
-		.menu, .menu ul {
-			margin:0;
-			padding:0;
-			list-style: none;
-			border-top: 1px black solid;
-			border-bottom: 1px black solid;
-		}
-		
-		.menu > li {
-			display: inline-block;
-			position: relative;
-			height:70px;
-			margin-left:50px;
-		}
-		
-		.menu ul {
-			display: none; /*표시에 관한 부분은 display 상태 속성*/
-			position:absolute;
-			left: 10px;;
-			top:70px;
-		}
-		
-		.menu li:hover > ul {
-			display: block;
-		}
-		
-		.menu >li {
-			padding: 1rem;
-			width:160px;
-		}
-	.menu > li  li {
-	width:160px;
+.menu, .menu ul {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
+    background-color: black;
+}
+
+.menu>li {
+	display: inline-block;
+	position: relative;
+	height: 70px;
+	margin-left: 50px;
+	padding: 1rem;
+    width: 12%;
+}
+
+.menu ul {
+	display: none; /*표시에 관한 부분은 display 상태 속성*/
+	position: absolute;
+	left: 10px;;
+	top: 70px;
+}
+
+.menu li:hover>ul {
+	display: block;
+}
+
+.menu>li {
+	padding: 1rem;
+    width: 200px;
+}
+
+.menu>li  li {
+	width: 160px;
+	margin: 0;
 	padding: .3rem;
-	background-color: white;
-	}
-	.menu li:hover >a{ 
-			color: #87CEFA;
-		}
-		
-		.menu li > a {
-			color: black;
-			text-decoration: none;
-			display: block;
-			width: 100%;
-			padding-top:.4rem;
-		}
-		
-		.menu > li > ul > li > ul {
-			top: 0;
-			left: 0;
-			margin-left: 150px;
-		}
+	background-color: black;
+	color: black;
+}
+
+.menu li:hover>a {
+	color: #87CEFA;
+}
+
+.menu li>a {
+	color: white;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding-top: .4rem;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: black;
+    margin: 0;
+}
+
+.menu>li>ul>li>ul {
+	top: 0;
+	left: 0;
+	margin-left: 150px;
+	margin-top:0;
+}
+
+.logo{
+		font-size: 43px;
+		text-decoration: none;
+		color: black;
+}
+	
+li.point {
+		margin-left: 30%;
+    	width: 300px;
+} 

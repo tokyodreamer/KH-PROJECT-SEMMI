@@ -29,7 +29,6 @@ public class MemberLoginServlet extends HttpServlet {
 				resp.sendRedirect("/semi/index.jsp");
 			}
 			else {
-				resp.sendRedirect("memberLogin.jsp");
 				resp.sendRedirect("memberLogin.jsp?error");
 			}
 			
