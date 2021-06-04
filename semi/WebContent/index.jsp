@@ -2,20 +2,29 @@
     pageEncoding="UTF-8"%>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
-
-<div class="row">
-	<a href="<%=request.getContextPath()%>/intro/intro.jsp">챌린저스 소개</a>
-</div>
-
-<div class="row">
-	<a href="<%=request.getContextPath()%>/member/memberJoin.jsp">회원가입</a>
-</div>
-
-<div class="row">
-	<a href="<%=request.getContextPath()%>/review/reviewList.jsp">후기 게시판</a>
-</div>
-
-<h2>회원 세션 값 : <%=session.getAttribute("memberNo") %></h2>
-<h2>관리자 세션 값 : <%=session.getAttribute("adminNo") %></h2>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css">
+	<div class="index-container-float">
+		<div class="index-explain">
+			<div class="index-explain-title">
+				더 챌린지란?
+			</div>
+			<div class="index-explain-content-01">
+				자신의 의지보다 반드시 해내야 되는 환경에 주목하여
+			</div>
+			<div class="index-explain-content-02">
+				스스로 돈을 걸어 도전하거나 후원을 통해 도전해 나가는
+			</div>
+			<div class="index-explain-content-03">
+				목표달성 웹사이트 <span>더 챌린지</span> 입니다
+			</div>
+		</div>
+		<div class="index-image">
+			<img alt="도전" src="<%=request.getContextPath()%>/image/challenge.jpg" class="index-image-challenge">
+		</div>
+	</div>
+	<div class="index-auth-title">인증 기준</div>
+	<div class="index-auth-container">
+		
+	</div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
