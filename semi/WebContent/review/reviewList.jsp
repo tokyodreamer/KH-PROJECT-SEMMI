@@ -106,9 +106,7 @@ $(function(){
 				<span id="time"><%=reDto.getReviewTime()%></span>
 			</div>
 			<div class="row text-left">
-				<textarea  cols="140" rows="10" id="textarea"  readonly>
-				<%=reDto.getReviewContent()%>
-			</textarea>
+				<textarea  cols="140" rows="10" id="textarea"  readonly><%=reDto.getReviewContent()%></textarea>
 			</div>
 
 		<% if (request.getSession().getAttribute("memberNo") != null && reDto.getReviewNick() == (int) request.getSession().getAttribute("memberNo")) { %>
