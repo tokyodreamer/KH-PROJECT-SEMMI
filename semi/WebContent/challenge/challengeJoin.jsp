@@ -83,6 +83,15 @@
 			location.href="<%=request.getContextPath()%>/challenge/challengeList.jsp";
 		});
 		
+		//새로고침 or 뒤로가기 or 나가기 버튼 클릭시 경고창 이벤트			
+		var checkload = true;
+		$("input[type=submit]").click(function() {
+				checkload = false;
+		});
+		$(window).on("beforeunload", function() {
+		if(checkload == true) return "정말로 나가시겠습니까?";
+		});
+		
 	});
 </script>
 <div class="join-container">
