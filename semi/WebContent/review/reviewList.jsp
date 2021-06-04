@@ -119,7 +119,4 @@ $(function(){
 		</div>
 		<%} %>
 	</div>
-</body>
-</html>
-
 <jsp:include page="/template/footer.jsp"></jsp:include>
