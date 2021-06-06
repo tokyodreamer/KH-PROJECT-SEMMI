@@ -318,7 +318,6 @@ padding-top:0.5rem;
 	padding-right:1rem;
 	border-radius:1.5em;
 	}
-
 </style>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <div class="container-1500">
@@ -442,8 +441,14 @@ List<AuthDto> authListByChallenge = authDao.listByChallenge(challengeNo);
 	
 	</table>
 	</div>
-<jsp:include page="/reply/reply.jsp?challengeNo=<%=challengeNo %>"></jsp:include>
 
+	<jsp:include page="/reply/reply.jsp?challengeNo=<%=challengeNo %>"></jsp:include>
 	<button class="donate-btn donate-btn-list" id="list">목록</button>
+	<div>
+	<%if (challengeListDto.getMemberNo() == memberNo) { %>
+	<a href="#" class="link-btn"> 도전글 삭제 </a>
+	<%}%>
+	</div>
+	
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
