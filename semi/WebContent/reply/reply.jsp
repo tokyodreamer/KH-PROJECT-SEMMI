@@ -20,15 +20,62 @@
 	List<ReplyListDto> replyList = replyListDao.list(challengeNo);
 
 %>
-	<!-- 
-	<style>
-	#border-reply{
-	background: #f2f5f9;
-    border-top: 1px solid #dae0e9;
-    padding: 30px;
-    }
-	</style>
-	-->
+<style>
+	textarea.form-input {
+	resize: vertical;
+	min-height: 100px; /*수치는 자유롭게 설정*/
+	height: 100px; /*수치는 자유롭게 설정*/
+	max-height: 500px; /*수치는 자유롭게 설정*/
+	}	
+	
+	.form-btn.form-btn-normal:hover {
+	background-color: rgba(3, 199, 90, 0.12);
+	color:#009f47;
+	border: 1px solid gray;
+	font-weight: bold;
+	cursor: pointer;
+	}
+	
+	.reply-display{
+	padding-left:10px; 
+	}
+	
+	#list-time{
+	font-size:12px; 
+	color: #979797;
+	}
+	
+	#list-nick{
+	font-size:14px; 
+	font-weight: bold;
+	}
+	
+	#list-content{
+	margin: 2px 0px; 
+	font-size:14px;
+	}
+	
+	.reply-list{
+	margin-left: 5%;
+	}
+	
+	#board_reply{
+	width:80%; 
+	margin-left:5%; 
+	margin-top:20px;
+	}
+	
+	.reply-edit-btn{
+	text-decoration: underline; 
+	cursor: pointer; 
+	color:blue;
+	}
+	
+	.reply-delete-btn{
+	padding-right: 20px;
+	}
+</style>
+	
 	
 	<script>
 	$(function(){
@@ -69,28 +116,31 @@
 		<!-- 
 		댓글 목록 영역
 	 -->
-	<div class="row text-left">
-		<h4>댓글 목록</h4>
+<div class="container-1500" ">
+	<div class="row text-left reply-list">
+		<h3>댓글</h3>
 	</div>
+	<div id="board_reply">
+
+	<hr>
 	<%for(ReplyListDto replyListDto : replyList) { %>
-	<div class="row text-left" style="border:1px solid gray;" id="border-reply">
+	<div class="row text-left">
 		<div class="float-container">
-			<div class="left"><%=replyListDto.getMemberNick()%></div>
-			<span><%=replyListDto.getReplyTime().toLocaleString()%></span>
+			<div class="left reply-display" id="list-nick"><%=replyListDto.getMemberNick()%></div>
 			<!-- 
 				수정과 삭제 메뉴는 "본인 글"에만 표시되어야 한다
 				= 본인글 : 댓글작성자번호(replyDto.getReplyWriter()) == 로그인된 회원번호(memberNo) 
 			-->
 			<%if(replyListDto.getReplyWriter() == memberNo){ %>
 			<div class="right">
-				<a class="reply-edit-btn" href="#">수정</a> 
+				<a class="reply-edit-btn">수정</a> 
 				<a class="reply-delete-btn" href="<%=root%>/reply/replyDelete.kh?replyNo=<%=replyListDto.getReplyNo()%>&replyOrigin=<%=challengeNo%>">삭제</a>
 			</div>
 			<%} %>
 		</div>
 		<!-- 화면 표시 댓글 -->
-		<div class="reply-display-area">
-			<pre><%=replyListDto.getReplyContent()%></pre>
+		<div class="reply-display-area reply-display">
+			<pre id="list-content"><%=replyListDto.getReplyContent()%></pre>
 		</div>
 		<!-- 
 			댓글 수정 영역 : 게시글번호(hidden), 댓글번호(hidden), 댓글내용(textarea)
@@ -109,9 +159,11 @@
 			</form>
 		</div>
 		<%} %>
-		<div><%=replyListDto.getReplyTime().toLocaleString()%></div>
+		<div class= "reply-display" id="list-time"><%=replyListDto.getReplyTime().toLocaleString()%></div>
+		<hr>
 	</div>
 	<%} %>
+	
 	
 		<!-- 
 			댓글 작성 영역 : 게시글번호(replyOrigin), 댓글내용(replyContent)로 전송
@@ -120,9 +172,11 @@
 		<input type="hidden" name="replyOrigin" value="<%=challengeNo%>">
 		
 		<div class="row">
-			<textarea name="replyContent" required class="form-input"></textarea>
+			<textarea name="replyContent" placeholder="댓글을 남겨보세요" class="form-input" required></textarea>
 		</div>
 		<div class="row">
 			<input type="submit" value="댓글 작성" class="form-btn form-btn-normal">
 		</div>
 	</form>
+</div>
+</div>

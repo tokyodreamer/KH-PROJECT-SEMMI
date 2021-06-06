@@ -452,6 +452,7 @@ List<AuthDto> authListByChallenge = authDao.listByChallenge(challengeNo);
 	</table>
 	</div>
 
+
 	<jsp:include page="/reply/reply.jsp?challengeNo=<%=challengeNo %>"></jsp:include>
 	<button style="margin-left:30%"class="donate-btn donate-btn-list" id="list"> 도전글 목록으로 돌아가기</button>
 	<div>
@@ -460,5 +461,10 @@ List<AuthDto> authListByChallenge = authDao.listByChallenge(challengeNo);
 	<%}%>
 	</div>
 	
+
+	<%int a =1; %>
+	<jsp:include page="/reply/reply.jsp?challengeNo=<%=challengeNo %>"></jsp:include>
+	<button class="donate-btn donate-btn-list" id="list">목록</button>
+
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

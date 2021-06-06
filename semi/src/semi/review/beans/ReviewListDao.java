@@ -9,10 +9,11 @@ import java.util.List;
 import semi.beans.JDBCUtils;
 
 public class ReviewListDao {
+	
 	public List<ReviewListDto> list() throws Exception{
 		Connection con =  JDBCUtils.getConnection();
 		
-		String sql = "select*from review_list order by review_time asc";
+		String sql = "select * from review_list order by review_time asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
@@ -27,7 +28,8 @@ public class ReviewListDao {
 			reListDto.setReviewTime(rs.getDate("review_time"));
 			reListDto.setReviewStar(rs.getInt("review_star"));
 			reListDto.setMemberNick(rs.getString("member_nick"));
-	
+			// 멤버 포인트도 불러오기
+			reListDto.setMemberPoint(rs.getInt("member_point"));
 			
 			reviewList.add(reListDto);
 			
@@ -64,10 +66,5 @@ public class ReviewListDao {
 		
 		return reviewListDto;
 	}
-	
-	
-	
-	
-	
 	
 }

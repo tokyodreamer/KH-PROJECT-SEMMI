@@ -115,12 +115,10 @@ public class ReviewDao {
 		String sql="update review set review_star=?, review_content=? where review_no=?";
 		
 
-
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, reviewDto.getReviewStar());
 		ps.setString(2, reviewDto.getReviewContent());
 		ps.setInt(3, reviewDto.getReviewNo());
-		System.out.println(reviewDto.getReviewNo());
 
 		int count = ps.executeUpdate();
 		

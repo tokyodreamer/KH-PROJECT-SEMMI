@@ -91,15 +91,8 @@
 					<tr>
 						<th>후원번호</th>
 						<th width="100px">챌린지번호</th>
-<!-- 						<th width="100px">카테고리</th> -->
 						<th>내번호</th>
 						<th>내 후원금</th>
-<!-- 						<th width="10%">도전 시작일</th> -->
-<!-- 						<th width="10%">도전 종료일</th> -->
-<!-- 						<th>달성률</th> -->
-<!-- 						<th>상금</th> -->
-<!-- 						<th>누적후원금</th> -->
-						<!-- <th>도전글내용</th> -->
 					</tr>
 			</thead>
 			
@@ -108,12 +101,8 @@
 					<tr>
 						<td><%=donateDto.getDonateNo() %></td>
 						<td><%=donateDto.getDonateChallengeNo() %></td>
-			
-						<td>
-							<%=donateDto.getDonateMemberNo() %>
-						</td>
-<%-- 						<td><%=challengeDto.getCategoryNo() %></td> --%>
-						<td><%=donateDto.getDonatePushPoint() %>원</td>
+						<td><%=donateDto.getDonateMemberNo() %></td>
+						<td><%=donateDto.getDonatePushPoint() %>포인트</td>
 						
 					</tr>
 					<%} %>
