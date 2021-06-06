@@ -91,25 +91,6 @@ public class DonateDao {
 		return donateDto;
 	}
 	
-//	public int count(int memberNo) throws Exception{
-//		Connection con = JDBCUtils.getConnection();
-//		
-//		String sql = "select count(*) from donate where member_no = ?";
-//		PreparedStatement ps = con.prepareStatement(sql);
-//		ps.setInt(1, memberNo);
-//		ResultSet rs = ps.executeQuery();
-//		
-//		int count;
-//		
-//		if(rs.next()) {
-//			count = rs.get;
-//		} else {
-//			count = 0;
-//		}
-//		
-//		return count;
-//	}
-	
 //	내 후원목록
 	public List<DonateDto> myList(int memberNo) throws Exception {
 		Connection con = JDBCUtils.getConnection();
@@ -126,9 +107,7 @@ public class DonateDao {
 			DonateDto.setDonateNo(rs.getInt("donate_no"));
 			DonateDto.setDonateChallengeNo(rs.getInt("challenge_no"));
 			DonateDto.setDonateMemberNo(rs.getInt("member_no"));
-//			DonateDto.setDonateCategoryNo(rs.getInt("donateCategory_no"));
-			DonateDto.setDonatePushPoint(rs.getInt("donatePushPoint"));
-			
+			DonateDto.setDonatePushPoint(rs.getInt("donate_PushPoint"));
 			
 			donateList.add(DonateDto);
 		}
