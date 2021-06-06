@@ -35,14 +35,15 @@
 	}
 	
 	.table th {
-      color: #168;
-      background: #f0f6f9;
+      color: white;
+      background-color: black;
       text-align: center;
 	}
 	
 	.table th, .table td {
       padding: 10px;
       border-bottom: 1px solid #ddd;
+      text-align: center;
     }
 	
 	.table.table-hover > tbody > tr:hover {
@@ -110,7 +111,7 @@
 						<td><%=challengeDto.getChallengeWriter() %></td>
 <%-- 						<td><%=challengeDto.getCategoryNo() %></td> --%>
 			
-						<td class="abc" onClick="location.href='#'">
+						<td class="abc" onClick="location.href='#'" style="text-align: left;">
 						
 							<!-- 제목을 누르면 상세보기 페이지로 이동 -->
 							<a href="#">

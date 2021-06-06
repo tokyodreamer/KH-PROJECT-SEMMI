@@ -127,7 +127,7 @@
 			<tr>
 				<th><label>인증 사진</label></th>
 				<td class = "filebox">
-					<input type=text" id="fileName" disabled="disabled">
+					<input type="text" id="fileName" disabled="disabled">
 					<label for="upload">업로드</label>
 					<input type="file" name="authFile" accept=".png, .jpg, .gif"  id = "upload" required>
 				</td>

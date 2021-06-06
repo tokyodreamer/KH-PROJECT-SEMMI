@@ -124,7 +124,7 @@
 			<div class="wall"></div>
 				
 					
-			<div class="member_exit" onclick="location.href='#'" style="cursor:pointer;">회원탈퇴</div>
+			<div class="member_exit" onclick="location.href='memberExit.kh'" style="cursor:pointer;">회원탈퇴</div>
 			
 		</div>
 		
