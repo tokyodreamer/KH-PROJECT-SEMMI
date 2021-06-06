@@ -109,6 +109,16 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/donateJoin.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
+	function delete_challenge(){
+		if (confirm("정말 해당 도전글을 삭제하시겠습니까?")==true) {
+			document.form.submit();
+		}
+		else{
+			return;
+		}
+		
+	}
+
 	$(function(){
 		// 참가비 :
 		
@@ -443,10 +453,10 @@ List<AuthDto> authListByChallenge = authDao.listByChallenge(challengeNo);
 	</div>
 
 	<jsp:include page="/reply/reply.jsp?challengeNo=<%=challengeNo %>"></jsp:include>
-	<button class="donate-btn donate-btn-list" id="list">목록</button>
+	<button style="margin-left:30%"class="donate-btn donate-btn-list" id="list"> 도전글 목록으로 돌아가기</button>
 	<div>
 	<%if (challengeListDto.getMemberNo() == memberNo) { %>
-	<a href="#" class="link-btn"> 도전글 삭제 </a>
+		<a href="https://naver.com" class="link-btn" onclick="delete_challenge();"> 도전글 삭제</a>
 	<%}%>
 	</div>
 	
