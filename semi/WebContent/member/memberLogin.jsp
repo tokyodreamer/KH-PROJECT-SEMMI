@@ -80,7 +80,7 @@
 			<div class="login_div left"onclick="location.href='memberJoin.jsp'" style="cursor:pointer;">
 				회원가입 &nbsp;|&nbsp;&nbsp;</div>
 			<div class="login_div left loign_id" onclick="location.href='idSearch.jsp'">아이디 찾기</div>
-			<div class="login_div right" onclick="location.href='index.jsp'">&nbsp;&nbsp;챌린저스 홈</div>
+			<div class="login_div right" onclick="location.href='<%=request.getContextPath()%>'">&nbsp;&nbsp;챌린저스 홈</div>
 			<div class="login_div right login_pw" onclick="location.href='pwSearch.jsp'"> 비밀번호 찾기&nbsp;&nbsp;|</div>
 			<div class="wall"></div>
 				

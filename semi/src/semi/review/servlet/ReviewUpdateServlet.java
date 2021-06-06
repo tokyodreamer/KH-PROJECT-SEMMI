@@ -32,7 +32,6 @@ public class ReviewUpdateServlet extends HttpServlet {
 
 			// 출력(리뷰넘버 자리에는 dto.get~을 넣으면 원래 번호로 돌아간다)
 			resp.sendRedirect("reviewDetail.jsp?reviewNo=" + reviewDto.getReviewNo());
-
 		}
 
 		catch (Exception e) {
