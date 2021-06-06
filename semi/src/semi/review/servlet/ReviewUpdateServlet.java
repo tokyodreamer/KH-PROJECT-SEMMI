@@ -23,8 +23,6 @@ public class ReviewUpdateServlet extends HttpServlet {
 			ReviewDto reviewDto = new ReviewDto();
 			reviewDto.setReviewNo(Integer.parseInt(req.getParameter("reviewNo")));
 
-			reviewDto.setReviewStar(Integer.parseInt(req.getParameter("review_star")));
-
 			reviewDto.setReviewStar(Integer.parseInt(req.getParameter("reviewStar")));
 
 			reviewDto.setReviewContent(req.getParameter("reviewContent"));
