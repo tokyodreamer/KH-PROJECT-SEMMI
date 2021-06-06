@@ -74,6 +74,7 @@
 	.reply-delete-btn{
 	padding-right: 20px;
 	}
+	
 </style>
 	
 	
