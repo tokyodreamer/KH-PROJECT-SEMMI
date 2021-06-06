@@ -139,14 +139,7 @@ $(function(){
 		</div>
 		<div class="row text-left">
 
-			<!-- 			 <textarea  cols="140" rows="10" id="textarea"  readonly> -->
-			<%-- 				<%=reDto.getReviewContent()%> --%>
-			<!-- 			</textarea> -->
 			<pre id="content"><%=reDto.getReviewContent()%></pre>
-
-
-			<textarea cols="140" rows="10" id="textarea" readonly><%=reDto.getReviewContent()%></textarea>
-
 		</div>
 
 		<%
