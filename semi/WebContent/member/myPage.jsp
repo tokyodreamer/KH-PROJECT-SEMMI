@@ -10,6 +10,7 @@
 	<jsp:include page="/template/header.jsp"></jsp:include>
 	
 	<%
+		String root = request.getContextPath();
 		Integer memberNo = (Integer)session.getAttribute("memberNo");
 		MemberDao memberDao = new MemberDao(); 
 		MemberDto memberDto = memberDao.find(memberNo);
@@ -124,7 +125,7 @@
 			<div class="wall"></div>
 				
 					
-			<div class="member_exit" onclick="location.href='#'" style="cursor:pointer;">회원탈퇴</div>
+			<div class="member_exit" onclick="location.href='memberExit.kh'" style="cursor:pointer;">회원탈퇴</div>
 			
 		</div>
 		
@@ -151,7 +152,7 @@
 				<div class="third_box"onclick="location.href='myChallenge.jsp'" style="cursor:pointer;">
 					내 챌린저스 목록
 				</div>
-				<div class="third_box"onclick="location.href='#'" style="cursor:pointer;">
+				<div class="third_box"onclick="location.href='<%=root%>/challenge/challengeList.jsp'" style="cursor:pointer;">
 					전체 챌린저스 목록
 				</div>
 			<%} else { %>
@@ -159,7 +160,7 @@
 				<div class="third_box"onclick="location.href='myChallenge.jsp'" style="cursor:pointer;">
 					내 챌린저스 목록
 				</div>
-				<div class="third_box"onclick="location.href='#'" style="cursor:pointer;">
+				<div class="third_box"onclick="location.href='<%=root%>/challenge/challengeList.jsp'" style="cursor:pointer;">
 					전체 챌린저스 목록
 				</div>
 			<%} %>
@@ -172,9 +173,8 @@
 		<div class="myPage_box left">
 			<h3>내 후원</h3>
 			<div>
-				<h4 style="text-align:center">현재 후원중 게시글 수 : </h4>
 				<div class="third_box"onclick="location.href='myDonate.jsp'" style="cursor:pointer;">
-					<h4>내 후원 목록 바로 가기</h4>
+					<h2>내 후원 목록 바로 가기</h2>
 				</div>
 			
 			</div>
