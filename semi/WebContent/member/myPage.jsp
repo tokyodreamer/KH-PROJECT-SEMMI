@@ -107,9 +107,9 @@
 			<div class="first_box left">
 					
 				<%if(memberPoint <=200000) { %>
-				<img src="https://via.placeholder.com/100x50.png?text=B" >
+				<img src="<%=request.getContextPath() %>/image/bronze.png" style="width:100px; height:100px;" >
 				<%} else if(memberPoint <=400000) { %>
-				<img src="https://via.placeholder.com/100x100.png?text=S" >
+				<img src="<%=request.getContextPath() %>/image/silver.JPG" style="width:100px; height:100px;" >
 				<%} else if(memberPoint <=600000) { %>
 				<img src="https://via.placeholder.com/100x100.png?text=G" >
 				<%} else { %>

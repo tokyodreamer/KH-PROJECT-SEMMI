@@ -8,6 +8,10 @@
 // 리스트 목록 불러오기 
 ReviewListDao reListDao = new ReviewListDao();
 List<ReviewListDto> reviewList = reListDao.list();
+
+for(ReviewListDto reDto : reviewList) {
+	int memberPoint = reDto.getMemberPoint();
+}
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
@@ -94,6 +98,15 @@ $(function(){
 <%-- 				<%} else { %> --%>
 <!-- 				<img src="/image/platinum.jpg"> -->
 <%-- 				<%} %> --%>
+		<%if(reDto.getMemberPoint() <= 200000) {%>
+			<img alt="" src="<%=request.getContextPath()%>/image/bronze.JPG" style="width: 50px; height: 50px;">
+		<%} else if(reDto.getMemberPoint() <= 400000) {%>
+			<img alt="실버" src="<%=request.getContextPath()%>/image/silver.JPG" style="width: 50px; height: 50px;">
+		<%} else if(reDto.getMemberPoint() <= 600000) { %>
+			<img alt="골드" src="<%=request.getContextPath()%>/image/gold.JPG" style="width: 50px; height: 50px;">
+		<%} else { %>
+			<img alt="플레" src="<%=request.getContextPath()%>/image/platinum.JPG" style="width: 50px; height: 50px;">
+		<%} %>
 		</div>
 		<div class="row">
 		<label id="nick">닉네임:</label> <span class="sp-nick"> <%
