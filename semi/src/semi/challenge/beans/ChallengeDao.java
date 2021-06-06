@@ -171,6 +171,20 @@ public class ChallengeDao {
 		return challengeList;
 	}
 	
+	//도전글 삭제
+	public boolean delete(int challengeNo) throws Exception {
+		Connection con = JDBCUtils.getConnection();
+		
+		String sql = "delete challenge where challenge_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, challengeNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count > 0;
+	}
+	
+	
 	//페이지블럭 계산을 위한 카운트 기능(목록/검색)
 	public int getCount() throws Exception {
 		Connection con = JDBCUtils.getConnection();

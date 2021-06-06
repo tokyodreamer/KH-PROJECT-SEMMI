@@ -66,7 +66,7 @@
 		}
 
 %>
-
+<jsp:include page="/template/header.jsp"></jsp:include>
 
 <style>
 	.text-deco > a{
@@ -84,8 +84,8 @@
 	}
 	
 	.table th {
-      color: #168;
-      background: #f0f6f9;
+	  color: white;
+      background-color: black;
       text-align: center;
       padding: 10px;
       border-bottom: 1px solid #ddd;
@@ -96,13 +96,13 @@
       border-bottom: 1px solid #ddd;
     }
 	
-    
-    .table.table-hover > tbody > tr:hover {
+  .table.table-hover > tbody > tr:hover {
 	background-color:rgb(242,242,242);
 	}
+	
+	
 </style>
 
-<jsp:include page="/template/header.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	//페이지 네비게이션에 있는 a태그를 누르면 전송하는 것이 아니라 form 내부에 값을 설정한 뒤 form을 전송
@@ -137,7 +137,7 @@
 	</div>
 	
 	<div class="row">
-		<table class="table table-hover"">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th> 인증 번호 </th>

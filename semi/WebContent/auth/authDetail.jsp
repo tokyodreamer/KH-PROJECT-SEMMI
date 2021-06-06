@@ -19,6 +19,9 @@ int authNo = Integer.parseInt(request.getParameter("authNo"));
 Integer adminNo = (Integer)session.getAttribute("adminNo");
 System.out.println(adminNo);
 
+Integer memberNo = (Integer)session.getAttribute("memberNo");
+System.out.println(memberNo);
+
 
 //수정 member_nick까지 입력을 위해
 AuthListDao authListDao = new AuthListDao();
@@ -143,8 +146,11 @@ ChallengeDao challengeDao = new ChallengeDao();
 </form>
 	
 	<div class="row">
-	<a href="<%=request.getContextPath()%>/auth/authDelete.kh?authNo=<%=authNo %>" class="ex-btn delete-btn">삭제</a>
-	<a href="authList.jsp" class="ex-btn">목록</a>
+		 <!-- 본인 및 관리자에게만 글 삭제가 가능하도록 설정 -->
+		<%if(adminNo != null || memberNo == authListDto.getAuthWriter()) { %>
+		<a href="<%=request.getContextPath()%>/auth/authDelete.kh?authNo=<%=authNo %>" class="ex-btn delete-btn">삭제</a>
+		<%} %>
+		<a href="authList.jsp" class="ex-btn">목록</a>
 	</div>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

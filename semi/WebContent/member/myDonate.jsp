@@ -34,8 +34,8 @@
 	}
 	
 	.table th {
-      color: #168;
-      background: #f0f6f9;
+       color: white;
+      background-color: black;
       text-align: center;
 	}
 	

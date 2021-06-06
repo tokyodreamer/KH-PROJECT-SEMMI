@@ -102,8 +102,8 @@
 	}
 	
 	.table th {
-      color: #168;
-      background: #f0f6f9;
+	  color: white;
+      background-color: black;
       text-align: center;
       padding: 10px;
       border-bottom: 1px solid #ddd;
