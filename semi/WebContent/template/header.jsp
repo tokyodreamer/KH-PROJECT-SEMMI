@@ -27,7 +27,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>세미 프로젝트 템플릿(임시)</title>
+<title>THE CHALLENGE</title>
 <link rel="stylesheet" type="text/css" href="<%=root%>/css/test.css">
 <link rel="stylesheet" type="text/css" href="<%=root%>/css/menu.css">
 <link rel="stylesheet" type="text/css" href="<%=root%>/css/layout.css">
@@ -37,7 +37,7 @@
 	<main>
 		<header class="float-container " style="padding:1.4rem;">
 		<div class="left" >
-		<a href="<%=root%>" class="logo" ><span style="font-weight: bold">SEMI</span> Project </a>
+		<a href="<%=root%>" class="logo" ><span style="font-weight: bold">THE</span> CHALLENGE </a>
 		</div>
 			<div class="right" >
 				<%if(isLogin) { %>

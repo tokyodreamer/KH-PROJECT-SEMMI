@@ -66,7 +66,7 @@
 	}
 	
 	#fileName{
-	style="padding: 2px; 
+	padding : 2px;
 	width: 30%;"
 	}
 	
