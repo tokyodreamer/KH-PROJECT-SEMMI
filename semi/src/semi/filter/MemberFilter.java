@@ -18,8 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 		"/member/memberExit.kh", "/member/memberExitSuccess.jsp",
 		"/challenge/*",
 		"/auth/*",
-		"/review/*"
-		
+		//"/review/*",
+		"/review/reviewDetail.jsp", "/review/reviewListConfirmDelete.jsp", "/review/reviewUpdate.jsp", "/review/reviewWrite.jsp",
+		"/review/reviewWrite.kh", "/review/reviewDelete.kh", "/review/reviewUpdate.kh"
 })
 public class MemberFilter implements Filter{
 	
