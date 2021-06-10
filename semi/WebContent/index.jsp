@@ -37,7 +37,7 @@
 				업데이트 예정
 			</div>
 		</div>
-	</div>
+	</div> 
 	<div class="index-auth-container">
 		<div class="index-auth-float-left">
 			<div class="index-auth-explain-title">인증 기준</div>

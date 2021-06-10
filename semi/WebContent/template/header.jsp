@@ -12,16 +12,15 @@
 	// - 세션에 memberNo 가 null 이 아니면 로그인 상태로 간주
 	// - 세션에 memberNo 가 null 이면 로그아웃 상태로 간주
 	Integer memberNo = (Integer) session.getAttribute("memberNo");
-	Integer adminNo = (Integer) session.getAttribute("adminNo");
 	
-	boolean isLogin = memberNo != null || adminNo != null; 
+	boolean isLogin = memberNo != null;
 	
 	// 보유포인트 출력
 	MemberDto memberDto = new MemberDto();
 	if((Integer) session.getAttribute("memberNo") != null){
 		MemberDao memberDao = new MemberDao();
 		memberDto = memberDao.find((int) session.getAttribute("memberNo"));
-	}
+	} 
 %>
 <!DOCTYPE html>
 <html>
@@ -37,7 +36,7 @@
 	<main>
 		<header class="float-container " style="padding:1.4rem;">
 		<div class="left" >
-		<a href="<%=root%>" class="logo" ><span style="font-weight: bold">SEMI</span> Project </a>
+		<a href="<%=root%>" class="logo" ><span style="font-weight: bold">THE</span> CHALLENGER </a>
 		</div>
 			<div class="right" >
 				<%if(isLogin) { %>
@@ -45,10 +44,8 @@
 					class="link-btn loginlogout"
 					style="font-size: 20px; background-color: black; color: white">로그아웃</a>
 				<%} else { %>
-
 					<a href="<%=root%>/member/emailCheck.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:white; color: black">회원가입</a>
 					<a href="<%=root%>/member/memberLogin.jsp" class="link-btn loginlogout" style="font-size: 20px; background-color:black; color:white;">&nbsp;로그인&nbsp;</a>
-
 				<%} %>
 			</div>
 		</header>
@@ -63,14 +60,8 @@
 						<li><a href="<%=root%>/member/myDonate.jsp">나의 후원내역</a></li>
 						<li><a href="<%=root%>/member/editMember.jsp">내 정보 변경</a></li>
 						<li><a href="<%=root%>/member/memberExit.kh" id="memberExit">탈퇴하기</a></li>
-						<%} else { %>
-
-							<li><a href="<%=root%>/member/emailCheck.jsp">회원 가입</a></li>
-							<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
-
 						<li><a href="<%=root%>/member/memberJoin.jsp">회원 가입</a></li>
 						<li><a href="<%=root%>/member/memberLogin.jsp">로그인</a></li>
-
 						<%} %>
 					</ul></li>
 					
@@ -88,10 +79,9 @@
 						<%} %>
 					</ul></li>
 				
-				<%if(isLogin) {%>	
+				<%if((Integer) session.getAttribute("memberNo") != null) {%>	
 					<li class="point"><a href="#"><%=memberDto.getMemberNick() %> 님의 보유포인트 : <%=memberDto.getMemberPoint() %></a></li>
 				<%} %>
-
 			</ul>
 		</nav>
 		<section>

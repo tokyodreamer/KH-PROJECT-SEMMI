@@ -135,7 +135,6 @@
 			</tbody>
 	</table>
 </div>
-	
 		<div class="row">
 			<input type="submit" value="등록" class="form-btn form-btn-positive">
 		</div>	

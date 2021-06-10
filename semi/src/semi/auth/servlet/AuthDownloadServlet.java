@@ -42,7 +42,7 @@ public class AuthDownloadServlet extends HttpServlet{
 			
 //			4. 파일 정보를 불러와서 사용자에게 전송(File 입력 후 네트워크 출력)
 
-			File dir = new File("D:/auth");
+			File dir = new File("D:/upload/kh74");
       
 			File target = new File(dir, authDto.getAuthSaveName());
 			
