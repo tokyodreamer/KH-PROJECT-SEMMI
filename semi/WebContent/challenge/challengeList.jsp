@@ -84,6 +84,7 @@
 		endBlock = lastBlock;//범위를 수정
 	}
 	
+	boolean isAdminLogin = (Integer) session.getAttribute("adminNo") != null;
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
@@ -203,6 +204,15 @@
 				$(".search-form").submit();//강제 submit 발생
 			}
 		});
+		
+		$("#no").click(function(e){
+			
+			if($("#no").val().equals("도전불가")) {
+				alert("현재 도전 중이라 도전이 불가능 합니다");
+				e.preventDefault();
+			}
+		});
+		
 	});
 </script>
 	
@@ -271,9 +281,11 @@
 	</div>
 	
 	<div class="row text-right">
-
+	<%if((Integer) session.getAttribute("adminNo") != null) { %>
+			<a href="<%=request.getContextPath() %>/member/memberLogin.jsp" class="write-btn" id="no">도전불가</a>
+	<%} else { %>
 		<a href="challengeJoin.jsp" class="write-btn">도전하기</a>
-
+	<%} %>
 	</div>
 	
 <div class="row">

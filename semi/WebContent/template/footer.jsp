@@ -8,7 +8,7 @@
 %>
 </section>
 <footer>
-	<h5>KHAcademy 취업반 수업자료 &copy;</h5>
+	<h5>4조 세미 프로젝트 &copy;</h5>
 	<hr>
 </footer>
 </main>

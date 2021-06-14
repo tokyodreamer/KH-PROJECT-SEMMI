@@ -176,7 +176,7 @@
 		
 		//삭제 관련
 		$("#delete-btn").click(function(e){
-			var choice = confirm("삭제하시겠습니까?");
+			var choice = confirm("도전을 포기하시면 참가한 포인트는 소멸하는데요??");
 			if(!choice){
 				e.preventDefault();
 			} else {
